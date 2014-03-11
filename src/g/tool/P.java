@@ -4,10 +4,29 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class P {
 	
 	
+	public static OzPicture backGround;
+	public static OzPicture arrowL;
+	public static OzPicture arrowL2;
+	
+	
+	
+	private static void loadTexture() {
+		setAtlas("data/Oz.atlas");
+		backGround = new OzPicture(1280, 720, atlas.findRegion("A"), true);
+		setAtlas("data/test.atlas");
+		arrowL = new OzPicture(81, 80, atlas.findRegion("game_jump_a"));
+		arrowL2 = new OzPicture(81, 80, atlas.findRegion("game_jump_a"), true);
+		LogShow(arrowL, "按钮");
+		LogShow(arrowL2, "按钮2");
+	}
+	private static void LogShow(OzPicture a,String s){
+		Gdx.app.log("ratio","  "+s+"图片宽: "+a.getSprite().getWidth()+" "+s+"图片高: "+a.getSprite().getHeight());
+	}
 	public static void begin(){
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -29,11 +48,6 @@ public class P {
 	
 	
 	
-	
-	
-	
-	
-	
 	private static float screenW;
 	private static float screenH;
 	private static float ratioX;
@@ -41,6 +55,7 @@ public class P {
 	private static float bgRatioX;
 	private static float bgRatioY;
 	private static SpriteBatch batch;
+	private static TextureAtlas atlas;
 	
 	public static void init(float screenWidth,float screenHeight){
 		batch = new SpriteBatch();
@@ -51,7 +66,7 @@ public class P {
 		Gdx.app.log("ratio", " 屏幕分辨率为: "+P.screenW +" * "+P.screenH);
 		//屏幕相对比例初始化
 		ratioInit();
-		
+		loadTexture();
 		
 	}
 	private static void ratioInit(){
@@ -79,6 +94,9 @@ public class P {
 			Gdx.app.log("ratio", "不符合条件，采用强制比例!");
 		}
 	}
+	private static void setAtlas(String path){
+		atlas = new TextureAtlas(Gdx.files.internal(path));
+	}
 	public static void dispose(){
 		batch.dispose();
 	}
@@ -88,4 +106,17 @@ public class P {
 	public static float getScreenH() {
 		return screenH;
 	}
+	public static float getRatioX() {
+		return ratioX;
+	}
+	public static float getRatioY() {
+		return ratioY;
+	}
+	public static float getBgRatioX() {
+		return bgRatioX;
+	}
+	public static float getBgRatioY() {
+		return bgRatioY;
+	}
+	
 }

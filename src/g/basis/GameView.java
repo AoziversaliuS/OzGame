@@ -38,8 +38,9 @@ public class GameView implements ApplicationListener {
 	public void showGraphic(){
 		P.begin();
 		
-		P.draw(0, 0, sprite);
-		
+		P.draw(0, 0, P.backGround.getSprite());
+		P.draw(100, 100, P.arrowL.getSprite());
+		P.draw(300, 100, P.arrowL2.getSprite());
 		P.end();
 	}
 
