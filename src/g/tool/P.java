@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class P {
-	private static float screenW;
-	private static float screenH;
-	private static SpriteBatch batch;
+	
 	
 	public static void begin(){
 		Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -16,7 +14,13 @@ public class P {
 		batch.begin();
 	}
 	public static void draw(float x,float y,Sprite sprite){
-		sprite.setPosition(x, y);
+		//此方法适用于画除了背景图片之外的图片
+		sprite.setPosition(x*P.ratioX, y*P.ratioY);
+		sprite.draw(batch);
+	}
+	public static void drawBg(float x,float y,Sprite sprite){
+		//此方法只能用来画背景图！
+		sprite.setPosition(x*P.bgRatioX, y*P.bgRatioY);
 		sprite.draw(batch);
 	}
 	public static void end(){
@@ -30,19 +34,58 @@ public class P {
 	
 	
 	
+	private static float screenW;
+	private static float screenH;
+	private static float ratioX;
+	private static float ratioY;
+	private static float bgRatioX;
+	private static float bgRatioY;
+	private static SpriteBatch batch;
 	
-	
-	
+	public static void init(float screenWidth,float screenHeight){
+		batch = new SpriteBatch();
+		
+		
+		P.screenW = screenWidth;
+		P.screenH = screenHeight;
+		Gdx.app.log("ratio", " 屏幕分辨率为: "+P.screenW +" * "+P.screenH);
+		//屏幕相对比例初始化
+		ratioInit();
+		
+		
+	}
+	private static void ratioInit(){
+		
+		/**以1280*720分辨率作为基准屏幕*/
+		
+		float offsetHeight = P.screenW/1280f * 720f; //offsetHeight:按16:9比例缩放之后非背景图的高度
+		Gdx.app.log("ratio", " 按比例缩放的高度为: "+offsetHeight);
+		if(offsetHeight < 720f){
+			//非背景图比例
+			ratioX = P.screenW/1280f;
+			ratioY = offsetHeight/720f;
+			//背景图覆盖屏幕
+			float bgOffsetWidth = P.screenH/720f * 1280f;
+			bgRatioX = bgOffsetWidth/1280f;
+			bgRatioY = P.screenH/720f;
+			Gdx.app.log("ratio", "符合条件，采用动态比例!");
+		}
+		else{
+			//不符合上述条件则采用强制覆盖全屏幕比例
+			ratioX = P.screenW/1280f;
+			ratioY = P.screenH/720f;
+			bgRatioX = ratioX;
+			bgRatioY = ratioY;
+			Gdx.app.log("ratio", "不符合条件，采用强制比例!");
+		}
+	}
+	public static void dispose(){
+		batch.dispose();
+	}
 	public static float getScreenW() {
 		return screenW;
 	}
-	public static void setScreenW(float screenW) {
-		P.screenW = screenW;
-	}
 	public static float getScreenH() {
 		return screenH;
-	}
-	public static void setScreenH(float screenH) {
-		P.screenH = screenH;
 	}
 }
