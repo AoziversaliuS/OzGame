@@ -17,13 +17,19 @@ public class P {
 	
 	private static void loadTexture() {
 		setAtlas("data/Oz.atlas");
+		
 		backGround = new OzPicture(1280, 720, atlas.findRegion("A"), true);
+		
 		setAtlas("data/test.atlas");
+		
 		arrowL = new OzPicture(81, 80, atlas.findRegion("game_jump_a"));
 		arrowL2 = new OzPicture(81, 80, atlas.findRegion("game_jump_a"), true);
+		LogShow(backGround, "±³¾°Í¼Æ¬");
 		LogShow(arrowL, "°´Å¥");
-		LogShow(arrowL2, "°´Å¥2");
 	}
+	
+	
+	
 	private static void LogShow(OzPicture a,String s){
 		Gdx.app.log("ratio","  "+s+"Í¼Æ¬¿í: "+a.getSprite().getWidth()+" "+s+"Í¼Æ¬¸ß: "+a.getSprite().getHeight());
 	}

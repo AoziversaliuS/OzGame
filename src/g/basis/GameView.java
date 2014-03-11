@@ -1,28 +1,69 @@
 package g.basis;
 
+import java.util.HashMap;
+
+import g.tool.OzPoint;
 import g.tool.P;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.InputProcessorQueue;
 
-public class GameView implements ApplicationListener {
+public class GameView extends InputProcessorQueue implements ApplicationListener {
 	
-	Sprite sprite;
+	private  HashMap<String, OzPoint> points;
+	
 	@Override
 	public void create() {	
-		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //资源初始化
-		TextureAtlas atlas= new TextureAtlas(Gdx.files.internal("data/Oz.atlas"));
-		sprite = new Sprite( atlas.findRegion("A"));
+		points = new HashMap<String, OzPoint>();
+		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //图片资源初始化
+		Gdx.input.setCatchBackKey(true); //不让系统接收到Back键
+		Gdx.input.setInputProcessor(this); //设置触屏监听
+		
 	}
-
+	@Override
+	public synchronized boolean keyDown(int keycode) {
+		return false;
+	}
+	@Override
+	public synchronized boolean touchDown(int screenX, int screenY,int pointer, int button) {
+		
+		points.put(""+pointer, new OzPoint(screenX, screenY, true));
+		
+		Gdx.app.log("Interact", "touchDown  有"+points.size()+"个点! "+"   "+pointer);
+		return false;
+	}
+	@Override
+	public synchronized boolean touchUp(int screenX, int screenY, int pointer,
+			int button) {
+		
+		points.remove(""+pointer);
+		
+		Gdx.app.log("Interact", "touchDown 有"+points.size()+"个点! "+"   "+pointer);
+		return false;
+	}
+	@Override
+	public synchronized boolean touchDragged(int screenX, int screenY,
+			int pointer) {
+		
+		points.get(""+pointer).set_XY_fromScreen(screenX, screenY);
+		
+		Gdx.app.log("Interact", "touchDown 有"+points.size()+"个点! "+"   "+pointer);
+		return false;
+	}
+	@Override
+	public void resize(int width, int height) {
+	}
+	@Override
+	public void pause() {
+	}
+	@Override
+	public void resume() {
+	}
+	@Override
+	public void dispose() {
+		P.dispose();
+	}
 
 
 	@Override
@@ -44,17 +85,5 @@ public class GameView implements ApplicationListener {
 		P.end();
 	}
 
-	@Override
-	public void resize(int width, int height) {
-	}
-	@Override
-	public void pause() {
-	}
-	@Override
-	public void resume() {
-	}
-	@Override
-	public void dispose() {
-		P.dispose();
-	}
+
 }
