@@ -2,6 +2,7 @@ package g.basis;
 
 import java.util.HashMap;
 
+import g.button.GameButton;
 import g.tool.OzPoint;
 import g.tool.P;
 
@@ -12,7 +13,8 @@ import com.badlogic.gdx.InputProcessorQueue;
 public class GameView extends InputProcessorQueue implements ApplicationListener {
 	
 	private  HashMap<String, OzPoint> points;
-	
+	//GameStatus
+	private GameButton gameBtn;
 	
 	@Override
 	public void create() {	
@@ -81,8 +83,10 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		P.begin();
 		
 		P.draw(0, 0, P.backGround.getSprite());
-		P.draw(100, 100, P.arrowL.getSprite());
-		P.draw(300, 100, P.arrowL2.getSprite());
+		P.draw(300, 100,P.Game_btnRight.getSprite());
+		P.draw(100, 100,P.Game_btnLeft.getSprite());
+		P.draw(100, 100,P.Game_btnLeftPress.getSprite());
+		P.draw(100, 100,P.Game_btnRightPress.getSprite());
 		P.end();
 	}
 

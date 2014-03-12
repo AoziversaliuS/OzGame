@@ -21,6 +21,15 @@ public class OzPicture {
 		this.basisHeight = basisHeight;
 		this.basisWidth = basisWidth;
 	}
+	public OzPicture( boolean planeFlip, boolean verticalFlip,float basisWidth , float basisHeight,TextureRegion region) {
+		super();
+		this.sprite = new Sprite(region);
+		sprite.flip(planeFlip, verticalFlip);
+		//针对手机屏幕来设定图片的大小
+		this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
+		this.basisHeight = basisHeight;
+		this.basisWidth = basisWidth;
+	}
 	public OzPicture(float basisWidth , float basisHeight,TextureRegion region,boolean isBackGround) {
 		super();
 		this.sprite = new Sprite(region);

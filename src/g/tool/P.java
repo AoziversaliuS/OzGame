@@ -5,27 +5,25 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class P {
 	
 	
 	public static OzPicture backGround;
-	public static OzPicture arrowL;
-	public static OzPicture arrowL2;
-	
-	
+	public static OzPicture Game_btnLeft;
+	public static OzPicture Game_btnRight;
+	public static OzPicture Game_btnLeftPress;
+	public static OzPicture Game_btnRightPress;
 	
 	private static void loadTexture() {
-		setAtlas("data/Oz.atlas");
+		setAtlas("Image/basis.atlas");
 		
-		backGround = new OzPicture(1280, 720, atlas.findRegion("A"), true);
-		
-		setAtlas("data/test.atlas");
-		
-		arrowL = new OzPicture(81, 80, atlas.findRegion("game_jump_a"));
-		arrowL2 = new OzPicture(81, 80, atlas.findRegion("game_jump_a"), true);
-		LogShow(backGround, "±³¾°Í¼Æ¬");
-		LogShow(arrowL, "°´Å¥");
+		backGround = new OzPicture(1280, 720, get("backGround"), true);
+		Game_btnLeft = new OzPicture(208, 125, get("btnLeft"));
+		Game_btnRight = new OzPicture(true, false,208, 125, get("btnLeft"));
+		Game_btnLeftPress = new OzPicture(208, 125, get("btnLeftPress"));
+		Game_btnRightPress = new OzPicture(true, false, 208, 125, get("btnLeftPress"));
 	}
 	
 	
@@ -74,6 +72,9 @@ public class P {
 		ratioInit();
 		loadTexture();
 		
+	}
+	private static TextureRegion get(String regionName){
+		return atlas.findRegion(regionName);
 	}
 	private static void ratioInit(){
 		
