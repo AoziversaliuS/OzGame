@@ -22,6 +22,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //图片资源初始化
 		Gdx.input.setCatchBackKey(true); //不让系统接收到Back键
 		Gdx.input.setInputProcessor(this); //设置触屏监听
+		this.gameInit();
 		
 	}
 	@Override
@@ -32,7 +33,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	public synchronized boolean touchDown(int screenX, int screenY,int pointer, int button) {
 		
 		points.put(""+pointer, new OzPoint(screenX, screenY, true));
-		
+		gameBtn.logic(points);
 		Gdx.app.log("Interact", "touchDown  有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
@@ -41,7 +42,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			int button) {
 		
 		points.remove(""+pointer);
-		
+		gameBtn.logic(points);
 		Gdx.app.log("Interact", "touchDown 有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
@@ -50,7 +51,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			int pointer) {
 		
 		points.get(""+pointer).set_XY_fromScreen(screenX, screenY);
-		
+		gameBtn.logic(points);
 		Gdx.app.log("Interact", "touchDown 有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
@@ -77,18 +78,23 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		showGraphic();
 	}
 	public void engine(){
+		gameEngine();
 		
 	}
 	public void showGraphic(){
 		P.begin();
-		
 		P.draw(0, 0, P.backGround.getSprite());
-		P.draw(300, 100,P.Game_btnRight.getSprite());
-		P.draw(100, 100,P.Game_btnLeft.getSprite());
-		P.draw(100, 100,P.Game_btnLeftPress.getSprite());
-		P.draw(100, 100,P.Game_btnRightPress.getSprite());
+		gameDraw();
 		P.end();
 	}
-
+	public void gameInit(){
+		gameBtn = new GameButton();
+	}
+	public void gameEngine(){
+		
+	}
+	public void gameDraw(){
+		gameBtn.draw();
+	}
 
 }

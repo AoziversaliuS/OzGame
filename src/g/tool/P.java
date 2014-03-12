@@ -15,7 +15,8 @@ public class P {
 	public static OzPicture Game_btnRight;
 	public static OzPicture Game_btnLeftPress;
 	public static OzPicture Game_btnRightPress;
-	
+	public static OzPicture Game_btnJump;
+	public static OzPicture Game_btnJumpPress;
 	private static void loadTexture() {
 		setAtlas("Image/basis.atlas");
 		
@@ -24,6 +25,8 @@ public class P {
 		Game_btnRight = new OzPicture(true, false,208, 125, get("btnLeft"));
 		Game_btnLeftPress = new OzPicture(208, 125, get("btnLeftPress"));
 		Game_btnRightPress = new OzPicture(true, false, 208, 125, get("btnLeftPress"));
+		Game_btnJump = new OzPicture(150, 150, get("btnJump"));
+		Game_btnJumpPress = new OzPicture(150, 150, get("btnJumpPress"));
 	}
 	
 	
