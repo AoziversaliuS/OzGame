@@ -13,6 +13,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	private  HashMap<String, OzPoint> points;
 	
+	
 	@Override
 	public void create() {	
 		points = new HashMap<String, OzPoint>();
