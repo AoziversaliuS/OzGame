@@ -3,6 +3,8 @@ package g.tool;
 import java.util.HashMap;
 import java.util.Set;
 
+import com.badlogic.gdx.Gdx;
+
 public class OzRect {
 	public float x;
 	public float y;
@@ -25,12 +27,13 @@ public class OzRect {
 		}
 		return false;
 	}
-	public boolean inside(HashMap<String, OzPoint> points){
+	public boolean insides(HashMap<String, OzPoint> points){
 		//判断一个[点集合]里是否有一个点在一个矩形内
 		Set<String> keys = points.keySet();
 		for(String key:keys){
 			if(        points.get(key).x>x && points.get(key).x<width 
 					&& points.get(key).y>y &&points.get(key).y<height ){
+				Gdx.app.log("btn","判定成功");
 				return true;
 			}
 		}
