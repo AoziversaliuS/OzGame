@@ -43,7 +43,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		points.remove(""+pointer);
 		gameBtn.logic(points);
-		Gdx.app.log("Interact", "touchDown 有"+points.size()+"个点! "+"   "+pointer);
+		Gdx.app.log("Interact", "touchUp 有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
 	@Override
@@ -52,7 +52,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		points.get(""+pointer).set_XY_fromScreen(screenX, screenY);
 		gameBtn.logic(points);
-		Gdx.app.log("Interact", "touchDown 有"+points.size()+"个点! "+"   "+pointer);
+		Gdx.app.log("Interact", "touchDragged 有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
 	@Override

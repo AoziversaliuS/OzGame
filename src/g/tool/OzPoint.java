@@ -10,8 +10,7 @@ public class OzPoint {
 	public OzPoint(float x, float y,boolean fromScreen) {
 		super();
 		if(fromScreen){
-			this.x = x/P.getRatioX() ;
-			this.y = y/P.getRatioY() ;
+			this.set_XY_fromScreen(x, y);
 		}
 		else{
 			this.x = x;
@@ -21,8 +20,8 @@ public class OzPoint {
 	public OzPoint() {
 	}
 	public void set_XY_fromScreen(float screenX,float screenY) {
-			this.x = x/P.getRatioX() ;
-			this.y = y/P.getRatioY() ;
+			this.x = screenX/P.getRatioX() ;
+			this.y =(P.getScreenH() - screenY)/P.getRatioY() ;
 	}
 	
 	

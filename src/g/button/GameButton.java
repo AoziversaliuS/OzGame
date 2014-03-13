@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 
@@ -31,7 +32,7 @@ public class GameButton extends OzElement{
 	//Skill
 	public static final int S_Jump=4,S_Else=5;
 	/**枚举值↑*/
-	
+	Texture e;
 	public  static int   Arrow;   //方向键,触碰信息
 	public  static int   Skill;   //技能键,触碰信息
 	
@@ -44,9 +45,9 @@ public class GameButton extends OzElement{
 		btnRightPress = new Sprite(P.Game_btnRightPress.getSprite());
 		btnJumpPress =  new Sprite(P.Game_btnJumpPress.getSprite());
 		
-		this.buttonLeft  = new OzRect(25, 25, 25+P.Game_btnLeft.getWidth(), 25+P.Game_btnLeft.getHeight());
-		this.buttonRight = new OzRect(275, 25, 275+P.Game_btnRight.getWidth(), 25+P.Game_btnRight.getHeight());
-		this.buttonJump = new OzRect(1000, 25, 1000+P.Game_btnJump.getWidth(), 25+P.Game_btnJump.getHeight());
+		this.buttonLeft  = new OzRect(25, 15, P.Game_btnLeft.getWidth(),P.Game_btnLeft.getHeight());
+		this.buttonRight = new OzRect(275, 15,P.Game_btnRight.getWidth(), P.Game_btnRight.getHeight());
+		this.buttonJump = new OzRect(1100, 15, P.Game_btnJump.getWidth(), P.Game_btnJump.getHeight());
 		
 		GameButton.Arrow = GameButton.A_Else;
 		GameButton.Skill = GameButton.S_Else;
@@ -60,7 +61,6 @@ public class GameButton extends OzElement{
 	public void logic(HashMap<String, OzPoint> points) {
 		
 		if(buttonLeft.insides(points)){
-			Gdx.app.log("btn","按下左箭头");
 			Arrow = GameButton.A_Left;
 		}
 		else if(buttonRight.insides(points)){
@@ -76,6 +76,8 @@ public class GameButton extends OzElement{
 		else{
 			Skill = GameButton.S_Else;
 		}
+		
+//		Gdx.app.log("btn", "Arrow: "+Arrow);
 		
 	}
 	@Override
@@ -95,10 +97,10 @@ public class GameButton extends OzElement{
 		}
 		//跳跃按键
 		if(Skill == GameButton.S_Else){
-			P.draw(1000, 25, btnJump);
+			P.draw(buttonJump.x, buttonJump.y, btnJump);
 		}
 		else if(Skill == GameButton.S_Jump){
-			P.draw(1000, 25, btnJumpPress);
+			P.draw(buttonJump.x, buttonJump.y, btnJumpPress);
 		}
 	}
 

@@ -13,8 +13,8 @@ public class OzRect {
 	public OzRect(float x, float y, float width, float height) {
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
+		this.width = x + width;
+		this.height = y + height;
 	}
 	public OzRect() {
 		super();
@@ -35,8 +35,13 @@ public class OzRect {
 					&& points.get(key).y>y &&points.get(key).y<height ){
 				Gdx.app.log("btn","ÅĞ¶¨³É¹¦");
 				return true;
+			}else{
+				Gdx.app.log("btn","ÅĞ¶¨Ê§°Ü:  point X:"+ points.get(key).x+" Y: "+points.get(key).y);
+				Gdx.app.log("btn","ÅĞ¶¨Ê§°Ü:  AX:"+x+" AY: "+y+" WIDTH: "+width+" HEIGHT: "+height);
 			}
+
 		}
+		
 		return false;
 	}
 	public boolean intersect(OzRect rect){

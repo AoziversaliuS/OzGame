@@ -2,6 +2,8 @@ package g.tool;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -77,6 +79,7 @@ public class P {
 		
 	}
 	private static TextureRegion get(String regionName){
+		atlas.findRegion(regionName).getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		return atlas.findRegion(regionName);
 	}
 	private static void ratioInit(){
