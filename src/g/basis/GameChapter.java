@@ -19,14 +19,14 @@ public class GameChapter {
 		
 		//以下皆为继承BasicBody的对象，只有BasicBody的子类才能达到伪静止状态
 		gateAtlas.add(new Land("L-1", new OzPoint(300, 100)));
-		gateAtlas.add(new Land("L-1", new OzPoint(-500, 1500)));
-		gateAtlas.add(new Land("L-1", new OzPoint(-800, 1800)));
-		gateAtlas.add(new Land("L-1", new OzPoint(  0, 1600)));
-		gateAtlas.add(new Land("L-2", new OzPoint(200, 1500)));
-		gateAtlas.add(new Land("L-3", new OzPoint(400, 1400)));
-		gateAtlas.add(new Land("L-3", new OzPoint(1000, 1400)));
-		gateAtlas.add(new Land("L-4", new OzPoint(400, 1700)));
-		gateAtlas.add(new Land("L-4", new OzPoint(900, 1700)));
+//		gateAtlas.add(new Land("L-1", new OzPoint(-500, 1500)));
+//		gateAtlas.add(new Land("L-1", new OzPoint(-800, 1800)));
+//		gateAtlas.add(new Land("L-1", new OzPoint(  0, 1600)));
+//		gateAtlas.add(new Land("L-2", new OzPoint(200, 1500)));
+//		gateAtlas.add(new Land("L-3", new OzPoint(400, 1400)));
+//		gateAtlas.add(new Land("L-3", new OzPoint(1000, 1400)));
+//		gateAtlas.add(new Land("L-4", new OzPoint(400, 1700)));
+//		gateAtlas.add(new Land("L-4", new OzPoint(900, 1700)));
 	}
 	
 	

@@ -80,8 +80,8 @@ public abstract class OzElement implements Origin{
 	public static void makeEntity(OzElement element){
 		element.entity.x     = element.l.x + element.entityOffset.x;
 		element.entity.y    = element.l.y + element.entityOffset.y;
-		element.entity.width  = element.l.x + element.entityOffset.x + element.entityOffset.width;
-		element.entity.height = element.l.y + element.entityOffset.y + element.entityOffset.height;
+		element.entity.width = element.entityOffset.width;
+		element.entity.height =  element.entityOffset.height;
 //		element.entity.centerX()
 	}
 }

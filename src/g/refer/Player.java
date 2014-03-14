@@ -11,6 +11,7 @@ import g.type.Vertical;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 
@@ -48,6 +49,7 @@ public class Player extends OzElement{
 //				new RectF(0, 0,P.Game_Player.basicWidth,P.Game_Player.basicHeight)
 				new OzRect(0, 0,P.player.getWidth(),P.player.getHeight())
 		);
+//		Gdx.app.log("impact", this.entity);
 		sprite = new Sprite(P.player.getSprite());
 		jump = false;
 	}
@@ -75,10 +77,10 @@ public class Player extends OzElement{
 	@Override
 	public void verticalLogic() {
 	    if( Player.isJump()==true && l.y>Player.limitUp){
-			l.y = l.y - Player.VALUE_JUMP;
+			l.y = l.y + Player.VALUE_JUMP;
 		}
 		else if(Player.isJump()==false && (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && l.y<Player.limitDown){
-			l.y = l.y + Player.VALUE_GRAVITY;
+			l.y = l.y - Player.VALUE_GRAVITY;
 		}
 		else if( Player.getVerticalT()==Vertical.Top ){
 			//停止下坠,坐标不改变就是停止下坠的状态
@@ -148,6 +150,7 @@ public class Player extends OzElement{
 				verticalT = Vertical.Bottom;
 			}
 		}
+//		Gdx.app.log("impact", " verticalT: "+verticalT );
 	}
 	@Override
 	public void impact(Player player) {
