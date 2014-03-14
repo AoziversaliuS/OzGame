@@ -46,9 +46,9 @@ public class GameButton extends OzElement{
 		btnRightPress = new Sprite(P.Game_btnRightPress.getSprite());
 		btnJumpPress =  new Sprite(P.Game_btnJumpPress.getSprite());
 		
-		this.buttonLeft  = new OzRect(25, 15, P.Game_btnLeft.getWidth(),P.Game_btnLeft.getHeight());
-		this.buttonRight = new OzRect(275, 15,P.Game_btnRight.getWidth(), P.Game_btnRight.getHeight());
-		this.buttonJump = new OzRect(1100, 15, P.Game_btnJump.getWidth(), P.Game_btnJump.getHeight());
+		this.buttonLeft  = new OzRect(25, 15, P.Game_btnLeft.getWidth(),P.Game_btnLeft.getHeight(),false);
+		this.buttonRight = new OzRect(275, 15,P.Game_btnRight.getWidth(), P.Game_btnRight.getHeight(),false);
+		this.buttonJump = new OzRect(1100, 15, P.Game_btnJump.getWidth(), P.Game_btnJump.getHeight(),false);
 		
 		GameButton.Arrow = GameButton.A_Else;
 		GameButton.Skill = GameButton.S_Else;

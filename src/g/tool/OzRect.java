@@ -10,11 +10,18 @@ public class OzRect {
 	public float y;
 	public float width;
 	public float height;
-	public OzRect(float x, float y, float width, float height) {
+	public OzRect(float x, float y, float width, float height,boolean isOffset) {
 		this.x = x;
 		this.y = y;
-		this.width = x + width;
-		this.height = y + height;
+		if(isOffset){
+			this.width = width;
+			this.height = height;
+		}
+		else{
+			this.width = x + width;
+			this.height = y + height;
+		}
+		
 	}
 	public OzRect() {
 		super();
