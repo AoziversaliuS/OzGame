@@ -20,13 +20,13 @@ public class Player extends OzElement{
 	private Sprite sprite;
 	
 	public static final float VALUE_MOVE    = 7;                //玩家水平移动速度
-	public static final float VALUE_GRAVITY = 7;                //重力
+	public static final float VALUE_GRAVITY = 11;                //重力
 	public static final float limitUp = 520;
 	public static final float limitDown = 200;
 	
-	public  static final float VALUE_JUMP    = 7;  //跳跃的速度
+	public  static final float VALUE_JUMP    = 11;  //跳跃的速度
 	public  static OzPoint L = new OzPoint();     //对外传输玩家坐标
-	public  static final int JumpTimeMAX = 40;
+	public  static final int JumpTimeMAX = 35;
 	private static int JumpTimeCount = 0;  //跳跃的时间
 	
 	//planeTouch
@@ -35,8 +35,8 @@ public class Player extends OzElement{
 	private static Vertical  verticalT =  Vertical.Else;
 	private  float push_X = 0;  //碰撞后将玩家位置推回到穿墙前
 	private  float push_Y = 0;  //碰撞后将玩家位置推回到穿墙前
-	private  float dY = 1;      //不出现穿墙状况的最低值 
-	private  float dX = 1;      //不出现穿墙状况的最低值 
+	private  float dY = 2;      //不出现穿墙状况的最低值 
+	private  float dX = 2;      //不出现穿墙状况的最低值 
 	
 	private static boolean jump = false;
 	
@@ -83,9 +83,11 @@ public class Player extends OzElement{
 			l.y = l.y - Player.VALUE_GRAVITY;
 		}
 		else if( Player.getVerticalT()==Vertical.Top ){
+//			this.fakeMove = false;
 			//停止下坠,坐标不改变就是停止下坠的状态
 		}
 	}
+
 
 
 	@Override
@@ -188,6 +190,9 @@ public class Player extends OzElement{
 			this.push_Y = push_Y - this.dY;
 			Gdx.app.log("impact", "进入垂直位置微调   "+this.push_Y);
 		}
+	}
+	public void pushBack_Y(){
+		l.y = l.y + push_Y;
 	}
 	
 	public  static OzPoint getL(){
