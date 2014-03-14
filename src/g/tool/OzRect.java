@@ -52,6 +52,9 @@ public class OzRect {
 		}
 		return true;
 	}
+	public float centerX() {
+		return (x+width)/2;
+	}
 	
 	
 	

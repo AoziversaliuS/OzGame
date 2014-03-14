@@ -17,7 +17,16 @@ public class OzPoint {
 			this.y = y;
 		}
 	}
+	
+	public OzPoint(float x, float y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
+
 	public OzPoint() {
+		this.x = 0;
+		this.y = 0;
 	}
 	public void set_XY_fromScreen(float screenX,float screenY) {
 			this.x = screenX/P.getRatioX() ;

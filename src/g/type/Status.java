@@ -2,5 +2,5 @@ package g.type;
 
 public enum Status {
 	Start,Select,Credits,Loading,Game,Pause,
-	StatusInitialize//初始化状态
+	Init//初始化状态
 }

@@ -10,15 +10,19 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class P {
-	
-	
-	public static OzPicture backGround;
+	//Button
 	public static OzPicture Game_btnLeft;
 	public static OzPicture Game_btnRight;
 	public static OzPicture Game_btnLeftPress;
 	public static OzPicture Game_btnRightPress;
 	public static OzPicture Game_btnJump;
 	public static OzPicture Game_btnJumpPress;
+	//source
+	public static OzPicture backGround;
+	public static OzPicture land;
+	public static OzPicture player;
+	public static OzPicture playerLeft;
+	public static OzPicture playerRight;
 	private static void loadTexture() {
 		setAtlas("Image/basis.atlas");
 		
@@ -29,6 +33,10 @@ public class P {
 		Game_btnRightPress  = new OzPicture(true, false, 208, 125, mS("btnLeftPress"));
 		Game_btnJump        = new OzPicture(150, 150, mS("btnJump"));
 		Game_btnJumpPress   = new OzPicture(150, 150, mS("btnJumpPress"));
+		land                = new OzPicture(200, 100, mS("land"));
+		player              = new OzPicture(60, 60, mS("player"));
+		playerLeft          = new OzPicture(60, 60, mS("playerLeft"));
+		playerRight         = new OzPicture(true, false,60,60, mS("playerLeft"));
 	}
 	
 	
@@ -44,6 +52,11 @@ public class P {
 	public static void draw(float x,float y,Sprite sprite){
 		//此方法适用于画除了背景图片之外的图片
 		sprite.setPosition(x*P.ratioX, y*P.ratioY);
+		sprite.draw(batch);
+	}
+	public static void draw(OzPoint point,Sprite sprite){
+		//此方法适用于画除了背景图片之外的图片
+		sprite.setPosition(point.x*P.ratioX, point.y*P.ratioY);
 		sprite.draw(batch);
 	}
 	public static void drawBg(float x,float y,Sprite sprite){

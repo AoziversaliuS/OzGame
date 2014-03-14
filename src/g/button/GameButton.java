@@ -1,6 +1,7 @@
 package g.button;
 
 import g.refer.OzElement;
+import g.refer.Player;
 import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.tool.P;
@@ -37,7 +38,7 @@ public class GameButton extends OzElement{
 	public  static int   Skill;   //技能键,触碰信息
 	
 	public GameButton() {
-		super("GameButton",Rank._9, ET.GameButton,null,null);
+		super("GameButton",Rank.SELF_CUSTOM, ET.GameButton,null,null);
 		btnLeft = new Sprite(P.Game_btnLeft.getSprite());
 		btnRight = new Sprite(P.Game_btnRight.getSprite());
 		btnJump = new Sprite(P.Game_btnJump.getSprite());
@@ -121,8 +122,11 @@ public class GameButton extends OzElement{
 	public void logic() {
 	}
 
+
 	@Override
-	public void impact( ) {
+	public void impact(Player player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
