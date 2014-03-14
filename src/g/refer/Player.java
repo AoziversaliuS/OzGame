@@ -20,11 +20,11 @@ public class Player extends OzElement{
 	private Sprite sprite;
 	
 	public static final float VALUE_MOVE    = 7;                //玩家水平移动速度
-	public static final float VALUE_GRAVITY = 10;                //重力
+	public static final float VALUE_GRAVITY = 7;                //重力
 	public static final float limitUp = 520;
 	public static final float limitDown = 200;
 	
-	public  static final float VALUE_JUMP    = 10;  //跳跃的速度
+	public  static final float VALUE_JUMP    = 7;  //跳跃的速度
 	public  static OzPoint L = new OzPoint();     //对外传输玩家坐标
 	public  static final int JumpTimeMAX = 40;
 	private static int JumpTimeCount = 0;  //跳跃的时间
@@ -186,6 +186,7 @@ public class Player extends OzElement{
 	public  void setPush_Y(float push_Y) {
 		if(push_Y - this.dY > 0){
 			this.push_Y = push_Y - this.dY;
+			Gdx.app.log("impact", "进入垂直位置微调   "+this.push_Y);
 		}
 	}
 	
