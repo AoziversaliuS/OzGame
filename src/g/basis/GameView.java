@@ -24,7 +24,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	private static   ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
 	private  ArrayList<OzInt> rankNum;   //按图层等级来进行显示图片
 	private Status status;  //当前界面状态
-	private Player player;
+	public static Player player;
 	@Override
 	public void create() {	
 		points = new HashMap<String, OzPoint>(); //触摸点
@@ -161,27 +161,27 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		}
 		player.set_VerticalT_and_PlaneT(gateAtlas); //设置玩家的垂直状态和水平状态值
 		int zz = 0;
-		for(OzElement g:gateAtlas){
-			if(g instanceof BasicBody){
-				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
-				g.l.x = g.l.x + player.getPush_X();
-				if(Player.getL().y <= Player.limitDown){
-					if(zz==0){
-						Gdx.app.log("impact", (zz) + " 坐标y "+(g.l.y+P.land.getHeight())+"  玩家坐标  "+Player.getL().y+" pushY "+player.getPush_Y()+" ↓");
-					}
-					g.l.y = g.l.y - player.getPush_Y();
-//					Gdx.app.log("impact", "进入垂直[整体]微调   ");
-					if(zz==0)
-					Gdx.app.log("impact", (zz++) + " 坐标y "+(g.l.y+P.land.getHeight())+"  玩家坐标  "+Player.getL().y+" pushY "+player.getPush_Y()+" ↑");
-				}
-				
-				
-			}
-		}
-//		if(Player.getL().y > Player.limitDown){
-//			player.pushBack_Y();
-////			Gdx.app.log("impact", "进入垂直[个体]微调   ");
+//		for(OzElement g:gateAtlas){
+//			if(g instanceof BasicBody){
+//				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
+//				g.l.x = g.l.x + player.getPush_X();
+//				if(Player.getL().y < Player.limitDown){
+//					if(zz==0){
+//						Gdx.app.log("impact", (zz) + " 坐标y "+(g.l.y+P.land.getHeight())+"  玩家坐标  "+Player.getL().y+" pushY "+player.getPush_Y()+" ↓");
+//					}
+//					g.l.y = g.l.y - player.getPush_Y();
+////					Gdx.app.log("impact", "进入垂直[整体]微调   ");
+//					if(zz==0)
+//					Gdx.app.log("impact", (zz++) + " 坐标y "+(g.l.y+P.land.getHeight())+"  玩家坐标  "+Player.getL().y+" pushY "+player.getPush_Y()+" ↑");
+//				}
+//				
+//				
+//			}
 //		}
+		if(Player.getL().y >= Player.limitDown){
+			player.pushBack_Y();
+//			Gdx.app.log("impact", "进入垂直[个体]微调   ");
+		}
 //		
 //		for(OzElement g:gateAtlas){
 //			if(g instanceof BasicBody){

@@ -76,10 +76,10 @@ public class Player extends OzElement{
 
 	@Override
 	public void verticalLogic() {
-	    if( Player.isJump()==true && l.y<Player.limitUp){
+	    if( Player.isJump()==true && l.y<=Player.limitUp){
 			l.y = l.y + Player.VALUE_JUMP;
 		}
-		else if(Player.isJump()==false && (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && l.y>Player.limitDown){
+		else if(Player.isJump()==false && (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && l.y>=Player.limitDown){
 			l.y = l.y - Player.VALUE_GRAVITY;
 		}
 		else if( Player.getVerticalT()==Vertical.Top ){
@@ -198,6 +198,7 @@ public class Player extends OzElement{
 	public  static OzPoint getL(){
 		return L;
 	}
+	
 
 	
 
