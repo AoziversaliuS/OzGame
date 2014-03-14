@@ -33,7 +33,7 @@ public class P {
 		Game_btnRightPress  = new OzPicture(true, false, 208, 125, mS("btnLeftPress"));
 		Game_btnJump        = new OzPicture(150, 150, mS("btnJump"));
 		Game_btnJumpPress   = new OzPicture(150, 150, mS("btnJumpPress"));
-		land                = new OzPicture(200, 100, mS("land"));
+		land                = new OzPicture(400, 200, mS("land"));
 		player              = new OzPicture(60, 60, mS("player"));
 		playerLeft          = new OzPicture(60, 60, mS("playerLeft"));
 		playerRight         = new OzPicture(true, false,60,60, mS("playerLeft"));

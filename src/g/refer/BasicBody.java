@@ -36,10 +36,10 @@ public abstract class BasicBody extends OzElement {
 	@Override
 	public void verticalLogic() {
 		
-	    if( Player.isJump()==true &&  Player.getL().y<=Player.limitUp){
+	    if( Player.isJump()==true &&  Player.getL().y>=Player.limitUp){
 			l.y = l.y - Player.VALUE_JUMP;
 		}
-		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && Player.getL().y>=Player.limitDown ){
+		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && Player.getL().y<=Player.limitDown ){
 			l.y = l.y + Player.VALUE_GRAVITY;
 		}
 		else if( Player.getVerticalT()==Vertical.Top ){

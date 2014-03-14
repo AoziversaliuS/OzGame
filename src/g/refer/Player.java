@@ -21,8 +21,8 @@ public class Player extends OzElement{
 	
 	public static final float VALUE_MOVE    = 7;                //玩家水平移动速度
 	public static final float VALUE_GRAVITY = 10;                //重力
-	public static final float limitUp = 200;
-	public static final float limitDown = 520;
+	public static final float limitUp = 520;
+	public static final float limitDown = 200;
 	
 	public  static final float VALUE_JUMP    = 10;  //跳跃的速度
 	public  static OzPoint L = new OzPoint();     //对外传输玩家坐标
@@ -35,8 +35,8 @@ public class Player extends OzElement{
 	private static Vertical  verticalT =  Vertical.Else;
 	private  float push_X = 0;  //碰撞后将玩家位置推回到穿墙前
 	private  float push_Y = 0;  //碰撞后将玩家位置推回到穿墙前
-	private  float dY = 2;      //不出现穿墙状况的最低值 
-	private  float dX = 2;      //不出现穿墙状况的最低值 
+	private  float dY = 1;      //不出现穿墙状况的最低值 
+	private  float dX = 1;      //不出现穿墙状况的最低值 
 	
 	private static boolean jump = false;
 	
@@ -76,10 +76,10 @@ public class Player extends OzElement{
 
 	@Override
 	public void verticalLogic() {
-	    if( Player.isJump()==true && l.y>Player.limitUp){
+	    if( Player.isJump()==true && l.y<Player.limitUp){
 			l.y = l.y + Player.VALUE_JUMP;
 		}
-		else if(Player.isJump()==false && (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && l.y<Player.limitDown){
+		else if(Player.isJump()==false && (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && l.y>Player.limitDown){
 			l.y = l.y - Player.VALUE_GRAVITY;
 		}
 		else if( Player.getVerticalT()==Vertical.Top ){
@@ -133,11 +133,12 @@ public class Player extends OzElement{
 			if(gateAtlas.get(i).planeT == Plane.Left){
 				
 				planeT = Plane.Left;
-				
+//				Gdx.app.log("impact", "碰到了 "+planeT);
 			}
 			else if(gateAtlas.get(i).planeT == Plane.Right){
 				
 				planeT = Plane.Right;
+//				Gdx.app.log("impact", "碰到了 "+planeT);
 				
 			}
 			else if(gateAtlas.get(i).verticalT == Vertical.Top){
@@ -150,7 +151,6 @@ public class Player extends OzElement{
 				verticalT = Vertical.Bottom;
 			}
 		}
-//		Gdx.app.log("impact", " verticalT: "+verticalT );
 	}
 	@Override
 	public void impact(Player player) {
@@ -174,10 +174,14 @@ public class Player extends OzElement{
 		return push_Y;
 	}
 
-	public  void setPush_X(float push_X) {
-		if(push_X - dX > 0){
+	public  void setPush_X(float push_X,boolean isLeftHit) {
+		if(push_X - dX > 0 && isLeftHit){
 			this.push_X = push_X - dX;
 		}
+		else if(dX + push_X<0 && !isLeftHit){
+			this.push_X = push_X + dX;
+		}
+//		Gdx.app.log("impact","逆推X"+ this.push_X );
 	}
 	public  void setPush_Y(float push_Y) {
 		if(push_Y - this.dY > 0){
