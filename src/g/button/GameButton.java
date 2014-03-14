@@ -60,7 +60,10 @@ public class GameButton extends OzElement{
 	}
 	public void logic(HashMap<String, OzPoint> points) {
 		
-		if(buttonLeft.insides(points)){
+		if(buttonLeft.insides(points) && buttonRight.insides(points)){
+			//两个键都按下的情况下，保持上一次所具有的按键状态
+		}
+	    else if(buttonLeft.insides(points)){
 			Arrow = GameButton.A_Left;
 		}
 		else if(buttonRight.insides(points)){
@@ -69,6 +72,7 @@ public class GameButton extends OzElement{
 		else{
 			Arrow = GameButton.A_Else;
 		}
+		
 		
 		if(buttonJump.insides(points)){
 			Skill = GameButton.S_Jump;

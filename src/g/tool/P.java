@@ -22,13 +22,13 @@ public class P {
 	private static void loadTexture() {
 		setAtlas("Image/basis.atlas");
 		
-		backGround = new OzPicture(1280, 720, get("backGround"), true);
-		Game_btnLeft = new OzPicture(208, 125, get("btnLeft"));
-		Game_btnRight = new OzPicture(true, false,208, 125, get("btnLeft"));
-		Game_btnLeftPress = new OzPicture(208, 125, get("btnLeftPress"));
-		Game_btnRightPress = new OzPicture(true, false, 208, 125, get("btnLeftPress"));
-		Game_btnJump = new OzPicture(150, 150, get("btnJump"));
-		Game_btnJumpPress = new OzPicture(150, 150, get("btnJumpPress"));
+		backGround          = new OzPicture(1280, 720, mS("backGround"), true);
+		Game_btnLeft        = new OzPicture(208, 125, mS("btnLeft"));
+		Game_btnRight       = new OzPicture(true, false,208, 125, mS("btnLeft"));
+		Game_btnLeftPress   = new OzPicture(208, 125, mS("btnLeftPress"));
+		Game_btnRightPress  = new OzPicture(true, false, 208, 125, mS("btnLeftPress"));
+		Game_btnJump        = new OzPicture(150, 150, mS("btnJump"));
+		Game_btnJumpPress   = new OzPicture(150, 150, mS("btnJumpPress"));
 	}
 	
 	
@@ -67,9 +67,8 @@ public class P {
 	private static TextureAtlas atlas;
 	
 	public static void init(float screenWidth,float screenHeight){
+		
 		batch = new SpriteBatch();
-		
-		
 		P.screenW = screenWidth;
 		P.screenH = screenHeight;
 		Gdx.app.log("ratio", " ÆÁÄ»·Ö±æÂÊÎª: "+P.screenW +" * "+P.screenH);
@@ -78,9 +77,8 @@ public class P {
 		loadTexture();
 		
 	}
-	private static TextureRegion get(String regionName){
-		atlas.findRegion(regionName).getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		return atlas.findRegion(regionName);
+	private static Sprite mS(String pictureName){
+		return atlas.createSprite(pictureName);
 	}
 	private static void ratioInit(){
 		
