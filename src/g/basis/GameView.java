@@ -160,36 +160,19 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			gateAtlas.get(i).impact(player);
 		}
 		player.set_VerticalT_and_PlaneT(gateAtlas); //设置玩家的垂直状态和水平状态值
-		int zz = 0;
-//		for(OzElement g:gateAtlas){
-//			if(g instanceof BasicBody){
-//				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
-//				g.l.x = g.l.x + player.getPush_X();
-//				if(Player.getL().y < Player.limitDown){
-//					if(zz==0){
-//						Gdx.app.log("impact", (zz) + " 坐标y "+(g.l.y+P.land.getHeight())+"  玩家坐标  "+Player.getL().y+" pushY "+player.getPush_Y()+" ↓");
-//					}
-//					g.l.y = g.l.y - player.getPush_Y();
-////					Gdx.app.log("impact", "进入垂直[整体]微调   ");
-//					if(zz==0)
-//					Gdx.app.log("impact", (zz++) + " 坐标y "+(g.l.y+P.land.getHeight())+"  玩家坐标  "+Player.getL().y+" pushY "+player.getPush_Y()+" ↑");
-//				}
-//				
-//				
-//			}
-//		}
-		if(Player.getL().y >= Player.limitDown){
+		boolean pushed = false;
+		for(OzElement g:gateAtlas){
+			if(g instanceof BasicBody){
+				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
+				g.l.x = g.l.x + player.getPush_X();
+				g.l.y = g.l.y - player.getPush_Y();
+				pushed = true;
+			}
+		}
+		if(Player.getL().y >= Player.limitDown && !pushed){
 			player.pushBack_Y();
-//			Gdx.app.log("impact", "进入垂直[个体]微调   ");
 		}
 //		
-//		for(OzElement g:gateAtlas){
-//			if(g instanceof BasicBody){
-//				Gdx.app.log("impact", (zz++) + " 坐标x  "+g.l.x+" y "+g.l.y);
-//			}
-//			
-//		}
-//		Gdx.app.log("impact",Player.getL().y+" "+Player.limitDown+" 偏差值 "+ player.getPush_Y()+A+" "+B);
 		//此时还未绘图
 		
 		//玩家状态改变↓

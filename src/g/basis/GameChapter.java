@@ -21,6 +21,7 @@ public class GameChapter {
 //		gateAtlas.add(new Land("L-1",500,300));
 		gateAtlas.add(new Land("L-1",300,100));
 		gateAtlas.add(new Land("L-1",500,50));
+		gateAtlas.add(new Land("L-1",700,-200));
 //		gateAtlas.add(new Land("L-1",100,50));
 //		gateAtlas.add(new Land("L-1",0,0));
 	}

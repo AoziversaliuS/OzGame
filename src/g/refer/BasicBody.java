@@ -46,6 +46,15 @@ public abstract class BasicBody extends OzElement {
 		else if( Player.getVerticalT()==Vertical.Top ){
 			//停止下坠,坐标不改变就是停止下坠的状态
 		}
+//		if( Player.isJump()==true ){
+//			l.y = l.y - Player.VALUE_JUMP;
+//		}
+//		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) ){
+//			l.y = l.y + Player.VALUE_GRAVITY;
+//		}
+//		else if( Player.getVerticalT()==Vertical.Top ){
+//			//停止下坠,坐标不改变就是停止下坠的状态
+//		}
 	    
 	}
 
