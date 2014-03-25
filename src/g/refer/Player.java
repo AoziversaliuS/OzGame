@@ -20,13 +20,13 @@ public class Player extends OzElement{
 	private Sprite sprite;
 	
 	public static final float VALUE_MOVE    = 7;                //玩家水平移动速度
-	public static final float VALUE_GRAVITY = 7;                //重力
+	public static final float VALUE_GRAVITY = 8;                //重力
 	public static final float limitUp = 520;
 	public static final float limitDown = 200;
 	
-	public  static final float VALUE_JUMP    = 7;  //跳跃的速度
+	public  static final float VALUE_JUMP    = 8;  //跳跃的速度
 	public  static OzPoint L = new OzPoint();     //对外传输玩家坐标
-	public  static final int JumpTimeMAX = 20;
+	public  static final int JumpTimeMAX = 25;
 	private static int JumpTimeCount = 0;  //跳跃的时间
 	
 	//planeTouch

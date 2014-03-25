@@ -23,6 +23,7 @@ public class P {
 	public static OzPicture player;
 	public static OzPicture playerLeft;
 	public static OzPicture playerRight;
+	
 	private static void loadTexture() {
 		setAtlas("Image/basis.atlas");
 		
