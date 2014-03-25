@@ -21,12 +21,7 @@ public class GameButton extends OzElement{
 	private OzRect buttonLeft;
 	private OzRect buttonRight;
 	private OzRect buttonJump;
-	private Sprite btnLeft;
-	private Sprite btnLeftPress;
-	private Sprite btnRight;
-	private Sprite btnRightPress;
-	private Sprite btnJump;
-	private Sprite btnJumpPress;
+	
 	/**枚举值↓*/
 	//orientation  枚举值不能相同！
 	public static final int A_Left=1, A_Right=2,A_Else=3;
@@ -39,12 +34,6 @@ public class GameButton extends OzElement{
 	
 	public GameButton() {
 		super("GameButton",Rank.SELF_CUSTOM, ET.GameButton,null,null);
-		btnLeft = new Sprite(P.Game_btnLeft.getSprite());
-		btnRight = new Sprite(P.Game_btnRight.getSprite());
-		btnJump = new Sprite(P.Game_btnJump.getSprite());
-		btnLeftPress = new Sprite(P.Game_btnLeftPress.getSprite());
-		btnRightPress = new Sprite(P.Game_btnRightPress.getSprite());
-		btnJumpPress =  new Sprite(P.Game_btnJumpPress.getSprite());
 		
 		this.buttonLeft  = new OzRect(25, 15, P.Game_btnLeft.getWidth(),P.Game_btnLeft.getHeight());
 		this.buttonRight = new OzRect(275, 15,P.Game_btnRight.getWidth(), P.Game_btnRight.getHeight());
@@ -89,23 +78,23 @@ public class GameButton extends OzElement{
 	public void draw() {
 		//左右按键
 		if(Arrow == GameButton.A_Else){
-			P.draw(buttonLeft.x, buttonLeft.y, btnLeft);
-			P.draw(buttonRight.x, buttonRight.y, btnRight);
+			P.draw(buttonLeft.x, buttonLeft.y, P.Game_btnLeft);
+			P.draw(buttonRight.x, buttonRight.y, P.Game_btnRight);
 		}
 		else if(Arrow == GameButton.A_Left){
-			P.draw(buttonLeft.x,buttonLeft.y, btnLeftPress);
-			P.draw(buttonRight.x, buttonRight.y, btnRight);
+			P.draw(buttonLeft.x,buttonLeft.y, P.Game_btnLeftPress);
+			P.draw(buttonRight.x, buttonRight.y, P.Game_btnRight);
 		}
 		else if(Arrow == GameButton.A_Right){
-			P.draw(buttonLeft.x,buttonLeft.y, btnLeft);
-			P.draw(buttonRight.x, buttonRight.y, btnRightPress);
+			P.draw(buttonLeft.x,buttonLeft.y, P.Game_btnLeft);
+			P.draw(buttonRight.x, buttonRight.y, P.Game_btnRightPress);
 		}
 		//跳跃按键
 		if(Skill == GameButton.S_Else){
-			P.draw(buttonJump.x, buttonJump.y, btnJump);
+			P.draw(buttonJump.x, buttonJump.y, P.Game_btnJump);
 		}
 		else if(Skill == GameButton.S_Jump){
-			P.draw(buttonJump.x, buttonJump.y, btnJumpPress);
+			P.draw(buttonJump.x, buttonJump.y, P.Game_btnJumpPress);
 		}
 	}
 

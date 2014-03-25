@@ -17,7 +17,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Player extends OzElement{
 
-	private Sprite sprite;
 	
 	public static final float VALUE_MOVE    = 7;                //玩家水平移动速度
 	public static final float VALUE_GRAVITY = 8;                //重力
@@ -50,7 +49,6 @@ public class Player extends OzElement{
 				new OzRect(0, 0,P.player.getWidth(),P.player.getHeight())
 		);
 //		Gdx.app.log("impact", this.entity);
-		sprite = new Sprite(P.player.getSprite());
 		jump = false;
 	}
 
@@ -91,7 +89,7 @@ public class Player extends OzElement{
 
 	@Override
 	public void draw() {
-		P.draw(l, sprite);
+		P.draw(l, P.player);
 	}
 
 

@@ -17,7 +17,7 @@ public class P {
 	public static OzPicture Game_btnRightPress;
 	public static OzPicture Game_btnJump;
 	public static OzPicture Game_btnJumpPress;
-	//source
+	//gameSource
 	public static OzPicture backGround;
 	public static OzPicture land;
 	public static OzPicture player;
@@ -50,21 +50,31 @@ public class P {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 	}
-	public static void draw(float x,float y,Sprite sprite){
+	
+	//绘图方法↓
+	
+	public static void draw(float x,float y,OzPicture picture){
+		picture.setDefault();
 		//此方法适用于画除了背景图片之外的图片
-		sprite.setPosition(x*P.ratioX, y*P.ratioY);
-		sprite.draw(batch);
+		picture.getSprite().setPosition(x*P.ratioX, y*P.ratioY);
+		picture.getSprite().draw(batch);
 	}
-	public static void draw(OzPoint point,Sprite sprite){
+	public static void draw(OzPoint point,OzPicture picture){
+		picture.setDefault();
 		//此方法适用于画除了背景图片之外的图片
-		sprite.setPosition(point.x*P.ratioX, point.y*P.ratioY);
-		sprite.draw(batch);
+		picture.getSprite().setPosition(point.x*P.ratioX, point.y*P.ratioY);
+		picture.getSprite().draw(batch);
 	}
-	public static void drawBg(float x,float y,Sprite sprite){
+	public static void drawBg(float x,float y,OzPicture picture){
+		picture.setDefault();
 		//此方法只能用来画背景图！
-		sprite.setPosition(x*P.bgRatioX, y*P.bgRatioY);
-		sprite.draw(batch);
+		picture.getSprite().setPosition(x*P.bgRatioX, y*P.bgRatioY);
+		picture.getSprite().draw(batch);
 	}
+	
+	//绘图方法↑
+	
+	
 	public static void end(){
 		batch.end();
 	}
