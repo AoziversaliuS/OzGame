@@ -51,6 +51,8 @@ public class P {
 		batch.begin();
 	}
 	
+	
+	
 	//»æÍ¼·½·¨¡ı
 	
 	public static void draw(float x,float y,OzPicture picture){

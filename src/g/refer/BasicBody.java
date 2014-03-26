@@ -12,8 +12,8 @@ import g.type.Vertical;
 public abstract class BasicBody extends OzElement {
 
 
-	public BasicBody(String Tag, int Rank, ET type, OzPoint l,
-			OzRect entityOffset) {
+	public BasicBody(String Tag, int Rank, ET type, OzPoint l,OzRect entityOffset) {
+		
 		super(Tag, Rank, type, l, entityOffset);
 	}
 

@@ -68,12 +68,10 @@ public abstract class OzElement implements Origin{
 		if(this.entity.intersect(other.entity)){
 			//与其它物体相碰则返回true
 			return true;
-			
 		}
 		else{
 			//没碰到返回false;
 			return false;
-			
 		}
 		
 	}

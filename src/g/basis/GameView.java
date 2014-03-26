@@ -33,6 +33,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		Gdx.input.setInputProcessor(this); //设置触屏监听
 		status = Status.Game;  //设置当前界面状态
 		this.gameInit();
+	
 		
 	}
 	@Override
