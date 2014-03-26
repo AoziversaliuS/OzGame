@@ -1,6 +1,5 @@
 package g.refer;
 
-import g.basis.GameView;
 import g.button.GameButton;
 import g.tool.OzPoint;
 import g.tool.OzRect;

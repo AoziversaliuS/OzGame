@@ -2,12 +2,9 @@ package g.tool;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class P {
 	//Button
@@ -35,9 +32,9 @@ public class P {
 		Game_btnJump        = new OzPicture(150, 150, mS("btnJump"));
 		Game_btnJumpPress   = new OzPicture(150, 150, mS("btnJumpPress"));
 		land                = new OzPicture(400, 200, mS("land"));
-		player              = new OzPicture(60, 60, mS("player"));
-		playerLeft          = new OzPicture(60, 60, mS("playerLeft"));
-		playerRight         = new OzPicture(true, false,60,60, mS("playerLeft"));
+		player              = new OzPicture(45, 45, mS("player"));
+		playerLeft          = new OzPicture(45, 45, mS("playerLeft"));
+		playerRight         = new OzPicture(true, false,45,45, mS("playerLeft"));
 	}
 	
 	

@@ -4,7 +4,6 @@ import g.build.Land;
 import g.refer.BackGround;
 import g.refer.OzElement;
 import g.tool.OzInt;
-import g.tool.OzPoint;
 
 import java.util.ArrayList;
 

@@ -12,7 +12,6 @@ import g.type.Vertical;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
 
 public class Player extends OzElement{
@@ -20,13 +19,16 @@ public class Player extends OzElement{
 	
 	public static final float VALUE_MOVE    = 7;                //玩家水平移动速度
 	public static final float VALUE_GRAVITY = 8;                //重力
-	public static final float limitUp = 520;
-	public static final float limitDown = 200;
+	
+	public static final float limitUp = 520;     //上限
+	public static final float limitDown = 200;   //下限
 	
 	public  static final float VALUE_JUMP    = 8;  //跳跃的速度
 	public  static OzPoint L = new OzPoint();     //对外传输玩家坐标
-	public  static final int JumpTimeMAX = 25;
-	private static int JumpTimeCount = 0;  //跳跃的时间
+	public  static final int JumpTimeMAX = 25;//跳跃的最大时间
+	private static int JumpTimeCount = 0;  //跳跃的时间计数
+	
+	
 	
 	//planeTouch
 	private static Plane     planeT    =  Plane.Else;
@@ -48,7 +50,6 @@ public class Player extends OzElement{
 //				new RectF(0, 0,P.Game_Player.basicWidth,P.Game_Player.basicHeight)
 				new OzRect(0, 0,P.player.getWidth(),P.player.getHeight())
 		);
-//		Gdx.app.log("impact", this.entity);
 		jump = false;
 	}
 
@@ -74,15 +75,15 @@ public class Player extends OzElement{
 
 	@Override
 	public void verticalLogic() {
-	    if( Player.isJump()==true && l.y<=Player.limitUp){
-			l.y = l.y + Player.VALUE_JUMP;
-		}
-		else if(Player.isJump()==false && (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && l.y>=Player.limitDown){
-			l.y = l.y - Player.VALUE_GRAVITY;
-		}
-		else if( Player.getVerticalT()==Vertical.Top ){
-			//停止下坠,坐标不改变就是停止下坠的状态
-		}
+//	    if( Player.isJump()==true && l.y<=Player.limitUp){
+//			l.y = l.y + Player.VALUE_JUMP;
+//		}
+//		else if(Player.isJump()==false && (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && l.y>=Player.limitDown){
+//			l.y = l.y - Player.VALUE_GRAVITY;
+//		}
+//		else if( Player.getVerticalT()==Vertical.Top ){
+//			//停止下坠,坐标不改变就是停止下坠的状态
+//		}
 	}
 
 

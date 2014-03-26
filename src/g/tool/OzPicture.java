@@ -23,7 +23,6 @@ public class OzPicture {
 		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		//针对手机屏幕来设定图片的大小
 		this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
-
 	}
 	public OzPicture( boolean planeFlip, boolean verticalFlip,float basisWidth , float basisHeight,Sprite sprite) {
 		super();
