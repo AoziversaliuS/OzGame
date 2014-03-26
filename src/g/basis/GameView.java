@@ -154,37 +154,37 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	}
 	public void gameEngine(){
 		
-		player.resetOnGameLogic();
+		player.resetOnBegin();
 		
 		//碰撞↓
 		for(int i=0;i<gateAtlas.size();i++){
 			gateAtlas.get(i).impact(player);
 		}
 		player.set_VerticalT_and_PlaneT(gateAtlas); //设置玩家的垂直状态和水平状态值
-		boolean pushed = false;
+		
 		for(OzElement g:gateAtlas){
 			if(g instanceof BasicBody){
 				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
 				g.l.x = g.l.x + player.getPush_X();
 				g.l.y = g.l.y - player.getPush_Y();
-				pushed = true;
 			}
 		}
-		if(Player.getL().y >= Player.limitDown && !pushed){
-			player.pushBack_Y();
-		}
-//		
-		//此时还未绘图
+		//碰撞↑
+	
+
 		
 		//玩家状态改变↓
 		player.updateAction();
+		//玩家状态改变↑
 		
 		//元素移动等逻辑↓
 		for(int i=0;i<gateAtlas.size();i++){
 			gateAtlas.get(i).engine();
 		}
-		
 		player.engine();
+		//元素移动等逻辑↑
+		
+		/**此时还未绘图******/
 	}
 	public void gameDraw(){
 		

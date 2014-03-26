@@ -20,14 +20,15 @@ public class Player extends OzElement{
 	public static final float VALUE_MOVE    = 7;                //玩家水平移动速度
 	public static final float VALUE_GRAVITY = 8;                //重力
 	
-	public static final float limitUp = 520;     //上限
-	public static final float limitDown = 200;   //下限
-	
-	public  static final float VALUE_JUMP    = 8;  //跳跃的速度
-	public  static OzPoint L = new OzPoint();     //对外传输玩家坐标
+	public  static final float VALUE_JUMP    = 8;               //跳跃的速度
 	public  static final int JumpTimeMAX = 25;//跳跃的最大时间
 	private static int JumpTimeCount = 0;  //跳跃的时间计数
 	
+	private  static OzPoint L = new OzPoint();     //对外传输玩家坐标
+	
+	
+	public static final int ALIVE = 0/**活着*/,DEAD = 1/**死亡*/,REVIVE = 2/**复活*/;
+	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
 	
 	
 	//planeTouch
@@ -46,11 +47,12 @@ public class Player extends OzElement{
 				"Player",
 				Rank.SELF_CUSTOM, 
 				ET.Player,
-				new OzPoint(400, 400),
-//				new RectF(0, 0,P.Game_Player.basicWidth,P.Game_Player.basicHeight)
+				new OzPoint( P.getScreenW()/2-P.player.getWidth()/2 , P.getScreenH()/2-P.player.getHeight()/2),
 				new OzRect(0, 0,P.player.getWidth(),P.player.getHeight())
 		);
+		Gdx.app.log("show", "玩家坐标: "+l.x+" , "+l.y);
 		jump = false;
+		condition = Player.ALIVE;
 	}
 
 	@Override
@@ -63,28 +65,6 @@ public class Player extends OzElement{
 	}
 	
 
-	@Override
-	public void planeLogic() {
-//		if(GameButton.getArrow() == GameButton.A_Left){
-//			l.x = l.x - MOVE_SPEED;
-//		}
-//		else if(GameButton.getPressO() == GamePressO.Right){
-//			l.x = l.x + MOVE_SPEED;
-//		}
-	}
-
-	@Override
-	public void verticalLogic() {
-//	    if( Player.isJump()==true && l.y<=Player.limitUp){
-//			l.y = l.y + Player.VALUE_JUMP;
-//		}
-//		else if(Player.isJump()==false && (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && l.y>=Player.limitDown){
-//			l.y = l.y - Player.VALUE_GRAVITY;
-//		}
-//		else if( Player.getVerticalT()==Vertical.Top ){
-//			//停止下坠,坐标不改变就是停止下坠的状态
-//		}
-	}
 
 
 
@@ -95,7 +75,7 @@ public class Player extends OzElement{
 
 
 	
-	public void resetOnGameLogic(){
+	public void resetOnBegin(){
 		//状态更新不能写在重设变量这里
 		push_X = 0; 
 		push_Y = 0;

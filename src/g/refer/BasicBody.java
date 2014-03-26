@@ -10,10 +10,11 @@ import g.type.Vertical;
 
 public abstract class BasicBody extends OzElement {
 
-
+    public OzPoint startPoint; //该物体最初所在的位置，用于重生时，地图位置还原
+	
 	public BasicBody(String Tag, int Rank, ET type, OzPoint l,OzRect entityOffset) {
-		
 		super(Tag, Rank, type, l, entityOffset);
+		startPoint = new OzPoint(l.x, l.y);
 	}
 
 	
@@ -24,10 +25,11 @@ public abstract class BasicBody extends OzElement {
 	//在这里进行水平移动运算  【玩家向左移动，向右移动】            时相对运动
 	@Override
 	public void planeLogic() {
-		
+		//玩家向左移动
 		if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
 			l.x = l.x + Player.VALUE_MOVE;
 		}
+		//玩家向右移动
 		else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
 			l.x = l.x - Player.VALUE_MOVE;
 		}
@@ -35,31 +37,26 @@ public abstract class BasicBody extends OzElement {
 	//垂直移动运算 玩家【跳跃，下坠】时的相对运动
 	@Override
 	public void verticalLogic() {
-		
-	    if( Player.isJump()==true &&  Player.getL().y>Player.limitUp){
+		//跳跃状态
+		if( Player.isJump()==true ){
 			l.y = l.y - Player.VALUE_JUMP;
 		}
-		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) && Player.getL().y<Player.limitDown ){
+		//下坠状态
+		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) ){
 			l.y = l.y + Player.VALUE_GRAVITY;
 		}
+		//站在陆地状态
 		else if( Player.getVerticalT()==Vertical.Top ){
 			//停止下坠,坐标不改变就是停止下坠的状态
 		}
-//		if( Player.isJump()==true ){
-//			l.y = l.y - Player.VALUE_JUMP;
-//		}
-//		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) ){
-//			l.y = l.y + Player.VALUE_GRAVITY;
-//		}
-//		else if( Player.getVerticalT()==Vertical.Top ){
-//			//停止下坠,坐标不改变就是停止下坠的状态
-//		}
 	    
 	}
 
 	@Override
 	public void reset() {
-
+		//重置坐标
+		l.x = startPoint.x;
+		l.y = startPoint.y;
 	}
 
 }
