@@ -5,6 +5,9 @@ public enum ET {
 	Element,//≥ı º÷µ
 	//GAME
 	GameButton,
-	BackGround,Land,Player
+	BackGround,Player,
+	
+	Land,Thorn
+	
 	//Start
 }

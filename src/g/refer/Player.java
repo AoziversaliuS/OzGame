@@ -31,6 +31,14 @@ public class Player extends OzElement{
 	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
 	
 	
+	public static int getCondition() {
+		return condition;
+	}
+
+	public static void setCondition(int condition) {
+		Player.condition = condition;
+	}
+
 	//planeTouch
 	private static Plane     planeT    =  Plane.Else;
 	//verticalTouch
