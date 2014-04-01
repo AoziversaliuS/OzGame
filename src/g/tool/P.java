@@ -1,6 +1,7 @@
 package g.tool;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -66,10 +67,13 @@ public class P {
 		picture.getSprite().setPosition(point.x*P.ratioX, point.y*P.ratioY);
 		picture.getSprite().draw(batch);
 	}
-	public static void drawScale(OzPoint point,OzPicture picture){
+	public static void drawScale(float scaleXY,OzPoint point,OzPicture picture){
 		picture.setDefault();
 		//此方法适用于画除了背景图片之外的图片
-//		picture.getSprite().s
+		picture.getSprite().setColor(Color.RED);
+		picture.getSprite().setScale(scaleXY);
+		picture.getSprite().setPosition(point.x*P.ratioX, point.y*P.ratioY);
+		picture.getSprite().draw(batch);
 	}
 	public static void drawBg(float x,float y,OzPicture picture){
 		picture.setDefault();

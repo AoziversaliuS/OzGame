@@ -1,5 +1,6 @@
 package g.tool;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -67,6 +68,7 @@ public class OzPicture {
 			this.sprite.setSize( this.basisWidth * P.getRatioX() , this.basisHeight * P.getRatioY() );
 		}
 		this.sprite.setScale(1f);
+		this.sprite.setColor(Color.WHITE);
 	}
 	
 	

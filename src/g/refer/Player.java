@@ -28,9 +28,13 @@ public class Player extends OzElement{
 	
 	
 	public static final int ALIVE = 0/**活着*/,
-			                DEAD_START = 1 ,DEAD_END = 2, /**死亡开始和结束*/
-			                REVIVE_START = 3, REVIVE_END = 4 /**复活开始和结束*/;
+			                DEAD_START=1 , DEADING=2,  DEAD_END=3, /**死亡开始和结束*/
+			                REVIVE_START=4,REVIVEING=5 , REVIVE_END=6 /**复活开始和结束*/;
+	private   boolean cChange = false;
 	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
+	
+	
+	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
 	
 	public static int getCondition() {
@@ -72,10 +76,10 @@ public class Player extends OzElement{
 	@Override
 	public void logic() {
 		if( condition==DEAD_START ){
-			condition = DEAD_END;
+			condition = DEADING;
 		}
 		else if( condition==REVIVE_START ){
-			condition = REVIVE_END;
+			condition = REVIVEING;
 		}
 		else if( condition==REVIVE_END ){
 			condition = ALIVE;
@@ -88,7 +92,25 @@ public class Player extends OzElement{
 
 	@Override
 	public void draw() {
-		P.draw(l, P.player);
+		if( condition==ALIVE ){
+			P.draw(l, P.player);
+		}
+		else if( condition==DEADING ){
+			P.drawScale(scaleSize, l,  P.player);
+			scaleSize = scaleSize + 0.1f;
+			if( scaleSize>3 ){
+				condition = DEAD_END;
+			}
+		}
+		else if( condition==REVIVEING ){
+			P.drawScale(scaleSize, l,  P.player);
+			scaleSize = scaleSize - 0.1f;
+			if( scaleSize<=1 ){
+				condition = REVIVE_END;
+			}
+		}
+		
+
 	}
 
 
