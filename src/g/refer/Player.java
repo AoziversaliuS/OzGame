@@ -65,7 +65,8 @@ public class Player extends OzElement{
 				new OzRect(0, 0,P.player.getWidth(),P.player.getHeight())
 		);
 		System.out.println("");
-		Gdx.app.log("show", "玩家坐标: "+l.x+" , "+l.y);
+//		System.out.println(P.getRatioX()+"   "+P.getRatioY());
+		Gdx.app.log("show", "玩家坐标: "+(P.getRatioX()*l.x)+" , "+(P.getRatioY()*l.y));
 		jump = false;
 		condition = Player.ALIVE;
 	}
