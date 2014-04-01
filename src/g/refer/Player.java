@@ -61,9 +61,10 @@ public class Player extends OzElement{
 				"Player",
 				Rank.SELF_CUSTOM, 
 				ET.Player,
-				new OzPoint( P.getScreenW()/2-P.player.getWidth()/2 , P.getScreenH()/2-P.player.getHeight()/2),
+				new OzPoint( P.BASIC_SCREEN_WIDTH/2-P.player.getWidth()/2 , P.BASIC_SCREEN_HEIGHT/2-P.player.getHeight()/2),
 				new OzRect(0, 0,P.player.getWidth(),P.player.getHeight())
 		);
+		System.out.println("");
 		Gdx.app.log("show", "Íæ¼Ò×ø±ê: "+l.x+" , "+l.y);
 		jump = false;
 		condition = Player.ALIVE;

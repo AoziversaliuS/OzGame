@@ -91,6 +91,9 @@ public class P {
 	
 	
 	
+	public static final float BASIC_SCREEN_WIDTH = 1280f;
+	public static final float BASIC_SCREEN_HEIGHT = 720f;
+	
 	private static float screenW;
 	private static float screenH;
 	private static float ratioX;
@@ -118,22 +121,22 @@ public class P {
 		
 		/**以1280*720分辨率作为基准屏幕*/
 		
-		float offsetHeight = P.screenW/1280f * 720f; //offsetHeight:按16:9比例缩放之后非背景图的高度
+		float offsetHeight = P.screenW/BASIC_SCREEN_WIDTH * BASIC_SCREEN_HEIGHT; //offsetHeight:按16:9比例缩放之后非背景图的高度
 		Gdx.app.log("ratio", " 按比例缩放的高度为: "+offsetHeight);
-		if(offsetHeight < 720f){
+		if(offsetHeight < BASIC_SCREEN_HEIGHT){
 			//非背景图比例
-			ratioX = P.screenW/1280f;
-			ratioY = offsetHeight/720f;
+			ratioX = P.screenW/BASIC_SCREEN_WIDTH;
+			ratioY = offsetHeight/BASIC_SCREEN_HEIGHT;
 			//背景图覆盖屏幕
-			float bgOffsetWidth = P.screenH/720f * 1280f;
-			bgRatioX = bgOffsetWidth/1280f;
-			bgRatioY = P.screenH/720f;
+			float bgOffsetWidth = P.screenH/BASIC_SCREEN_HEIGHT * BASIC_SCREEN_WIDTH;
+			bgRatioX = bgOffsetWidth/BASIC_SCREEN_WIDTH;
+			bgRatioY = P.screenH/BASIC_SCREEN_HEIGHT;
 			Gdx.app.log("ratio", "符合条件，采用动态比例!");
 		}
 		else{
 			//不符合上述条件则采用强制覆盖全屏幕比例
-			ratioX = P.screenW/1280f;
-			ratioY = P.screenH/720f;
+			ratioX = P.screenW/BASIC_SCREEN_WIDTH;
+			ratioY = P.screenH/BASIC_SCREEN_HEIGHT;
 			bgRatioX = ratioX;
 			bgRatioY = ratioY;
 			Gdx.app.log("ratio", "不符合条件，采用强制比例!");
