@@ -48,13 +48,16 @@ public abstract class OzElement implements Origin{
 	}
 	
 	public void engine(){
-		
-		if(planeLogicUsed){
-			planeLogic();     //玩家向左移动，向右移动时相对运动
+		//只有活着时才能进行相对移动
+		if(Player.getCondition()==Player.ALIVE){
+			if(planeLogicUsed){
+				planeLogic();     //玩家向左移动，向右移动时相对运动
+			}
+			if(verticalLogicUsed){
+				verticalLogic();  // 玩家跳跃，下坠时的相对运动
+			}
 		}
-		if(verticalLogicUsed){
-			verticalLogic();  // 玩家跳跃，下坠时的相对运动
-		}
+
 		
 		logic();              //元素自身特有的逻辑运算
 	}

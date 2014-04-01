@@ -20,6 +20,7 @@ public class P {
 	public static OzPicture player;
 	public static OzPicture playerLeft;
 	public static OzPicture playerRight;
+	public static OzPicture Thorn;
 	
 	private static void loadTexture() {
 		setAtlas("Image/basis.atlas");
@@ -35,6 +36,7 @@ public class P {
 		player              = new OzPicture(45, 45, mS("player"));
 		playerLeft          = new OzPicture(45, 45, mS("playerLeft"));
 		playerRight         = new OzPicture(true, false,45,45, mS("playerLeft"));
+		Thorn               = new OzPicture(100, 100, mS("Thorn"));
 	}
 	
 	
@@ -63,6 +65,11 @@ public class P {
 		//此方法适用于画除了背景图片之外的图片
 		picture.getSprite().setPosition(point.x*P.ratioX, point.y*P.ratioY);
 		picture.getSprite().draw(batch);
+	}
+	public static void drawScale(OzPoint point,OzPicture picture){
+		picture.setDefault();
+		//此方法适用于画除了背景图片之外的图片
+//		picture.getSprite().s
 	}
 	public static void drawBg(float x,float y,OzPicture picture){
 		picture.setDefault();

@@ -27,7 +27,9 @@ public class Player extends OzElement{
 	private  static OzPoint L = new OzPoint();     //对外传输玩家坐标
 	
 	
-	public static final int ALIVE = 0/**活着*/,DEAD = 1/**死亡*/,REVIVE = 2/**复活*/;
+	public static final int ALIVE = 0/**活着*/,
+			                DEAD_START = 1 ,DEAD_END = 2, /**死亡开始和结束*/
+			                REVIVE_START = 3, REVIVE_END = 4 /**复活开始和结束*/;
 	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
 	
 	
@@ -69,7 +71,15 @@ public class Player extends OzElement{
 	
 	@Override
 	public void logic() {
-		
+		if( condition==DEAD_START ){
+			condition = DEAD_END;
+		}
+		else if( condition==REVIVE_START ){
+			condition = REVIVE_END;
+		}
+		else if( condition==REVIVE_END ){
+			condition = ALIVE;
+		}
 	}
 	
 

@@ -1,6 +1,7 @@
 package g.basis;
 
 import g.build.Land;
+import g.build.Thorn;
 import g.refer.BackGround;
 import g.refer.OzElement;
 import g.tool.OzInt;
@@ -18,9 +19,10 @@ public class GameChapter {
 		
 		//以下皆为继承BasicBody的对象，只有BasicBody的子类才能达到伪静止状态
 //		gateAtlas.add(new Land("L-1",500,300));
-		gateAtlas.add(new Land("L-1",300,100));
-		gateAtlas.add(new Land("L-1",500,50));
-		gateAtlas.add(new Land("L-1",700,-100));
+		gateAtlas.add(new Land("L-1",300,0));
+		gateAtlas.add(new Land("L-1",500,-50));
+		gateAtlas.add(new Land("L-1",700,-200));
+		gateAtlas.add(new Thorn("T-1", 0, 100));
 //		gateAtlas.add(new Land("L-1",100,50));
 //		gateAtlas.add(new Land("L-1",0,0));
 	}

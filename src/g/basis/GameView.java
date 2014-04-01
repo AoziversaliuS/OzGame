@@ -156,6 +156,15 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		player.resetOnBegin();
 		
+		
+		if(Player.getCondition()==Player.DEAD_END){
+			for(OzElement g:gateAtlas){
+				g.reset();
+			}
+			//重设坐标之后开始复活
+			Player.setCondition(Player.REVIVE_START);
+		}
+		
 		//碰撞↓
 		for(int i=0;i<gateAtlas.size();i++){
 			gateAtlas.get(i).impact(player);
