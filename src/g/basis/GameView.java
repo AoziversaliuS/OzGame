@@ -83,7 +83,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 
 	@Override
 	public void render() {	
-		Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
+//		Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
 		
 		engine();
 		showGraphic();
