@@ -159,7 +159,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		if(Player.getCondition()==Player.DEAD_END){
 			boolean finish = false;
+			System.out.println("===============");
 			for(OzElement g:gateAtlas){
+
 				if( finish==false ){
 					finish = g.rollBack();
 				}
