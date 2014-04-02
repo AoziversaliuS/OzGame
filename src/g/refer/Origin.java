@@ -12,4 +12,6 @@ public interface Origin {
 		public abstract void draw();
 		
 		public abstract void impact(Player player);
+		
+		public abstract boolean rollBack();
 }

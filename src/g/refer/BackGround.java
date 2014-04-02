@@ -34,6 +34,13 @@ public class BackGround extends OzElement{
 	public void impact(Player player) {
 	}
 
+
+	@Override
+	public boolean rollBack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 
 }

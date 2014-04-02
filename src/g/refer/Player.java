@@ -218,6 +218,12 @@ public class Player extends OzElement{
 	public  static OzPoint getL(){
 		return L;
 	}
+
+	@Override
+	public boolean rollBack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 	

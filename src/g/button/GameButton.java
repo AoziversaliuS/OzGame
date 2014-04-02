@@ -118,6 +118,12 @@ public class GameButton extends OzElement{
 		
 	}
 
+	@Override
+	public boolean rollBack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 	
 
