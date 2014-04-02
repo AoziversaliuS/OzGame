@@ -33,7 +33,8 @@ public class Player extends OzElement{
 	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
 	
 	
-	
+	public static final int HIT_BASIC = 7 /**碰到静止的物体*/, HIT_MOVING = 8 /**碰到移动的物体*/, HIT_ELSE = 9;
+	private static int hitStatus = HIT_ELSE;
 	
 	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
