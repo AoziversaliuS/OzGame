@@ -11,7 +11,7 @@ import g.type.Vertical;
 public abstract class BasicBody extends OzElement {
 
     public OzPoint startPoint; //该物体最初所在的位置，用于重生时，地图位置还原
-    public static final float rollBackRate = 50f;
+    public static final float rollBackRate = 25f;
     public static final float deviation = 0.1f; //误差
     public float range = 5;
     public boolean  selectedRange = false;
