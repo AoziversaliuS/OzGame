@@ -11,7 +11,7 @@ import g.type.Vertical;
 public abstract class BasicBody extends OzElement {
 
     public OzPoint startPoint; //该物体最初所在的位置，用于重生时，地图位置还原
-    public static final float rollBackRate = 100f;
+    public static final float rollBackRate = 50f;
     public static final float deviation = 0.1f; //误差
     public float range = 5;
     public boolean  selectedRange = false;
@@ -58,9 +58,9 @@ public abstract class BasicBody extends OzElement {
 
 	@Override
 	public void reset() {
-		//重置坐标
-		l.x = startPoint.x;
-		l.y = startPoint.y;
+//		//重置坐标
+//		l.x = startPoint.x;
+//		l.y = startPoint.y;
 	}
 	public boolean rollBack(){
 		float a = startPoint.x - l.x;
@@ -74,7 +74,7 @@ public abstract class BasicBody extends OzElement {
 		setRange(c);//只在复活移动最开头设置一次range。
 //		range = 5;
 		System.out.println("c="+c+"  range="+range + " selectedRange="+selectedRange);
-		if( c<=range ){
+		if( Math.abs(c-range)<deviation || c<range ){
 			l.x = startPoint.x;
 			l.y = startPoint.y;
 			selectedRange = false; //复活移动完成后，selectedRange设为false;
@@ -95,6 +95,9 @@ public abstract class BasicBody extends OzElement {
 	public void setRange(float c){
 		if(selectedRange==false){
 			range = c/rollBackRate;
+			if( range<10f ){
+				range = 10f;
+			}
 			selectedRange = true;  //复活移动完成后，selectedRange要重新设为false;
 		}
 	}
