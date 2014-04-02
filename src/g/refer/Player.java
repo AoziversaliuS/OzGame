@@ -30,8 +30,9 @@ public class Player extends OzElement{
 	public static final int ALIVE = 0/**活着*/,
 			                DEAD_START=1 , DEADING=2,  DEAD_END=3, /**死亡开始和结束*/
 			                REVIVE_START=4,REVIVEING=5 , REVIVE_END=6 /**复活开始和结束*/;
-	private   boolean cChange = false;
 	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
+	
+	
 	
 	
 	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
