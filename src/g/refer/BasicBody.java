@@ -58,5 +58,19 @@ public abstract class BasicBody extends OzElement {
 		l.x = startPoint.x;
 		l.y = startPoint.y;
 	}
+	public void rollBack(){
+//		float a = startPoint.x - l.x;
+//		float b = startPoint.y - l.y;
+//		float c;
+//		float sinY;
+//		float cosX;
+//		c = (float) Math.sqrt( a*a+b*b );
+//		cosX = a/c;
+//		sinY = b/c;
+//		float dx = 5*cosX;
+//		float dy = 5*sinY;
+//		l.x = l.x+dx;
+//		l.y = l.y+dy;
+	}
 
 }
