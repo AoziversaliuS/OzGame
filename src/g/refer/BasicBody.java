@@ -15,7 +15,13 @@ public abstract class BasicBody extends OzElement {
     public static final float deviation = 0.1f; //误差
     public float range = 5;
     public boolean  selected = false;
-	
+    
+    
+    public float a;
+    public float b;
+    public float c;//回滚时用到的3个重要变量 勾股定理
+    
+    
 	public BasicBody(String Tag, int Rank, ET type, OzPoint l,OzRect entityOffset) {
 		super(Tag, Rank, type, l, entityOffset);
 		startPoint = new OzPoint(l.x, l.y);
@@ -65,15 +71,15 @@ public abstract class BasicBody extends OzElement {
 	
 	//玩家死亡后回滚建筑坐标
 	public boolean rollBack(){
-		float a = startPoint.x - l.x;
-		float b = startPoint.y - l.y;
-		float c;
+		
 		float sinY;
 		float cosX;
 		
+		a = startPoint.x - l.x;
+		b = startPoint.y - l.y;
 		c = (float) Math.sqrt( a*a+b*b );
 		
-		setRange(c);//只在复活移动最开头设置一次range。
+		setRange();//只在复活移动最开头设置一次range。
 //		range = 5;
 //		System.out.println("c="+c+"  range="+range + " selectedRange="+selected);
 		if( Math.abs(c-range)<deviation || c<range ){
@@ -94,7 +100,7 @@ public abstract class BasicBody extends OzElement {
 		return false;
 	}
 	
-	public void setRange(float c){
+	public void setRange(){
 		if(selected==false){
 			range = c/rollBackRate;
 			if( range<10f ){
