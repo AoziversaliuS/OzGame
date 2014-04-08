@@ -1,10 +1,13 @@
 package g.basis;
 
 import g.build.Land;
+import g.build.MoveLand;
+import g.build.ReferPoint;
 import g.build.Thorn;
 import g.refer.BackGround;
 import g.refer.OzElement;
 import g.tool.OzInt;
+import g.type.Move;
 
 import java.util.ArrayList;
 
@@ -19,6 +22,7 @@ public class GameChapter {
 		
 		//以下皆为继承BasicBody的对象，只有BasicBody的子类才能达到伪静止状态
 //		gateAtlas.add(new Land("L-1",500,300));
+		gateAtlas.add(new MoveLand("ML-1", 0, 500, 0, 300, 3, Move.plane));
 		gateAtlas.add(new Land("L-1",300,0));
 		gateAtlas.add(new Land("L-1",500,-50));
 		gateAtlas.add(new Land("L-1",700,-200));
@@ -71,6 +75,9 @@ public class GameChapter {
 	private static void initialise(ArrayList<OzElement> gateAtlas,ArrayList<OzInt> rankNum){
 		gateAtlas       = new ArrayList<OzElement>();   //定义地图集队列
 		rankNum         = new ArrayList<OzInt>();       //重设图层序号队列 
+		
+		//每一关加载地图时提前加载参照点,由于是第一个加进去的元素，所以逻辑运算会先更新参照点然后再进行其它建筑的逻辑运算
+		gateAtlas.add(new ReferPoint());
 	}
 	/**使图层队列从小到大排序*/
 	private static void makingRankArray(ArrayList<OzElement> gateAtlas,ArrayList<OzInt> rankNum){

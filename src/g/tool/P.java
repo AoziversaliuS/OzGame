@@ -22,22 +22,34 @@ public class P {
 	public static OzPicture playerLeft;
 	public static OzPicture playerRight;
 	public static OzPicture Thorn;
+	public static OzPicture MoveLand;
 	
 	private static void loadTexture() {
-		setAtlas("Image/basis.atlas");
 		
-		backGround          = new OzPicture(1280, 720, mS("backGround"), true);
+		
+		setAtlas("Image/player/player.atlas");
+		player              = new OzPicture(45, 45, mS("player"));
+		playerLeft          = new OzPicture(45, 45, mS("playerLeft"));
+		playerRight         = new OzPicture(true, false,45,45, mS("playerLeft"));
+		setAtlas("Image/button/button.atlas");
 		Game_btnLeft        = new OzPicture(208, 125, mS("btnLeft"));
 		Game_btnRight       = new OzPicture(true, false,208, 125, mS("btnLeft"));
 		Game_btnLeftPress   = new OzPicture(208, 125, mS("btnLeftPress"));
 		Game_btnRightPress  = new OzPicture(true, false, 208, 125, mS("btnLeftPress"));
 		Game_btnJump        = new OzPicture(150, 150, mS("btnJump"));
 		Game_btnJumpPress   = new OzPicture(150, 150, mS("btnJumpPress"));
+		
+		setAtlas("Image/backGround/backGround.atlas");
+		backGround          = new OzPicture(1280, 720, mS("backGround"), true);
+		
+		setAtlas("Image/build/build.atlas");
 		land                = new OzPicture(400, 200, mS("land"));
-		player              = new OzPicture(45, 45, mS("player"));
-		playerLeft          = new OzPicture(45, 45, mS("playerLeft"));
-		playerRight         = new OzPicture(true, false,45,45, mS("playerLeft"));
-		Thorn               = new OzPicture(100, 100, mS("Thorn"));
+		Thorn               = new OzPicture(50, 50, mS("thorn"));
+		MoveLand            = new OzPicture(100, 50, mS("moveLand"));
+		
+		
+	
+		
 	}
 	
 	

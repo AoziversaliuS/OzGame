@@ -62,6 +62,8 @@ public abstract class BasicBody extends OzElement {
 //		l.x = startPoint.x;
 //		l.y = startPoint.y;
 	}
+	
+	//玩家死亡后回滚建筑坐标
 	public boolean rollBack(){
 		float a = startPoint.x - l.x;
 		float b = startPoint.y - l.y;

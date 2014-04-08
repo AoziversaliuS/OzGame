@@ -13,7 +13,7 @@ import g.type.Vertical;
 public abstract class OzElement implements Origin{
 	
 	public int rankNum = -1;  //该元素所在的图层
-	public float angle = 0;
+	public float angle = 0;//角度？不知有何用
 	ET type = ET.Element;
 	public OzPoint l;   //元素的坐标
 	public OzRect  entityOffset; //entifyOffset 实体相对于l的偏移量
@@ -24,6 +24,9 @@ public abstract class OzElement implements Origin{
 	
 	public Plane    planeT = Plane.Else;        //用来识别其它物体碰到自己的哪个位置
 	public Vertical verticalT = Vertical.Else;
+	
+	public static OzPoint refer = new OzPoint(); //游戏移动物体的参照坐标 只能在ReferPoint类里更新此坐标
+	
 	//构造函数
 	public OzElement(String Tag,int Rank,ET type,OzPoint l,OzRect entityOffset){
 		entity = new OzRect();
