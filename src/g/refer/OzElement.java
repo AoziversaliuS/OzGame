@@ -59,6 +59,7 @@ public abstract class OzElement implements Origin{
 			if(verticalLogicUsed){
 				verticalLogic();  // 玩家跳跃，下坠时的相对运动
 			}
+//			logic();  
 		}
 
 		

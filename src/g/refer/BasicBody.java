@@ -14,7 +14,7 @@ public abstract class BasicBody extends OzElement {
     public static final float rollBackRate = 25f;
     public static final float deviation = 0.1f; //误差
     public float range = 5;
-    public boolean  selectedRange = false;
+    public boolean  selected = false;
 	
 	public BasicBody(String Tag, int Rank, ET type, OzPoint l,OzRect entityOffset) {
 		super(Tag, Rank, type, l, entityOffset);
@@ -75,11 +75,11 @@ public abstract class BasicBody extends OzElement {
 		
 		setRange(c);//只在复活移动最开头设置一次range。
 //		range = 5;
-		System.out.println("c="+c+"  range="+range + " selectedRange="+selectedRange);
+//		System.out.println("c="+c+"  range="+range + " selectedRange="+selected);
 		if( Math.abs(c-range)<deviation || c<range ){
 			l.x = startPoint.x;
 			l.y = startPoint.y;
-			selectedRange = false; //复活移动完成后，selectedRange设为false;
+			selected = false; //复活移动完成后，selectedRange设为false;
 //			System.out.println("-------------------------");
 			return true;
 		}
@@ -95,12 +95,12 @@ public abstract class BasicBody extends OzElement {
 	}
 	
 	public void setRange(float c){
-		if(selectedRange==false){
+		if(selected==false){
 			range = c/rollBackRate;
 			if( range<10f ){
 				range = 10f;
 			}
-			selectedRange = true;  //复活移动完成后，selectedRange要重新设为false;
+			selected = true;  //复活移动完成后，selectedRange要重新设为false;
 		}
 	}
 

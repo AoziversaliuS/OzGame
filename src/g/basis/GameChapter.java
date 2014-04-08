@@ -23,6 +23,7 @@ public class GameChapter {
 		//以下皆为继承BasicBody的对象，只有BasicBody的子类才能达到伪静止状态
 //		gateAtlas.add(new Land("L-1",500,300));
 		gateAtlas.add(new MoveLand("ML-1", 0, 500, 0, 300, 3, Move.plane));
+		gateAtlas.add(new MoveLand("ML-1", 50, 300, 300, 400, 3, Move.vertical));
 		gateAtlas.add(new Land("L-1",300,0));
 		gateAtlas.add(new Land("L-1",500,-50));
 		gateAtlas.add(new Land("L-1",700,-200));
@@ -32,6 +33,7 @@ public class GameChapter {
 		gateAtlas.add(new Thorn("T-3", 1200, 100));
 //		gateAtlas.add(new Land("L-1",100,50));
 //		gateAtlas.add(new Land("L-1",0,0));
+		System.out.println("gateAtlasSize="+gateAtlas.size());
 	}
 	
 	
@@ -73,11 +75,15 @@ public class GameChapter {
 	}
 	/**切换地图时重设地图集和图层队列*/
 	private static void initialise(ArrayList<OzElement> gateAtlas,ArrayList<OzInt> rankNum){
-		gateAtlas       = new ArrayList<OzElement>();   //定义地图集队列
-		rankNum         = new ArrayList<OzInt>();       //重设图层序号队列 
+//		gateAtlas       = new ArrayList<OzElement>();   //定义地图集队列
+//		rankNum         = new ArrayList<OzInt>();       //重设图层序号队列 
+		rankNum.clear();
+		gateAtlas.clear();
 		
-		//每一关加载地图时提前加载参照点,由于是第一个加进去的元素，所以逻辑运算会先更新参照点然后再进行其它建筑的逻辑运算
+		
 		gateAtlas.add(new ReferPoint());
+		//每一关加载地图时提前加载参照点,由于是第一个加进去的元素，所以逻辑运算会先更新参照点然后再进行其它建筑的逻辑运算
+		
 	}
 	/**使图层队列从小到大排序*/
 	private static void makingRankArray(ArrayList<OzElement> gateAtlas,ArrayList<OzInt> rankNum){
