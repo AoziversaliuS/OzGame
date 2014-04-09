@@ -52,12 +52,15 @@ public abstract class BasicBody extends OzElement {
 	@Override
 	public void verticalLogic() {
 		//ÌøÔ¾×´Ì¬
+		
 		if( Player.isJump()==true ){
 			l.y = l.y - Player.VALUE_JUMP;
+			System.out.println("ÌøÔ¾");
 		}
 		//ÏÂ×¹×´Ì¬
 		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) ){
 			l.y = l.y + Player.VALUE_GRAVITY;
+			System.out.println("ÏÂ×¹");
 		}
 		//Õ¾ÔÚÂ½µØ×´Ì¬
 		
