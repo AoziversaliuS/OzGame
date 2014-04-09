@@ -35,15 +35,18 @@ public abstract class BasicBody extends OzElement {
 	//在这里进行水平移动运算  【玩家向左移动，向右移动】            时相对运动
 	@Override
 	public void planeLogic() {
-		//玩家向左移动
+//		System.out.println("Player.getPlane_HitType()="+Player.getPlane_HitType());
+		if( Player.getPlane_HitType()==Player.HIT_BASIC || Player.getPlane_HitType()==Player.HIT_ELSE ){
+			//玩家向左移动
+			if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
+				l.x = l.x + Player.VALUE_MOVE;
+			}
+			//玩家向右移动
+			else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
+				l.x = l.x - Player.VALUE_MOVE;
+			}
+		}
 		
-		if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
-			l.x = l.x + Player.VALUE_MOVE;
-		}
-		//玩家向右移动
-		else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
-			l.x = l.x - Player.VALUE_MOVE;
-		}
 	}
 	//垂直移动运算 玩家【跳跃，下坠】时的相对运动
 	@Override
@@ -57,7 +60,10 @@ public abstract class BasicBody extends OzElement {
 			l.y = l.y + Player.VALUE_GRAVITY;
 		}
 		//站在陆地状态
-		else if( Player.getVerticalT()==Vertical.Top ){
+		
+		
+		
+		else if( Player.getVerticalT()==Vertical.Top && Player.getVertical_HitType()==Player.HIT_BASIC ){
 			//停止下坠,坐标不改变就是停止下坠的状态
 		}
 	    
