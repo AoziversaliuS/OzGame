@@ -36,6 +36,14 @@ public class Player extends OzElement{
 	public static final int HIT_BASIC = 7 /**碰到静止的物体*/, HIT_MOVING = 8 /**碰到移动的物体*/, HIT_ELSE = 9;
 	private static int hitStatus = HIT_ELSE;
 	
+	public static int getHitStatus() {
+		return hitStatus;
+	}
+
+	public static void setHitStatus(int hitStatus) {
+		Player.hitStatus = hitStatus;
+	}
+
 	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
 	
