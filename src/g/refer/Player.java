@@ -34,19 +34,28 @@ public class Player extends OzElement{
 	
 	
 	public static final int HIT_BASIC = 7 /**碰到静止的物体*/, HIT_MOVING = 8 /**碰到移动的物体*/, HIT_ELSE = 9;
-	private static int hitStatus = HIT_ELSE;
-	
-	public static int getHitStatus() {
-		return hitStatus;
-	}
-
-	public static void setHitStatus(int hitStatus) {
-		Player.hitStatus = hitStatus;
-	}
+	private static int plane_HitType = HIT_ELSE;
+	private static int vertical_HitType = HIT_ELSE;
 
 	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
 	
+	public static int getPlane_HitType() {
+		return plane_HitType;
+	}
+
+	public static void setPlane_HitType(int plane_HitType) {
+		Player.plane_HitType = plane_HitType;
+	}
+
+	public static int getVertical_HitType() {
+		return vertical_HitType;
+	}
+
+	public static void setVertical_HitType(int vertical_HitType) {
+		Player.vertical_HitType = vertical_HitType;
+	}
+
 	public static int getCondition() {
 		return condition;
 	}
@@ -131,8 +140,13 @@ public class Player extends OzElement{
 		//状态更新不能写在重设变量这里
 		push_X = 0; 
 		push_Y = 0;
+		
 		planeT = Plane.Else;
 		verticalT = Vertical.Else;
+		
+		plane_HitType = HIT_ELSE;  //重设碰撞状态
+		vertical_HitType = HIT_ELSE;
+		
 		L = l; //对外传输玩家坐标
 	}
 	

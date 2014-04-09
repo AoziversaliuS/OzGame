@@ -36,6 +36,7 @@ public abstract class BasicBody extends OzElement {
 	@Override
 	public void planeLogic() {
 		//Íæ¼ÒÏò×óÒÆ¶¯
+		
 		if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
 			l.x = l.x + Player.VALUE_MOVE;
 		}
