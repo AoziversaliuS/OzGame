@@ -1,9 +1,11 @@
 package g.refer;
 
+import g.build.MoveLand;
 import g.button.GameButton;
 import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.type.ET;
+import g.type.Move;
 import g.type.Plane;
 import g.type.Vertical;
 
@@ -16,6 +18,8 @@ public abstract class BasicBody extends OzElement {
     public float range = 5;
     public boolean  selected = false;
     
+    
+    public static MoveLand MoveLand_hitting;
     
     public float a;
     public float b;
@@ -36,6 +40,7 @@ public abstract class BasicBody extends OzElement {
 	@Override
 	public void planeLogic() {
 //		System.out.println("Player.getPlane_HitType()="+Player.getPlane_HitType());
+		
 		if( Player.getPlane_HitType()==Player.HIT_BASIC || Player.getPlane_HitType()==Player.HIT_ELSE ){
 			//Íæ¼ÒÏò×óÒÆ¶¯
 			if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
@@ -52,7 +57,6 @@ public abstract class BasicBody extends OzElement {
 	@Override
 	public void verticalLogic() {
 		//ÌøÔ¾×´Ì¬
-		
 		if( Player.isJump()==true ){
 			l.y = l.y - Player.VALUE_JUMP;
 			System.out.println("ÌøÔ¾");

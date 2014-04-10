@@ -26,16 +26,17 @@ public class Player extends OzElement{
 	
 	private  static OzPoint L = new OzPoint();     //对外传输玩家坐标
 	
-	
-	public static final int ALIVE = 0/**活着*/,
-			                DEAD_START=1 , DEADING=2,  DEAD_END=3, /**死亡开始和结束*/
+	public static final int ALIVE = 0 /**活着*/,
+			                DEAD_START=1 , DEADING=2,  DEAD_END=3,    /**死亡开始和结束*/
 			                REVIVE_START=4,REVIVEING=5 , REVIVE_END=6 /**复活开始和结束*/;
 	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
 	
-	
-	public static final int HIT_BASIC = 7 /**碰到静止的物体*/, HIT_MOVING = 8 /**碰到移动的物体*/, HIT_ELSE = 9;
-	private static int plane_HitType = HIT_ELSE;
-	private static int vertical_HitType = HIT_ELSE;
+	public static final int HIT_BASIC = 7        /**碰到静止的物体*/, 
+			                HIT_VerticalMove = 8 /**碰到垂直移动的物体*/, 
+			                HIT_PlaneMove = 9,   /**碰到水平移动的物体*/
+			                HIT_ELSE = 10;       /**其余情况(没碰到物体时的情况)*/
+	private static int plane_HitType = HIT_ELSE;    //水平碰撞类型
+	private static int vertical_HitType = HIT_ELSE; //垂直碰撞类型
 
 	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
