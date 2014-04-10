@@ -230,6 +230,7 @@ public class Player extends OzElement{
 		else if(dX + push_X<0 && !isLeftHit){
 			this.push_X = push_X + dX;
 		}
+		Gdx.app.log("impact", "进入水平位置微调   "+this.push_X);
 //		Gdx.app.log("impact","逆推X"+ this.push_X );
 	}
 	public  void setPush_Y(float push_Y) {
