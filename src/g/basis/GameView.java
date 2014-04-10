@@ -182,13 +182,13 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		player.set_VerticalT_and_PlaneT(gateAtlas); //设置玩家的垂直状态和水平状态值
 		
 		//位置微调
-		for(OzElement g:gateAtlas){
-			if(g instanceof BasicBody){
-				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
-				g.l.x = g.l.x + player.getPush_X();
-				g.l.y = g.l.y - player.getPush_Y();
-			}
-		}
+//		for(OzElement g:gateAtlas){
+//			if(g instanceof BasicBody){
+//				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
+//				g.l.x = g.l.x + player.getPush_X();
+//				g.l.y = g.l.y - player.getPush_Y();
+//			}
+//		}
 		//碰撞↑
 	
 		

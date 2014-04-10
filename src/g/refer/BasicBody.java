@@ -74,21 +74,27 @@ public abstract class BasicBody extends OzElement {
 		//跳跃状态
 		if( Player.isJump()==true ){
 			l.y = l.y - Player.VALUE_JUMP;
-			System.out.println("跳跃");
+//			System.out.println("跳跃");
 		}
 		//下坠状态  碰到移动方块和静止方块底部都是这个设置
 		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) ){
 			l.y = l.y + Player.VALUE_GRAVITY;
-			System.out.println("下坠");
+//			System.out.println("下坠");
 		}
 		//站在陆地状态
 		
 		
-		//到了这里就有碰到 [移动方块top] 或碰到 [静止方块top] 两种情况
+		//到了这里就 只有 碰到 [移动方块top] 或碰到 [静止方块top] 两种情况
 		else if( Player.getVerticalT()==Vertical.Top ){
-			
+			//碰到静止方块
 			if( Player.getVertical_HitType()==Player.HIT_BASIC ){
 				//停止下坠,坐标不改变就是停止下坠的状态
+			}
+			else if( Player.getVertical_HitType()==Player.HIT_Moving ){
+//				if( MoveLand_hitting!=this ){
+//				System.out.println("进入VM");
+					l.y = l.y - MoveLand_hitting.speed;
+//				}
 			}
 		}
 	    
