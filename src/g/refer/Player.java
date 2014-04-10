@@ -99,6 +99,7 @@ public class Player extends OzElement{
 	public void logic() {
 		if( condition==DEAD_START ){
 			condition = DEADING;
+			System.out.println("е§дкЫРЭі: "+condition);
 		}
 		else if( condition==REVIVE_START ){
 			condition = REVIVEING;

@@ -175,13 +175,12 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		}
 		//↑复活回滚
 		
-		//碰撞检测A↓ [用于更新玩家状态]
+		//碰撞检测A↓ [用于更新玩家碰撞状态]
 		for(int i=0;i<gateAtlas.size();i++){
 			gateAtlas.get(i).impact(player);
 		}
 		player.set_VerticalT_and_PlaneT(gateAtlas); //设置玩家的垂直状态和水平状态值
 		//碰撞检测A↑
-	
 		
 		
 		//玩家状态改变↓
@@ -204,8 +203,6 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		for(int i=0;i<gateAtlas.size();i++){
 			gateAtlas.get(i).impact(player);
 		}
-		player.set_VerticalT_and_PlaneT(gateAtlas); //设置玩家的垂直状态和水平状态值
-		
 		//位置微调
 		for(OzElement g:gateAtlas){
 			if(g instanceof BasicBody){
