@@ -156,7 +156,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		player.resetOnBegin();
 		
-		
+		//↓复活回滚
 		if(Player.getCondition()==Player.DEAD_END){
 			boolean finish = false;
 			for(OzElement g:gateAtlas){
@@ -172,8 +172,8 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			if(finish){
 				Player.setCondition(Player.REVIVE_START);
 			}
-
 		}
+		//↑复活回滚
 		
 		//碰撞↓
 		for(int i=0;i<gateAtlas.size();i++){
@@ -191,11 +191,16 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		}
 		//碰撞↑
 	
-
+		
 		
 		//玩家状态改变↓
 		player.updateAction();
 		//玩家状态改变↑
+		
+		//对参数进行一些更新,目前仅用于MoveLand方向发生改变时更新参数
+		for(int i=0;i<gateAtlas.size();i++){
+			gateAtlas.get(i).prepare();
+		}
 		
 		//元素移动等逻辑↓
 		for(int i=0;i<gateAtlas.size();i++){

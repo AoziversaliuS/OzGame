@@ -124,6 +124,12 @@ public class GameButton extends OzElement{
 		return false;
 	}
 
+	@Override
+	public void prepare() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 

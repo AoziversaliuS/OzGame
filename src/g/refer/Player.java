@@ -249,6 +249,12 @@ public class Player extends OzElement{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void prepare() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 	
