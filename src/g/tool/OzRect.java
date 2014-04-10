@@ -59,6 +59,10 @@ public class OzRect {
 //		Gdx.app.log("impact", ""+x+"   "+width+"   "+(x+width)/2);
 		return (x+width/2);
 	}
+	public float centerY() {
+//		Gdx.app.log("impact", ""+x+"   "+width+"   "+(x+width)/2);
+		return (y+height/2);
+	}
 	
 	public float getRight(){
 		return (x+width);
