@@ -37,6 +37,7 @@ public class Player extends OzElement{
 			                HIT_ELSE = 10;       /**其余情况(没碰到物体时的情况)*/
 	private static int plane_HitType = HIT_ELSE;    //水平碰撞类型
 	private static int vertical_HitType = HIT_ELSE; //垂直碰撞类型
+	//不必要？
 
 	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
