@@ -32,9 +32,8 @@ public class Player extends OzElement{
 	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
 	
 	public static final int HIT_BASIC = 7        /**碰到静止的物体*/, 
-			                HIT_VerticalMove = 8 /**碰到垂直移动的物体*/, 
-			                HIT_PlaneMove = 9,   /**碰到水平移动的物体*/
-			                HIT_ELSE = 10;       /**其余情况(没碰到物体时的情况)*/
+			                HIT_Moving = 8       /**碰到移动的物体*/, 
+			                HIT_ELSE = 9;        /**其余情况(没碰到物体时的情况)*/
 	private static int plane_HitType = HIT_ELSE;    //水平碰撞类型
 	private static int vertical_HitType = HIT_ELSE; //垂直碰撞类型
 	//不必要？
@@ -143,10 +142,12 @@ public class Player extends OzElement{
 		push_X = 0; 
 		push_Y = 0;
 		
+		//重置为没有碰到任何方块的状态
 		planeT = Plane.Else;
 		verticalT = Vertical.Else;
 		
-		plane_HitType = HIT_ELSE;  //重设碰撞状态
+		//重设碰撞状态
+		plane_HitType = HIT_ELSE;  
 		vertical_HitType = HIT_ELSE;
 		
 		L = l; //对外传输玩家坐标

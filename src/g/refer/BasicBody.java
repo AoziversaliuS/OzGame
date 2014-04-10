@@ -51,6 +51,21 @@ public abstract class BasicBody extends OzElement {
 				l.x = l.x - Player.VALUE_MOVE;
 			}
 		}
+		//水平方向上碰到移动方块
+		else if( Player.getPlane_HitType()==Player.HIT_Moving ){
+			
+			if( MoveLand_hitting.mT==Move.vertical ){
+				//玩家向左移动
+				if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
+					l.x = l.x + Player.VALUE_MOVE;
+				}
+				//玩家向右移动
+				else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
+					l.x = l.x - Player.VALUE_MOVE;
+				}
+			}
+			
+		}
 		
 	}
 	//垂直移动运算 玩家【跳跃，下坠】时的相对运动
@@ -61,7 +76,7 @@ public abstract class BasicBody extends OzElement {
 			l.y = l.y - Player.VALUE_JUMP;
 			System.out.println("跳跃");
 		}
-		//下坠状态
+		//下坠状态  碰到移动方块和静止方块底部都是这个设置
 		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) ){
 			l.y = l.y + Player.VALUE_GRAVITY;
 			System.out.println("下坠");
@@ -69,9 +84,12 @@ public abstract class BasicBody extends OzElement {
 		//站在陆地状态
 		
 		
-		
-		else if( Player.getVerticalT()==Vertical.Top && Player.getVertical_HitType()==Player.HIT_BASIC ){
-			//停止下坠,坐标不改变就是停止下坠的状态
+		//到了这里就有碰到 [移动方块top] 或碰到 [静止方块top] 两种情况
+		else if( Player.getVerticalT()==Vertical.Top ){
+			
+			if( Player.getVertical_HitType()==Player.HIT_BASIC ){
+				//停止下坠,坐标不改变就是停止下坠的状态
+			}
 		}
 	    
 	}
