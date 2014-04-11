@@ -41,25 +41,40 @@ public abstract class BasicBody extends OzElement {
 	public void planeLogic() {
 //		System.out.println("Player.getPlane_HitType()="+Player.getPlane_HitType());
 		
-//		if( Player.getPlane_HitType()==Player.HIT_BASIC || Player.getPlane_HitType()==Player.HIT_ELSE ){
-//			//玩家向左移动
-//			if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
-//				l.x = l.x + Player.VALUE_MOVE;
-//			}
-//			//玩家向右移动
-//			else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
-//				l.x = l.x - Player.VALUE_MOVE;
-//			}
-//		}
+		if( Player.getPlane_HitType()==Player.HIT_BASIC || Player.getPlane_HitType()==Player.HIT_ELSE ){
+			//玩家向左移动
+			if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
+				l.x = l.x + Player.VALUE_MOVE;
+			}
+			//玩家向右移动
+			else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
+				l.x = l.x - Player.VALUE_MOVE;
+			}
+		}
+		else if( Player.getPlane_HitType()==Player.HIT_Moving ){
+			if( MoveLand_hitting.mT==Move.vertical ){
+				//玩家向左移动
+				if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
+					l.x = l.x + Player.VALUE_MOVE;
+				}
+				//玩家向右移动
+				else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
+					l.x = l.x - Player.VALUE_MOVE;
+				}
+			}
+			else if( MoveLand_hitting.mT==Move.plane ){
+				float mlSpeed = MoveLand_hitting.speed;
+				//玩家向左移动
+				if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() == Plane.Right && mlSpeed<0 ){
+					l.x = l.x - mlSpeed;
+				}
+				//玩家向右移动
+				else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() == Plane.Left && mlSpeed>0 ){
+					l.x = l.x - mlSpeed;
+				}
+			}
+		}
 		
-		//玩家向左移动
-		if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
-			l.x = l.x + Player.VALUE_MOVE;
-		}
-		//玩家向右移动
-		else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
-			l.x = l.x - Player.VALUE_MOVE;
-		}
 		//水平方向上碰到移动方块
 		if( Player.getPlane_HitType()==Player.HIT_Moving ){
 			
@@ -74,16 +89,7 @@ public abstract class BasicBody extends OzElement {
 				}
 			}
 			else if( MoveLand_hitting.mT==Move.plane ){
-//				if( Player.getPlaneT()==Plane.Left || Player.getPlaneT()==Plane.Right ){
-//					l.x = l.x - MoveLand_hitting.speed;
-//				}
-//				if( Player.getPlaneT()==Plane.Left && MoveLand_hitting.speed>0 ){
-//					l.x = l.x - Player.VALUE_MOVE;
-//				}
-//				else if( Player.getPlaneT()==Plane.Right && MoveLand_hitting.speed<0 ){
-//					l.x = l.x - Player.VALUE_MOVE;
-//				}
-//				System.out.println("MoveLand_hitting.speed= "+MoveLand_hitting.speed);
+				
 				if( Player.getPlaneT()==Plane.Left && MoveLand_hitting.speed<0 ){
 					l.x = l.x - MoveLand_hitting.speed;
 				}
