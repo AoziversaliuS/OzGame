@@ -27,6 +27,7 @@ public class GameChapter {
 //		gateAtlas.add(new MoveLand("ML-2", 500, 200, 200, 400, 3, Move.vertical));
 //		gateAtlas.add(new MoveLand("ML-1", 50, 300, 300, 400, 3, Move.vertical));
 		gateAtlas.add(new Land("L-1",300,0));
+//		gateAtlas.add(new Land("L-1",00,0));
 		gateAtlas.add(new Land("L-1",500,-50));
 		gateAtlas.add(new Land("L-1",700,-200));
 		gateAtlas.add(new Thorn("T-1", 0, 100));

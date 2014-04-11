@@ -83,12 +83,13 @@ public abstract class BasicBody extends OzElement {
 //				else if( Player.getPlaneT()==Plane.Right && MoveLand_hitting.speed<0 ){
 //					l.x = l.x - Player.VALUE_MOVE;
 //				}
-				System.out.println("MoveLand_hitting.speed= "+MoveLand_hitting.speed);
-				if( Player.getPlaneT()==Plane.Left && MoveLand_hitting.speed>0 ){
+//				System.out.println("MoveLand_hitting.speed= "+MoveLand_hitting.speed);
+				if( Player.getPlaneT()==Plane.Left && MoveLand_hitting.speed<0 ){
 					l.x = l.x - MoveLand_hitting.speed;
 				}
-				else if( Player.getPlaneT()==Plane.Right && MoveLand_hitting.speed<0 ){
+				else if( Player.getPlaneT()==Plane.Right && MoveLand_hitting.speed>0 ){
 					l.x = l.x - MoveLand_hitting.speed;
+					System.out.println("MoveLand_hitting.speed= "+MoveLand_hitting.speed);
 				}
 			}
 			
