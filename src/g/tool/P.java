@@ -43,7 +43,7 @@ public class P {
 		backGround          = new OzPicture(1280, 720, mS("backGround"), true);
 		
 		setAtlas("Image/build/build.atlas");
-		land                = new OzPicture(400, 200, mS("land"));
+		land                = new OzPicture(600, 200, mS("land"));
 		Thorn               = new OzPicture(50, 50, mS("thorn"));
 		MoveLand            = new OzPicture(100, 50, mS("moveLand"));
 		
