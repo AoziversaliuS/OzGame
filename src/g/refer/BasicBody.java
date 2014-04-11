@@ -74,9 +74,9 @@ public abstract class BasicBody extends OzElement {
 				}
 			}
 			else if( MoveLand_hitting.mT==Move.plane ){
-				if( Player.getPlaneT()==Plane.Left || Player.getPlaneT()==Plane.Right ){
-					l.x = l.x - MoveLand_hitting.speed;
-				}
+//				if( Player.getPlaneT()==Plane.Left || Player.getPlaneT()==Plane.Right ){
+//					l.x = l.x - MoveLand_hitting.speed;
+//				}
 			}
 			
 		}
