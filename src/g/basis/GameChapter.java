@@ -23,8 +23,8 @@ public class GameChapter {
 		
 		//以下皆为继承BasicBody的对象，只有BasicBody的子类才能达到伪静止状态
 //		gateAtlas.add(new Land("L-1",500,300));
-		gateAtlas.add(new MoveLand("ML-1", 700, 150, 700, 1000, 3, Move.plane));
-		gateAtlas.add(new MoveLand("ML-2", 500, 200, 200, 400, 3, Move.vertical));
+		gateAtlas.add(new MoveLand("ML-1", 300, 200, 300, 500, 3, Move.plane));
+//		gateAtlas.add(new MoveLand("ML-2", 500, 200, 200, 400, 3, Move.vertical));
 //		gateAtlas.add(new MoveLand("ML-1", 50, 300, 300, 400, 3, Move.vertical));
 		gateAtlas.add(new Land("L-1",300,0));
 		gateAtlas.add(new Land("L-1",500,-50));
