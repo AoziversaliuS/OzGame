@@ -65,12 +65,18 @@ public abstract class BasicBody extends OzElement {
 			else if( MoveLand_hitting.mT==Move.plane ){
 				float mlSpeed = MoveLand_hitting.speed;
 				//玩家向左移动
-				if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() == Plane.Right && mlSpeed<0 ){
+				if(GameButton.getArrow()==GameButton.A_Left && Player.getPlaneT()==Plane.Right && mlSpeed<0 ){
 					l.x = l.x - mlSpeed;
 				}
 				//玩家向右移动
-				else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() == Plane.Left && mlSpeed>0 ){
+				else if(GameButton.getArrow()==GameButton.A_Right && Player.getPlaneT()==Plane.Left && mlSpeed>0 ){
 					l.x = l.x - mlSpeed;
+				}
+				else if( GameButton.getArrow()==GameButton.A_Left && Player.getPlaneT()!=Plane.Right ){
+					l.x = l.x + Player.VALUE_MOVE;
+				}
+				else if( GameButton.getArrow()==GameButton.A_Right && Player.getPlaneT()!=Plane.Left ){
+					l.x = l.x - Player.VALUE_MOVE;
 				}
 			}
 		}
