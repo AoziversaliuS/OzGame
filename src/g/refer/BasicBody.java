@@ -74,7 +74,7 @@ public abstract class BasicBody extends OzElement {
 				}
 			}
 			else if( MoveLand_hitting.mT==Move.plane ){
-				if( Player.getPlaneT()==Plane.Left || Player.getPlaneT()==Plane.Right || Player.getVerticalT()==Vertical.Top ){
+				if( Player.getPlaneT()==Plane.Left || Player.getPlaneT()==Plane.Right ){
 					l.x = l.x - MoveLand_hitting.speed;
 				}
 			}
@@ -105,10 +105,13 @@ public abstract class BasicBody extends OzElement {
 				//停止下坠,坐标不改变就是停止下坠的状态
 			}
 			else if( Player.getVertical_HitType()==Player.HIT_Moving ){
-//				if( MoveLand_hitting!=this ){
-//				System.out.println("进入VM");
-					l.y = l.y - MoveLand_hitting.speed;
-//				}
+				
+					if( MoveLand_hitting.mT==Move.vertical ){
+						l.y = l.y - MoveLand_hitting.speed;
+					}
+					else if( MoveLand_hitting.mT==Move.plane ){
+						l.x = l.x - MoveLand_hitting.speed;
+					}
 			}
 		}
 	    
