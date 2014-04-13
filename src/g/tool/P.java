@@ -17,7 +17,19 @@ public class P {
 	public static OzPicture Game_btnJumpPress;
 	//gameSource
 	public static OzPicture backGround;
-	public static OzPicture land;
+	
+	//Land¡ý 
+	public static OzPicture land_1;
+	public static OzPicture land_2;
+	public static OzPicture land_3;
+	public static OzPicture land_4;
+	public static OzPicture land_5;
+	public static OzPicture land_6;
+	public static OzPicture land_7;
+	public static OzPicture land_8;
+	public static OzPicture land_9;
+	//Land¡ü
+	
 	public static OzPicture player;
 	public static OzPicture playerLeft;
 	public static OzPicture playerRight;
@@ -31,6 +43,7 @@ public class P {
 		player              = new OzPicture(45, 45, mS("player"));
 		playerLeft          = new OzPicture(45, 45, mS("playerLeft"));
 		playerRight         = new OzPicture(true, false,45,45, mS("playerLeft"));
+		
 		setAtlas("Image/button/button.atlas");
 		Game_btnLeft        = new OzPicture(208, 125, mS("btnLeft"));
 		Game_btnRight       = new OzPicture(true, false,208, 125, mS("btnLeft"));
@@ -43,7 +56,18 @@ public class P {
 		backGround          = new OzPicture(1280, 720, mS("backGround"), true);
 		
 		setAtlas("Image/build/build.atlas");
-		land                = new OzPicture(600, 200, mS("land"));
+		//Land
+		land_1 = new OzPicture(50, 50, mS("land_1"));
+		land_2 = new OzPicture(50, 50, mS("land_2"));
+		land_3 = new OzPicture(50, 50, mS("land_3"));
+		land_4 = new OzPicture(50, 50, mS("land_4"));
+		land_5 = new OzPicture(50, 50, mS("land_5"));
+		land_6 = new OzPicture(50, 50, mS("land_6"));
+		land_7 = new OzPicture(50, 50, mS("land_7"));
+		land_8 = new OzPicture(50, 50, mS("land_8"));
+		land_9 = new OzPicture(50, 50, mS("land_9"));
+		
+		//Thorn
 		Thorn               = new OzPicture(50, 50, mS("thorn"));
 		MoveLand            = new OzPicture(100, 50, mS("moveLand"));
 		
