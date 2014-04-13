@@ -57,15 +57,15 @@ public class P {
 		
 		setAtlas("Image/build/build.atlas");
 		//Land
-		land_1 = new OzPicture(50, 50, mS("land_1"));
-		land_2 = new OzPicture(50, 50, mS("land_2"));
-		land_3 = new OzPicture(50, 50, mS("land_3"));
-		land_4 = new OzPicture(50, 50, mS("land_4"));
-		land_5 = new OzPicture(50, 50, mS("land_5"));
-		land_6 = new OzPicture(50, 50, mS("land_6"));
-		land_7 = new OzPicture(50, 50, mS("land_7"));
-		land_8 = new OzPicture(50, 50, mS("land_8"));
-		land_9 = new OzPicture(50, 50, mS("land_9"));
+		land_1 = new OzPicture(50, 50, mS("land",1));
+		land_2 = new OzPicture(50, 50, mS("land",2));
+		land_3 = new OzPicture(50, 50, mS("land",3));
+		land_4 = new OzPicture(50, 50, mS("land",4));
+		land_5 = new OzPicture(50, 50, mS("land",5));
+		land_6 = new OzPicture(50, 50, mS("land",6));
+		land_7 = new OzPicture(50, 50, mS("land",7));
+		land_8 = new OzPicture(50, 50, mS("land",8));
+		land_9 = new OzPicture(50, 50, mS("land",9));
 		
 		//Thorn
 		Thorn               = new OzPicture(50, 50, mS("thorn"));
@@ -152,6 +152,9 @@ public class P {
 	}
 	private static Sprite mS(String pictureName){
 		return atlas.createSprite(pictureName);
+	}
+	private static Sprite mS(String pictureName,int index){
+		return atlas.createSprite(pictureName,index);
 	}
 	private static void ratioInit(){
 		
