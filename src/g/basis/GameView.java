@@ -23,7 +23,10 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	private GameButton gameBtn;
 	private static   ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
 	private  ArrayList<OzInt> rankNum;   //按图层等级来进行显示图片
-	private Status status;  //当前界面状态
+	
+	public static Status status;  //当前界面状态
+    public static Status lastStatus;
+	
 	public static Player player;
 	@Override
 	public void create() {	
@@ -44,7 +47,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	public synchronized boolean touchDown(int screenX, int screenY,int pointer, int button) {
 		
 		points.put(""+pointer, new OzPoint(screenX, screenY, true));
-		gameBtn.logic(points);
+		btnLogic();
 		Gdx.app.log("Interact", "touchDown  有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
@@ -53,7 +56,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			int button) {
 		
 		points.remove(""+pointer);
-		gameBtn.logic(points);
+		btnLogic();
 		Gdx.app.log("Interact", "touchUp 有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
@@ -62,7 +65,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			int pointer) {
 		
 		points.get(""+pointer).set_XY_fromScreen(screenX, screenY);
-		gameBtn.logic(points);
+		btnLogic();
 		Gdx.app.log("Interact", "touchDragged 有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
@@ -131,7 +134,29 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		}
 		
+		
 		P.end();
+	}
+	
+	public void btnLogic(){
+		
+		switch (status) {
+				
+		case Credits:  {        break;}
+				
+		case Game:     {    gameBtn.logic(points);    break;}
+					
+		case Loading:  {        break;}
+				
+		case Pause:    {        break;}
+				
+		case Select:   {        break;}
+				
+		case Start:    {        break;}
+				
+		case Init:     {        break;}
+		
+		}
 	}
 	
 	
@@ -226,6 +251,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		}
 		player.draw();
 		gameBtn.draw();
+	
+//		P.sprite.setPosition(0, 0);
+//		P.sprite.draw(P.batch);
 	}
 
 }

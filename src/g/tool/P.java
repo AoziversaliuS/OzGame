@@ -1,8 +1,12 @@
 package g.tool;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -36,8 +40,22 @@ public class P {
 	public static OzPicture Thorn;
 	public static OzPicture MoveLand;
 	
+	
+	
+	public static Texture texture;
+	public static Sprite sprite;
+	
 	private static void loadTexture() {
 		
+		Pixmap p = new Pixmap((int)P.screenW, (int)P.screenH,  Format.RGBA8888);
+		p.setColor(Color.BLACK);
+		p.fill();
+		texture = new Texture(p);
+		sprite = new Sprite(texture);
+		
+//		sprite.setColor(0, 0, 0, 100f);
+		
+		sprite.setColor(0, 0, 0, 0.5f);
 		
 		setAtlas("Image/player/player.atlas");
 		player              = new OzPicture(45, 45, mS("player"));
@@ -136,7 +154,8 @@ public class P {
 	private static float ratioY;
 	private static float bgRatioX;
 	private static float bgRatioY;
-	private static SpriteBatch batch;
+	
+	public static SpriteBatch batch;
 	private static TextureAtlas atlas;
 	
 	public static void init(float screenWidth,float screenHeight){
