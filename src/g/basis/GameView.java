@@ -24,9 +24,10 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	private static   ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
 	private  ArrayList<OzInt> rankNum;   //按图层等级来进行显示图片
 	
-	public static Status status;  //当前界面状态
-    public static Status lastStatus;
+	private static Status status;  //当前界面状态
+    private static Status toStatus;
 	
+
 	public static Player player;
 	@Override
 	public void create() {	
@@ -34,7 +35,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //图片资源初始化
 		Gdx.input.setCatchBackKey(true); //不让系统接收到Back键
 		Gdx.input.setInputProcessor(this); //设置触屏监听
+		
 		status = Status.Game;  //设置当前界面状态
+		
 		this.gameInit();
 	
 		
@@ -87,9 +90,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	@Override
 	public void render() {	
 //		Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
-		
 		engine();
 		showGraphic();
+		
 	}
 	public void engine(){
 		
@@ -254,6 +257,21 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 //		P.sprite.setPosition(0, 0);
 //		P.sprite.draw(P.batch);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void setToStatus(Status toStatus) {
+		GameView.toStatus = toStatus;
 	}
 
 }
