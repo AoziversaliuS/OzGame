@@ -1,7 +1,9 @@
 package g.button;
 
+import java.awt.Point;
 import java.util.HashMap;
 
+import g.basis.GameView;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -9,12 +11,14 @@ import g.tool.OzRect;
 import g.tool.P;
 import g.type.ET;
 import g.type.Rank;
+import g.type.Status;
 
 public class StartButton extends OzElement{
 
 	private OzRect startGameButton;
 	
-	public static final int START_GAME = 1,ELSE = 2; 
+	public static final int START_GAME = 1,ELSE = 3; 
+	private boolean submit = false;//按下且松开按钮时为true
 	
 	private  int selected = StartButton.ELSE;
 	
@@ -38,18 +42,42 @@ public class StartButton extends OzElement{
 	
 	public void logic(HashMap<String, OzPoint> points) {
 		
-		if( startGameButton.insides(points) ){
-			selected = StartButton.START_GAME;
+		//只有第一个碰到屏幕的点才有效
+		l = points.get("0");
+		
+		
+		if( l!=null ){
+			
+			if( startGameButton.inside(l) ){
+				selected = StartButton.START_GAME;
+			}
+			else{
+				selected = StartButton.ELSE;
+			}
+			
 		}
 		else{
-			selected = StartButton.ELSE;
+			System.out.println("进入");
+			if( selected!=StartButton.ELSE ){
+				submit = true;
+			}
 		}
-		active();
+		
+		if(submit){
+			active();
+		}
+		
 		
 	}
 	//按键触发事件
 	private void active(){
+		if( selected==StartButton.START_GAME ){
+			GameView.setToStatus(Status.Game);
+		}
 		
+		
+		submit = false;
+		selected = StartButton.ELSE;
 	}
 	
 
