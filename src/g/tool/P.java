@@ -68,6 +68,10 @@ public class P {
 		makeBlackPicture();
 		//ÖÆ×÷ºÚÉ«Í¼Æ¬¡ü
 		
+		setAtlas("Image/start/start.atlas");
+		startBg = new OzPicture(1280, 720, mS("startBg"), P.FORCE_RATIO);
+		startBtnA = new OzPicture(334, 135, mS("startBtnA"));
+		startBtnB = new OzPicture(334, 135, mS("startBtnB"));
 		
 		
 		
@@ -85,7 +89,7 @@ public class P {
 		Game_btnJumpPress   = new OzPicture(150, 150, mS("btnJumpPress"));
 		
 		setAtlas("Image/backGround/backGround.atlas");
-		backGround          = new OzPicture(1280, 720, mS("backGround"), true);
+		backGround          = new OzPicture(1280, 720, mS("backGround"), P.BG_RATIO);
 		
 		setAtlas("Image/build/build.atlas");
 		//Land

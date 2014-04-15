@@ -37,21 +37,27 @@ public class OzPicture {
 		this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
 
 	}
-	public OzPicture(float basisWidth , float basisHeight,Sprite sprite,boolean isBackGround) {
+	public OzPicture(float basisWidth , float basisHeight,Sprite sprite,int TYPE) {
 		super();
 		//保存参数等属性
-		this.isBackGround = isBackGround;
+		if( TYPE == P.BG_RATIO ){
+			this.isBackGround = true;
+		}
+		
 		this.basisHeight = basisHeight;
 		this.basisWidth = basisWidth;
 		this.sprite = sprite;
 		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		//针对手机屏幕来设定图片的大小
-		if(isBackGround){
+		if( TYPE == P.BG_RATIO ){
 			//背景图片特殊设定
 			this.sprite.setSize( basisWidth * P.getBgRatioX() , basisHeight * P.getBgRatioY() );
 		}
-		else{
+		else if( TYPE == P.RATIO ){
 			this.sprite.setSize( basisWidth * P.getRatioX() , basisHeight * P.getRatioY() );
+		}
+		else if( TYPE == P.FORCE_RATIO ){
+			this.sprite.setSize( basisWidth * P.getForceRatioX() , basisHeight * P.getForceRatioY() );
 		}
 	}
 	public OzPicture() {

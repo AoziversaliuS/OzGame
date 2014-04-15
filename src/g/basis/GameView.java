@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import g.button.GameButton;
+import g.button.StartButton;
 import g.refer.BasicBody;
 import g.refer.OzElement;
 import g.refer.Player;
@@ -19,6 +20,8 @@ import com.badlogic.gdx.InputProcessorQueue;
 public class GameView extends InputProcessorQueue implements ApplicationListener {
 	
 	private  HashMap<String, OzPoint> points;
+	//StartStatus
+	private StartButton startBtn;
 	//GameStatus
 	private GameButton gameBtn;
 	private static   ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
@@ -40,8 +43,10 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		Gdx.input.setCatchBackKey(true); //不让系统接收到Back键
 		Gdx.input.setInputProcessor(this); //设置触屏监听
 		
-		status = Status.Game;  //设置当前界面状态
-		toStatus = Status.Game;
+		status = Status.Start;  //设置当前界面状态
+		toStatus = Status.Start;
+		
+		startInit();
 		this.gameInit();
 		 
 	}
@@ -93,7 +98,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	@Override
 	public void render() {	
 		P.begin();
-		Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
+//		Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
 		if( toStatus==status ){
 			engine();
 			showGraphic();
@@ -118,7 +123,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		switch (status) {
 		
-		case Credits:  {        break;}
+		case Credits:  {       break;}
 		
 		case Game:     {    gameEngine();    break;}
 			
@@ -128,7 +133,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		case Select:   {        break;}
 		
-		case Start:    {        break;}
+		case Start:    {    startEngine();     break;}
 		
 		case Init:     {        break;}
 		
@@ -151,7 +156,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		case Select:   {        break;}
 		
-		case Start:    {        break;}
+		case Start:    {    startDraw();   break;}
 		
 		case Init:     {        break;}
 		
@@ -167,7 +172,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 				
 		case Credits:  {        break;}
 				
-		case Game:     {    gameBtn.logic(points);    break;}
+		case Game:     {    gameBtn.logic(points);     break;}
 					
 		case Loading:  {        break;}
 				
@@ -175,7 +180,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 				
 		case Select:   {        break;}
 				
-		case Start:    {        break;}
+		case Start:    {     startBtn.logic(points);   break;}
 				
 		case Init:     {        break;}
 		
@@ -183,9 +188,18 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	}
 	
 	
+	public void startInit(){
+		startBtn = new StartButton();
+	}
 	
+	public void startEngine(){
+		
+	}
 	
-	
+	public void startDraw(){
+		P.drawFr(0, 0, P.startBg);
+		startBtn.draw();
+	}
 	
 	
 	

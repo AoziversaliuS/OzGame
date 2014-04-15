@@ -11,4 +11,5 @@ public enum ET {
 	Land,Thorn,MoveLand,DeadLine
 	
 	//Start
+	,StartButton
 }
