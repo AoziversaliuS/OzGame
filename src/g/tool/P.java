@@ -19,6 +19,13 @@ public class P {
 	public static OzPicture Game_btnRightPress;
 	public static OzPicture Game_btnJump;
 	public static OzPicture Game_btnJumpPress;
+	
+	
+	//startSource
+	public static OzPicture startBg;
+	public static OzPicture startBtnA;
+	public static OzPicture startBtnB;
+	
 	//gameSource
 	public static OzPicture backGround;
 	
@@ -42,20 +49,15 @@ public class P {
 	
 	
 	
-	public static Texture texture;
-	public static Sprite sprite;
+	public static Sprite black;
 	
 	private static void loadTexture() {
+		//制作黑色图片↓
+		makeBlackPicture();
+		//制作黑色图片↑
 		
-		Pixmap p = new Pixmap((int)P.screenW, (int)P.screenH,  Format.RGBA8888);
-		p.setColor(Color.BLACK);
-		p.fill();
-		texture = new Texture(p);
-		sprite = new Sprite(texture);
 		
-//		sprite.setColor(0, 0, 0, 100f);
 		
-		sprite.setColor(0, 0, 0, 0.5f);
 		
 		setAtlas("Image/player/player.atlas");
 		player              = new OzPicture(45, 45, mS("player"));
@@ -109,6 +111,8 @@ public class P {
 	
 	//绘图方法↓
 	
+	
+	
 	public static void draw(float x,float y,OzPicture picture){
 		picture.setDefault();
 		//此方法适用于画除了背景图片之外的图片
@@ -136,6 +140,11 @@ public class P {
 		picture.getSprite().draw(batch);
 	}
 	
+	
+	public static void setlight(float light){
+		black.setColor(0, 0, 0, light);
+		black.draw(batch);
+	}
 	//绘图方法↑
 	
 	
@@ -155,7 +164,13 @@ public class P {
 	private static float bgRatioX;
 	private static float bgRatioY;
 	
-	public static SpriteBatch batch;
+	private static float forceRatioX; //强制比例
+	private static float forceRatioY;
+	
+	private static SpriteBatch batch;
+
+
+
 	private static TextureAtlas atlas;
 	
 	public static void init(float screenWidth,float screenHeight){
@@ -199,6 +214,19 @@ public class P {
 			bgRatioY = ratioY;
 			Gdx.app.log("ratio", "不符合条件，采用强制比例!");
 		}
+		
+		forceRatioX = P.screenW/BASIC_SCREEN_WIDTH;
+		forceRatioY = P.screenH/BASIC_SCREEN_HEIGHT;
+		
+	}
+	private static void makeBlackPicture(){
+		Pixmap p = new Pixmap((int)P.screenW, (int)P.screenH,  Format.RGBA8888);
+		p.setColor(Color.BLACK);
+		p.fill();
+		Texture texture = new Texture(p);
+		black = new Sprite(texture);
+		texture.dispose();
+		p.dispose();
 	}
 	private static void setAtlas(String path){
 		atlas = new TextureAtlas(Gdx.files.internal(path));
@@ -224,5 +252,9 @@ public class P {
 	public static float getBgRatioY() {
 		return bgRatioY;
 	}
+	public static SpriteBatch getBatch() {
+		return batch;
+	}
+
 	
 }

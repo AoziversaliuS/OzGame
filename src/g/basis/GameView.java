@@ -26,21 +26,24 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	private static Status status;  //当前界面状态
     private static Status toStatus;
-	
+	private float lightNum = 0f;
+	private boolean pre = false;
 
 	public static Player player;
+	
 	@Override
 	public void create() {	
+		
+		
 		points = new HashMap<String, OzPoint>(); //触摸点
 		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //图片资源初始化
 		Gdx.input.setCatchBackKey(true); //不让系统接收到Back键
 		Gdx.input.setInputProcessor(this); //设置触屏监听
 		
 		status = Status.Game;  //设置当前界面状态
-		
+		toStatus = Status.Game;
 		this.gameInit();
-	
-		
+		 
 	}
 	@Override
 	public synchronized boolean keyDown(int keycode) {
@@ -89,10 +92,27 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 
 	@Override
 	public void render() {	
-//		Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
-		engine();
-		showGraphic();
+		P.begin();
+		Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
+		if( toStatus==status ){
+			engine();
+			showGraphic();
+		}
+		else{
+			statusSwitch();
+		}
 		
+		P.setlight(lightNum);
+		P.end();
+	}
+	public void statusSwitch(){
+		
+		if( toStatus==Status.Game && status==Status.Start ){
+			lightNum = lightNum + 0.01f;
+			if( lightNum<1 ){
+				gameDraw();
+			}
+		}
 	}
 	public void engine(){
 		
@@ -117,7 +137,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 	}
 	public void showGraphic(){
-		P.begin();
+		
 		
 		switch (status) {
 		
@@ -138,7 +158,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		}
 		
 		
-		P.end();
+		
 	}
 	
 	public void btnLogic(){
@@ -255,8 +275,6 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		player.draw();
 		gameBtn.draw();
 	
-//		P.sprite.setPosition(0, 0);
-//		P.sprite.draw(P.batch);
 	}
 	
 	
