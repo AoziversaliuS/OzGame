@@ -12,6 +12,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class P {
+	public static float getForceRatioX() {
+		return forceRatioX;
+	}
+
+
+
+	public static float getForceRatioY() {
+		return forceRatioY;
+	}
+
+
+
 	//Button
 	public static OzPicture Game_btnLeft;
 	public static OzPicture Game_btnRight;
@@ -140,20 +152,32 @@ public class P {
 		picture.getSprite().draw(batch);
 	}
 	
+	//强制比例
+	public static void drawFr(OzPoint point,OzPicture picture){
+		picture.getSprite().setPosition(point.x*P.forceRatioX, point.y*P.forceRatioY);
+		picture.getSprite().draw(batch);
+	}
+	public static void drawFr(float x,float y,OzPicture picture){
+		picture.getSprite().setPosition(x*P.forceRatioX, y*P.forceRatioY);
+		picture.getSprite().draw(batch);
+	}
 	
+	
+
+	//绘图方法↑
+	
+	//设置屏幕亮度
 	public static void setlight(float light){
 		black.setColor(0, 0, 0, light);
 		black.draw(batch);
 	}
-	//绘图方法↑
-	
 	
 	public static void end(){
 		batch.end();
 	}
 	
 	
-	
+	public static final int RATIO = 1,BG_RATIO = 2, FORCE_RATIO = 3;
 	public static final float BASIC_SCREEN_WIDTH = 1280f;
 	public static final float BASIC_SCREEN_HEIGHT = 720f;
 	
