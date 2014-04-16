@@ -30,7 +30,8 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	private static Status status;  //当前界面状态
     private static Status toStatus;
 	private float lightNum = 0f;
-	private boolean pre = false;
+	private boolean switching = false;
+	private boolean switchFinish = false;
 
 	public static Player player;
 	
@@ -111,12 +112,35 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		P.end();
 	}
 	public void statusSwitch(){
-		
+		final float dNum = 0.05f;
+		final float maxLight = 0.98f;
+		final float minLight = 0.01f;
 		if( toStatus==Status.Game && status==Status.Start ){
-			lightNum = lightNum + 0.01f;
-			if( lightNum<1 ){
-				gameDraw();
+			
+			if(!switching){
+				lightNum = lightNum + dNum;
+				startDraw();
+				if( lightNum>=maxLight ){
+					System.out.println("进来了");
+					switching = true;
+				}
+				System.out.println("lightNum="+lightNum);
 			}
+			else{
+				lightNum = lightNum - dNum;
+				gameDraw();
+				if( lightNum<=minLight ){
+					switchFinish = true;
+				}
+			}
+		}
+		
+		if( switchFinish ){
+			status = toStatus;
+			//重置信息
+			lightNum = 0;
+			switching = false;
+			switchFinish = false;
 		}
 	}
 	public void engine(){
