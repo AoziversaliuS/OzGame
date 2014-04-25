@@ -31,7 +31,8 @@ public class P {
 	public static OzPicture Game_btnRightPress;
 	public static OzPicture Game_btnJump;
 	public static OzPicture Game_btnJumpPress;
-	
+	public static OzPicture Game_btnAttack;
+	public static OzPicture Game_btnAttackPress;
 	
 	//startSource
 	public static OzPicture startBg;
@@ -57,7 +58,7 @@ public class P {
 	public static OzPicture playerLeft;
 	public static OzPicture playerRight;
 	public static OzPicture Thorn;
-	public static OzPicture MoveLand;
+	public static OzPicture[] MoveLand = new OzPicture[3];
 	
 	
 	
@@ -87,6 +88,8 @@ public class P {
 		Game_btnRightPress  = new OzPicture(true, false, 208, 125, mS("btnLeftPress"));
 		Game_btnJump        = new OzPicture(150, 150, mS("btnJump"));
 		Game_btnJumpPress   = new OzPicture(150, 150, mS("btnJumpPress"));
+		Game_btnAttack      = new OzPicture(150, 150, mS("btnAttack"));
+		Game_btnAttackPress = new OzPicture(150, 150, mS("btnAttackPress"));
 		
 		setAtlas("Image/backGround/backGround.atlas");
 		backGround          = new OzPicture(1280, 720, mS("backGround"), P.BG_RATIO);
@@ -105,9 +108,9 @@ public class P {
 		
 		//Thorn
 		Thorn               = new OzPicture(50, 50, mS("thorn"));
-		MoveLand            = new OzPicture(100, 50, mS("moveLand"));
-		
-		
+		MoveLand[0]            = new OzPicture(50, 50, mS("moveLand",0));
+		MoveLand[1]            = new OzPicture(50, 50, mS("moveLand",1));
+		MoveLand[2]            = new OzPicture(true, false, 50, 50, mS("moveLand",0));
 	
 		
 	}

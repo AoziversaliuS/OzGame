@@ -101,7 +101,7 @@ public abstract class BasicBody extends OzElement {
 				}
 				else if( Player.getPlaneT()==Plane.Right && MoveLand_hitting.speed>0 ){
 					l.x = l.x - MoveLand_hitting.speed;
-					System.out.println("MoveLand_hitting.speed= "+MoveLand_hitting.speed);
+//					System.out.println("MoveLand_hitting.speed= "+MoveLand_hitting.speed);
 				}
 			}
 			

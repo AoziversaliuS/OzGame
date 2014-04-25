@@ -23,20 +23,22 @@ public class GameChapter {
 		
 		//以下皆为继承BasicBody的对象，只有BasicBody的子类才能达到伪静止状态
 //		gateAtlas.add(new Land("L-1",500,300));
-		gateAtlas.add(new MoveLand("ML-1", 400, 200, 400, 600, 3, Move.plane));
-		gateAtlas.add(new MoveLand("ML-1", 400, 300, 400, 600, 2, Move.plane));
+//		new MoveLand(Tag, x, y, widthNum, heightNum, A, B, speed, mT)
+//		gateAtlas.add(new MoveLand("ML-1", 400, 200,3, 400, 600, 3, Move.plane));
+		gateAtlas.add(new MoveLand("ML-1", 400, 300,4, 400, 600, 2, Move.plane));
 //		gateAtlas.add(new MoveLand("ML-2", 500, 200, 200, 400, 3, Move.vertical));
-		gateAtlas.add(new MoveLand("ML-1", 1150, 300, 300, 600, 2, Move.vertical));
-		gateAtlas.add(new MoveLand("ML-1", 1000, 200, 200, 400, 3, Move.vertical));
+		gateAtlas.add(new MoveLand("ML-1", 1150, 300,3, 300, 600, 2, Move.vertical));
+		gateAtlas.add(new MoveLand("ML-1", 1000, 200,3, 200, 400, 3, Move.vertical));
 		gateAtlas.add(new Land("L-1",300,0,6,4));
-//		gateAtlas.add(new Land("L-1",00,0));
+		gateAtlas.add(new Land("L-1",-200,-50,10,4));
 		gateAtlas.add(new Land("L-1",500,-50,6,4));
 		gateAtlas.add(new Land("L-1",700,-200,6,4));
 		gateAtlas.add(new Land("L-1",1050,-200,3,3));
-		gateAtlas.add(new Thorn("T-1", 0, 100));
-		gateAtlas.add(new Thorn("T-2", 400, 300));
+		gateAtlas.add(new Thorn("T-1",-200, 150));
+		gateAtlas.add(new Thorn("T-1",-150, 150));
+		gateAtlas.add(new Thorn("T-1",-100, 150));
+		gateAtlas.add(new Thorn("T-1",-50, 150));
 //		gateAtlas.add(new Thorn("T-3", 800, 300));
-		gateAtlas.add(new Thorn("T-3", 1200, 100));
 		
 		gateAtlas.add(new DeadLine(-300) );
 		System.out.println("gateAtlasSize="+gateAtlas.size());

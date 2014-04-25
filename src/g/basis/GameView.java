@@ -11,6 +11,7 @@ import g.refer.Player;
 import g.tool.OzInt;
 import g.tool.OzPoint;
 import g.tool.P;
+import g.tool.Res;
 import g.type.Status;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -30,17 +31,23 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	private static Status status;  //当前界面状态
     private static Status toStatus;
 	private float lightNum = 0f;
-	private boolean switching = false;
-	private boolean switchFinish = false;
-
+	
+	private final int SWITCH_PREPARE=1,SWITCH_LOADING=2,SWITCH_LOADED=3,SWITCH_FINISH=4;
+	private int sT = SWITCH_PREPARE;
+	
 	public static Player player;
 	
 	@Override
 	public void create() {	
 		
+		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //图片资源初始化
+		Res.init();
+		
 		
 		points = new HashMap<String, OzPoint>(); //触摸点
-		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //图片资源初始化
+		
+
+		
 		Gdx.input.setCatchBackKey(true); //不让系统接收到Back键
 		Gdx.input.setInputProcessor(this); //设置触屏监听
 		
@@ -117,30 +124,36 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		final float minLight = 0.01f;
 		if( toStatus==Status.Game && status==Status.Start ){
 			
-			if(!switching){
+			if( sT==SWITCH_PREPARE ){
 				lightNum = lightNum + dNum;
 				startDraw();
 				if( lightNum>=maxLight ){
-					System.out.println("进来了");
-					switching = true;
+					sT = SWITCH_LOADING;
+					Res.prepare(Res.gA);
 				}
-				System.out.println("lightNum="+lightNum);
+//				System.out.println("lightNum="+lightNum);
 			}
-			else{
+			else if( sT==SWITCH_LOADING ){
+				boolean update = Res.update();
+				System.out.println("update="+update);
+				if(update){
+					sT = SWITCH_LOADED;
+				}
+			}
+			else if( sT==SWITCH_LOADED ){
 				lightNum = lightNum - dNum;
 				gameDraw();
 				if( lightNum<=minLight ){
-					switchFinish = true;
+					sT = SWITCH_FINISH;
 				}
 			}
 		}
 		
-		if( switchFinish ){
+		if( sT==SWITCH_FINISH ){
 			status = toStatus;
 			//重置信息
 			lightNum = 0;
-			switching = false;
-			switchFinish = false;
+			sT=SWITCH_PREPARE;
 		}
 	}
 	public void engine(){
@@ -301,8 +314,8 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		/**此时还未绘图******/
 	}
+	float count = 0;
 	public void gameDraw(){
-		
 		for(int i=0;i<rankNum.size();i++){
 			for(int i2=0;i2<gateAtlas.size();i2++){
 				if(rankNum.get(i).value == gateAtlas.get(i2).rankNum){

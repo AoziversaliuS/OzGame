@@ -21,12 +21,13 @@ public class GameButton extends OzElement{
 	private OzRect buttonLeft;
 	private OzRect buttonRight;
 	private OzRect buttonJump;
+	private OzRect buttonAttack;
 	
 	/**枚举值↓*/
 	//orientation  枚举值不能相同！
 	public static final int A_Left=1, A_Right=2,A_Else=3;
 	//Skill
-	public static final int S_Jump=4,S_Else=5;
+	public static final int S_Jump=4,S_Attack=5,S_Else=6;
 	/**枚举值↑*/
 	Texture e;
 	public  static int   Arrow;   //方向键,触碰信息
@@ -35,10 +36,10 @@ public class GameButton extends OzElement{
 	public GameButton() {
 		super("GameButton",Rank.SELF_CUSTOM, ET.GameButton,null,null);
 		
-		this.buttonLeft  = new OzRect(25, 15, P.Game_btnLeft.getWidth(),P.Game_btnLeft.getHeight());
-		this.buttonRight = new OzRect(275, 15,P.Game_btnRight.getWidth(), P.Game_btnRight.getHeight());
-		this.buttonJump = new OzRect(1100, 15, P.Game_btnJump.getWidth(), P.Game_btnJump.getHeight());
-		
+		this.buttonLeft  = new OzRect(25, 10, P.Game_btnLeft.getWidth(),P.Game_btnLeft.getHeight());
+		this.buttonRight = new OzRect(275, 10,P.Game_btnRight.getWidth(), P.Game_btnRight.getHeight());
+		this.buttonJump = new OzRect(900, 10, P.Game_btnJump.getWidth(), P.Game_btnJump.getHeight());
+		this.buttonAttack = new OzRect(1120, 10, P.Game_btnAttack.getWidth(), P.Game_btnAttack.getHeight());
 		GameButton.Arrow = GameButton.A_Else;
 		GameButton.Skill = GameButton.S_Else;
 	}
@@ -63,8 +64,13 @@ public class GameButton extends OzElement{
 			Arrow = GameButton.A_Else;
 		}
 		
-		
-		if(buttonJump.insides(points)){
+		if(buttonJump.insides(points) && buttonAttack.insides(points) ){
+			
+		}
+		else if(buttonAttack.insides(points)){
+			Skill = GameButton.S_Attack;
+		}
+		else if(buttonJump.insides(points)){
 			Skill = GameButton.S_Jump;
 		}
 		else{
@@ -91,10 +97,16 @@ public class GameButton extends OzElement{
 		}
 		//跳跃按键
 		if(Skill == GameButton.S_Else){
+			P.draw(buttonAttack.x, buttonAttack.y, P.Game_btnAttack);
 			P.draw(buttonJump.x, buttonJump.y, P.Game_btnJump);
 		}
 		else if(Skill == GameButton.S_Jump){
+			P.draw(buttonAttack.x, buttonAttack.y, P.Game_btnAttack);
 			P.draw(buttonJump.x, buttonJump.y, P.Game_btnJumpPress);
+		}
+		else if(Skill == GameButton.S_Attack){
+			P.draw(buttonAttack.x, buttonAttack.y, P.Game_btnAttackPress);
+			P.draw(buttonJump.x, buttonJump.y, P.Game_btnJump);
 		}
 	}
 
