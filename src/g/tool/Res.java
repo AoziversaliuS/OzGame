@@ -27,10 +27,10 @@ public class Res {
 	public static OzPicture startBtnB;
 	
 	//Button
-	public static OzPicture[] Game_btnLeft = new OzPicture[2];
-	public static OzPicture[] Game_btnRight = new OzPicture[2];
-	public static OzPicture[] Game_btnJump = new OzPicture[2];
-	public static OzPicture[] Game_btnAttack = new OzPicture[2];
+	public static OzPicture[] game_btnLeft = new OzPicture[2];
+	public static OzPicture[] game_btnRight = new OzPicture[2];
+	public static OzPicture[] game_btnJump = new OzPicture[2];
+	public static OzPicture[] game_btnAttack = new OzPicture[2];
 	
 	//gameSource
 	public static OzPicture backGround;
@@ -40,8 +40,8 @@ public class Res {
 	//Land¡ü
 	
 	public static OzPicture[] player = new OzPicture[3];
-	public static OzPicture Thorn;
-	public static OzPicture[] MoveLand = new OzPicture[3];
+	public static OzPicture thorn;
+	public static OzPicture[] moveLand = new OzPicture[3];
 	
 	public static void init(){
 		manager = new AssetManager();
@@ -91,22 +91,22 @@ public class Res {
 		else if( loadStatus==LOAD_FINISH ){
 			
 			setAtlas("Image/button/button.atlas");
-				loadPicGroup(208, 125, Game_btnLeft, "btnLeft");
-				loadPicGroup(true, false, 208, 125, Game_btnRight, "btnLeft");
-				loadPicGroup(150, 150, Game_btnJump, "btnJump");
-				loadPicGroup(150, 150, Game_btnAttack, "btnAttack");
+				loadPicGroup(208, 125, game_btnLeft, "btnLeft");
+				loadPicGroup(true, false, 208, 125, game_btnRight, "btnLeft");
+				loadPicGroup(150, 150, game_btnJump, "btnJump");
+				loadPicGroup(150, 150, game_btnAttack, "btnAttack");
 				
 			setAtlas("Image/player/player.atlas");
-				player[0]    = new OzPicture(45, 45, mS("player"));
-				player[1]    = new OzPicture(45, 45, mS("playerLeft"));
-				player[2]    = new OzPicture(true, false,45,45, mS("playerLeft"));
+				player[0]    = new OzPicture(45, 45, mS("player",0));
+				player[1]    = new OzPicture(45, 45, mS("player",1));
+				player[2]    = new OzPicture(true, false,45,45, mS("player",1));
 				
 			setAtlas("Image/build/build.atlas");
 				loadPicGroup(50, 50, land, "land");
-				Thorn        = new OzPicture(50, 50, mS("thorn"));
-				MoveLand[0]  = new OzPicture(50, 50, mS("moveLand",0));
-				MoveLand[1]  = new OzPicture(50, 50, mS("moveLand",1));
-				MoveLand[2]  = new OzPicture(true, false, 50, 50, mS("moveLand",0));
+				thorn        = new OzPicture(50, 50, mS("thorn"));
+				moveLand[0]  = new OzPicture(50, 50, mS("moveLand",0));
+				moveLand[1]  = new OzPicture(50, 50, mS("moveLand",1));
+				moveLand[2]  = new OzPicture(true, false, 50, 50, mS("moveLand",0));
 				
 			setAtlas("Image/backGround/backGround.atlas");
 				backGround          = new OzPicture(1280, 720, mS("backGround"), P.BG_RATIO);
