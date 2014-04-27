@@ -134,9 +134,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 //				System.out.println("lightNum="+lightNum);
 			}
 			else if( sT==SWITCH_LOADING ){
-				boolean update = Res.update();
-				System.out.println("update="+update);
-				if(update){
+				if(Res.update()){
+					//加载完图片之后载入地图
+					GameChapter.chapterLoad(gateAtlas, rankNum,1); 
 					sT = SWITCH_LOADED;
 				}
 			}
@@ -248,7 +248,6 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		gameBtn     = new GameButton();
 		gateAtlas   = new ArrayList<OzElement>();
 		rankNum     = new ArrayList<OzInt>();
-		GameChapter.chapterLoad(gateAtlas, rankNum,1); 
 		player =  new Player();
 	}
 	public void gameEngine(){
