@@ -3,6 +3,7 @@ package g.refer;
 
 import g.tool.OzPoint;
 import g.tool.P;
+import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
 
@@ -26,7 +27,7 @@ public class BackGround extends OzElement{
 	
 	@Override
 	public void draw() {
-		P.drawBg(l.x, l.y , P.backGround);
+		P.drawBg(l.x, l.y , Res.backGround);
 	}
 
 
