@@ -9,6 +9,7 @@ import g.refer.Player;
 import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.tool.P;
+import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
 import g.type.Status;
@@ -25,7 +26,7 @@ public class StartButton extends OzElement{
 	public StartButton( ) {
 		super("StartButton", Rank.SELF_CUSTOM , ET.StartButton, null, null );
 		
-		startGameButton = new OzRect(450, 300, P.startBtnA.getWidth(), P.startBtnA.getHeight());
+		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());
 	}
 
 	@Override
@@ -85,10 +86,10 @@ public class StartButton extends OzElement{
 	public void draw() {
 		
 		if( selected == StartButton.START_GAME ){
-			P.draw(startGameButton.x, startGameButton.y, P.startBtnB);
+			P.draw(startGameButton.x, startGameButton.y, Res.startBtnB);
 		}
 		else if( selected==StartButton.ELSE ){
-			P.draw(startGameButton.x, startGameButton.y, P.startBtnA);
+			P.draw(startGameButton.x, startGameButton.y, Res.startBtnA);
 		}
 		
 	}

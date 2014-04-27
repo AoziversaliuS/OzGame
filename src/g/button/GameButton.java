@@ -5,6 +5,7 @@ import g.refer.Player;
 import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.tool.P;
+import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
 
@@ -36,10 +37,10 @@ public class GameButton extends OzElement{
 	public GameButton() {
 		super("GameButton",Rank.SELF_CUSTOM, ET.GameButton,null,null);
 		
-		this.buttonLeft  = new OzRect(25, 10, P.Game_btnLeft.getWidth(),P.Game_btnLeft.getHeight());
-		this.buttonRight = new OzRect(275, 10,P.Game_btnRight.getWidth(), P.Game_btnRight.getHeight());
-		this.buttonJump = new OzRect(900, 10, P.Game_btnJump.getWidth(), P.Game_btnJump.getHeight());
-		this.buttonAttack = new OzRect(1120, 10, P.Game_btnAttack.getWidth(), P.Game_btnAttack.getHeight());
+		this.buttonLeft  = new OzRect(25, 10, Res.game_btnLeft[0].getWidth(),Res.game_btnLeft[0].getHeight());
+		this.buttonRight = new OzRect(275, 10,Res.game_btnRight[0].getWidth(), Res.game_btnRight[0].getHeight());
+		this.buttonJump = new OzRect(900, 10, Res.game_btnJump[0].getWidth(), Res.game_btnJump[0].getHeight());
+		this.buttonAttack = new OzRect(1120, 10, Res.game_btnAttack[0].getWidth(), Res.game_btnAttack[0].getHeight());
 		GameButton.Arrow = GameButton.A_Else;
 		GameButton.Skill = GameButton.S_Else;
 	}
@@ -84,29 +85,29 @@ public class GameButton extends OzElement{
 	public void draw() {
 		//×óÓÒ°´¼ü
 		if(Arrow == GameButton.A_Else){
-			P.draw(buttonLeft.x, buttonLeft.y, P.Game_btnLeft);
-			P.draw(buttonRight.x, buttonRight.y, P.Game_btnRight);
+			P.draw(buttonLeft.x, buttonLeft.y, Res.game_btnLeft[0]);
+			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[0]);
 		}
 		else if(Arrow == GameButton.A_Left){
-			P.draw(buttonLeft.x,buttonLeft.y, P.Game_btnLeftPress);
-			P.draw(buttonRight.x, buttonRight.y, P.Game_btnRight);
+			P.draw(buttonLeft.x,buttonLeft.y, Res.game_btnLeft[1]);
+			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[0]);
 		}
 		else if(Arrow == GameButton.A_Right){
-			P.draw(buttonLeft.x,buttonLeft.y, P.Game_btnLeft);
-			P.draw(buttonRight.x, buttonRight.y, P.Game_btnRightPress);
+			P.draw(buttonLeft.x,buttonLeft.y, Res.game_btnLeft[0]);
+			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[1]);
 		}
 		//ÌøÔ¾°´¼ü
 		if(Skill == GameButton.S_Else){
-			P.draw(buttonAttack.x, buttonAttack.y, P.Game_btnAttack);
-			P.draw(buttonJump.x, buttonJump.y, P.Game_btnJump);
+			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
+			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
 		}
 		else if(Skill == GameButton.S_Jump){
-			P.draw(buttonAttack.x, buttonAttack.y, P.Game_btnAttack);
-			P.draw(buttonJump.x, buttonJump.y, P.Game_btnJumpPress);
+			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
+			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
 		}
 		else if(Skill == GameButton.S_Attack){
-			P.draw(buttonAttack.x, buttonAttack.y, P.Game_btnAttackPress);
-			P.draw(buttonJump.x, buttonJump.y, P.Game_btnJump);
+			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
+			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
 		}
 	}
 
