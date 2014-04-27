@@ -27,33 +27,19 @@ public class Res {
 	public static OzPicture startBtnB;
 	
 	//Button
-	public static OzPicture Game_btnLeft;
-	public static OzPicture Game_btnRight;
-	public static OzPicture Game_btnLeftPress;
-	public static OzPicture Game_btnRightPress;
-	public static OzPicture Game_btnJump;
-	public static OzPicture Game_btnJumpPress;
-	public static OzPicture Game_btnAttack;
-	public static OzPicture Game_btnAttackPress;
+	public static OzPicture[] Game_btnLeft = new OzPicture[2];
+	public static OzPicture[] Game_btnRight = new OzPicture[2];
+	public static OzPicture[] Game_btnJump = new OzPicture[2];
+	public static OzPicture[] Game_btnAttack = new OzPicture[2];
 	
 	//gameSource
 	public static OzPicture backGround;
 	
 	//Land↓ 
-	public static OzPicture land_1;
-	public static OzPicture land_2;
-	public static OzPicture land_3;
-	public static OzPicture land_4;
-	public static OzPicture land_5;
-	public static OzPicture land_6;
-	public static OzPicture land_7;
-	public static OzPicture land_8;
-	public static OzPicture land_9;
+	public static OzPicture[] land = new OzPicture[9];
 	//Land↑
 	
-	public static OzPicture player;
-	public static OzPicture playerLeft;
-	public static OzPicture playerRight;
+	public static OzPicture[] player = new OzPicture[3];
 	public static OzPicture Thorn;
 	public static OzPicture[] MoveLand = new OzPicture[3];
 	
@@ -103,41 +89,40 @@ public class Res {
 		}
 		//资源加载完成后建立资源的引用
 		else if( loadStatus==LOAD_FINISH ){
+			
 			setAtlas("Image/button/button.atlas");
-			Game_btnLeft        = new OzPicture(208, 125, mS("btnLeft"));
-			Game_btnRight       = new OzPicture(true, false,208, 125, mS("btnLeft"));
-			Game_btnLeftPress   = new OzPicture(208, 125, mS("btnLeftPress"));
-			Game_btnRightPress  = new OzPicture(true, false, 208, 125, mS("btnLeftPress"));
-			Game_btnJump        = new OzPicture(150, 150, mS("btnJump"));
-			Game_btnJumpPress   = new OzPicture(150, 150, mS("btnJumpPress"));
-			Game_btnAttack      = new OzPicture(150, 150, mS("btnAttack"));
-			Game_btnAttackPress = new OzPicture(150, 150, mS("btnAttackPress"));
+				loadPicGroup(208, 125, Game_btnLeft, "btnLeft");
+				loadPicGroup(true, false, 208, 125, Game_btnRight, "btnLeft");
+				loadPicGroup(150, 150, Game_btnJump, "btnJump");
+				loadPicGroup(150, 150, Game_btnAttack, "btnAttack");
+				
 			setAtlas("Image/player/player.atlas");
-			player              = new OzPicture(45, 45, mS("player"));
-			playerLeft          = new OzPicture(45, 45, mS("playerLeft"));
-			playerRight         = new OzPicture(true, false,45,45, mS("playerLeft"));
+				player[0]    = new OzPicture(45, 45, mS("player"));
+				player[1]    = new OzPicture(45, 45, mS("playerLeft"));
+				player[2]    = new OzPicture(true, false,45,45, mS("playerLeft"));
+				
 			setAtlas("Image/build/build.atlas");
-			//Land
-			land_1 = new OzPicture(50, 50, mS("land",1));
-			land_2 = new OzPicture(50, 50, mS("land",2));
-			land_3 = new OzPicture(50, 50, mS("land",3));
-			land_4 = new OzPicture(50, 50, mS("land",4));
-			land_5 = new OzPicture(50, 50, mS("land",5));
-			land_6 = new OzPicture(50, 50, mS("land",6));
-			land_7 = new OzPicture(50, 50, mS("land",7));
-			land_8 = new OzPicture(50, 50, mS("land",8));
-			land_9 = new OzPicture(50, 50, mS("land",9));
-			//Thorn
-			Thorn               = new OzPicture(50, 50, mS("thorn"));
-			MoveLand[0]            = new OzPicture(50, 50, mS("moveLand",0));
-			MoveLand[1]            = new OzPicture(50, 50, mS("moveLand",1));
-			MoveLand[2]            = new OzPicture(true, false, 50, 50, mS("moveLand",0));
+				loadPicGroup(50, 50, land, "land");
+				Thorn        = new OzPicture(50, 50, mS("thorn"));
+				MoveLand[0]  = new OzPicture(50, 50, mS("moveLand",0));
+				MoveLand[1]  = new OzPicture(50, 50, mS("moveLand",1));
+				MoveLand[2]  = new OzPicture(true, false, 50, 50, mS("moveLand",0));
+				
 			setAtlas("Image/backGround/backGround.atlas");
-			backGround          = new OzPicture(1280, 720, mS("backGround"), P.BG_RATIO);
+				backGround          = new OzPicture(1280, 720, mS("backGround"), P.BG_RATIO);
 		}
 
 	}
-
+	private static void loadPicGroup(float width,float height,OzPicture[] picGroup,String resName){
+		for(int i=0;i<picGroup.length;i++){
+			picGroup[i] = new OzPicture(width, height, mS(resName,i));
+		}
+	}
+	private static void loadPicGroup(boolean planeFlip, boolean verticalFlip,float width,float height,OzPicture[] picGroup,String resName){
+		for(int i=0;i<picGroup.length;i++){
+			picGroup[i] = new OzPicture(planeFlip,verticalFlip,width, height, mS(resName,i));
+		}
+	}
 	private static void setAtlas(String aP){
 		atlasPath = aP;
 	}
