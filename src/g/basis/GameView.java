@@ -20,6 +20,9 @@ import com.badlogic.gdx.InputProcessorQueue;
 
 public class GameView extends InputProcessorQueue implements ApplicationListener {
 	
+	private boolean showFPS = true;
+	
+	
 	private  HashMap<String, OzPoint> points;
 	//StartStatus
 	private StartButton startBtn;
@@ -106,7 +109,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	@Override
 	public void render() {	
 		P.begin();
-//		Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
+		if(showFPS){
+			Gdx.app.log("FPS", " FPS:  "+Gdx.graphics.getFramesPerSecond());
+		}
 		if( toStatus==status ){
 			engine();
 			showGraphic();
@@ -234,7 +239,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	}
 	
 	public void startDraw(){
-		P.drawFr(0, 0, P.startBg);
+		P.drawFr(0, 0, Res.startBg);
 		startBtn.draw();
 	}
 	
@@ -315,6 +320,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	}
 	float count = 0;
 	public void gameDraw(){
+		
 		for(int i=0;i<rankNum.size();i++){
 			for(int i2=0;i2<gateAtlas.size();i2++){
 				if(rankNum.get(i).value == gateAtlas.get(i2).rankNum){

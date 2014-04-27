@@ -103,10 +103,10 @@ public class GameButton extends OzElement{
 		}
 		else if(Skill == GameButton.S_Jump){
 			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
-			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
+			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[1]);
 		}
 		else if(Skill == GameButton.S_Attack){
-			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
+			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[1]);
 			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
 		}
 	}

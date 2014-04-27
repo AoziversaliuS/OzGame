@@ -4,6 +4,7 @@ import g.button.GameButton;
 import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.tool.P;
+import g.tool.Res;
 import g.type.ET;
 import g.type.Plane;
 import g.type.Rank;
@@ -81,8 +82,8 @@ public class Player extends OzElement{
 				"Player",
 				Rank.SELF_CUSTOM, 
 				ET.Player,
-				new OzPoint( P.BASIC_SCREEN_WIDTH/2-P.player.getWidth()/2 , P.BASIC_SCREEN_HEIGHT/2-P.player.getHeight()/2),
-				new OzRect(0, 0,P.player.getWidth(),P.player.getHeight())
+				new OzPoint( P.BASIC_SCREEN_WIDTH/2-Res.player[0].getWidth()/2 , P.BASIC_SCREEN_HEIGHT/2-Res.player[0].getHeight()/2),
+				new OzRect(0, 0,Res.player[0].getWidth(),Res.player[0].getHeight())
 		);
 		System.out.println("");
 //		System.out.println(P.getRatioX()+"   "+P.getRatioY());
@@ -116,17 +117,17 @@ public class Player extends OzElement{
 	@Override
 	public void draw() {
 		if( condition==ALIVE ){
-			P.draw(l, P.player);
+			P.draw(l, Res.player[0]);
 		}
 		else if( condition==DEADING ){
-			P.drawScale(scaleSize, l,  P.player);
+			P.drawScale(scaleSize, l,  Res.player[0]);
 			scaleSize = scaleSize + 0.1f;
 			if( scaleSize>3 ){
 				condition = DEAD_END;
 			}
 		}
 		else if( condition==REVIVEING ){
-			P.drawScale(scaleSize, l,  P.player);
+			P.drawScale(scaleSize, l,  Res.player[0]);
 			scaleSize = scaleSize - 0.1f;
 			if( scaleSize<=1 ){
 				condition = REVIVE_END;

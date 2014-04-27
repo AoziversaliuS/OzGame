@@ -15,26 +15,26 @@ public class OzPicture {
 	
 	
 
+
+	
 	public OzPicture( float basisWidth , float basisHeight,Sprite sprite) {
 		super();
 		//保存参数等属性
-		this.basisHeight = basisHeight;
-		this.basisWidth = basisWidth;
-		this.sprite = sprite;
-		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		init(basisWidth, basisHeight, sprite);
 		//针对手机屏幕来设定图片的大小
-		this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
+		if( this.sprite!=null ){
+			this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
+		}
 	}
 	public OzPicture( boolean planeFlip, boolean verticalFlip,float basisWidth , float basisHeight,Sprite sprite) {
 		super();
 		//保存参数等属性
-		this.basisHeight = basisHeight;
-		this.basisWidth = basisWidth;
-		this.sprite = sprite;
-		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		sprite.flip(planeFlip, verticalFlip);
-		//针对手机屏幕来设定图片的大小
-		this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
+		init(basisWidth, basisHeight, sprite);
+		if( this.sprite!=null ){
+			sprite.flip(planeFlip, verticalFlip);
+			//针对手机屏幕来设定图片的大小
+			this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
+		}
 
 	}
 	public OzPicture(float basisWidth , float basisHeight,Sprite sprite,int TYPE) {
@@ -44,21 +44,29 @@ public class OzPicture {
 			this.isBackGround = true;
 		}
 		
+		init(basisWidth, basisHeight, sprite);
+		//针对手机屏幕来设定图片的大小
+		if( this.sprite!=null ){
+			if( TYPE == P.BG_RATIO ){
+				//背景图片特殊设定
+				this.sprite.setSize( basisWidth * P.getBgRatioX() , basisHeight * P.getBgRatioY() );
+			}
+			else if( TYPE == P.RATIO ){
+				this.sprite.setSize( basisWidth * P.getRatioX() , basisHeight * P.getRatioY() );
+			}
+			else if( TYPE == P.FORCE_RATIO ){
+				this.sprite.setSize( basisWidth * P.getForceRatioX() , basisHeight * P.getForceRatioY() );
+			}
+		}
+	}
+	private void init(float basisWidth , float basisHeight,Sprite sprite){
 		this.basisHeight = basisHeight;
 		this.basisWidth = basisWidth;
 		this.sprite = sprite;
-		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		//针对手机屏幕来设定图片的大小
-		if( TYPE == P.BG_RATIO ){
-			//背景图片特殊设定
-			this.sprite.setSize( basisWidth * P.getBgRatioX() , basisHeight * P.getBgRatioY() );
+		if( this.sprite!=null ){
+			sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		}
-		else if( TYPE == P.RATIO ){
-			this.sprite.setSize( basisWidth * P.getRatioX() , basisHeight * P.getRatioY() );
-		}
-		else if( TYPE == P.FORCE_RATIO ){
-			this.sprite.setSize( basisWidth * P.getForceRatioX() , basisHeight * P.getForceRatioY() );
-		}
+		
 	}
 	public OzPicture() {
 		super();
@@ -66,6 +74,7 @@ public class OzPicture {
 	
 	
 	public void setDefault(){
+		//这里有一点逻辑错误，因为还有强制比例没有判断
 		if(isBackGround){
 			//背景图片特殊设定
 			this.sprite.setSize( this.basisWidth * P.getBgRatioX() , this.basisHeight * P.getBgRatioY() );
@@ -86,6 +95,34 @@ public class OzPicture {
 	}
 	public float getWidth() {
 		return basisWidth;
+	}
+	
+	
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
+	}
+	public void setSprite(boolean planeFlip, boolean verticalFlip,Sprite sprite) {
+		this.sprite = sprite;
+		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		sprite.flip(planeFlip, verticalFlip);
+		this.sprite.setSize(  basisWidth*P.getRatioX() , basisHeight*P.getRatioY() );
+	}
+	public void setSprite(boolean planeFlip, boolean verticalFlip,Sprite sprite,int TYPE) {
+		this.sprite = sprite;
+		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		sprite.flip(planeFlip, verticalFlip);
+		if( TYPE == P.BG_RATIO ){
+			//背景图片特殊设定
+			this.sprite.setSize( basisWidth * P.getBgRatioX() , basisHeight * P.getBgRatioY() );
+		}
+		else if( TYPE == P.RATIO ){
+			this.sprite.setSize( basisWidth * P.getRatioX() , basisHeight * P.getRatioY() );
+		}
+		else if( TYPE == P.FORCE_RATIO ){
+			this.sprite.setSize( basisWidth * P.getForceRatioX() , basisHeight * P.getForceRatioY() );
+		}
 	}
 	
 	
