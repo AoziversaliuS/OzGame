@@ -1,10 +1,10 @@
 package g.basis;
 
-import g.build.DeadLine;
-import g.build.Land;
-import g.build.MoveLand;
-import g.build.ReferPoint;
-import g.build.Thorn;
+import g.e.build.DeadLine;
+import g.e.build.Land;
+import g.e.build.MoveLand;
+import g.e.build.ReferPoint;
+import g.e.build.Thorn;
 import g.refer.BackGround;
 import g.refer.OzElement;
 import g.tool.OzInt;
