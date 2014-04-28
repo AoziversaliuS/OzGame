@@ -143,12 +143,6 @@ public abstract class BasicBody extends OzElement {
 	    
 	}
 
-	@Override
-	public void reset() {
-//		//重置坐标
-//		l.x = startPoint.x;
-//		l.y = startPoint.y;
-	}
 	
 	//玩家死亡后回滚建筑坐标
 	public boolean rollBack(){

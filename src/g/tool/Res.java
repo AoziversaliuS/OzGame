@@ -33,15 +33,17 @@ public class Res {
 	public static OzPicture[] game_btnAttack = new OzPicture[2];
 	
 	//gameSource
-	public static OzPicture backGround;
-	
-	//Land↓ 
-	public static OzPicture[] land = new OzPicture[9];
-	//Land↑
-	
 	public static OzPicture[] player = new OzPicture[3];
+	public static OzPicture backGround;
+	//build↓ 
+	public static OzPicture[] land = new OzPicture[9];
 	public static OzPicture thorn;
 	public static OzPicture[] moveLand = new OzPicture[3];
+	//view↓
+	public static OzPicture signTower;
+
+
+	
 	
 	public static void init(){
 		manager = new AssetManager();
@@ -85,12 +87,15 @@ public class Res {
 		setPicGroupData(150, 150, game_btnJump);
 		setPicGroupData(150, 150, game_btnAttack);
 		setPicGroupData(45, 45, player);
+		//build↓
 		setPicGroupData(100, 100, land);
 		thorn        = new OzPicture(50, 50);
 		moveLand[0]  = new OzPicture(50, 50);
 		moveLand[1]  = new OzPicture(50, 50);
 		moveLand[2]  = new OzPicture(50, 50);
 		backGround   = new OzPicture(1280, 720, P.BG_RATIO);
+		//view↓
+		signTower = new OzPicture(250, 300);
 	}
 	private static void gA(){
 		//将资源放到预加载队列中
@@ -99,6 +104,7 @@ public class Res {
 			manager.load("Image/player/player.atlas", TextureAtlas.class);
 			manager.load("Image/build/build.atlas", TextureAtlas.class);
 			manager.load("Image/backGround/backGround.atlas", TextureAtlas.class);
+			manager.load("Image/view/view.atlas", TextureAtlas.class);
 		}
 		//资源加载完成后建立资源的引用
 		else if( loadStatus==LOAD_FINISH ){
@@ -112,6 +118,8 @@ public class Res {
 			player[0].setSprite(mS("player",0));
 			player[1].setSprite(mS("player",1));
 			player[2].setSprite(true, false,mS("player",1));
+		setAtlas("Image/backGround/backGround.atlas");
+			backGround.setSprite(false, false, mS("backGround"), P.BG_RATIO);
 			
 		setAtlas("Image/build/build.atlas");
 			loadPicGroup(50, 50, land, "land");
@@ -119,30 +127,10 @@ public class Res {
 			moveLand[0].setSprite( mS("moveLand",0));
 			moveLand[1].setSprite(mS("moveLand",1));
 			moveLand[2].setSprite(true,false,mS("moveLand",0));
+		
+		setAtlas("Image/view/view.atlas");
+			signTower.setSprite(mS("tower"));
 			
-		setAtlas("Image/backGround/backGround.atlas");
-			backGround.setSprite(false, false, mS("backGround"), P.BG_RATIO);
-			
-//			setAtlas("Image/button/button.atlas");
-//				loadPicGroup(208, 125, game_btnLeft, "btnLeft");
-//				loadPicGroup(true, false, 208, 125, game_btnRight, "btnLeft");
-//				loadPicGroup(150, 150, game_btnJump, "btnJump");
-//				loadPicGroup(150, 150, game_btnAttack, "btnAttack");
-//				
-//			setAtlas("Image/player/player.atlas");
-//				player[0]    = new OzPicture(45, 45, mS("player",0));
-//				player[1]    = new OzPicture(45, 45, mS("player",1));
-//				player[2]    = new OzPicture(true, false,45,45, mS("player",1));
-//				
-//			setAtlas("Image/build/build.atlas");
-//				loadPicGroup(50, 50, land, "land");
-//				thorn        = new OzPicture(50, 50, mS("thorn"));
-//				moveLand[0]  = new OzPicture(50, 50, mS("moveLand",0));
-//				moveLand[1]  = new OzPicture(50, 50, mS("moveLand",1));
-//				moveLand[2]  = new OzPicture(true, false, 50, 50, mS("moveLand",0));
-//				
-//			setAtlas("Image/backGround/backGround.atlas");
-//				backGround          = new OzPicture(1280, 720, mS("backGround"), P.BG_RATIO);
 		}
 
 	}

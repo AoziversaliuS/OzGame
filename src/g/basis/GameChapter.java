@@ -5,9 +5,11 @@ import g.e.build.Land;
 import g.e.build.MoveLand;
 import g.e.build.ReferPoint;
 import g.e.build.Thorn;
+import g.e.view.View;
 import g.refer.BackGround;
 import g.refer.OzElement;
 import g.tool.OzInt;
+import g.tool.Res;
 import g.type.Move;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class GameChapter {
 		gateAtlas.add(new Thorn("T-1",-150, 150));
 		gateAtlas.add(new Thorn("T-1",-100, 150));
 		gateAtlas.add(new Thorn("T-1",-50, 150));
-//		gateAtlas.add(new Thorn("T-3", 800, 300));
+		gateAtlas.add(new View("signTower", 0, 150, Res.signTower));
 		
 		gateAtlas.add(new DeadLine(-300) );
 		System.out.println("gateAtlasSize="+gateAtlas.size());
