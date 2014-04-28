@@ -22,7 +22,7 @@ public class P {
 		return forceRatioY;
 	}
 
-
+	
 
 	
 	
@@ -31,11 +31,18 @@ public class P {
 	
 	public static Sprite black;
 	
-	private static void loadTexture() {
-		//制作黑色图片↓
+	public static void init(float screenWidth,float screenHeight){
+		
+		batch = new SpriteBatch();
+		P.screenW = screenWidth;
+		P.screenH = screenHeight;
+		Gdx.app.log("ratio", " 屏幕分辨率为: "+P.screenW +" * "+P.screenH);
+		//屏幕相对比例初始化
+		ratioInit();
 		makeBlackPicture();
-		//制作黑色图片↑
+		
 	}
+	
 	
 	
 	
@@ -126,17 +133,7 @@ public class P {
 
 	private static TextureAtlas atlas;
 	
-	public static void init(float screenWidth,float screenHeight){
-		
-		batch = new SpriteBatch();
-		P.screenW = screenWidth;
-		P.screenH = screenHeight;
-		Gdx.app.log("ratio", " 屏幕分辨率为: "+P.screenW +" * "+P.screenH);
-		//屏幕相对比例初始化
-		ratioInit();
-		loadTexture();
-		
-	}
+
 	private static Sprite mS(String pictureName){
 		return atlas.createSprite(pictureName);
 	}

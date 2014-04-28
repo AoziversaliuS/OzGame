@@ -14,9 +14,19 @@ public class OzPicture {
 	
 	
 	
+	//无Sprite构造方法
+	public OzPicture( float basisWidth , float basisHeight){
+		init(basisWidth, basisHeight, null);
+	}
+	public OzPicture( float basisWidth , float basisHeight,int TYPE){
+		init(basisWidth, basisHeight, null);
+		if( TYPE == P.BG_RATIO ){
+			this.isBackGround = true;
+		}
+	}
 
 
-	
+	//有Sprite构造方法
 	public OzPicture( float basisWidth , float basisHeight,Sprite sprite) {
 		super();
 		//保存参数等属性

@@ -86,11 +86,11 @@ public class Res {
 		setPicGroupData(150, 150, game_btnAttack);
 		setPicGroupData(45, 45, player);
 		setPicGroupData(100, 100, land);
-		thorn        = new OzPicture(50, 50,null);
-		moveLand[0]  = new OzPicture(50, 50,null);
-		moveLand[1]  = new OzPicture(50, 50,null);
-		moveLand[2]  = new OzPicture(50, 50,null);
-		backGround   = new OzPicture(1280, 720,null, P.BG_RATIO);
+		thorn        = new OzPicture(50, 50);
+		moveLand[0]  = new OzPicture(50, 50);
+		moveLand[1]  = new OzPicture(50, 50);
+		moveLand[2]  = new OzPicture(50, 50);
+		backGround   = new OzPicture(1280, 720, P.BG_RATIO);
 	}
 	private static void gA(){
 		//将资源放到预加载队列中
@@ -148,7 +148,7 @@ public class Res {
 	}
 	private static void setPicGroupData(float width,float height,OzPicture[] picGroup){
 		for(int i=0;i<picGroup.length;i++){
-			picGroup[i] = new OzPicture(width, height, null);
+			picGroup[i] = new OzPicture(width, height);
 		}
 	}
 	private static void loadPicGroup(float width,float height,OzPicture[] picGroup,String resName){

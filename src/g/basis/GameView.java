@@ -20,7 +20,7 @@ import com.badlogic.gdx.InputProcessorQueue;
 
 public class GameView extends InputProcessorQueue implements ApplicationListener {
 	
-	private boolean showFPS = true;
+	private boolean showFPS = false;
 	
 	
 	private  HashMap<String, OzPoint> points;
@@ -43,8 +43,8 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	@Override
 	public void create() {	
 		
-		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //图片资源初始化
-		Res.init();
+		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //画图工具类初始化
+		Res.init();//资源管理器初始化。
 		
 		
 		points = new HashMap<String, OzPoint>(); //触摸点
@@ -57,8 +57,8 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		status = Status.Start;  //设置当前界面状态
 		toStatus = Status.Start;
 		
-		startInit();
-		this.gameInit();
+		startInit();//开始菜单初始化
+		this.gameInit();//游戏界面初始化
 		 
 	}
 	@Override
@@ -320,7 +320,6 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	}
 	float count = 0;
 	public void gameDraw(){
-		
 		for(int i=0;i<rankNum.size();i++){
 			for(int i2=0;i2<gateAtlas.size();i2++){
 				if(rankNum.get(i).value == gateAtlas.get(i2).rankNum){
