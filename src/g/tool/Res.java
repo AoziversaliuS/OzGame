@@ -18,7 +18,7 @@ public class Res {
 
 	
 	public static final int gA=1,gB=2,gC=3;
-	static int resourceNum;
+	static int resourceNum = gA;
 	
 	
 	//startSource
@@ -41,7 +41,7 @@ public class Res {
 	public static OzPicture[] moveLand = new OzPicture[3];
 	//view↓
 	public static OzPicture signTower;
-
+	public static OzPicture[] signTowerLight = new OzPicture[9];
 
 	
 	
@@ -95,7 +95,8 @@ public class Res {
 		moveLand[2]  = new OzPicture(50, 50);
 		backGround   = new OzPicture(1280, 720, P.BG_RATIO);
 		//view↓
-		signTower = new OzPicture(250, 300);
+		signTower = new OzPicture(255, 283);
+		setPicGroupData(76, 76, signTowerLight);
 	}
 	private static void gA(){
 		//将资源放到预加载队列中
@@ -109,10 +110,10 @@ public class Res {
 		//资源加载完成后建立资源的引用
 		else if( loadStatus==LOAD_FINISH ){
 			setAtlas("Image/button/button.atlas");
-			loadPicGroup(208, 125, game_btnLeft, "btnLeft");
-			loadPicGroup(true, false, 208, 125, game_btnRight, "btnLeft");
-			loadPicGroup(150, 150, game_btnJump, "btnJump");
-			loadPicGroup(150, 150, game_btnAttack, "btnAttack");
+			loadPicGroup(game_btnLeft, "btnLeft");
+			loadPicGroup(true, false, game_btnRight, "btnLeft");
+			loadPicGroup(game_btnJump, "btnJump");
+			loadPicGroup( game_btnAttack, "btnAttack");
 			
 		setAtlas("Image/player/player.atlas");
 			player[0].setSprite(mS("player",0));
@@ -122,14 +123,15 @@ public class Res {
 			backGround.setSprite(false, false, mS("backGround"), P.BG_RATIO);
 			
 		setAtlas("Image/build/build.atlas");
-			loadPicGroup(50, 50, land, "land");
+			loadPicGroup(land, "land");
 			thorn.setSprite(mS("thorn"));
 			moveLand[0].setSprite( mS("moveLand",0));
 			moveLand[1].setSprite(mS("moveLand",1));
 			moveLand[2].setSprite(true,false,mS("moveLand",0));
 		
 		setAtlas("Image/view/view.atlas");
-			signTower.setSprite(mS("tower"));
+			signTower.setSprite(mS("signTower"));
+			loadPicGroup( signTowerLight, "signLight");
 			
 		}
 
@@ -139,13 +141,13 @@ public class Res {
 			picGroup[i] = new OzPicture(width, height);
 		}
 	}
-	private static void loadPicGroup(float width,float height,OzPicture[] picGroup,String resName){
+	private static void loadPicGroup(OzPicture[] picGroup,String resName){
 		for(int i=0;i<picGroup.length;i++){
 //			picGroup[i] = new OzPicture(width, height, mS(resName,i));
 			picGroup[i].setSprite(mS(resName,i));
 		}
 	}
-	private static void loadPicGroup(boolean planeFlip, boolean verticalFlip,float width,float height,OzPicture[] picGroup,String resName){
+	private static void loadPicGroup(boolean planeFlip, boolean verticalFlip,OzPicture[] picGroup,String resName){
 		for(int i=0;i<picGroup.length;i++){
 //			picGroup[i] = new OzPicture(planeFlip,verticalFlip,width, height, mS(resName,i));
 			picGroup[i].setSprite(planeFlip, verticalFlip, mS(resName,i));

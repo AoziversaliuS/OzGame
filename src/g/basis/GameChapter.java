@@ -5,6 +5,7 @@ import g.e.build.Land;
 import g.e.build.MoveLand;
 import g.e.build.ReferPoint;
 import g.e.build.Thorn;
+import g.e.view.AnimationView;
 import g.e.view.View;
 import g.refer.BackGround;
 import g.refer.OzElement;
@@ -41,6 +42,7 @@ public class GameChapter {
 		gateAtlas.add(new Thorn("T-1",-100, 150));
 		gateAtlas.add(new Thorn("T-1",-50, 150));
 		gateAtlas.add(new View("signTower", 0, 150, Res.signTower));
+		gateAtlas.add(new AnimationView("signTowerLight", 204, 383, Res.signTowerLight, 1));
 		
 		gateAtlas.add(new DeadLine(-300) );
 		System.out.println("gateAtlasSize="+gateAtlas.size());

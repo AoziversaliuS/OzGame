@@ -135,6 +135,7 @@ public class P {
 	
 
 	private static Sprite mS(String pictureName){
+		
 		return atlas.createSprite(pictureName);
 	}
 	private static Sprite mS(String pictureName,int index){

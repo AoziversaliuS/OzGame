@@ -59,7 +59,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		startInit();//开始菜单初始化
 		this.gameInit();//游戏界面初始化
-		 
+		
 	}
 	@Override
 	public synchronized boolean keyDown(int keycode) {

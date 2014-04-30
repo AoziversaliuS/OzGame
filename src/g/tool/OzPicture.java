@@ -94,6 +94,7 @@ public class OzPicture {
 		}
 		this.sprite.setScale(1f);
 		this.sprite.setColor(Color.WHITE);
+		
 	}
 	
 	

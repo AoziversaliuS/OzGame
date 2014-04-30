@@ -41,6 +41,13 @@ public class Player extends OzElement{
 
 	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
+	public static float moveSpeed(){
+		return VALUE_MOVE;
+	}
+	public static float gravity(){
+		return VALUE_GRAVITY;
+	}
+	
 	
 	public static int getPlane_HitType() {
 		return plane_HitType;
@@ -85,8 +92,6 @@ public class Player extends OzElement{
 				new OzPoint( P.BASIC_SCREEN_WIDTH/2-Res.player[0].getWidth()/2 , P.BASIC_SCREEN_HEIGHT/2-Res.player[0].getHeight()/2),
 				new OzRect(0, 0,Res.player[0].getWidth(),Res.player[0].getHeight())
 		);
-		System.out.println("");
-//		System.out.println(P.getRatioX()+"   "+P.getRatioY());
 		Gdx.app.log("show", "玩家坐标: "+(P.getRatioX()*l.x)+" , "+(P.getRatioY()*l.y));
 		jump = false;
 		condition = Player.ALIVE;
