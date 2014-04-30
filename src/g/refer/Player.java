@@ -18,10 +18,14 @@ import com.badlogic.gdx.Gdx;
 public class Player extends OzElement{
 
 	
-	public static final float VALUE_MOVE    = 7;                //玩家水平移动速度
-	public static final float VALUE_GRAVITY = 8;                //重力
+	private static final float MAX_MOVE    = 7;                //玩家水平移动速度
+	private static final float MAX_GRAVITY = 8;                //重力
+	private  static final float MAX_JUMP    = 8;               //跳跃的速度
 	
-	public  static final float VALUE_JUMP    = 8;               //跳跃的速度
+	private static float moveSpeed = MAX_MOVE;
+	private static float gravitySpeed = MAX_GRAVITY;
+	private static float jumpSpeed = MAX_JUMP;
+	
 	public  static final int JumpTimeMAX = 25;//跳跃的最大时间
 	private static int JumpTimeCount = 0;  //跳跃的时间计数
 	
@@ -42,10 +46,13 @@ public class Player extends OzElement{
 	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
 	public static float moveSpeed(){
-		return VALUE_MOVE;
+		return moveSpeed;
+	}
+	public static float jumpSpeed(){
+		return jumpSpeed;
 	}
 	public static float gravity(){
-		return VALUE_GRAVITY;
+		return gravitySpeed;
 	}
 	
 	
@@ -169,18 +176,34 @@ public class Player extends OzElement{
 			if(GameButton.getSkill() == GameButton.S_Jump && verticalT == Vertical.Top){
 				jump = true;
 			}
-			
+			if( gravitySpeed<MAX_GRAVITY ){
+				gravitySpeed++;
+				System.out.println(gravitySpeed);
+			}
 			
 			if(verticalT == Vertical.Bottom){  //碰到元素顶部则设跳跃状态为false
 				jump = false;
+				jumpSpeed = MAX_JUMP;
+				if(gravitySpeed==MAX_GRAVITY ){
+					gravitySpeed = 0;
+				}
 			}
 			else if( jump == true && JumpTimeCount < JumpTimeMAX){
 				JumpTimeCount++;
+				if( JumpTimeCount>JumpTimeMAX-8 ){
+					jumpSpeed--;
+				}
 			}
-			else{
+			else if( JumpTimeCount == JumpTimeMAX ){
+				jumpSpeed = MAX_JUMP;
+				gravitySpeed = 0;
 				 jump = false;
 				JumpTimeCount = 0;  //如果玩家当前状态不是跳跃状态，则重置跳跃时间计数，为下次跳跃做准备。
 			}
+			else if(jump==false){
+				JumpTimeCount = 0;
+			}
+			System.out.println("gravitySpeed="+gravitySpeed);
 	}
 	
 	public void set_VerticalT_and_PlaneT( ArrayList<OzElement>  gateAtlas){

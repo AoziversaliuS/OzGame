@@ -44,22 +44,22 @@ public abstract class BasicBody extends OzElement {
 		if( Player.getPlane_HitType()==Player.HIT_BASIC || Player.getPlane_HitType()==Player.HIT_ELSE ){
 			//玩家向左移动
 			if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
-				l.x = l.x + Player.VALUE_MOVE;
+				l.x = l.x + Player.moveSpeed();
 			}
 			//玩家向右移动
 			else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
-				l.x = l.x - Player.VALUE_MOVE;
+				l.x = l.x - Player.moveSpeed();
 			}
 		}
 		else if( Player.getPlane_HitType()==Player.HIT_Moving ){
 			if( MoveLand_hitting.mT==Move.vertical ){
 				//玩家向左移动
 				if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
-					l.x = l.x + Player.VALUE_MOVE;
+					l.x = l.x + Player.moveSpeed();
 				}
 				//玩家向右移动
 				else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
-					l.x = l.x - Player.VALUE_MOVE;
+					l.x = l.x - Player.moveSpeed();
 				}
 			}
 			else if( MoveLand_hitting.mT==Move.plane ){
@@ -73,10 +73,10 @@ public abstract class BasicBody extends OzElement {
 					l.x = l.x - mlSpeed;
 				}
 				else if( GameButton.getArrow()==GameButton.A_Left && Player.getPlaneT()!=Plane.Right ){
-					l.x = l.x + Player.VALUE_MOVE;
+					l.x = l.x + Player.moveSpeed();
 				}
 				else if( GameButton.getArrow()==GameButton.A_Right && Player.getPlaneT()!=Plane.Left ){
-					l.x = l.x - Player.VALUE_MOVE;
+					l.x = l.x - Player.moveSpeed();
 				}
 			}
 		}
@@ -87,11 +87,11 @@ public abstract class BasicBody extends OzElement {
 			if( MoveLand_hitting.mT==Move.vertical ){
 				//玩家向左移动
 				if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
-					l.x = l.x + Player.VALUE_MOVE;
+					l.x = l.x + Player.moveSpeed();
 				}
 				//玩家向右移动
 				else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
-					l.x = l.x - Player.VALUE_MOVE;
+					l.x = l.x - Player.moveSpeed();
 				}
 			}
 			else if( MoveLand_hitting.mT==Move.plane ){
@@ -113,12 +113,12 @@ public abstract class BasicBody extends OzElement {
 	public void verticalLogic() {
 		//跳跃状态
 		if( Player.isJump()==true ){
-			l.y = l.y - Player.VALUE_JUMP;
+			l.y = l.y - Player.jumpSpeed();
 //			System.out.println("跳跃");
 		}
-		//下坠状态  碰到移动方块和静止方块底部都是这个设置
+		//下坠状态             碰到移动方块和静止方块底部都是这个设置
 		else if( (Player.getVerticalT()==Vertical.Else || Player.getVerticalT()==Vertical.Bottom) ){
-			l.y = l.y + Player.VALUE_GRAVITY;
+			l.y = l.y + Player.gravity();
 //			System.out.println("下坠");
 		}
 		//站在陆地状态
