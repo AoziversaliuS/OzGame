@@ -184,13 +184,13 @@ public class Player extends OzElement{
 			if(verticalT == Vertical.Bottom){  //碰到元素顶部则设跳跃状态为false
 				jump = false;
 				jumpSpeed = MAX_JUMP;
-				if(gravitySpeed==MAX_GRAVITY ){
+				if(gravitySpeed==MAX_GRAVITY ){//如果碰到底部后，第一次重力移动若不能使小球离开底部，则会再次进入这里，为避免重置重力，故加判断
 					gravitySpeed = 0;
 				}
 			}
 			else if( jump == true && JumpTimeCount < JumpTimeMAX){
 				JumpTimeCount++;
-				if( JumpTimeCount>JumpTimeMAX-8 ){
+				if( JumpTimeCount>JumpTimeMAX-MAX_JUMP ){
 					jumpSpeed--;
 				}
 			}
@@ -203,7 +203,7 @@ public class Player extends OzElement{
 			else if(jump==false){
 				JumpTimeCount = 0;
 			}
-			System.out.println("gravitySpeed="+gravitySpeed);
+//			System.out.println("gravitySpeed="+gravitySpeed);
 	}
 	
 	public void set_VerticalT_and_PlaneT( ArrayList<OzElement>  gateAtlas){
