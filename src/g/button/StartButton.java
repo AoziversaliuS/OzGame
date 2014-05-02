@@ -27,6 +27,11 @@ public class StartButton extends OzElement{
 		super("StartButton", Rank.SELF_CUSTOM , ET.StartButton, null, null );
 		
 		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());
+//		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());
+//		System.out.println("startGameButton 宽:"+startGameButton.width+"   高:"+startGameButton.height);
+		
+		System.out.println("startGameButton 宽:"+Res.startBtnA.getOriginWidth()+"   高:"+Res.startBtnA.getOriginHeight() );
+		System.out.println("startGameButton 使用比例为:"+Res.startBtnA.getRatioType());
 	}
 
 	@Override
@@ -49,7 +54,7 @@ public class StartButton extends OzElement{
 		
 		if( l!=null ){
 			
-			if( startGameButton.inside(l) ){
+			if( startGameButton.inside(l,P.FORCE_RATIO) ){
 				selected = StartButton.START_GAME;
 			}
 			else{
@@ -86,10 +91,10 @@ public class StartButton extends OzElement{
 	public void draw() {
 		
 		if( selected == StartButton.START_GAME ){
-			P.draw(startGameButton.x, startGameButton.y, Res.startBtnB);
+			P.drawForce(startGameButton.x, startGameButton.y, Res.startBtnB);
 		}
 		else if( selected==StartButton.ELSE ){
-			P.draw(startGameButton.x, startGameButton.y, Res.startBtnA);
+			P.drawForce(startGameButton.x, startGameButton.y, Res.startBtnA);
 		}
 		
 	}

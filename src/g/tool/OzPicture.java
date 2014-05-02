@@ -9,11 +9,14 @@ public class OzPicture {
 	private float basisHeight;
 	private float basisWidth;
 	private boolean isBackGround = false;
+	private float ratioType=P.RATIO;
 	
 	
 	
 	
-	
+	public float getRatioType() {
+		return ratioType;
+	}
 	//无Sprite构造方法
 	public OzPicture( float basisWidth , float basisHeight){
 		init(basisWidth, basisHeight, null);
@@ -21,6 +24,7 @@ public class OzPicture {
 	public OzPicture( float basisWidth , float basisHeight,int TYPE){
 		init(basisWidth, basisHeight, null);
 		if( TYPE == P.BG_RATIO ){
+			ratioType = P.BG_RATIO;
 			this.isBackGround = true;
 		}
 	}
@@ -53,6 +57,7 @@ public class OzPicture {
 		if( TYPE == P.BG_RATIO ){
 			this.isBackGround = true;
 		}
+		ratioType = TYPE;
 		
 		init(basisWidth, basisHeight, sprite);
 		//针对手机屏幕来设定图片的大小
@@ -85,12 +90,16 @@ public class OzPicture {
 	
 	public void setDefault(){
 		//这里有一点逻辑错误，因为还有强制比例没有判断
+		//根据比例来设置图片大小
 		if(isBackGround){
 			//背景图片特殊设定
 			this.sprite.setSize( this.basisWidth * P.getBgRatioX() , this.basisHeight * P.getBgRatioY() );
 		}
-		else{
+		else if( ratioType==P.RATIO ){
 			this.sprite.setSize( this.basisWidth * P.getRatioX() , this.basisHeight * P.getRatioY() );
+		}
+		else if( ratioType==P.FORCE_RATIO ){
+			this.sprite.setSize( this.basisWidth * P.getForceRatioX(), this.basisHeight * P.getForceRatioY() );
 		}
 		this.sprite.setScale(1f);
 		this.sprite.setColor(Color.WHITE);
@@ -100,6 +109,12 @@ public class OzPicture {
 	
 	public Sprite getSprite() {
 		return sprite;
+	}
+	public float getOriginHeight(){
+		return sprite.getHeight();
+	}
+	public float getOriginWidth(){
+		return sprite.getWidth();
 	}
 	public float getHeight() {
 		return basisHeight;
@@ -124,6 +139,7 @@ public class OzPicture {
 		this.sprite = sprite;
 		sprite.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite.flip(planeFlip, verticalFlip);
+		ratioType = TYPE;
 		if( TYPE == P.BG_RATIO ){
 			//背景图片特殊设定
 			this.sprite.setSize( basisWidth * P.getBgRatioX() , basisHeight * P.getBgRatioY() );

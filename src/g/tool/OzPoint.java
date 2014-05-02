@@ -29,8 +29,8 @@ public class OzPoint {
 		this.y = 0;
 	}
 	public void set_XY_fromScreen(float screenX,float screenY) {
-			this.x = screenX/P.getRatioX() ;
-			this.y =(P.getScreenH() - screenY)/P.getRatioY() ;
+			this.x = screenX;
+			this.y =(P.getScreenH() - screenY);
 	}
 	
 	

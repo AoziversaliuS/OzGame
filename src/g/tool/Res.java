@@ -53,8 +53,8 @@ public class Res {
 	private static void NecessaryResLoad(){
 		loadAtlas("Image/start/start.atlas");
 		startBg = new OzPicture(1280, 720, lS("startBg"), P.FORCE_RATIO);
-		startBtnA = new OzPicture(334, 135, lS("startBtnA"));
-		startBtnB = new OzPicture(334, 135, lS("startBtnB"));
+		startBtnA = new OzPicture(334, 135, lS("startBtnA"), P.FORCE_RATIO);
+		startBtnB = new OzPicture(334, 135, lS("startBtnB"), P.FORCE_RATIO);
 	}
 	
 	

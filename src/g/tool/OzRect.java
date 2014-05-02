@@ -21,19 +21,17 @@ public class OzRect {
 		super();
 	}
 	
-	public boolean inside(OzPoint point){
-		//判断一个点是否在一个矩形内
-		if( point.x>x && point.x<this.getRight() && point.y>y &&point.y<this.getTop() ){
-			return true;
-		}
-		return false;
-	}
-	public boolean insides(HashMap<String, OzPoint> points){
+
+	public boolean insides(HashMap<String, OzPoint> points,int rationType){
 		//判断一个[点集合]里是否有一个点在一个矩形内
 		Set<String> keys = points.keySet();
+		
+
 		for(String key:keys){
 			
-			if(  inside(points.get(key))==true ){
+
+			
+			if(  inside(points.get(key),rationType)==true ){
 				Gdx.app.log("btn","判定成功");
 				return true;
 			}else{
@@ -45,22 +43,54 @@ public class OzRect {
 		
 		return false;
 	}
+	private float get_pX_by(int rationType,OzPoint point){
+		if( rationType==P.RATIO ){
+			return point.x/P.getRatioX();
+		}
+		else if( rationType==P.FORCE_RATIO ){
+			return point.x/P.getForceRatioX();
+		}
+		else if( rationType==P.BG_RATIO ){
+			return point.x/P.getBgRatioX();
+		}
+		return -1f;
+	}
+	private float get_pY_by(int rationType,OzPoint point){
+		if( rationType==P.RATIO ){
+			return point.y/P.getRatioY();
+		}
+		else if( rationType==P.FORCE_RATIO ){
+			return point.y/P.getForceRatioY();
+		}
+		else if( rationType==P.BG_RATIO ){
+			return point.y/P.getBgRatioY();
+		}
+		return -1f;
+	}
 	public boolean intersect(OzRect rect){
 		//判断两个矩形是否相交
 		if(this.getRight()<rect.x || this.getTop()<rect.y || y>rect.getTop() || x>rect.getRight()){
 			//在rect的左边                                                  在rect的底部                                    在rect的上面                                  在rect的右边             笛卡尔坐标系
-//			Gdx.app.log(" impact", "land x "+x+" y "+y+" Right "+this.getRight()+" Top "+this.getTop());
-//			Gdx.app.log(" impact", "player x "+rect.x+"  y "+rect.y+"  Right "+rect.getRight()+"  Top "+rect.getTop());
 			return false;
 		}
 		return true;
 	}
+	
+	public boolean inside(OzPoint point,int rationType){
+		float pX=-1f,pY=-1f;
+		pX = get_pX_by(rationType, point);
+		pY = get_pY_by(rationType, point);
+		//判断一个点是否在一个矩形内
+		if( pX>x && pX<this.getRight() && pY>y && pY<this.getTop() ){
+			return true;
+		}
+		return false;
+	}
+	
 	public float centerX() {
-//		Gdx.app.log("impact", ""+x+"   "+width+"   "+(x+width)/2);
 		return (x+width/2);
 	}
 	public float centerY() {
-//		Gdx.app.log("impact", ""+x+"   "+width+"   "+(x+width)/2);
 		return (y+height/2);
 	}
 	

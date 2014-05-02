@@ -64,7 +64,7 @@ public class P {
 	public static void draw(float x,float y,OzPicture picture){
 		picture.setDefault();
 		//此方法适用于画除了背景图片之外的图片
-		picture.getSprite().setPosition(x*P.ratioX, y*P.ratioY);
+		picture.getSprite().setPosition(x*P.ratioX, y*P.ratioY);//根据比例来设置位置
 		picture.getSprite().draw(batch);
 	}
 	public static void draw(OzPoint point,OzPicture picture){
@@ -89,11 +89,11 @@ public class P {
 	}
 	
 	//强制比例
-	public static void drawFr(OzPoint point,OzPicture picture){
+	public static void drawForce(OzPoint point,OzPicture picture){
 		picture.getSprite().setPosition(point.x*P.forceRatioX, point.y*P.forceRatioY);
 		picture.getSprite().draw(batch);
 	}
-	public static void drawFr(float x,float y,OzPicture picture){
+	public static void drawForce(float x,float y,OzPicture picture){
 		picture.getSprite().setPosition(x*P.forceRatioX, y*P.forceRatioY);
 		picture.getSprite().draw(batch);
 	}

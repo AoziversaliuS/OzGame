@@ -239,7 +239,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	}
 	
 	public void startDraw(){
-		P.drawFr(0, 0, Res.startBg);
+		P.drawForce(0, 0, Res.startBg);
 		startBtn.draw();
 	}
 	
