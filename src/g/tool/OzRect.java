@@ -33,7 +33,7 @@ public class OzRect {
 		Set<String> keys = points.keySet();
 		for(String key:keys){
 			if(        points.get(key).x>x && points.get(key).x<this.getRight() 
-					&& points.get(key).y>y &&points.get(key).y<this.getTop() ){
+					&& points.get(key).y>y &&points.get(key).y<this.getTop()     ){
 				Gdx.app.log("btn","ÅĞ¶¨³É¹¦");
 				return true;
 			}else{
