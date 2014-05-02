@@ -32,8 +32,8 @@ public class OzRect {
 		//判断一个[点集合]里是否有一个点在一个矩形内
 		Set<String> keys = points.keySet();
 		for(String key:keys){
-			if(        points.get(key).x>x && points.get(key).x<this.getRight() 
-					&& points.get(key).y>y &&points.get(key).y<this.getTop()     ){
+			
+			if(  inside(points.get(key))==true ){
 				Gdx.app.log("btn","判定成功");
 				return true;
 			}else{
