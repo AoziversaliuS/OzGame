@@ -27,11 +27,9 @@ public class StartButtons extends OzElement{
 		super("StartButton", Rank.SELF_CUSTOM , ET.StartButtons, null, null );
 		
 		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());
-//		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());
-//		System.out.println("startGameButton 宽:"+startGameButton.width+"   高:"+startGameButton.height);
 		
-		System.out.println("startGameButton 宽:"+Res.startBtnA.getOriginWidth()+"   高:"+Res.startBtnA.getOriginHeight() );
-		System.out.println("startGameButton 使用比例为:"+Res.startBtnA.getRatioType());
+//		System.out.println("startGameButton 宽:"+Res.startBtnA.getOriginWidth()+"   高:"+Res.startBtnA.getOriginHeight() );
+//		System.out.println("startGameButton 使用比例为:"+Res.startBtnA.getRatioType());
 	}
 
 	@Override

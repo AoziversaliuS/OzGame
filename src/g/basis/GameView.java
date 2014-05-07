@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import g.button.GameButtons;
+import g.button.SelectButtons;
 import g.button.StartButtons;
 import g.refer.BasicBody;
 import g.refer.OzElement;
@@ -26,10 +27,12 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	private long times = 50;
 	
 	private  HashMap<String, OzPoint> points;
+	//SelectStatus
+	private SelectButtons selectBtns;
 	//StartStatus
-	private StartButtons startBtn;
+	private StartButtons startBtns;
 	//GameStatus
-	private GameButtons gameBtn;
+	private GameButtons gameBtns;
 	private static   ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
 	private  ArrayList<OzInt> rankNum;   //按图层等级来进行显示图片
 	
@@ -252,15 +255,15 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 				
 		case Credits:  {        break;}
 				
-		case Game:     {    gameBtn.logic(points);     break;}
+		case Game:     {    gameBtns.logic(points);     break;}
 					
 		case Loading:  {        break;}
 				
 		case Pause:    {        break;}
 				
-		case Select:   {        break;}
+		case Select:   {    selectBtns.logic(points);   break;}
 				
-		case Start:    {     startBtn.logic(points);   break;}
+		case Start:    {     startBtns.logic(points);   break;}
 				
 		case Init:     {        break;}
 		
@@ -269,7 +272,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	
 	public void startInit(){
-		startBtn = new StartButtons();
+		startBtns = new StartButtons();
 	}
 	
 	public void startEngine(){
@@ -277,19 +280,19 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	}
 	public void startDraw(){
 		P.drawForce(0, 0, Res.startBg);
-		startBtn.draw();
+		startBtns.draw();
 	}
 	
 	
 	public void selectInit(){
-		
+		selectBtns = new SelectButtons();
 	}
 	public void selectEngine(){
 		
 	}
 	public void selectDraw(){
 		P.drawForce(0, 0, Res.selectBg);
-		P.drawForce(50, 50, Res.selectBtn);
+		selectBtns.draw();
 	}
 	
 	
@@ -299,7 +302,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	
 	public void gameInit(){
-		gameBtn     = new GameButtons();
+		gameBtns     = new GameButtons();
 		gateAtlas   = new ArrayList<OzElement>();
 		rankNum     = new ArrayList<OzInt>();
 		player =  new Player();
@@ -376,7 +379,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			}
 		}
 		player.draw();
-		gameBtn.draw();
+		gameBtns.draw();
 	
 	}
 	

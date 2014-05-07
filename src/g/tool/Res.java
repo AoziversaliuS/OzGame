@@ -27,7 +27,7 @@ public class Res {
 	public static OzPicture startBtnB;
 	//selectSource
 	public static OzPicture selectBg;
-	public static OzPicture selectBtn;
+	public static OzPicture selectBtn[] = new OzPicture[2];
 	
 	//gameSource
 	public static OzPicture[] game_btnLeft = new OzPicture[2];
@@ -143,6 +143,9 @@ public class Res {
 	private static Sprite lS(String picName){
 		return atlas.createSprite(picName);
 	}
+	private static Sprite lS(String picName,int index){
+		return atlas.createSprite(picName, index);
+	}
 	private static Sprite mS(String picName){
 		return manager.get(atlasPath, TextureAtlas.class).createSprite(picName);
 	}
@@ -169,8 +172,9 @@ public class Res {
 			startBtnA = new OzPicture(334, 135, lS("startBtnA"), P.FORCE_RATIO);
 			startBtnB = new OzPicture(334, 135, lS("startBtnB"), P.FORCE_RATIO);
 		loadAtlas("Image/select/select.atlas");
-			selectBg = new OzPicture(1280, 720, lS("backGround"), P.FORCE_RATIO);
-			selectBtn = new OzPicture(150, 150, lS("selectBtn"), P.FORCE_RATIO);
+			selectBg = new OzPicture(1280, 720, lS("bG"), P.FORCE_RATIO);
+			selectBtn[0] = new OzPicture(150, 150, lS("btn",0), P.FORCE_RATIO);
+			selectBtn[1] = new OzPicture(150, 150, lS("btn",1), P.FORCE_RATIO);
 	}
 	
 	
