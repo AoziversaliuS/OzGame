@@ -113,7 +113,7 @@ public class P {
 	}
 	
 	
-	public static final int RATIO = 1,BG_RATIO = 2, FORCE_RATIO = 3;
+	public static final int AUTO_RATIO = 1,BG_RATIO = 2, FORCE_RATIO = 3;
 	public static final float BASIC_SCREEN_WIDTH = 1280f;
 	public static final float BASIC_SCREEN_HEIGHT = 720f;
 	

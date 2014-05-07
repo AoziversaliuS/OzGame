@@ -1,6 +1,6 @@
 package g.refer;
 
-import g.button.GameButton;
+import g.button.GameButtons;
 import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.tool.P;
@@ -25,6 +25,7 @@ public class Player extends OzElement{
 	private static float moveSpeed = MAX_MOVE;
 	private static float gravitySpeed = MAX_GRAVITY;
 	private static float jumpSpeed = MAX_JUMP;
+	private static boolean gravityFinish = false; //用于解除BUG
 	
 	public  static final int JumpTimeMAX = 25;//跳跃的最大时间
 	private static int JumpTimeCount = 0;  //跳跃的时间计数
@@ -173,18 +174,22 @@ public class Player extends OzElement{
 	}
 	public void jumpAction(){
 		//当玩家站在陆地上且按下跳跃按键之后才可以跳跃。verticalT
-			if(GameButton.getSkill() == GameButton.S_Jump && verticalT == Vertical.Top){
+			if(GameButtons.getSkill() == GameButtons.S_Jump && verticalT == Vertical.Top){
 				jump = true;
+				System.out.println("jump11111111111111111111");
+			}
+			if( verticalT == Vertical.Top ){
+				gravityFinish = false;
 			}
 			if( gravitySpeed<MAX_GRAVITY ){
 				gravitySpeed++;
-				System.out.println(gravitySpeed);
+//				System.out.println("gravitySpeed="+gravitySpeed);
 			}
-			
+			System.out.println("gravitySpeed="+gravitySpeed);
 			if(verticalT == Vertical.Bottom){  //碰到元素顶部则设跳跃状态为false
 				jump = false;
 				jumpSpeed = MAX_JUMP;
-				if(gravitySpeed==MAX_GRAVITY ){//如果碰到底部后，第一次重力移动若不能使小球离开底部，则会再次进入这里，为避免重置重力，故加判断
+				if( gravityFinish ){//如果碰到底部后，第一次重力移动若不能使小球离开底部，则会再次进入这里，为避免重置重力，故加判断
 					gravitySpeed = 0;
 				}
 			}

@@ -1,6 +1,6 @@
 package g.refer;
 
-import g.button.GameButton;
+import g.button.GameButtons;
 import g.e.build.MoveLand;
 import g.tool.OzPoint;
 import g.tool.OzRect;
@@ -43,39 +43,39 @@ public abstract class BasicBody extends OzElement {
 		
 		if( Player.getPlane_HitType()==Player.HIT_BASIC || Player.getPlane_HitType()==Player.HIT_ELSE ){
 			//玩家向左移动
-			if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
+			if(GameButtons.getArrow() == GameButtons.A_Left && Player.getPlaneT() != Plane.Right){
 				l.x = l.x + Player.moveSpeed();
 			}
 			//玩家向右移动
-			else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
+			else if(GameButtons.getArrow() == GameButtons.A_Right && Player.getPlaneT() != Plane.Left){
 				l.x = l.x - Player.moveSpeed();
 			}
 		}
 		else if( Player.getPlane_HitType()==Player.HIT_Moving ){
 			if( MoveLand_hitting.mT==Move.vertical ){
 				//玩家向左移动
-				if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
+				if(GameButtons.getArrow() == GameButtons.A_Left && Player.getPlaneT() != Plane.Right){
 					l.x = l.x + Player.moveSpeed();
 				}
 				//玩家向右移动
-				else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
+				else if(GameButtons.getArrow() == GameButtons.A_Right && Player.getPlaneT() != Plane.Left){
 					l.x = l.x - Player.moveSpeed();
 				}
 			}
 			else if( MoveLand_hitting.mT==Move.plane ){
 				float mlSpeed = MoveLand_hitting.speed;
 				//玩家向左移动
-				if(GameButton.getArrow()==GameButton.A_Left && Player.getPlaneT()==Plane.Right && mlSpeed<0 ){
+				if(GameButtons.getArrow()==GameButtons.A_Left && Player.getPlaneT()==Plane.Right && mlSpeed<0 ){
 					l.x = l.x - mlSpeed;
 				}
 				//玩家向右移动
-				else if(GameButton.getArrow()==GameButton.A_Right && Player.getPlaneT()==Plane.Left && mlSpeed>0 ){
+				else if(GameButtons.getArrow()==GameButtons.A_Right && Player.getPlaneT()==Plane.Left && mlSpeed>0 ){
 					l.x = l.x - mlSpeed;
 				}
-				else if( GameButton.getArrow()==GameButton.A_Left && Player.getPlaneT()!=Plane.Right ){
+				else if( GameButtons.getArrow()==GameButtons.A_Left && Player.getPlaneT()!=Plane.Right ){
 					l.x = l.x + Player.moveSpeed();
 				}
-				else if( GameButton.getArrow()==GameButton.A_Right && Player.getPlaneT()!=Plane.Left ){
+				else if( GameButtons.getArrow()==GameButtons.A_Right && Player.getPlaneT()!=Plane.Left ){
 					l.x = l.x - Player.moveSpeed();
 				}
 			}
@@ -86,11 +86,11 @@ public abstract class BasicBody extends OzElement {
 			
 			if( MoveLand_hitting.mT==Move.vertical ){
 				//玩家向左移动
-				if(GameButton.getArrow() == GameButton.A_Left && Player.getPlaneT() != Plane.Right){
+				if(GameButtons.getArrow() == GameButtons.A_Left && Player.getPlaneT() != Plane.Right){
 					l.x = l.x + Player.moveSpeed();
 				}
 				//玩家向右移动
-				else if(GameButton.getArrow() == GameButton.A_Right && Player.getPlaneT() != Plane.Left){
+				else if(GameButtons.getArrow() == GameButtons.A_Right && Player.getPlaneT() != Plane.Left){
 					l.x = l.x - Player.moveSpeed();
 				}
 			}

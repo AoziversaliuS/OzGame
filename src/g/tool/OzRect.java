@@ -32,11 +32,11 @@ public class OzRect {
 
 			
 			if(  inside(points.get(key),rationType)==true ){
-				Gdx.app.log("btn","判定成功");
+//				Gdx.app.log("btn","判定成功");
 				return true;
 			}else{
-				Gdx.app.log("btn","判定失败:  point X:"+ points.get(key).x+" Y: "+points.get(key).y);
-				Gdx.app.log("btn","判定失败:  AX:"+x+" AY: "+y+" WIDTH: "+width+" HEIGHT: "+height);
+//				Gdx.app.log("btn","判定失败:  point X:"+ points.get(key).x+" Y: "+points.get(key).y);
+//				Gdx.app.log("btn","判定失败:  AX:"+x+" AY: "+y+" WIDTH: "+width+" HEIGHT: "+height);
 			}
 
 		}
@@ -44,7 +44,7 @@ public class OzRect {
 		return false;
 	}
 	private float get_pX_by(int rationType,OzPoint point){
-		if( rationType==P.RATIO ){
+		if( rationType==P.AUTO_RATIO ){
 			return point.x/P.getRatioX();
 		}
 		else if( rationType==P.FORCE_RATIO ){
@@ -56,7 +56,7 @@ public class OzRect {
 		return -1f;
 	}
 	private float get_pY_by(int rationType,OzPoint point){
-		if( rationType==P.RATIO ){
+		if( rationType==P.AUTO_RATIO ){
 			return point.y/P.getRatioY();
 		}
 		else if( rationType==P.FORCE_RATIO ){

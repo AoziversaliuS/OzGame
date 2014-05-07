@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 
-public class GameButton extends OzElement{
+public class GameButtons extends OzElement{
 
 	private OzRect buttonLeft;
 	private OzRect buttonRight;
@@ -34,48 +34,48 @@ public class GameButton extends OzElement{
 	public  static int   Arrow;   //方向键,触碰信息
 	public  static int   Skill;   //技能键,触碰信息
 	
-	public GameButton() {
+	public GameButtons() {
 		super("GameButton",Rank.SELF_CUSTOM, ET.GameButton,null,null);
 		
 		this.buttonLeft  = new OzRect(25, 10, Res.game_btnLeft[0].getWidth(),Res.game_btnLeft[0].getHeight());
 		this.buttonRight = new OzRect(275, 10,Res.game_btnRight[0].getWidth(), Res.game_btnRight[0].getHeight());
 		this.buttonJump = new OzRect(900, 10, Res.game_btnJump[0].getWidth(), Res.game_btnJump[0].getHeight());
 		this.buttonAttack = new OzRect(1120, 10, Res.game_btnAttack[0].getWidth(), Res.game_btnAttack[0].getHeight());
-		GameButton.Arrow = GameButton.A_Else;
-		GameButton.Skill = GameButton.S_Else;
+		GameButtons.Arrow = GameButtons.A_Else;
+		GameButtons.Skill = GameButtons.S_Else;
 	}
 
 	@Override
 	public void reset() {
-		GameButton.Arrow = GameButton.A_Else;   //清除掉上一帧的按键信息
-		GameButton.Skill = GameButton.S_Else;
+		GameButtons.Arrow = GameButtons.A_Else;   //清除掉上一帧的按键信息
+		GameButtons.Skill = GameButtons.S_Else;
 	}
 	public void logic(HashMap<String, OzPoint> points) {
 		
-		if(buttonLeft.insides(points,P.RATIO) && buttonRight.insides(points,P.RATIO)){
+		if(buttonLeft.insides(points,P.AUTO_RATIO) && buttonRight.insides(points,P.AUTO_RATIO)){
 			//两个键都按下的情况下，保持上一次所具有的按键状态
 		}
-	    else if(buttonLeft.insides(points,P.RATIO)){
-			Arrow = GameButton.A_Left;
+	    else if(buttonLeft.insides(points,P.AUTO_RATIO)){
+			Arrow = GameButtons.A_Left;
 		}
-		else if(buttonRight.insides(points,P.RATIO)){
-			Arrow = GameButton.A_Right;
+		else if(buttonRight.insides(points,P.AUTO_RATIO)){
+			Arrow = GameButtons.A_Right;
 		}
 		else{
-			Arrow = GameButton.A_Else;
+			Arrow = GameButtons.A_Else;
 		}
 		
-		if(buttonJump.insides(points,P.RATIO) && buttonAttack.insides(points,P.RATIO) ){
+		if(buttonJump.insides(points,P.AUTO_RATIO) && buttonAttack.insides(points,P.AUTO_RATIO) ){
 			
 		}
-		else if(buttonAttack.insides(points,P.RATIO)){
-			Skill = GameButton.S_Attack;
+		else if(buttonAttack.insides(points,P.AUTO_RATIO)){
+			Skill = GameButtons.S_Attack;
 		}
-		else if(buttonJump.insides(points,P.RATIO)){
-			Skill = GameButton.S_Jump;
+		else if(buttonJump.insides(points,P.AUTO_RATIO)){
+			Skill = GameButtons.S_Jump;
 		}
 		else{
-			Skill = GameButton.S_Else;
+			Skill = GameButtons.S_Else;
 		}
 		
 //		Gdx.app.log("btn", "Arrow: "+Arrow);
@@ -84,28 +84,28 @@ public class GameButton extends OzElement{
 	@Override
 	public void draw() {
 		//左右按键
-		if(Arrow == GameButton.A_Else){
+		if(Arrow == GameButtons.A_Else){
 			P.draw(buttonLeft.x, buttonLeft.y, Res.game_btnLeft[0]);
 			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[0]);
 		}
-		else if(Arrow == GameButton.A_Left){
+		else if(Arrow == GameButtons.A_Left){
 			P.draw(buttonLeft.x,buttonLeft.y, Res.game_btnLeft[1]);
 			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[0]);
 		}
-		else if(Arrow == GameButton.A_Right){
+		else if(Arrow == GameButtons.A_Right){
 			P.draw(buttonLeft.x,buttonLeft.y, Res.game_btnLeft[0]);
 			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[1]);
 		}
 		//跳跃按键
-		if(Skill == GameButton.S_Else){
+		if(Skill == GameButtons.S_Else){
 			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
 			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
 		}
-		else if(Skill == GameButton.S_Jump){
+		else if(Skill == GameButtons.S_Jump){
 			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
 			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[1]);
 		}
-		else if(Skill == GameButton.S_Attack){
+		else if(Skill == GameButtons.S_Attack){
 			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[1]);
 			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
 		}
@@ -113,10 +113,10 @@ public class GameButton extends OzElement{
 
 	
 	public static int getArrow(){
-		return GameButton.Arrow;     //将Arrow的值传递给外界
+		return GameButtons.Arrow;     //将Arrow的值传递给外界
 	}
 	public static int getSkill(){
-		return GameButton.Skill;     //将Skill的值传递给外界
+		return GameButtons.Skill;     //将Skill的值传递给外界
 	}
 	
 	

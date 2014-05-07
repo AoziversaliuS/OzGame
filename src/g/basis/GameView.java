@@ -3,8 +3,8 @@ package g.basis;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import g.button.GameButton;
-import g.button.StartButton;
+import g.button.GameButtons;
+import g.button.StartButtons;
 import g.refer.BasicBody;
 import g.refer.OzElement;
 import g.refer.Player;
@@ -22,12 +22,14 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	private boolean showFPS = false;
 	
+	private boolean debug = false;
+	private long times = 50;
 	
 	private  HashMap<String, OzPoint> points;
 	//StartStatus
-	private StartButton startBtn;
+	private StartButtons startBtn;
 	//GameStatus
-	private GameButton gameBtn;
+	private GameButtons gameBtn;
 	private static   ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
 	private  ArrayList<OzInt> rankNum;   //按图层等级来进行显示图片
 	
@@ -64,6 +66,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		startInit();//开始菜单初始化
 		this.gameInit();//游戏界面初始化
+		this.selectInit();//选择菜单初始化
 		
 	}
 	@Override
@@ -75,7 +78,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		points.put(""+pointer, new OzPoint(screenX, screenY, true));
 		btnLogic();
-		Gdx.app.log("Interact", "touchDown  有"+points.size()+"个点! "+"   "+pointer);
+//		Gdx.app.log("Interact", "touchDown  有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
 	@Override
@@ -84,7 +87,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		points.remove(""+pointer);
 		btnLogic();
-		Gdx.app.log("Interact", "touchUp 有"+points.size()+"个点! "+"   "+pointer);
+//		Gdx.app.log("Interact", "touchUp 有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
 	@Override
@@ -93,7 +96,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		points.get(""+pointer).set_XY_fromScreen(screenX, screenY);
 		btnLogic();
-		Gdx.app.log("Interact", "touchDragged 有"+points.size()+"个点! "+"   "+pointer);
+		Gdx.app.log("Interact", "touchDragged 有"+points.size()+"个点! "+"   "+pointer+" L: "+screenX+" "+screenY);
 		return false;
 	}
 	@Override
@@ -127,12 +130,21 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		P.setlight(lightNum);
 		P.end();
+		
+		if(debug){
+			try {
+				Thread.sleep(times);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void statusSwitch(){
 
-		if( toStatus==Status.Game && status==Status.Start ){
-			this.startToGame();
+		if( toStatus==Status.Select && status==Status.Start ){
+			this.startToSelect();
 		}
 		
 		if( sT==SWITCH_FINISH ){
@@ -142,13 +154,32 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			sT=SWITCH_PREPARE;
 		}
 	}
+	private void startToSelect(){
+		if( sT==SWITCH_PREPARE ){
+			lightNum = lightNum + dNum;
+			startDraw();
+			if( lightNum>=maxLight ){
+				sT = SWITCH_LOADING;
+			}
+		}
+		else if( sT==SWITCH_LOADING ){
+				sT = SWITCH_LOADED;
+		}
+		else if( sT==SWITCH_LOADED ){
+			lightNum = lightNum - dNum;
+			selectDraw();
+			if( lightNum<=minLight ){
+				sT = SWITCH_FINISH;
+			}
+		}
+	}
 	private void startToGame(){
 		if( sT==SWITCH_PREPARE ){
 			lightNum = lightNum + dNum;
 			startDraw();
 			if( lightNum>=maxLight ){
 				sT = SWITCH_LOADING;
-				Res.prepare(Res.gA);
+				Res.prepare(Res.resourceA);
 			}
 		}
 		else if( sT==SWITCH_LOADING ){
@@ -179,7 +210,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		case Pause:    {        break;}
 		
-		case Select:   {        break;}
+		case Select:   {     selectEngine();   break;}
 		
 		case Start:    {    startEngine();     break;}
 		
@@ -203,7 +234,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		case Pause:    {        break;}
 		
-		case Select:   {        break;}
+		case Select:   {     selectDraw();   break;}
 		
 		case Start:    {    startDraw();   break;}
 		
@@ -238,16 +269,27 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	
 	public void startInit(){
-		startBtn = new StartButton();
+		startBtn = new StartButtons();
 	}
 	
 	public void startEngine(){
 		
 	}
-	
 	public void startDraw(){
 		P.drawForce(0, 0, Res.startBg);
 		startBtn.draw();
+	}
+	
+	
+	public void selectInit(){
+		
+	}
+	public void selectEngine(){
+		
+	}
+	public void selectDraw(){
+		P.drawForce(0, 0, Res.selectBg);
+		P.drawForce(50, 50, Res.selectBtn);
 	}
 	
 	
@@ -257,7 +299,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	
 	public void gameInit(){
-		gameBtn     = new GameButton();
+		gameBtn     = new GameButtons();
 		gateAtlas   = new ArrayList<OzElement>();
 		rankNum     = new ArrayList<OzInt>();
 		player =  new Player();

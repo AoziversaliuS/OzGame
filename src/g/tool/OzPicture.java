@@ -9,7 +9,7 @@ public class OzPicture {
 	private float basisHeight;
 	private float basisWidth;
 	private boolean isBackGround = false;
-	private float ratioType=P.RATIO;
+	private float ratioType=P.AUTO_RATIO;
 	
 	
 	
@@ -66,7 +66,7 @@ public class OzPicture {
 				//±≥æ∞Õº∆¨Ãÿ ‚…Ë∂®
 				this.sprite.setSize( basisWidth * P.getBgRatioX() , basisHeight * P.getBgRatioY() );
 			}
-			else if( TYPE == P.RATIO ){
+			else if( TYPE == P.AUTO_RATIO ){
 				this.sprite.setSize( basisWidth * P.getRatioX() , basisHeight * P.getRatioY() );
 			}
 			else if( TYPE == P.FORCE_RATIO ){
@@ -95,7 +95,7 @@ public class OzPicture {
 			//±≥æ∞Õº∆¨Ãÿ ‚…Ë∂®
 			this.sprite.setSize( this.basisWidth * P.getBgRatioX() , this.basisHeight * P.getBgRatioY() );
 		}
-		else if( ratioType==P.RATIO ){
+		else if( ratioType==P.AUTO_RATIO ){
 			this.sprite.setSize( this.basisWidth * P.getRatioX() , this.basisHeight * P.getRatioY() );
 		}
 		else if( ratioType==P.FORCE_RATIO ){
@@ -144,7 +144,7 @@ public class OzPicture {
 			//±≥æ∞Õº∆¨Ãÿ ‚…Ë∂®
 			this.sprite.setSize( basisWidth * P.getBgRatioX() , basisHeight * P.getBgRatioY() );
 		}
-		else if( TYPE == P.RATIO ){
+		else if( TYPE == P.AUTO_RATIO ){
 			this.sprite.setSize( basisWidth * P.getRatioX() , basisHeight * P.getRatioY() );
 		}
 		else if( TYPE == P.FORCE_RATIO ){

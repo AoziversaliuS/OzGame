@@ -14,16 +14,16 @@ import g.type.ET;
 import g.type.Rank;
 import g.type.Status;
 
-public class StartButton extends OzElement{
+public class StartButtons extends OzElement{
 
 	private OzRect startGameButton;
 	
 	public static final int START_GAME = 1,ELSE = 3; 
 	private boolean submit = false;//按下且松开按钮时为true
 	
-	private  int selected = StartButton.ELSE;
+	private  int selected = StartButtons.ELSE;
 	
-	public StartButton( ) {
+	public StartButtons( ) {
 		super("StartButton", Rank.SELF_CUSTOM , ET.StartButton, null, null );
 		
 		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());
@@ -55,16 +55,16 @@ public class StartButton extends OzElement{
 		if( l!=null ){
 			
 			if( startGameButton.inside(l,P.FORCE_RATIO) ){
-				selected = StartButton.START_GAME;
+				selected = StartButtons.START_GAME;
 			}
 			else{
-				selected = StartButton.ELSE;
+				selected = StartButtons.ELSE;
 			}
 			
 		}
 		else{
 			System.out.println("进入");
-			if( selected!=StartButton.ELSE ){
+			if( selected!=StartButtons.ELSE ){
 				submit = true;
 			}
 		}
@@ -77,23 +77,23 @@ public class StartButton extends OzElement{
 	}
 	//按键触发事件
 	private void active(){
-		if( selected==StartButton.START_GAME ){
-			GameView.setToStatus(Status.Game);
+		if( selected==StartButtons.START_GAME ){
+			GameView.setToStatus(Status.Select);
 		}
 		
 		
 		submit = false;
-		selected = StartButton.ELSE;
+		selected = StartButtons.ELSE;
 	}
 	
 
 	@Override
 	public void draw() {
 		
-		if( selected == StartButton.START_GAME ){
+		if( selected == StartButtons.START_GAME ){
 			P.drawForce(startGameButton.x, startGameButton.y, Res.startBtnB);
 		}
-		else if( selected==StartButton.ELSE ){
+		else if( selected==StartButtons.ELSE ){
 			P.drawForce(startGameButton.x, startGameButton.y, Res.startBtnA);
 		}
 		
