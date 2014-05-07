@@ -24,7 +24,7 @@ public class StartButtons extends OzElement{
 	private  int selected = StartButtons.ELSE;
 	
 	public StartButtons( ) {
-		super("StartButton", Rank.SELF_CUSTOM , ET.StartButton, null, null );
+		super("StartButton", Rank.SELF_CUSTOM , ET.StartButtons, null, null );
 		
 		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());
 //		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());

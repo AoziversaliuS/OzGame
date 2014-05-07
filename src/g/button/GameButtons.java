@@ -35,7 +35,7 @@ public class GameButtons extends OzElement{
 	public  static int   Skill;   //技能键,触碰信息
 	
 	public GameButtons() {
-		super("GameButton",Rank.SELF_CUSTOM, ET.GameButton,null,null);
+		super("GameButton",Rank.SELF_CUSTOM, ET.GameButtons,null,null);
 		
 		this.buttonLeft  = new OzRect(25, 10, Res.game_btnLeft[0].getWidth(),Res.game_btnLeft[0].getHeight());
 		this.buttonRight = new OzRect(275, 10,Res.game_btnRight[0].getWidth(), Res.game_btnRight[0].getHeight());

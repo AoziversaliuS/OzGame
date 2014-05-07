@@ -96,7 +96,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		points.get(""+pointer).set_XY_fromScreen(screenX, screenY);
 		btnLogic();
-		Gdx.app.log("Interact", "touchDragged 有"+points.size()+"个点! "+"   "+pointer+" L: "+screenX+" "+screenY);
+//		Gdx.app.log("Interact", "touchDragged 有"+points.size()+"个点! "+"   "+pointer+" L: "+screenX+" "+screenY);
 		return false;
 	}
 	@Override

@@ -4,12 +4,15 @@ public enum ET {
 	
 	Element,//初始值
 	//GAME
-	GameButton,
+	GameButtons,
 	BackGround,Player,
 	
 	ReferPoint,//参照点
 	Land,Thorn,MoveLand,DeadLine,View
 	
 	//Start
-	,StartButton
+	,StartButtons
+	
+	//Select
+	,SelectButtons
 }

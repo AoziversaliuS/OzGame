@@ -176,7 +176,6 @@ public class Player extends OzElement{
 		//当玩家站在陆地上且按下跳跃按键之后才可以跳跃。verticalT
 			if(GameButtons.getSkill() == GameButtons.S_Jump && verticalT == Vertical.Top){
 				jump = true;
-				System.out.println("jump11111111111111111111");
 			}
 			if( verticalT == Vertical.Top ){
 				gravityFinish = false;
@@ -185,7 +184,6 @@ public class Player extends OzElement{
 				gravitySpeed++;
 //				System.out.println("gravitySpeed="+gravitySpeed);
 			}
-			System.out.println("gravitySpeed="+gravitySpeed);
 			if(verticalT == Vertical.Bottom){  //碰到元素顶部则设跳跃状态为false
 				jump = false;
 				jumpSpeed = MAX_JUMP;

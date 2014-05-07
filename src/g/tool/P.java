@@ -61,41 +61,53 @@ public class P {
 	
 	
 	
-	public static void draw(float x,float y,OzPicture picture){
-		picture.setDefault();
-		//此方法适用于画除了背景图片之外的图片
-		picture.getSprite().setPosition(x*P.ratioX, y*P.ratioY);//根据比例来设置位置
-		picture.getSprite().draw(batch);
-	}
-	public static void draw(OzPoint point,OzPicture picture){
-		picture.setDefault();
-		//此方法适用于画除了背景图片之外的图片
-		picture.getSprite().setPosition(point.x*P.ratioX, point.y*P.ratioY);
-		picture.getSprite().draw(batch);
-	}
+
 	public static void drawScale(float scaleXY,OzPoint point,OzPicture picture){
 		picture.setDefault();
 		//此方法适用于画除了背景图片之外的图片
+		//↓这里之后删
 		picture.getSprite().setColor(Color.RED);
+		//↑
 		picture.getSprite().setScale(scaleXY);
-		picture.getSprite().setPosition(point.x*P.ratioX, point.y*P.ratioY);
-		picture.getSprite().draw(batch);
+		drawAtPosition(point.x*P.autoRatioX, point.y*P.autoRatioY, picture);
 	}
 	public static void drawBg(float x,float y,OzPicture picture){
-		picture.setDefault();
 		//此方法只能用来画背景图！
-		picture.getSprite().setPosition(x*P.bgRatioX, y*P.bgRatioY);
-		picture.getSprite().draw(batch);
+		drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
 	}
 	
+	//自动比例
+	public static void draw(OzPoint point,OzPicture picture){
+		draw(point.x, point.y, picture);
+	}
+	public static void draw(float x,float y,OzPicture picture){
+		picture.setDefault();
+		drawAtPosition(x*P.autoRatioX,   y*P.autoRatioY, picture);
+	}
 	//强制比例
 	public static void drawForce(OzPoint point,OzPicture picture){
-		picture.getSprite().setPosition(point.x*P.forceRatioX, point.y*P.forceRatioY);
-		picture.getSprite().draw(batch);
+		drawForce(point.x, point.y, picture);
 	}
 	public static void drawForce(float x,float y,OzPicture picture){
-		picture.getSprite().setPosition(x*P.forceRatioX, y*P.forceRatioY);
-		picture.getSprite().draw(batch);
+		picture.setDefault();
+		drawAtPosition(x*P.forceRatioX,  y*P.forceRatioY, picture);
+	}
+	
+	private static void drawAtPosition(float positionX,float positionY,OzPicture picture){
+		picture.getSprite().setPosition(positionX,positionY);//已经调整好比例之后的XY值
+		float left = picture.getSprite().getX();
+		float right = picture.getSprite().getX()+picture.getSprite().getWidth();
+		float top = picture.getSprite().getY()+picture.getSprite().getHeight();
+		float bottom = picture.getSprite().getY();
+		
+		
+		if( right<0 || left>P.screenW || top<0 || bottom>P.screenH ){
+			//不画超出屏幕范围的东西
+		}
+		else{
+			picture.getSprite().draw(batch);
+		}
+//		picture.getSprite().draw(batch);
 	}
 	
 	
@@ -119,8 +131,8 @@ public class P {
 	
 	private static float screenW;
 	private static float screenH;
-	private static float ratioX;
-	private static float ratioY;
+	private static float autoRatioX;
+	private static float autoRatioY;
 	private static float bgRatioX;
 	private static float bgRatioY;
 	
@@ -149,8 +161,8 @@ public class P {
 		Gdx.app.log("ratio", " 按比例缩放的高度为: "+offsetHeight);
 		if(offsetHeight < BASIC_SCREEN_HEIGHT){
 			//非背景图比例
-			ratioX = P.screenW/BASIC_SCREEN_WIDTH;
-			ratioY = offsetHeight/BASIC_SCREEN_HEIGHT;
+			autoRatioX = P.screenW/BASIC_SCREEN_WIDTH;
+			autoRatioY = offsetHeight/BASIC_SCREEN_HEIGHT;
 			//背景图覆盖屏幕
 			float bgOffsetWidth = P.screenH/BASIC_SCREEN_HEIGHT * BASIC_SCREEN_WIDTH;
 			bgRatioX = bgOffsetWidth/BASIC_SCREEN_WIDTH;
@@ -159,10 +171,10 @@ public class P {
 		}
 		else{
 			//不符合上述条件则采用强制覆盖全屏幕比例
-			ratioX = P.screenW/BASIC_SCREEN_WIDTH;
-			ratioY = P.screenH/BASIC_SCREEN_HEIGHT;
-			bgRatioX = ratioX;
-			bgRatioY = ratioY;
+			autoRatioX = P.screenW/BASIC_SCREEN_WIDTH;
+			autoRatioY = P.screenH/BASIC_SCREEN_HEIGHT;
+			bgRatioX = autoRatioX;
+			bgRatioY = autoRatioY;
 			Gdx.app.log("ratio", "不符合条件，采用强制比例!");
 		}
 		
@@ -192,10 +204,10 @@ public class P {
 		return screenH;
 	}
 	public static float getRatioX() {
-		return ratioX;
+		return autoRatioX;
 	}
 	public static float getRatioY() {
-		return ratioY;
+		return autoRatioY;
 	}
 	public static float getBgRatioX() {
 		return bgRatioX;

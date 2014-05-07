@@ -89,7 +89,6 @@ public class OzPicture {
 	
 	
 	public void setDefault(){
-		//这里有一点逻辑错误，因为还有强制比例没有判断
 		//根据比例来设置图片大小
 		if(isBackGround){
 			//背景图片特殊设定
