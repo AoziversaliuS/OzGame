@@ -40,6 +40,11 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	public static Player player;
 	
+	
+	private final float dNum = 0.05f;
+	private final float maxLight = 0.98f;
+	private final float minLight = 0.01f;
+	
 	@Override
 	public void create() {	
 		
@@ -123,35 +128,11 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		P.setlight(lightNum);
 		P.end();
 	}
+	
 	public void statusSwitch(){
-		final float dNum = 0.05f;
-		final float maxLight = 0.98f;
-		final float minLight = 0.01f;
+
 		if( toStatus==Status.Game && status==Status.Start ){
-			
-			if( sT==SWITCH_PREPARE ){
-				lightNum = lightNum + dNum;
-				startDraw();
-				if( lightNum>=maxLight ){
-					sT = SWITCH_LOADING;
-					Res.prepare(Res.gA);
-				}
-//				System.out.println("lightNum="+lightNum);
-			}
-			else if( sT==SWITCH_LOADING ){
-				if(Res.update()){
-					//加载完图片之后载入地图
-					GameChapter.chapterLoad(gateAtlas, rankNum,1); 
-					sT = SWITCH_LOADED;
-				}
-			}
-			else if( sT==SWITCH_LOADED ){
-				lightNum = lightNum - dNum;
-				gameDraw();
-				if( lightNum<=minLight ){
-					sT = SWITCH_FINISH;
-				}
-			}
+			this.startToGame();
 		}
 		
 		if( sT==SWITCH_FINISH ){
@@ -161,6 +142,31 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			sT=SWITCH_PREPARE;
 		}
 	}
+	private void startToGame(){
+		if( sT==SWITCH_PREPARE ){
+			lightNum = lightNum + dNum;
+			startDraw();
+			if( lightNum>=maxLight ){
+				sT = SWITCH_LOADING;
+				Res.prepare(Res.gA);
+			}
+		}
+		else if( sT==SWITCH_LOADING ){
+			if(Res.update()){
+				//加载完图片之后载入地图
+				GameChapter.chapterLoad(gateAtlas, rankNum,1); 
+				sT = SWITCH_LOADED;
+			}
+		}
+		else if( sT==SWITCH_LOADED ){
+			lightNum = lightNum - dNum;
+			gameDraw();
+			if( lightNum<=minLight ){
+				sT = SWITCH_FINISH;
+			}
+		}
+	}
+	
 	public void engine(){
 		
 		switch (status) {
@@ -183,6 +189,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		
 	}
+	
 	public void showGraphic(){
 		
 		
@@ -318,7 +325,6 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		/**此时还未绘图******/
 	}
-	float count = 0;
 	public void gameDraw(){
 		for(int i=0;i<rankNum.size();i++){
 			for(int i2=0;i2<gateAtlas.size();i2++){
