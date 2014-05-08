@@ -53,36 +53,76 @@ public class SelectButtons extends OzElement{
 	public void logic() {
 		
 	}
-	public void logic(HashMap<String, OzPoint> points){
-//		l = points.get("0");
+	
+	private void moveConfirm(){
+		if( !moveable ){
+			dragRange = dragRange + dX;
+			if( dragRange>MIN_DRAG_RANGE ){
+				moveable = true;
+			}
+		}
+	}
+	
+	private void pointsArithmetic(HashMap<String, OzPoint> points){
+	
 		x1 = x2;//重置坐标信息，因为这时候x2保存的实际是上一次的X坐标。
 		if( points.size()==1 ){
 			for(String key:points.keySet()){
 				int id = Integer.parseInt(key);
 				if( lastId==id ){
 					x2 = points.get(key).x;
-					System.out.println("last="+x1);
-					System.out.println("now="+x2);
+					dX = x2 - x1;
+					this.moveConfirm();//判断是否需要移动屏幕
 				}
 				else{
 					lastId = id;
 				}
 			}
 		}
+		else if(  points.get(lastId+"")!=null  ){
+					x2 = points.get(lastId+"").x;
+					dX = x2 - x1;
+					this.moveConfirm();//判断是否需要移动屏幕
+		}
+		else{
+			lastId = -1;
+			dragRange = 0;
+			moveable = false;
+		}
 		l = points.get(""+lastId);
-//		System.out.println("l="+l+" lastId="+lastId);
+	}
+	
+	public void logic(HashMap<String, OzPoint> points){
+		
+		//触摸点的算法
+		this.pointsArithmetic(points);
+
 		
 		boolean selected = false;
-		if( l!=null ){
-			for(int i=0;i<btns.size();i++){
-				OzRect btn = btns.get(i);
-				if(btn.inside(l, P.FORCE_RATIO)){
-					chapterId = i + 1;
-					selected = true;
-					break;
+
+		if(l!=null){
+
+			if( !moveable ){
+				//非移动状态判断是否按下了按钮
+				for(int i=0;i<btns.size();i++){
+					OzRect btn = btns.get(i);
+					if(btn.inside(l, P.FORCE_RATIO)){
+						chapterId = i + 1;
+						selected = true;
+						break;
+					}
 				}
 			}
+			else{
+				//移动状态
+				for(OzRect btn:btns){
+					
+				}
+			}
+			
 		}
+		
+		
 		if( !selected ){
 			chapterId = -1;
 		}
