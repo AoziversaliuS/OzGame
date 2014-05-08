@@ -19,12 +19,13 @@ public class SelectButtons extends OzElement{
 	private final float FIRST_LINE = 400;
 	private final float SECOND_LINE = 200;
 	private final float SPACE = 50;
-	private final float LIMIT_LEFT = 100;
+	private final float LIMIT_LEFT = 65;
 	
 	private final float MIN_DRAG_RANGE = 50;//最小移动距离，只有超过了这个距离才能移动
 	
 	private float dragRange = 0;//一只手指拖动的距离，当距离超过最小拖动距离时屏幕将被拖动
-	
+	private static int pageNum = 0; //表示当前处于哪一页，最小页数为第0页
+	private static final int MAX_PAGE_NUM = 2;//最大页数
 	private boolean moveable = false;//屏幕是否允许被拖动
 	
 	private int lastId = -1;//上一次的触摸点的Id
@@ -42,7 +43,15 @@ public class SelectButtons extends OzElement{
 	public SelectButtons() {
 		super("SelectButtons", Rank.SELF_CUSTOM, ET.SelectButtons, null, null);
 		btns = new ArrayList<OzRect>();
+		
 		btns.add(new OzRect(LIMIT_LEFT, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
+		for(int i=0;i<5;i++){
+			float leftX = btns.get(btns.size()-1).getRight() + SPACE;
+			btns.add(new OzRect(leftX, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
+		}
+		
+		System.out.println("右间距="+btns.get(btns.size()-1).getRight());
+		
 	}
 
 	@Override
