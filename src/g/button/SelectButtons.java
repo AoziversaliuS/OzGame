@@ -67,6 +67,7 @@ public class SelectButtons extends OzElement{
 	
 		x1 = x2;//重置坐标信息，因为这时候x2保存的实际是上一次的X坐标。
 		if( points.size()==1 ){
+			//用于处理第一个手指碰上去，然后第二个手指碰上去，最后第一个手指离开，第二个手指还未离开的情况
 			for(String key:points.keySet()){
 				int id = Integer.parseInt(key);
 				if( lastId==id ){
@@ -80,11 +81,13 @@ public class SelectButtons extends OzElement{
 			}
 		}
 		else if(  points.get(lastId+"")!=null  ){
+			//用于处理有很多个手指，但第一次碰上去的手指仍未离开的情况
 					x2 = points.get(lastId+"").x;
 					dX = x2 - x1;
 					this.moveConfirm();//判断是否需要移动屏幕
 		}
 		else{
+			//所有手指离开之后,或第一个手指离开之后还有多个手指的情况下,重置信息
 			lastId = -1;
 			dragRange = 0;
 			moveable = false;
