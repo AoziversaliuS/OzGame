@@ -16,8 +16,8 @@ public class SelectButtons extends OzElement{
 
 	private ArrayList<OzRect> btns;
 	
-	private final float FIRST_LINE = 500;
-	private final float SECOND_LINE = 300;
+	private final float FIRST_LINE = 400;
+	private final float SECOND_LINE = 200;
 	private final float SPACE = 50;
 	private final float LIMIT_LEFT = 100;
 	
@@ -57,7 +57,7 @@ public class SelectButtons extends OzElement{
 	private void moveConfirm(){
 		if( !moveable ){
 			dragRange = dragRange + dX;
-			if( dragRange>MIN_DRAG_RANGE ){
+			if( Math.abs(dragRange)>MIN_DRAG_RANGE ){
 				moveable = true;
 			}
 		}
@@ -71,12 +71,15 @@ public class SelectButtons extends OzElement{
 			for(String key:points.keySet()){
 				int id = Integer.parseInt(key);
 				if( lastId==id ){
-					x2 = points.get(key).x;
+					x2 = points.get(id+"").x;
 					dX = x2 - x1;
 					this.moveConfirm();//判断是否需要移动屏幕
 				}
 				else{
 					lastId = id;
+					//更换触碰点时使触碰点坐标赋值给X1先;
+					x1 = points.get(id+"").x;
+					x2 = points.get(id+"").x;
 				}
 			}
 		}
@@ -119,7 +122,7 @@ public class SelectButtons extends OzElement{
 			else{
 				//移动状态
 				for(OzRect btn:btns){
-					
+					btn.x = btn.x + dX;
 				}
 			}
 			
