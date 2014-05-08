@@ -19,7 +19,7 @@ public class SelectButtons extends OzElement{
 	private final float FIRST_LINE = 400;
 	private final float SECOND_LINE = 200;
 	private final float SPACE = 50;
-	private final float LIMIT_LEFT = 65;
+	private final float LIMIT_LEFT = 65;//屏幕左上角第一个按钮的x坐标
 	
 	private final float MIN_DRAG_RANGE = 50;//最小移动距离，只有超过了这个距离才能移动
 	
@@ -40,18 +40,32 @@ public class SelectButtons extends OzElement{
 	
 	
 	
-	public SelectButtons() {
+	public SelectButtons(){
 		super("SelectButtons", Rank.SELF_CUSTOM, ET.SelectButtons, null, null);
 		btns = new ArrayList<OzRect>();
+		this.addButtons();
 		
-		btns.add(new OzRect(LIMIT_LEFT, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
-		for(int i=0;i<5;i++){
-			float leftX = btns.get(btns.size()-1).getRight() + SPACE;
-			btns.add(new OzRect(leftX, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
+	}
+	
+	private void addButtons(){
+		
+		for(int page=0;page<=MAX_PAGE_NUM;page++){
+			//每一页的起始坐标
+			float firstX = page*P.BASIC_SCREEN_WIDTH+LIMIT_LEFT;
+			//第一行
+			btns.add(new OzRect(firstX, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
+			for(int i=0;i<5;i++){
+				float leftX = btns.get(btns.size()-1).getRight() + SPACE;
+				btns.add(new OzRect(leftX, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
+			}
+			//第二行
+			btns.add(new OzRect(firstX, SECOND_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
+			for(int i=0;i<5;i++){
+				float leftX = btns.get(btns.size()-1).getRight() + SPACE;
+				btns.add(new OzRect(leftX, SECOND_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
+			}
 		}
-		
 		System.out.println("右间距="+btns.get(btns.size()-1).getRight());
-		
 	}
 
 	@Override
