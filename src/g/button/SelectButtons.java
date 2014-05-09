@@ -26,7 +26,9 @@ public class SelectButtons extends OzElement{
 	private float dragRange = 0;//一只手指拖动的距离，当距离超过最小拖动距离时屏幕将被拖动
 	private static int pageNum = 0; //表示当前处于哪一页，最小页数为第0页
 	private static final int MAX_PAGE_NUM = 2;//最大页数
-	private boolean moveable = false;//屏幕是否允许被拖动
+	
+	private static final int MOVE_QUIET=1/**静止*/,MOVE_DRAG=2/**拖动*/,MOVE_ADJUST=3/**调整*/;
+	private int moveMold = MOVE_QUIET;
 	
 	private int lastId = -1;//上一次的触摸点的Id
 	private float x1 = -1;//上一次的触摸点的横坐标
@@ -78,10 +80,10 @@ public class SelectButtons extends OzElement{
 	}
 	
 	private void moveConfirm(){
-		if( !moveable ){
+		if( moveMold==MOVE_QUIET || moveMold==MOVE_ADJUST ){
 			dragRange = dragRange + dX;
 			if( Math.abs(dragRange)>MIN_DRAG_RANGE ){
-				moveable = true;
+				moveMold = MOVE_DRAG;
 			}
 		}
 	}
@@ -112,11 +114,16 @@ public class SelectButtons extends OzElement{
 					dX = x2 - x1;
 					this.moveConfirm();//判断是否需要移动屏幕
 		}
+		else if( moveMold==MOVE_ADJUST ){
+			
+
+			
+		}
 		else{
 			//所有手指离开之后,或第一个手指离开之后还有多个手指的情况下,重置信息
 			lastId = -1;
 			dragRange = 0;
-			moveable = false;
+			moveMold = MOVE_QUIET;
 		}
 		l = points.get(""+lastId);
 	}
@@ -131,7 +138,7 @@ public class SelectButtons extends OzElement{
 
 		if(l!=null){
 
-			if( !moveable ){
+			if( moveMold==MOVE_QUIET ){
 				//非移动状态判断是否按下了按钮
 				for(int i=0;i<btns.size();i++){
 					OzRect btn = btns.get(i);
@@ -142,7 +149,7 @@ public class SelectButtons extends OzElement{
 					}
 				}
 			}
-			else{
+			else if( moveMold==MOVE_DRAG ||  moveMold==MOVE_ADJUST ){
 				//移动状态
 				for(OzRect btn:btns){
 					btn.x = btn.x + dX;
