@@ -19,14 +19,15 @@ public class SelectButtons extends OzElement{
 	private final float FIRST_LINE = 400;
 	private final float SECOND_LINE = 200;
 	private final float SPACE = 50;
-	private final float LIMIT_LEFT = 65;//屏幕左上角第一个按钮的x坐标
+	private final float LIMIT_CENTER = 65;//屏幕左上角第一个按钮的x坐标,同时也作为判断的基准中线
 	
 	private final float MIN_DRAG_RANGE = 50;//最小移动距离，只有超过了这个距离才能移动
 	
 	private float dragRange = 0;//一只手指拖动的距离，当距离超过最小拖动距离时屏幕将被拖动
-	private static int pageNum = 0; //表示当前处于哪一页，最小页数为第0页
-	private static final int MAX_PAGE_NUM = 2;//最大页数
+	private static int currentPageId = 0; //表示当前处于哪一页，最小页数为第0页
 	
+	private static final int MAX_PAGE_NUM = 2;//最大页数
+	private static final int MAX_BTN_NUM_ON_PAGE = 12;
 	private static final int MOVE_QUIET=1/**静止*/,MOVE_DRAG=2/**拖动*/,MOVE_ADJUST=3/**调整*/;
 	private int moveMold = MOVE_QUIET;
 	
@@ -44,6 +45,7 @@ public class SelectButtons extends OzElement{
 	
 	public SelectButtons(){
 		super("SelectButtons", Rank.SELF_CUSTOM, ET.SelectButtons, null, null);
+		currentPageId = 0;//当前处于第0页
 		btns = new ArrayList<OzRect>();
 		this.addButtons();
 		
@@ -53,7 +55,7 @@ public class SelectButtons extends OzElement{
 		
 		for(int page=0;page<=MAX_PAGE_NUM;page++){
 			//每一页的起始坐标
-			float firstX = page*P.BASIC_SCREEN_WIDTH+LIMIT_LEFT;
+			float firstX = page*P.BASIC_SCREEN_WIDTH+LIMIT_CENTER;
 			//第一行
 			btns.add(new OzRect(firstX, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
 			for(int i=0;i<5;i++){
@@ -114,11 +116,6 @@ public class SelectButtons extends OzElement{
 					dX = x2 - x1;
 					this.moveConfirm();//判断是否需要移动屏幕
 		}
-		else if( moveMold==MOVE_ADJUST ){
-			
-
-			
-		}
 		else{
 			//所有手指离开之后,或第一个手指离开之后还有多个手指的情况下,重置信息
 			lastId = -1;
@@ -126,6 +123,10 @@ public class SelectButtons extends OzElement{
 			moveMold = MOVE_QUIET;
 		}
 		l = points.get(""+lastId);
+		
+		if( moveMold==MOVE_ADJUST ){
+			
+		}
 	}
 	
 	public void logic(HashMap<String, OzPoint> points){
@@ -181,6 +182,29 @@ public class SelectButtons extends OzElement{
 		
 	}
 
+	private String getDir(){
+		
+		OzRect signBtn = btns.get(getSignBtnId(currentPageId));
+		
+		if( signBtn.x <= LIMIT_CENTER ){
+			return "Left";
+		}
+		else if( signBtn.x >= LIMIT_CENTER ){
+			return "Right";
+		}
+		
+		return "ERROR";
+		
+	}
+	
+	private int getSignBtnId(int pId){
+		int btnId = pId*MAX_BTN_NUM_ON_PAGE;
+		if( btnId<btns.size() ){
+			return btnId;
+		}
+		return -1;
+		
+	}
 
 	public static int getChapterId() {
 		return chapterId;
