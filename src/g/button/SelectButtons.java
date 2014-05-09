@@ -121,6 +121,7 @@ public class SelectButtons extends OzElement{
 			lastId = -1;
 			dragRange = 0;
 			moveMold = MOVE_QUIET;
+//			moveMold = MOVE_ADJUST;  以后要改成这个
 		}
 		l = points.get(""+lastId);
 		
@@ -184,7 +185,7 @@ public class SelectButtons extends OzElement{
 
 	private String getDir(){
 		
-		OzRect signBtn = btns.get(getSignBtnId(currentPageId));
+		OzRect signBtn = getSignBtn(currentPageId);
 		
 		if( signBtn.x <= LIMIT_CENTER ){
 			return "Left";
@@ -197,13 +198,63 @@ public class SelectButtons extends OzElement{
 		
 	}
 	
-	private int getSignBtnId(int pId){
+	private OzRect getSignBtn(int pId){
 		int btnId = pId*MAX_BTN_NUM_ON_PAGE;
 		if( btnId<btns.size() ){
-			return btnId;
+			return btns.get(btnId);
 		}
-		return -1;
+		return null;
 		
+	}
+	private int getPageId(OzRect signBtn){
+		int btnId=0;
+		int pId = -1;
+		for(;btnId<btns.size();btnId++){
+			if( btns.get(btnId)==signBtn ){
+				break;
+			}
+		}
+		pId = btnId/MAX_BTN_NUM_ON_PAGE;
+		return pId;
+	}
+	private OzRect getLeftSignBtn(){
+		OzRect leftBtn = null;
+		
+		for(int i=0;i<=MAX_PAGE_NUM;i++){
+			OzRect btn = getSignBtn(i);
+			if( btn.x<=LIMIT_CENTER ){
+				leftBtn = btn;
+			}
+		}
+		return leftBtn;
+	}
+	private OzRect getRightSignBtn(){
+		OzRect rightBtn = null;
+		for(int i=0;i<=MAX_PAGE_NUM;i++){
+			OzRect btn = getSignBtn(i);
+			if( btn.x>=LIMIT_CENTER ){
+				rightBtn = btn;
+			}
+		}
+		return rightBtn;
+	}
+	private boolean haveNextPage(OzRect signBtn){
+		int pId = getPageId(signBtn);
+		if( pId<MAX_PAGE_NUM ){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	private boolean havePrePage(OzRect signBtn){
+		int pId = getPageId(signBtn);
+		if( pId>0 ){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public static int getChapterId() {
