@@ -18,10 +18,10 @@ public class SelectButtons extends OzElement{
 	
 	private static final float FIRST_LINE = 400;
 	private static final float SECOND_LINE = 200;
-	private static final float SPACE = 50;
-	private static final float LIMIT_CENTER = 65;//屏幕左上角第一个按钮的x坐标,同时也作为判断的基准中线
-	private static final float LIMIT_RANGE = 250;
-	private static final float ADJUST_SPEED = 20;
+	private static final float SPACE = 40;
+	private static final float LIMIT_CENTER = 90;//屏幕左上角第一个按钮的x坐标,同时也作为判断的基准中线
+	private static final float LIMIT_RANGE = 200; //限制的大小
+	private static final float ADJUST_SPEED = 30;
 	
 	private final float MIN_DRAG_RANGE = 50;//最小移动距离，只有超过了这个距离才能移动
 	
@@ -49,6 +49,7 @@ public class SelectButtons extends OzElement{
 		currentPageId = 0;//当前处于第0页
 		btns = new ArrayList<OzRect>();
 		this.addButtons();
+		System.out.println("左边"+btns.get(0).x+"   右边"+(P.BASIC_SCREEN_WIDTH - btns.get(11).getRight()));
 		
 	}
 	
@@ -96,48 +97,69 @@ public class SelectButtons extends OzElement{
 		if( moveMold==MOVE_ADJUST ){
 			int dir = getDir();
 			if( dir==DIR_LEFT ){
-				OzRect leftBtn = getLeftSignBtn();
-				if( leftBtn==null ){
-					//没有上一页的情况
-					moveMold = MOVE_QUIET;//左边没有一个按钮的情况暂定，要改
-					System.out.println("没有上一页");
-				}
-				else{
-					float moveRange = Math.abs( leftBtn.x-LIMIT_CENTER );
-					if( moveRange<=LIMIT_RANGE ){
-						//左还原
-						System.out.println("//左还原");
-						if( moveRange>ADJUST_SPEED ){
-							dX = ADJUST_SPEED;
-							System.out.println("A");
-						}
-						else{
-							System.out.println("B");
-							dX = moveRange;
-							moveMold = MOVE_QUIET;
-						}
+				System.out.println("DIR_LEFT");
+				OzRect leftBtn = getLeftSignBtn();//既然已经判定了方向为left，那么leftBtn不可能为null!
+				OzRect rightBtn = getRightSignBtn();
+				float moveRange = Math.abs( leftBtn.x-LIMIT_CENTER );
+				
+				if( moveRange<=LIMIT_RANGE || rightBtn==null ){
+					//左还原  在标志按钮 [没超过限定范围] 或 [没有下一页] 的情况下进入
+					if( moveRange>ADJUST_SPEED ){
+						dX = ADJUST_SPEED;
 					}
 					else{
-						//移动到下一页
-						System.out.println("//移动到下一页");
-						OzRect rightBtn = getRightSignBtn();
-						if( rightBtn.x-LIMIT_CENTER>ADJUST_SPEED ){
-							dX = -ADJUST_SPEED;
-						}
-						else{
-							dX = LIMIT_CENTER - rightBtn.x;
-							moveMold = MOVE_QUIET;
-							System.out.println("//移动到下一页moveMold = MOVE_QUIET;");
-						}
+						dX = moveRange;
+						moveMold = MOVE_QUIET;
 					}
+				}
+				else{
+					//移动到下一页
+					if( rightBtn.x-LIMIT_CENTER>ADJUST_SPEED ){
+						dX = -ADJUST_SPEED;
+					}
+					else{
+						dX = -(rightBtn.x-LIMIT_CENTER);
+						moveMold = MOVE_QUIET;
+					}	
+					
 				}
 			}
 			else if( dir==DIR_RIGHT ){
+				System.out.println("DIR_RIGHT");
+				OzRect leftBtn = getLeftSignBtn();//既然已经判定了方向为left，那么leftBtn不可能为null!
+				OzRect rightBtn = getRightSignBtn();
+				float moveRange = Math.abs( rightBtn.x-LIMIT_CENTER );
+				
+				if( moveRange<=LIMIT_RANGE || leftBtn==null ){
+					//右还原  在标志按钮 [没超过限定范围] 或 [没有上一页] 的情况下进入
+					if( moveRange>ADJUST_SPEED ){
+						dX = -ADJUST_SPEED;
+					}
+					else{
+						dX = -moveRange;
+						moveMold = MOVE_QUIET;
+					}
+				}
+				else{
+					//移动到上一页
+					if( LIMIT_CENTER-leftBtn.x >ADJUST_SPEED ){
+						dX = ADJUST_SPEED;
+					}
+					else{
+						dX = LIMIT_CENTER-leftBtn.x;
+						moveMold = MOVE_QUIET;
+					}	
+					
+				}
 				
 			}
 			//每一帧的按钮移位操作
 			for(OzRect btn:btns){
 				btn.x = btn.x + dX;
+			}
+			if( moveMold==MOVE_QUIET ){
+				currentPageId = getPageId();//重设当前页的Id
+				dX = 0;
 			}
 		}
 	}
@@ -255,6 +277,25 @@ public class SelectButtons extends OzElement{
 		return null;
 		
 	}
+	private int getPageId(){
+		int pId = -1;
+		float range = -1;
+		for(int i=0;i<=MAX_PAGE_NUM;i++){
+			OzRect signBtn = getSignBtn(i);
+			if(i==0){
+				pId = i;
+				range = Math.abs(signBtn.x-LIMIT_CENTER);
+			}
+			else{
+				if( Math.abs(signBtn.x-LIMIT_CENTER)<range ){
+					pId = i;
+				}
+			}
+			
+		}
+		return pId;
+	}
+	
 	private int getPageId(OzRect signBtn){
 		int btnId=0;
 		int pId = -1;
