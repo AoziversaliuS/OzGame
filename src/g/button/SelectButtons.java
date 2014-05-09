@@ -16,10 +16,12 @@ public class SelectButtons extends OzElement{
 
 	private ArrayList<OzRect> btns;
 	
-	private final float FIRST_LINE = 400;
-	private final float SECOND_LINE = 200;
-	private final float SPACE = 50;
-	private final float LIMIT_CENTER = 65;//屏幕左上角第一个按钮的x坐标,同时也作为判断的基准中线
+	private static final float FIRST_LINE = 400;
+	private static final float SECOND_LINE = 200;
+	private static final float SPACE = 50;
+	private static final float LIMIT_CENTER = 65;//屏幕左上角第一个按钮的x坐标,同时也作为判断的基准中线
+	private static final float LIMIT_RANGE = 250;
+	private static final float ADJUST_SPEED = 20;
 	
 	private final float MIN_DRAG_RANGE = 50;//最小移动距离，只有超过了这个距离才能移动
 	
@@ -29,14 +31,13 @@ public class SelectButtons extends OzElement{
 	private static final int MAX_PAGE_NUM = 2;//最大页数
 	private static final int MAX_BTN_NUM_ON_PAGE = 12;
 	private static final int MOVE_QUIET=1/**静止*/,MOVE_DRAG=2/**拖动*/,MOVE_ADJUST=3/**调整*/;
+	private static final int DIR_LEFT=4,DIR_RIGHT=5;
 	private int moveMold = MOVE_QUIET;
 	
 	private int lastId = -1;//上一次的触摸点的Id
 	private float x1 = -1;//上一次的触摸点的横坐标
 	private float x2 = -1;//这一次的触摸点的横坐标
 	private float dX = 0;//触摸之后x轴要移动的距离
-	
-	
 	
 	
 	private static int chapterId = -1;
@@ -91,7 +92,6 @@ public class SelectButtons extends OzElement{
 	}
 	
 	private void pointsArithmetic(HashMap<String, OzPoint> points){
-	
 		x1 = x2;//重置坐标信息，因为这时候x2保存的实际是上一次的X坐标。
 		if( points.size()==1 ){
 			//用于处理第一个手指碰上去，然后第二个手指碰上去，最后第一个手指离开，第二个手指还未离开的情况
@@ -120,13 +120,59 @@ public class SelectButtons extends OzElement{
 			//所有手指离开之后,或第一个手指离开之后还有多个手指的情况下,重置信息
 			lastId = -1;
 			dragRange = 0;
-			moveMold = MOVE_QUIET;
-//			moveMold = MOVE_ADJUST;  以后要改成这个
+			if( moveMold==MOVE_DRAG ){
+//				moveMold = MOVE_QUIET;
+				moveMold = MOVE_ADJUST;  //以后要改成这个
+			}
 		}
 		l = points.get(""+lastId);
-		
 		if( moveMold==MOVE_ADJUST ){
-			
+			int dir = getDir();
+			if( dir==DIR_LEFT ){
+				OzRect leftBtn = getLeftSignBtn();
+				if( leftBtn==null ){
+					//没有上一页的情况
+					moveMold = MOVE_QUIET;//左边没有一个按钮的情况暂定，要改
+					System.out.println("没有上一页");
+				}
+				else{
+					float moveRange = Math.abs( leftBtn.x-LIMIT_CENTER );
+					if( moveRange<=LIMIT_RANGE ){
+						//左还原
+						System.out.println("//左还原");
+						if( moveRange>ADJUST_SPEED ){
+							dX = ADJUST_SPEED;
+						}
+						else{
+							dX = moveRange;
+							for(OzRect btn:btns){
+								btn.x = btn.x + dX;
+							}
+							moveMold = MOVE_QUIET;
+							System.out.println("moveMold = MOVE_QUIET");
+						}
+					}
+					else{
+						//移动到下一页
+						System.out.println("//移动到下一页");
+						OzRect rightBtn = getRightSignBtn();
+						if( rightBtn.x-LIMIT_CENTER>ADJUST_SPEED ){
+							dX = -ADJUST_SPEED;
+						}
+						else{
+							dX = LIMIT_CENTER - rightBtn.x;
+							for(OzRect btn:btns){
+								btn.x = btn.x + dX;
+							}
+							moveMold = MOVE_QUIET;
+							System.out.println("//移动到下一页moveMold = MOVE_QUIET;");
+						}
+					}
+				}
+			}
+			else if( dir==DIR_RIGHT ){
+				
+			}
 		}
 	}
 	
@@ -183,18 +229,18 @@ public class SelectButtons extends OzElement{
 		
 	}
 
-	private String getDir(){
+	private int getDir(){
 		
 		OzRect signBtn = getSignBtn(currentPageId);
 		
 		if( signBtn.x <= LIMIT_CENTER ){
-			return "Left";
+			return DIR_LEFT;
 		}
 		else if( signBtn.x >= LIMIT_CENTER ){
-			return "Right";
+			return DIR_RIGHT;
 		}
 		
-		return "ERROR";
+		return -1;
 		
 	}
 	
