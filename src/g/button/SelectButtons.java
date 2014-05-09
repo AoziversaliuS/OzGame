@@ -79,7 +79,7 @@ public class SelectButtons extends OzElement{
 
 	@Override
 	public void logic() {
-		
+		this.adjust();
 	}
 	
 	private void moveConfirm(){
@@ -91,6 +91,94 @@ public class SelectButtons extends OzElement{
 		}
 	}
 	
+
+	private void adjust(){
+		if( moveMold==MOVE_ADJUST ){
+			int dir = getDir();
+			if( dir==DIR_LEFT ){
+				OzRect leftBtn = getLeftSignBtn();
+				if( leftBtn==null ){
+					//没有上一页的情况
+					moveMold = MOVE_QUIET;//左边没有一个按钮的情况暂定，要改
+					System.out.println("没有上一页");
+				}
+				else{
+					float moveRange = Math.abs( leftBtn.x-LIMIT_CENTER );
+					if( moveRange<=LIMIT_RANGE ){
+						//左还原
+						System.out.println("//左还原");
+						if( moveRange>ADJUST_SPEED ){
+							dX = ADJUST_SPEED;
+							System.out.println("A");
+						}
+						else{
+							System.out.println("B");
+							dX = moveRange;
+							moveMold = MOVE_QUIET;
+						}
+					}
+					else{
+						//移动到下一页
+						System.out.println("//移动到下一页");
+						OzRect rightBtn = getRightSignBtn();
+						if( rightBtn.x-LIMIT_CENTER>ADJUST_SPEED ){
+							dX = -ADJUST_SPEED;
+						}
+						else{
+							dX = LIMIT_CENTER - rightBtn.x;
+							moveMold = MOVE_QUIET;
+							System.out.println("//移动到下一页moveMold = MOVE_QUIET;");
+						}
+					}
+				}
+			}
+			else if( dir==DIR_RIGHT ){
+				
+			}
+			//每一帧的按钮移位操作
+			for(OzRect btn:btns){
+				btn.x = btn.x + dX;
+			}
+		}
+	}
+	//此方法只有在屏幕上有触碰点的时候才调用
+	public void logic(HashMap<String, OzPoint> points){
+		
+		//触摸点的算法
+		this.pointsArithmetic(points);
+
+		
+		boolean selected = false;
+
+		if(l!=null){
+
+			if( moveMold==MOVE_QUIET ){
+				//非移动状态判断是否按下了按钮
+				for(int i=0;i<btns.size();i++){
+					OzRect btn = btns.get(i);
+					if(btn.inside(l, P.FORCE_RATIO)){
+						chapterId = i + 1;
+						selected = true;
+						break;
+					}
+				}
+			}
+			else if( moveMold==MOVE_DRAG ){
+				//移动状态
+				for(OzRect btn:btns){
+					btn.x = btn.x + dX;
+				}
+			}
+			
+		}
+		
+		
+		if( !selected ){
+			chapterId = -1;
+		}
+		
+		
+	}
 	private void pointsArithmetic(HashMap<String, OzPoint> points){
 		x1 = x2;//重置坐标信息，因为这时候x2保存的实际是上一次的X坐标。
 		if( points.size()==1 ){
@@ -126,92 +214,7 @@ public class SelectButtons extends OzElement{
 			}
 		}
 		l = points.get(""+lastId);
-		if( moveMold==MOVE_ADJUST ){
-			int dir = getDir();
-			if( dir==DIR_LEFT ){
-				OzRect leftBtn = getLeftSignBtn();
-				if( leftBtn==null ){
-					//没有上一页的情况
-					moveMold = MOVE_QUIET;//左边没有一个按钮的情况暂定，要改
-					System.out.println("没有上一页");
-				}
-				else{
-					float moveRange = Math.abs( leftBtn.x-LIMIT_CENTER );
-					if( moveRange<=LIMIT_RANGE ){
-						//左还原
-						System.out.println("//左还原");
-						if( moveRange>ADJUST_SPEED ){
-							dX = ADJUST_SPEED;
-						}
-						else{
-							dX = moveRange;
-							for(OzRect btn:btns){
-								btn.x = btn.x + dX;
-							}
-							moveMold = MOVE_QUIET;
-							System.out.println("moveMold = MOVE_QUIET");
-						}
-					}
-					else{
-						//移动到下一页
-						System.out.println("//移动到下一页");
-						OzRect rightBtn = getRightSignBtn();
-						if( rightBtn.x-LIMIT_CENTER>ADJUST_SPEED ){
-							dX = -ADJUST_SPEED;
-						}
-						else{
-							dX = LIMIT_CENTER - rightBtn.x;
-							for(OzRect btn:btns){
-								btn.x = btn.x + dX;
-							}
-							moveMold = MOVE_QUIET;
-							System.out.println("//移动到下一页moveMold = MOVE_QUIET;");
-						}
-					}
-				}
-			}
-			else if( dir==DIR_RIGHT ){
-				
-			}
-		}
-	}
 	
-	public void logic(HashMap<String, OzPoint> points){
-		
-		//触摸点的算法
-		this.pointsArithmetic(points);
-
-		
-		boolean selected = false;
-
-		if(l!=null){
-
-			if( moveMold==MOVE_QUIET ){
-				//非移动状态判断是否按下了按钮
-				for(int i=0;i<btns.size();i++){
-					OzRect btn = btns.get(i);
-					if(btn.inside(l, P.FORCE_RATIO)){
-						chapterId = i + 1;
-						selected = true;
-						break;
-					}
-				}
-			}
-			else if( moveMold==MOVE_DRAG ||  moveMold==MOVE_ADJUST ){
-				//移动状态
-				for(OzRect btn:btns){
-					btn.x = btn.x + dX;
-				}
-			}
-			
-		}
-		
-		
-		if( !selected ){
-			chapterId = -1;
-		}
-		
-		
 	}
 
 	@Override

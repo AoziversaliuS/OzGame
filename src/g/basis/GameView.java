@@ -213,7 +213,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 		case Pause:    {        break;}
 		
-		case Select:   {     selectEngine();   break;}
+		case Select:   {    selectEngine();   break;}
 		
 		case Start:    {    startEngine();     break;}
 		
@@ -288,7 +288,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		selectBtns = new SelectButtons();
 	}
 	public void selectEngine(){
-		
+		selectBtns.logic();
 	}
 	public void selectDraw(){
 		P.drawForce(0, 0, Res.selectBg);
