@@ -71,6 +71,10 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		this.gameInit();//游戏界面初始化
 		this.selectInit();//选择菜单初始化
 		
+//		Res.prepare(Res.resourceA);
+//		while( !Res.update() ){
+//		}
+//		System.out.println("更新状态"+Res.update());
 	}
 	@Override
 	public synchronized boolean keyDown(int keycode) {
@@ -149,6 +153,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		if( toStatus==Status.Select && status==Status.Start ){
 			this.startToSelect();
 		}
+		else if( toStatus==Status.Game && status==Status.Select ){
+			this.selectToGame();
+		}
 		
 		if( sT==SWITCH_FINISH ){
 			status = toStatus;
@@ -176,17 +183,19 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			}
 		}
 	}
-	private void startToGame(){
+	private void selectToGame(){
 		if( sT==SWITCH_PREPARE ){
 			lightNum = lightNum + dNum;
-			startDraw();
+			selectDraw();
 			if( lightNum>=maxLight ){
 				sT = SWITCH_LOADING;
 				Res.prepare(Res.resourceA);
 			}
 		}
 		else if( sT==SWITCH_LOADING ){
-			if(Res.update()){
+			boolean s = Res.update();
+			System.out.println(s);
+			if(s){
 				//加载完图片之后载入地图
 				GameChapter.chapterLoad(gateAtlas, rankNum,SelectButtons.getChapterId()); 
 				sT = SWITCH_LOADED;
@@ -392,7 +401,12 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	
 	
-	
+	public static boolean switchFinished(){
+		if( status==toStatus){
+			return true;
+		}
+		return false;
+	}
 	
 	public static void setToStatus(Status toStatus) {
 		GameView.toStatus = toStatus;

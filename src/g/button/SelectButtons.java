@@ -3,6 +3,7 @@ package g.button;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import g.basis.GameView;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -11,6 +12,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
+import g.type.Status;
 
 public class SelectButtons extends OzElement{
 
@@ -18,6 +20,7 @@ public class SelectButtons extends OzElement{
 	
 	private static final float FIRST_LINE = 400;
 	private static final float SECOND_LINE = 200;
+	private static final int   LINE_BTN_NUM = 6;
 	private static final float SPACE = 40;
 	private static final float LIMIT_CENTER = 90;//屏幕左上角第一个按钮的x坐标,同时也作为判断的基准中线
 	private static final float LIMIT_RANGE = 200; //限制的大小
@@ -60,13 +63,13 @@ public class SelectButtons extends OzElement{
 			float firstX = page*P.BASIC_SCREEN_WIDTH+LIMIT_CENTER;
 			//第一行
 			btns.add(new OzRect(firstX, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
-			for(int i=0;i<5;i++){
+			for(int i=0;i<LINE_BTN_NUM-1;i++){
 				float leftX = btns.get(btns.size()-1).getRight() + SPACE;
 				btns.add(new OzRect(leftX, FIRST_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
 			}
 			//第二行
 			btns.add(new OzRect(firstX, SECOND_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
-			for(int i=0;i<5;i++){
+			for(int i=0;i<LINE_BTN_NUM-1;i++){
 				float leftX = btns.get(btns.size()-1).getRight() + SPACE;
 				btns.add(new OzRect(leftX, SECOND_LINE, Res.selectBtn[0].getWidth(), Res.selectBtn[0].getHeight()));
 			}
@@ -76,6 +79,31 @@ public class SelectButtons extends OzElement{
 
 	@Override
 	public void reset() {
+		for(int page=0;page<=MAX_PAGE_NUM;page++){
+			//每一页的起始坐标
+			OzRect btnBuff;
+			float firstX = page*P.BASIC_SCREEN_WIDTH+LIMIT_CENTER;
+			//第一行
+			OzRect btn = getSignBtn(page);
+			int btnId = getBtnId(btn);
+			btn.x = firstX;
+			btnBuff = btn;
+			for(int i=btnId+1;i<btnId+LINE_BTN_NUM;i++){
+				float leftX = btnBuff.getRight() + SPACE;
+				btns.get(i).x = leftX;
+				btnBuff = btns.get(i);
+			}
+			//第二行
+		    btn = btns.get(btnId+LINE_BTN_NUM);
+		    btnId = getBtnId(btn);
+		    btn.x = firstX;
+			btnBuff = btn;
+			for(int i=btnId+1;i<btnId+LINE_BTN_NUM;i++){
+				float leftX = btnBuff.getRight() + SPACE;
+				btns.get(i).x = leftX;
+				btnBuff = btns.get(i);
+			}
+		}
 	}
 
 	@Override
@@ -97,7 +125,6 @@ public class SelectButtons extends OzElement{
 		if( moveMold==MOVE_ADJUST ){
 			int dir = getDir();
 			if( dir==DIR_LEFT ){
-				System.out.println("DIR_LEFT");
 				OzRect leftBtn = getLeftSignBtn();//既然已经判定了方向为left，那么leftBtn不可能为null!
 				OzRect rightBtn = getRightSignBtn();
 				float moveRange = Math.abs( leftBtn.x-LIMIT_CENTER );
@@ -125,7 +152,6 @@ public class SelectButtons extends OzElement{
 				}
 			}
 			else if( dir==DIR_RIGHT ){
-				System.out.println("DIR_RIGHT");
 				OzRect leftBtn = getLeftSignBtn();//既然已经判定了方向为left，那么leftBtn不可能为null!
 				OzRect rightBtn = getRightSignBtn();
 				float moveRange = Math.abs( rightBtn.x-LIMIT_CENTER );
@@ -179,7 +205,7 @@ public class SelectButtons extends OzElement{
 				for(int i=0;i<btns.size();i++){
 					OzRect btn = btns.get(i);
 					if(btn.inside(l, P.FORCE_RATIO)){
-						chapterId = i + 1;
+						chapterId = i;
 						selected = true;
 						break;
 					}
@@ -196,7 +222,13 @@ public class SelectButtons extends OzElement{
 		
 		
 		if( !selected ){
-			chapterId = -1;
+			if( GameView.switchFinished() ){//界面跳转完成后重设变量
+				chapterId = -1;
+			}
+		}
+		else{
+			GameView.setToStatus(Status.Game);
+			selected = false;
 		}
 		
 		
@@ -231,8 +263,7 @@ public class SelectButtons extends OzElement{
 			lastId = -1;
 			dragRange = 0;
 			if( moveMold==MOVE_DRAG ){
-//				moveMold = MOVE_QUIET;
-				moveMold = MOVE_ADJUST;  //以后要改成这个
+				moveMold = MOVE_ADJUST;  //如果是拖动状态就要变为调整状态
 			}
 		}
 		l = points.get(""+lastId);
@@ -244,7 +275,7 @@ public class SelectButtons extends OzElement{
 		
 		for(int i=0;i<btns.size();i++){
 			OzRect btn = btns.get(i);
-			if( i+1==chapterId ){
+			if( i==chapterId ){
 				P.drawForce(btn.x, btn.y, Res.selectBtn[1]);
 			}
 			else{
@@ -276,6 +307,14 @@ public class SelectButtons extends OzElement{
 		}
 		return null;
 		
+	}
+	private int getBtnId(OzRect btn){
+		for(int i=0;i<btns.size();i++){
+			if( btns.get(i)==btn ){
+				return i;
+			}
+		}
+		return -1;
 	}
 	private int getPageId(){
 		int pId = -1;
@@ -327,24 +366,6 @@ public class SelectButtons extends OzElement{
 			}
 		}
 		return rightBtn;
-	}
-	private boolean haveNextPage(OzRect signBtn){
-		int pId = getPageId(signBtn);
-		if( pId<MAX_PAGE_NUM ){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	private boolean havePrePage(OzRect signBtn){
-		int pId = getPageId(signBtn);
-		if( pId>0 ){
-			return true;
-		}
-		else{
-			return false;
-		}
 	}
 
 	public static int getChapterId() {

@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class GameChapter {
 	
 	//第一关地图
-	static void A_01(ArrayList<OzElement> gateAtlas){
-		
+	static void A_00(ArrayList<OzElement> gateAtlas){
+		System.out.println("进入A_00000");
 		gateAtlas.add(new BackGround("BG-1"));
 		
 		
@@ -52,7 +52,7 @@ public class GameChapter {
 	
 	
 	//第二关地图
-	private static void A_02(ArrayList<OzElement> gateAtlas) {
+	private static void A_01(ArrayList<OzElement> gateAtlas) {
 		// TODO Auto-generated method stub
 	}
 	
@@ -69,21 +69,21 @@ public class GameChapter {
 	
 	//地图载入
 	static void chapterLoad(ArrayList<OzElement> gateAtlas,ArrayList<OzInt> rankNum,int gateNum){
-		initialise(gateAtlas,rankNum); //一定要写在第一行
+		initialise(gateAtlas,rankNum); //一定要写在第一行，用来清空地图信息
 		switch (gateNum){
 		
-		case 1:
-			                    A_01(gateAtlas);
+		case 0:
+			                    A_00(gateAtlas);
 			break;
-		case 2:
-								A_02(gateAtlas);
+		case 1:
+								A_01(gateAtlas);
 			break;
 			
 			
 		default:
 			break;
 		}
-		makingRankArray(gateAtlas, rankNum);//一定要写在最后一行
+		makingRankArray(gateAtlas, rankNum);//一定要写在最后一行，用来设置关卡信息
 	}
 	/**切换地图时重设地图集和图层队列*/
 	private static void initialise(ArrayList<OzElement> gateAtlas,ArrayList<OzInt> rankNum){
