@@ -44,8 +44,8 @@ public class SelectButtons extends OzElement{
 	
 	
 	private static int chapterId = -1;
-	
-	
+	private boolean submit = false;
+	private boolean selected = false;
 	
 	public SelectButtons(){
 		super("SelectButtons", Rank.SELF_CUSTOM, ET.SelectButtons, null, null);
@@ -189,14 +189,13 @@ public class SelectButtons extends OzElement{
 			}
 		}
 	}
-	//此方法只有在屏幕上有触碰点的时候才调用
+	//此方法只有在屏幕上有触碰点的时候才调用，最后一个触碰点离开时也会进入，此时points.size()==0;
 	public void logic(HashMap<String, OzPoint> points){
 		
 		//触摸点的算法
 		this.pointsArithmetic(points);
 
-		
-		boolean selected = false;
+		selected = false;
 
 		if(l!=null){
 
@@ -217,18 +216,24 @@ public class SelectButtons extends OzElement{
 					btn.x = btn.x + dX;
 				}
 			}
-			
 		}
 		
-		
-		if( !selected ){
-			if( GameView.switchFinished() ){//界面跳转完成后重设变量
-				chapterId = -1;
-			}
+		//selected为true时肯定有点在屏幕上
+		if( selected==true ){
+			submit = true;
+		}
+		else if( moveMold==MOVE_DRAG ){ //拖动时提交无效
+			chapterId = -1;            
+			submit = false;
+		}
+		else if( submit && moveMold==MOVE_QUIET ){ 
+			GameView.setToStatus(Status.Game);
+			submit = false;
 		}
 		else{
-			GameView.setToStatus(Status.Game);
-			selected = false;
+			if( GameView.switchFinished() ){//界面跳转到游戏界面时返回true
+				chapterId = -1;            //重设变量
+			}
 		}
 		
 		
@@ -275,7 +280,7 @@ public class SelectButtons extends OzElement{
 		
 		for(int i=0;i<btns.size();i++){
 			OzRect btn = btns.get(i);
-			if( i==chapterId ){
+			if( i==chapterId && selected==true ){
 				P.drawForce(btn.x, btn.y, Res.selectBtn[1]);
 			}
 			else{

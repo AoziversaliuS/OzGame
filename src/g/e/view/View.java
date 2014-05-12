@@ -37,8 +37,6 @@ public class View extends BasicBody{
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -402,7 +402,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	
 	
 	public static boolean switchFinished(){
-		if( status==toStatus){
+		if( status==toStatus && status==Status.Game ){
 			return true;
 		}
 		return false;
