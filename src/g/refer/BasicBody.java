@@ -1,7 +1,7 @@
 package g.refer;
 
 import g.button.GameButtons;
-import g.e.build.MoveLand;
+import g.e.architecture.MoveLand;
 import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.type.ET;

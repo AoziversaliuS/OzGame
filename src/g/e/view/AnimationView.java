@@ -21,6 +21,7 @@ public class AnimationView extends BasicBody{
 		timeCount = 0;
 		index = 0;
 		this.pics = pics;
+		//asd
 	}
 
 	@Override

@@ -1,10 +1,10 @@
 package g.basis;
 
-import g.e.build.DeadLine;
-import g.e.build.Land;
-import g.e.build.MoveLand;
-import g.e.build.ReferPoint;
-import g.e.build.Thorn;
+import g.e.architecture.DeadLine;
+import g.e.architecture.Land;
+import g.e.architecture.MoveLand;
+import g.e.architecture.ReferPoint;
+import g.e.architecture.Thorn;
 import g.e.view.AnimationView;
 import g.e.view.View;
 import g.refer.BackGround;
