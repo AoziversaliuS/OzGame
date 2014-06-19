@@ -63,6 +63,7 @@ public class Res {
 			selectBtn[0] = new OzPicture(150, 150, lS("btn",0), P.FORCE_RATIO);
 			selectBtn[1] = new OzPicture(150, 150, lS("btn",1), P.FORCE_RATIO);
 	}
+	//图片对象初始化
 	private static void initPic() {
 		setPicGroupData(208, 125, game_btnLeft);
 		setPicGroupData(208, 125, game_btnRight);

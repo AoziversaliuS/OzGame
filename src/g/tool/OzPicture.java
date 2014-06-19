@@ -9,12 +9,12 @@ public class OzPicture {
 	private float basisHeight;
 	private float basisWidth;
 	private boolean isBackGround = false;
-	private float ratioType=P.AUTO_RATIO;
+	private int ratioType=P.AUTO_RATIO;
 	
 	
 	
 	
-	public float getRatioType() {
+	public int getRatioType() {
 		return ratioType;
 	}
 	//无Sprite构造方法

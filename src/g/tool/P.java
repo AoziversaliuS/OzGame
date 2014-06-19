@@ -57,6 +57,14 @@ public class P {
 	
 	
 	//绘图方法↓
+	//根据图片的比例来画
+	public static void draw(OzPoint p,OzPicture picture){
+		draw(p.x, p.y, picture);
+	}
+	public static void draw(float x,float y,OzPicture picture){
+		draw(x, y, picture,picture.getRatioType());
+	}
+	//画图时自行设置比例
 	public static void draw(OzPoint p,OzPicture picture,int ratioType){
 		draw(p.x, p.y, picture, ratioType);
 	}
