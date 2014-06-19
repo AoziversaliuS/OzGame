@@ -24,7 +24,7 @@ public class View extends BasicBody{
 
 	@Override
 	public void draw() {
-		P.draw(l, viewPic);
+		P.draw(l, viewPic,P.AUTO_RATIO);
 	}
 
 	@Override

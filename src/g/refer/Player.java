@@ -130,7 +130,7 @@ public class Player extends OzElement{
 	@Override
 	public void draw() {
 		if( condition==ALIVE ){
-			P.draw(l, Res.player[0]);
+			P.draw(l, Res.player[0] ,P.AUTO_RATIO);
 		}
 		else if( condition==DEADING ){
 			P.drawScale(scaleSize, l,  Res.player[0]);

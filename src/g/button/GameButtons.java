@@ -97,36 +97,36 @@ public class GameButtons extends OzElement{
 	public void draw() {
 		//×óÓÒ°´¼ü
 		if(Arrow == GameButtons.A_Else){
-			P.draw(buttonLeft.x, buttonLeft.y, Res.game_btnLeft[0]);
-			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[0]);
+			P.draw(buttonLeft.x, buttonLeft.y, Res.game_btnLeft[0],P.AUTO_RATIO);
+			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[0],P.AUTO_RATIO);
 		}
 		else if(Arrow == GameButtons.A_Left){
-			P.draw(buttonLeft.x,buttonLeft.y, Res.game_btnLeft[1]);
-			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[0]);
+			P.draw(buttonLeft.x,buttonLeft.y, Res.game_btnLeft[1],P.AUTO_RATIO);
+			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[0],P.AUTO_RATIO);
 		}
 		else if(Arrow == GameButtons.A_Right){
-			P.draw(buttonLeft.x,buttonLeft.y, Res.game_btnLeft[0]);
-			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[1]);
+			P.draw(buttonLeft.x,buttonLeft.y, Res.game_btnLeft[0],P.AUTO_RATIO);
+			P.draw(buttonRight.x, buttonRight.y, Res.game_btnRight[1],P.AUTO_RATIO);
 		}
 		//ÌøÔ¾°´¼ü
 		if(Skill == GameButtons.S_Else){
-			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
-			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
+			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0],P.AUTO_RATIO);
+			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0],P.AUTO_RATIO);
 		}
 		else if(Skill == GameButtons.S_Jump){
-			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0]);
-			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[1]);
+			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[0],P.AUTO_RATIO);
+			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[1],P.AUTO_RATIO);
 		}
 		else if(Skill == GameButtons.S_Attack){
-			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[1]);
-			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
+			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[1],P.AUTO_RATIO);
+			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0],P.AUTO_RATIO);
 		}
 		//ÔÝÍ£°´¼ü
 		if(Playing){
-			P.drawRaw(buttonPass.x, buttonPass.y, Res.game_btnPass[0]);
+			P.draw(buttonPass.x, buttonPass.y, Res.game_btnPass[0],P.NO_RATIO);
 		}
 		else{
-			P.drawRaw(buttonPass.x, buttonPass.y, Res.game_btnPass[1]);
+			P.draw(buttonPass.x, buttonPass.y, Res.game_btnPass[1],P.NO_RATIO);
 		}
 	}
 

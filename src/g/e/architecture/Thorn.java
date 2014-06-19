@@ -28,7 +28,7 @@ public class Thorn extends BasicBody {
 
 	@Override
 	public void draw() {
-		P.draw(l, Res.thorn);
+		P.draw(l, Res.thorn,P.AUTO_RATIO);
 	}
 
 	@Override

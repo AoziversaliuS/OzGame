@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class P {
 	public static float getForceRatioX() {
@@ -58,10 +57,30 @@ public class P {
 	
 	
 	//绘图方法↓
-	
-	
-	
-
+	public static void draw(OzPoint p,OzPicture picture,int ratioType){
+		draw(p.x, p.y, picture, ratioType);
+	}
+	public static void draw(float x,float y,OzPicture picture,int ratioType){
+		if( ratioType == NO_RATIO ){
+			//直接画
+			picture.setDefault();
+			drawAtPosition(x, y, picture);
+		}
+		else if( ratioType==AUTO_RATIO ){
+			//自动比例
+			picture.setDefault();
+			drawAtPosition(x*P.autoRatioX,   y*P.autoRatioY, picture);
+		}
+		else if( ratioType==FORCE_RATIO ){
+			//强制比例
+			picture.setDefault();
+			drawAtPosition(x*P.forceRatioX,  y*P.forceRatioY, picture);
+		}
+		else if( ratioType==BG_RATIO ){
+			//背景比例
+			drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
+		}
+	}
 	public static void drawScale(float scaleXY,OzPoint point,OzPicture picture){
 		picture.setDefault();
 		//此方法适用于画除了背景图片之外的图片
@@ -71,35 +90,36 @@ public class P {
 		picture.getSprite().setScale(scaleXY);
 		drawAtPosition(point.x*P.autoRatioX, point.y*P.autoRatioY, picture);
 	}
-	//直接画，不转换坐标的比例
-	public static void drawRaw(OzPoint p,OzPicture picture){
-		drawRaw(p.x, p.y, picture);
-	}
-	public static void drawRaw(float x,float y,OzPicture picture){
-		picture.setDefault();
-		drawAtPosition(x, y, picture);
-	}
-	//背景比例
-	public static void drawBg(float x,float y,OzPicture picture){
-		//此方法只能用来画背景图！
-		drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
-	}
-	//自动比例
-	public static void draw(OzPoint point,OzPicture picture){
-		draw(point.x, point.y, picture);
-	}
-	public static void draw(float x,float y,OzPicture picture){
-		picture.setDefault();
-		drawAtPosition(x*P.autoRatioX,   y*P.autoRatioY, picture);
-	}
-	//强制比例
-	public static void drawForce(OzPoint point,OzPicture picture){
-		drawForce(point.x, point.y, picture);
-	}
-	public static void drawForce(float x,float y,OzPicture picture){
-		picture.setDefault();
-		drawAtPosition(x*P.forceRatioX,  y*P.forceRatioY, picture);
-	}
+//	//直接画，不转换坐标的比例
+//	public static void drawRaw(OzPoint p,OzPicture picture){
+//		drawRaw(p.x, p.y, picture);
+//	}
+//	public static void drawRaw(float x,float y,OzPicture picture){
+//		picture.setDefault();
+//		drawAtPosition(x, y, picture);
+//	}
+
+//	//背景比例
+//	public static void drawBg(float x,float y,OzPicture picture){
+//		//此方法只能用来画背景图！
+//		drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
+//	}
+//	//自动比例
+//	public static void draw(OzPoint point,OzPicture picture){
+//		draw(point.x, point.y, picture);
+//	}
+//	public static void draw(float x,float y,OzPicture picture){
+//		picture.setDefault();
+//		drawAtPosition(x*P.autoRatioX,   y*P.autoRatioY, picture);
+//	}
+//	//强制比例
+//	public static void drawForce(OzPoint point,OzPicture picture){
+//		drawForce(point.x, point.y, picture);
+//	}
+//	public static void drawForce(float x,float y,OzPicture picture){
+//		picture.setDefault();
+//		drawAtPosition(x*P.forceRatioX,  y*P.forceRatioY, picture);
+//	}
 	
 	private static void drawAtPosition(float positionX,float positionY,OzPicture picture){
 		picture.getSprite().setPosition(positionX,positionY);//已经调整好比例之后的XY值
@@ -133,7 +153,7 @@ public class P {
 	}
 	
 	
-	public static final int AUTO_RATIO = 1,BG_RATIO = 2, FORCE_RATIO = 3;
+	public static final int AUTO_RATIO = 1,BG_RATIO = 2, FORCE_RATIO = 3,NO_RATIO=4;
 	public static final float BASIC_SCREEN_WIDTH = 1280f;
 	public static final float BASIC_SCREEN_HEIGHT = 720f;
 	
@@ -151,16 +171,16 @@ public class P {
 
 
 
-	private static TextureAtlas atlas;
+//	private static TextureAtlas atlas;
 	
 
-	private static Sprite mS(String pictureName){
-		
-		return atlas.createSprite(pictureName);
-	}
-	private static Sprite mS(String pictureName,int index){
-		return atlas.createSprite(pictureName,index);
-	}
+//	private static Sprite mS(String pictureName){
+//		
+//		return atlas.createSprite(pictureName);
+//	}
+//	private static Sprite mS(String pictureName,int index){
+//		return atlas.createSprite(pictureName,index);
+//	}
 	private static void ratioInit(){
 		
 		/**以1280*720分辨率作为基准屏幕*/
@@ -199,9 +219,9 @@ public class P {
 		texture.dispose();
 		p.dispose();
 	}
-	private static void setAtlas(String path){
-		atlas = new TextureAtlas(Gdx.files.internal(path));
-	}
+//	private static void setAtlas(String path){
+//		atlas = new TextureAtlas(Gdx.files.internal(path));
+//	}
 	public static void dispose(){
 		batch.dispose();
 	}

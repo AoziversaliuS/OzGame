@@ -81,18 +81,18 @@ public class MoveLand extends BasicBody{
 	}
 	@Override
 	public void draw() {
-		P.draw(l, Res.moveLand[0]);
+		P.draw(l, Res.moveLand[0],P.AUTO_RATIO);
 		int dW = (int) Res.moveLand[0].getWidth();
 		int dNum = 0;
 		for(;dNum<width;dNum=dNum+dW){
 			if( dNum==0 ){
-				P.draw(l.x+dNum, l.y, Res.moveLand[0]);
+				P.draw(l.x+dNum, l.y, Res.moveLand[0],P.AUTO_RATIO);
 			}
 			else if( dNum==width-dW ){
-				P.draw(l.x+dNum, l.y, Res.moveLand[2]);
+				P.draw(l.x+dNum, l.y, Res.moveLand[2],P.AUTO_RATIO);
 			}
 			else{
-				P.draw(l.x+dNum, l.y, Res.moveLand[1]);
+				P.draw(l.x+dNum, l.y, Res.moveLand[1],P.AUTO_RATIO);
 			}
 		}
 	}

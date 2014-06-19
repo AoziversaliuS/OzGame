@@ -38,7 +38,7 @@ public class AnimationView extends BasicBody{
 
 	@Override
 	public void draw() {
-		P.draw(l, pics[index]);
+		P.draw(l, pics[index],P.AUTO_RATIO);
 	}
 
 	@Override

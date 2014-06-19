@@ -286,7 +286,8 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		
 	}
 	public void startDraw(){
-		P.drawForce(0, 0, Res.startBg);
+//		P.drawForce(0, 0, Res.startBg);
+		P.draw(0, 0, Res.startBg, P.FORCE_RATIO);
 		startBtns.draw();
 	}
 	
@@ -298,7 +299,8 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		selectBtns.logic();
 	}
 	public void selectDraw(){
-		P.drawForce(0, 0, Res.selectBg);
+//		P.drawForce(0, 0, Res.selectBg);
+		P.draw(0, 0, Res.selectBg, P.FORCE_RATIO);
 		selectBtns.draw();
 	}
 	

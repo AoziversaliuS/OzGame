@@ -281,10 +281,12 @@ public class SelectButtons extends OzElement{
 		for(int i=0;i<btns.size();i++){
 			OzRect btn = btns.get(i);
 			if( i==chapterId && selected==true ){
-				P.drawForce(btn.x, btn.y, Res.selectBtn[1]);
+//				P.drawForce(btn.x, btn.y, Res.selectBtn[1]);
+				P.draw(btn.x, btn.y, Res.selectBtn[1], P.FORCE_RATIO);
 			}
 			else{
-				P.drawForce(btn.x, btn.y, Res.selectBtn[0]);
+//				P.drawForce(btn.x, btn.y, Res.selectBtn[0]);
+				P.draw(btn.x, btn.y, Res.selectBtn[0], P.FORCE_RATIO);
 			}
 		}
 		

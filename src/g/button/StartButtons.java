@@ -89,10 +89,12 @@ public class StartButtons extends OzElement{
 	public void draw() {
 		
 		if( selected == StartButtons.START_GAME ){
-			P.drawForce(startGameButton.x, startGameButton.y, Res.startBtnB);
+//			P.drawForce(startGameButton.x, startGameButton.y, Res.startBtnB);
+			P.draw(startGameButton.x, startGameButton.y, Res.startBtnB, P.FORCE_RATIO);
 		}
 		else if( selected==StartButtons.ELSE ){
-			P.drawForce(startGameButton.x, startGameButton.y, Res.startBtnA);
+//			P.drawForce(startGameButton.x, startGameButton.y, Res.startBtnA);
+			P.draw(startGameButton.x, startGameButton.y, Res.startBtnA, P.FORCE_RATIO);
 		}
 		
 	}

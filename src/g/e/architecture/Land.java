@@ -53,35 +53,35 @@ public class Land extends BasicBody {
 				for(; xNum<width; xNum=xNum+dW ){
 					if( yNum==0 ){
 						if( xNum==0 ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[0]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[0],P.AUTO_RATIO);
 						}
 						else if( xNum==(width-dW) ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[2]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[2],P.AUTO_RATIO);
 						}
 						else{
-							P.draw(l.x+xNum, l.y+yNum, Res.land[1]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[1],P.AUTO_RATIO);
 						}
 					}
 					else if( yNum==(height-dH) ){
 						if( xNum==0 ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[6]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[6],P.AUTO_RATIO);
 						}
 						else if( xNum==(width-dW) ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[8]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[8],P.AUTO_RATIO);
 						}
 						else{
-							P.draw(l.x+xNum, l.y+yNum, Res.land[7]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[7],P.AUTO_RATIO);
 						}
 					}
 					else{
 						if( xNum==0 ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[3]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[3],P.AUTO_RATIO);
 						}
 						else if( xNum==(width-dW) ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[5]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[5],P.AUTO_RATIO);
 						}
 						else{
-							P.draw(l.x+xNum, l.y+yNum, Res.land[4]);
+							P.draw(l.x+xNum, l.y+yNum, Res.land[4],P.AUTO_RATIO);
 						}
 					}
 				}

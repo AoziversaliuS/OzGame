@@ -27,7 +27,8 @@ public class BackGround extends OzElement{
 	
 	@Override
 	public void draw() {
-		P.drawBg(l.x, l.y , Res.backGround);
+//		P.drawBg(l.x, l.y , Res.backGround);
+		P.draw(l,Res.backGround, P.BG_RATIO);
 	}
 
 
