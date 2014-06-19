@@ -82,7 +82,7 @@ public class GameButtons extends OzElement{
 		else{
 			Skill = GameButtons.S_Else;
 		}
-		
+		//
 		if(buttonPass.insides(points, P.AUTO_RATIO)){
 			Playing = false;
 		}
