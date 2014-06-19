@@ -30,7 +30,7 @@ public class GameButtons extends OzElement{
 	//Skill
 	public static final int S_Jump=4,S_Attack=5,S_Else=6;
 	/**枚举值↑*/
-	Texture e;
+//	Texture e;
 	public  static int   Arrow;   //方向键,触碰信息
 	public  static int   Skill;   //技能键,触碰信息
 	public static  boolean Playing ;//游戏处于暂停状态时Playing为false
