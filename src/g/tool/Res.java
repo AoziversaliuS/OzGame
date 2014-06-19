@@ -65,21 +65,21 @@ public class Res {
 	}
 	//图片对象初始化
 	private static void initPic() {
-		setPicGroupData(208, 125, game_btnLeft);
-		setPicGroupData(208, 125, game_btnRight);
-		setPicGroupData(150, 150, game_btnJump);
-		setPicGroupData(150, 150, game_btnAttack);
-		setPicGroupData(100, 100, game_btnPass);
-		setPicGroupData(45, 45, player);
+		setPicGroupData(208, 125, game_btnLeft,P.AUTO_RATIO);
+		setPicGroupData(208, 125, game_btnRight,P.AUTO_RATIO);
+		setPicGroupData(150, 150, game_btnJump,P.AUTO_RATIO);
+		setPicGroupData(150, 150, game_btnAttack,P.AUTO_RATIO);
+		setPicGroupData(100, 100, game_btnPass,P.AUTO_RATIO);
+		setPicGroupData(45, 45, player,P.AUTO_RATIO);
 		//build↓
-		setPicGroupData(50, 50, land);
-		thorn        = new OzPicture(50, 50);
-		moveLand[0]  = new OzPicture(50, 50);
-		moveLand[1]  = new OzPicture(50, 50);
-		moveLand[2]  = new OzPicture(50, 50);
+		setPicGroupData(50, 50, land,P.AUTO_RATIO);
+		thorn        = new OzPicture(50, 50,P.AUTO_RATIO);
+		moveLand[0]  = new OzPicture(50, 50,P.AUTO_RATIO);
+		moveLand[1]  = new OzPicture(50, 50,P.AUTO_RATIO);
+		moveLand[2]  = new OzPicture(50, 50,P.AUTO_RATIO);
 		backGround   = new OzPicture(1280, 720, P.BG_RATIO);
 		//view↓
-		setPicGroupData(195, 254, tree);
+		setPicGroupData(195, 254, tree,P.AUTO_RATIO);
 	}
 	
 	public static void prepare(int rNum){
@@ -120,48 +120,48 @@ public class Res {
 		else if( loadStatus==LOAD_FINISH ){
 			
 			setAtlas("Image/button/button.atlas");
-			loadPicGroup(game_btnLeft, "btnLeft");
-			loadPicGroup(true, false, game_btnRight, "btnLeft");
-			loadPicGroup(game_btnJump, "btnJump");
-			loadPicGroup( game_btnAttack, "btnAttack");
-			loadPicGroup(game_btnPass, "btnPass");
+			loadPicGroup(game_btnLeft, "btnLeft",P.AUTO_RATIO);
+			loadPicGroup(true, false, game_btnRight, "btnLeft",P.AUTO_RATIO);
+			loadPicGroup(game_btnJump, "btnJump",P.AUTO_RATIO);
+			loadPicGroup( game_btnAttack, "btnAttack",P.AUTO_RATIO);
+			loadPicGroup(game_btnPass, "btnPass",P.AUTO_RATIO);
 			
 			setAtlas("Image/player/player.atlas");
-			player[0].setSprite(mS("player",0));
+			player[0].setSprite(mS("player",0),P.AUTO_RATIO);
 			
 			setAtlas("Image/backGround/backGround.atlas");
 			backGround.setSprite(false, false, mS("backGround"), P.BG_RATIO);
 			
 			setAtlas("Image/build/build.atlas");
-			loadPicGroup(land, "land");
-			thorn.setSprite(mS("thorn"));
-			moveLand[0].setSprite( mS("moveLand",0));
-			moveLand[1].setSprite(mS("moveLand",1));
-			moveLand[2].setSprite(true,false,mS("moveLand",0));
+			loadPicGroup(land, "land",P.AUTO_RATIO);
+			thorn.setSprite(mS("thorn"),P.AUTO_RATIO);
+			moveLand[0].setSprite( mS("moveLand",0),P.AUTO_RATIO);
+			moveLand[1].setSprite(mS("moveLand",1),P.AUTO_RATIO);
+			moveLand[2].setSprite(true,false,mS("moveLand",0),P.AUTO_RATIO);
 		
 			setAtlas("Image/view/view.atlas");
-			loadPicGroup( tree, "tree");
+			loadPicGroup( tree, "tree",P.AUTO_RATIO);
 		}
 	}
 	
 	
 	
-	private static void setPicGroupData(float width,float height,OzPicture[] picGroup){
+	private static void setPicGroupData(float width,float height,OzPicture[] picGroup,int ratioType){
 		for(int i=0;i<picGroup.length;i++){
-			picGroup[i] = new OzPicture(width, height);
+			picGroup[i] = new OzPicture(width, height,ratioType);
 		}
 	}
-	private static void loadPicGroup(OzPicture[] picGroup,String resName){
+	private static void loadPicGroup(OzPicture[] picGroup,String resName,int ratioType){
 //		for(int i=0;i<picGroup.length;i++){
 ////			picGroup[i] = new OzPicture(width, height, mS(resName,i));
 //			picGroup[i].setSprite(mS(resName,i));
 //		}
-		loadPicGroup(false, false, picGroup, resName);
+		loadPicGroup(false, false, picGroup, resName,ratioType);
 	}
-	private static void loadPicGroup(boolean planeFlip, boolean verticalFlip,OzPicture[] picGroup,String resName){
+	private static void loadPicGroup(boolean planeFlip, boolean verticalFlip,OzPicture[] picGroup,String resName,int ratioType){
 		for(int i=0;i<picGroup.length;i++){
 //			picGroup[i] = new OzPicture(planeFlip,verticalFlip,width, height, mS(resName,i));
-			picGroup[i].setSprite(planeFlip, verticalFlip, mS(resName,i));
+			picGroup[i].setSprite(planeFlip, verticalFlip, mS(resName,i),ratioType);
 		}
 	}
 	
