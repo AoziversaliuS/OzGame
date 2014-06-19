@@ -17,17 +17,22 @@ public class Res {
 	
 
 	
-	public static final int resourceA=1,resourceB=2,resourceC=3;
-	static int resourceNum = resourceA;
+	public static final int GAME_A=1,GAME_B=2,GAME_C=3;
+	static int sourceId = GAME_A;
 	
 	
-	//startSource
+	/**startSource*/
 	public static OzPicture startBg;
 	public static OzPicture startBtnA;
 	public static OzPicture startBtnB;
-	//selectSource
+	/**selectSource**/
 	public static OzPicture selectBg;
 	public static OzPicture selectBtn[] = new OzPicture[2];
+	/**pauseSource**/
+	public static OzPicture pause_btnResume[] = new OzPicture[2];
+	public static OzPicture pause_btnToSelect[] = new OzPicture[2];
+	public static OzPicture pause_btnToMain[] = new OzPicture[2];
+	public static OzPicture pause_btnExit[] = new OzPicture[2];
 	
 	/**gameSource*/
 	//button
@@ -65,6 +70,13 @@ public class Res {
 	}
 	//图片对象初始化
 	private static void initPic() {
+		//暂停菜单对象初始化
+		setPicGroupData(283, 105, pause_btnResume, P.FORCE_RATIO);
+		setPicGroupData(283, 105,  pause_btnToSelect,  P.FORCE_RATIO);
+		setPicGroupData(283, 105,  pause_btnToMain,  P.FORCE_RATIO);
+		setPicGroupData(283, 105,  pause_btnExit,  P.FORCE_RATIO);
+		
+		//游戏图片对象初始化
 		setPicGroupData(208, 125, game_btnLeft,P.AUTO_RATIO);
 		setPicGroupData(208, 125, game_btnRight,P.AUTO_RATIO);
 		setPicGroupData(150, 150, game_btnJump,P.AUTO_RATIO);
@@ -82,25 +94,25 @@ public class Res {
 		setPicGroupData(195, 254, tree,P.AUTO_RATIO);
 	}
 	
-	public static void prepare(int rNum){
+	public static void prepare(int sourceId){
 		//此方法只能进入一次！,用来预加载资源
 		loadStatus = LOADING;
 		//resourceNum表示需要加载哪一份资源
-		resourceNum = rNum;
-		useResource();
+		Res.sourceId = sourceId;
+		useSource();
 	}
 	public static boolean update(){
 		boolean isFinish = manager.update();
 		if(isFinish){
 			loadStatus=LOAD_FINISH;
-			useResource();
+			useSource();
 		}
 		return isFinish;
 	}
-	private static void useResource(){
-		switch (resourceNum) {
+	private static void useSource(){
+		switch (sourceId) {
 				
-				case resourceA: { gA(); break; }
+				case GAME_A: { gA(); break; }
 					
 		
 		}

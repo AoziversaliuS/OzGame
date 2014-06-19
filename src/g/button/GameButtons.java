@@ -1,5 +1,6 @@
 package g.button;
 
+import g.basis.GameView;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -8,6 +9,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
+import g.type.Status;
 
 import java.util.HashMap;
 
@@ -21,7 +23,7 @@ public class GameButtons extends OzElement{
 	private OzRect buttonRight;
 	private OzRect buttonJump;
 	private OzRect buttonAttack;
-	private OzRect buttonPass;
+	private OzRect buttonPause;
 	/**枚举值↓*/
 	//orientation  枚举值不能相同！
 	public static final int A_Left=1, A_Right=2,A_Else=3;
@@ -42,7 +44,7 @@ public class GameButtons extends OzElement{
 		
 		float passX = P.BASIC_SCREEN_WIDTH-Res.game_btnPass[0].getWidth();//相对坐标，屏幕大小不同，位置也会调整
 		float passY = P.BASIC_SCREEN_HEIGHT-Res.game_btnPass[0].getHeight();
-		buttonPass = new OzRect(passX, passY, Res.game_btnPass[0].getWidth(), Res.game_btnPass[0].getHeight());
+		buttonPause = new OzRect(passX, passY, Res.game_btnPass[0].getWidth(), Res.game_btnPass[0].getHeight());
 		
 		GameButtons.Arrow = GameButtons.A_Else;
 		GameButtons.Skill = GameButtons.S_Else;
@@ -83,8 +85,9 @@ public class GameButtons extends OzElement{
 			Skill = GameButtons.S_Else;
 		}
 		//
-		if(buttonPass.insides(points, P.FORCE_RATIO)){
+		if(buttonPause.insides(points, P.FORCE_RATIO)){
 			Playing = false;
+			GameView.setToStatus(Status.Pause);
 		}
 		else{
 			Playing = true;
@@ -123,10 +126,10 @@ public class GameButtons extends OzElement{
 		}
 		//暂停按键
 		if(Playing){
-			P.draw(buttonPass.x, buttonPass.y, Res.game_btnPass[0]);
+			P.draw(buttonPause.x, buttonPause.y, Res.game_btnPass[0]);
 		}
 		else{
-			P.draw(buttonPass.x, buttonPass.y, Res.game_btnPass[1]);
+			P.draw(buttonPause.x, buttonPause.y, Res.game_btnPass[1]);
 		}
 	}
 
@@ -137,8 +140,9 @@ public class GameButtons extends OzElement{
 	public static int getSkill(){
 		return GameButtons.Skill;     //将Skill的值传递给外界
 	}
+	
 	/**
-	 * 玩家在游戏中按下暂停按键则会返回false
+	 * 玩家在游戏中按下暂停按键则此方法会返回false
 	 */
 	public static boolean isPlaying() {
 		return Playing;

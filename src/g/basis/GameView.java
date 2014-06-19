@@ -156,6 +156,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		else if( toStatus==Status.Game && status==Status.Select ){
 			this.selectToGame();
 		}
+		if( toStatus==Status.Pause && status==Status.Game ){
+			gameToPause();
+		}
 		
 		if( sT==SWITCH_FINISH ){
 			status = toStatus;
@@ -163,6 +166,26 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			lightNum = 0;
 			sT=SWITCH_PREPARE;
 		}
+	}
+	private void gameToPause(){
+		if( sT==SWITCH_PREPARE ){
+			lightNum = lightNum + dNum;
+			gameDraw();
+			if( lightNum>=maxLight/2 ){
+				sT = SWITCH_LOADING;
+			}
+		}
+		else if( sT==SWITCH_LOADING ){
+				gameDraw();
+//				sT = SWITCH_LOADED;
+		}
+//		else if( sT==SWITCH_LOADED ){
+////			lightNum = lightNum - dNum;
+//
+//			if( lightNum<=minLight ){
+//				sT = SWITCH_FINISH;
+//			}
+//		}
 	}
 	private void startToSelect(){
 		if( sT==SWITCH_PREPARE ){
@@ -189,10 +212,11 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			selectDraw();
 			if( lightNum>=maxLight ){
 				sT = SWITCH_LOADING;
-				Res.prepare(Res.resourceA);
+				Res.prepare(Res.GAME_A);
 			}
 		}
 		else if( sT==SWITCH_LOADING ){
+			selectDraw();
 			if(Res.update()){
 				//加载完图片之后载入地图
 				GameChapter.chapterLoad(gateAtlas, rankNum,SelectButtons.getChapterId()); 
