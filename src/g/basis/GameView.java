@@ -163,12 +163,33 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		if( toStatus==Status.Pause && status==Status.Game ){
 			gameToPause();
 		}
+		if( toStatus==Status.Game && status==Status.Pause ){
+			pauseToGame();
+		}
 		
 		if( sT==SWITCH_FINISH ){
 			status = toStatus;
 			//÷ÿ÷√–≈œ¢
 			lightNum = 0;
 			sT=SWITCH_PREPARE;
+		}
+	}
+	private void pauseToGame(){
+		if( sT==SWITCH_PREPARE ){
+			lightNum = maxLight/2;
+			gameDraw();
+			sT = SWITCH_LOADING;
+		}
+		else if( sT==SWITCH_LOADING ){
+			gameDraw();
+			sT = SWITCH_LOADED;
+		}
+		else if( sT==SWITCH_LOADED ){
+			lightNum = lightNum-dNum;
+			gameDraw();
+			if(lightNum<=minLight){
+				sT = SWITCH_FINISH;
+			}
 		}
 	}
 	private void gameToPause(){

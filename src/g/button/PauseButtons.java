@@ -2,6 +2,7 @@ package g.button;
 
 import java.util.HashMap;
 
+import g.basis.GameView;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -10,6 +11,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
+import g.type.Status;
 
 public class PauseButtons extends OzElement{
 
@@ -71,7 +73,9 @@ public class PauseButtons extends OzElement{
 		}
 	}
 	private void active(){
-		
+		if( selected==RESUME ){
+			GameView.setToStatus(Status.Game);
+		}
 		submit = false;
 		selected = ELSE;
 	}

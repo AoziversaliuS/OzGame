@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Res {
-	private static final int LOADING=1,LOAD_FINISH=2; 
+	private static final int LOADING=1,LOAD_FINISH=2,UN_LOAD=3; 
 	private static int loadStatus = LOADING;
 	private static TextureAtlas atlas;
 	
@@ -17,7 +17,7 @@ public class Res {
 	
 
 	
-	public static final int GAME_A=1,GAME_B=2,GAME_C=3;
+	public static final int GAME_A=201,GAME_B=202,GAME_C=203;
 	public static final int PAUSE_SOURCE = 101;
 	static int sourceId = GAME_A;
 	
@@ -125,6 +125,9 @@ public class Res {
 			//加载暂停菜单的图片资源
 			manager.load("Image/pause/pause.atlas", TextureAtlas.class);
 		}
+		else if( loadStatus==UN_LOAD ){//卸载资源
+			manager.unload("Image/pause/pause.atlas");
+		}
 		else if( loadStatus==LOAD_FINISH ){
 			setAtlas("Image/pause/pause.atlas");
 			loadPicGroup(pause_btnResume, "btnResume", P.FORCE_RATIO);
@@ -132,6 +135,7 @@ public class Res {
 			loadPicGroup(pause_btnToMain, "btnToMain", P.FORCE_RATIO);
 			loadPicGroup(pause_btnExit, "btnExit", P.FORCE_RATIO);
 		}
+		
 	}
 	
 	private static void gA(){
@@ -142,11 +146,16 @@ public class Res {
 			manager.load("Image/build/build.atlas", TextureAtlas.class);
 			manager.load("Image/backGround/backGround.atlas", TextureAtlas.class);
 			manager.load("Image/view/view.atlas", TextureAtlas.class);
-		
 		}
-		//资源加载完成后建立资源的引用
+		else if( loadStatus==UN_LOAD ){
+			manager.unload("Image/button/button.atlas");
+			manager.unload("Image/player/player.atlas");
+			manager.unload("Image/build/build.atlas");
+			manager.unload("Image/backGround/backGround.atlas");
+			manager.unload("Image/view/view.atlas");
+		}
 		else if( loadStatus==LOAD_FINISH ){
-			
+			//资源加载完成后建立资源的引用
 			setAtlas("Image/button/button.atlas");
 			loadPicGroup(game_btnLeft, "btnLeft",P.AUTO_RATIO);
 			loadPicGroup(true, false, game_btnRight, "btnLeft",P.AUTO_RATIO);
@@ -215,12 +224,22 @@ public class Res {
 	private static Sprite mS(String picName,int index){
 		return manager.get(atlasPath, TextureAtlas.class).createSprite(picName,index);
 	}
-
+	/**
+	 * 获取加载进度
+	 * */
 	public static float getProgress(){
 		return manager.getProgress();
 	}
 	public static void clear(){
 		manager.clear();
+	}
+	/**
+	 * 卸载sourceId对应的资源
+	 * */
+	public static void unload(int sourceId){
+		Res.sourceId = sourceId;
+		loadStatus = UN_LOAD;
+		useSource();
 	}
 	
 	
