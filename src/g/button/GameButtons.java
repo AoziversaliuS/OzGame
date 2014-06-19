@@ -40,8 +40,8 @@ public class GameButtons extends OzElement{
 		buttonJump = new OzRect(900, 10, Res.game_btnJump[0].getWidth(), Res.game_btnJump[0].getHeight());
 		buttonAttack = new OzRect(1120, 10, Res.game_btnAttack[0].getWidth(), Res.game_btnAttack[0].getHeight());
 		
-		float passX = P.getScreenW()-Res.game_btnPass[0].getRealWidth();//相对坐标，屏幕大小不同，位置也会调整
-		float passY = P.getScreenH()-Res.game_btnPass[0].getRealHeight();
+		float passX = P.BASIC_SCREEN_WIDTH-Res.game_btnPass[0].getWidth();//相对坐标，屏幕大小不同，位置也会调整
+		float passY = P.BASIC_SCREEN_HEIGHT-Res.game_btnPass[0].getHeight();
 		buttonPass = new OzRect(passX, passY, Res.game_btnPass[0].getWidth(), Res.game_btnPass[0].getHeight());
 		
 		GameButtons.Arrow = GameButtons.A_Else;
@@ -83,7 +83,7 @@ public class GameButtons extends OzElement{
 			Skill = GameButtons.S_Else;
 		}
 		//
-		if(buttonPass.insides(points, P.AUTO_RATIO)){
+		if(buttonPass.insides(points, P.FORCE_RATIO)){
 			Playing = false;
 		}
 		else{
@@ -123,10 +123,10 @@ public class GameButtons extends OzElement{
 		}
 		//暂停按键
 		if(Playing){
-			P.draw(buttonPass.x, buttonPass.y, Res.game_btnPass[0],P.NO_RATIO);
+			P.draw(buttonPass.x, buttonPass.y, Res.game_btnPass[0]);
 		}
 		else{
-			P.draw(buttonPass.x, buttonPass.y, Res.game_btnPass[1],P.NO_RATIO);
+			P.draw(buttonPass.x, buttonPass.y, Res.game_btnPass[1]);
 		}
 	}
 
@@ -136,6 +136,12 @@ public class GameButtons extends OzElement{
 	}
 	public static int getSkill(){
 		return GameButtons.Skill;     //将Skill的值传递给外界
+	}
+	/**
+	 * 玩家在游戏中按下暂停按键则会返回false
+	 */
+	public static boolean isPlaying() {
+		return Playing;
 	}
 	
 	
@@ -162,9 +168,7 @@ public class GameButtons extends OzElement{
 		
 	}
 
-	public static boolean isPlaying() {
-		return Playing;
-	}
+
 
 
 	

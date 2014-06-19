@@ -124,7 +124,8 @@ public class Res {
 			loadPicGroup(true, false, game_btnRight, "btnLeft",P.AUTO_RATIO);
 			loadPicGroup(game_btnJump, "btnJump",P.AUTO_RATIO);
 			loadPicGroup( game_btnAttack, "btnAttack",P.AUTO_RATIO);
-			loadPicGroup(game_btnPass, "btnPass",P.AUTO_RATIO);
+			//暂停按钮使用强制比例
+			loadPicGroup(game_btnPass, "btnPass",P.FORCE_RATIO);
 			
 			setAtlas("Image/player/player.atlas");
 			player[0].setSprite(mS("player",0),P.AUTO_RATIO);
