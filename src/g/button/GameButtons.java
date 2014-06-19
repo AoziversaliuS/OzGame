@@ -6,17 +6,13 @@ import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.tool.P;
 import g.tool.Res;
-import g.tool.Res.*;
 import g.type.ET;
 import g.type.Rank;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
 
 
 public class GameButtons extends OzElement{
@@ -44,8 +40,8 @@ public class GameButtons extends OzElement{
 		buttonJump = new OzRect(900, 10, Res.game_btnJump[0].getWidth(), Res.game_btnJump[0].getHeight());
 		buttonAttack = new OzRect(1120, 10, Res.game_btnAttack[0].getWidth(), Res.game_btnAttack[0].getHeight());
 		
-		float passX = P.getScreenW()-Res.game_btnPass[0].getWidth();//相对坐标，屏幕大小不同，位置也会调整
-		float passY = P.getScreenH()-Res.game_btnPass[0].getHeight();
+		float passX = P.getScreenW()-Res.game_btnPass[0].getRealWidth();//相对坐标，屏幕大小不同，位置也会调整
+		float passY = P.getScreenH()-Res.game_btnPass[0].getRealHeight();
 		buttonPass = new OzRect(passX, passY, Res.game_btnPass[0].getWidth(), Res.game_btnPass[0].getHeight());
 		
 		GameButtons.Arrow = GameButtons.A_Else;
@@ -56,6 +52,7 @@ public class GameButtons extends OzElement{
 	public void reset() {
 		GameButtons.Arrow = GameButtons.A_Else;   //清除掉上一帧的按键信息
 		GameButtons.Skill = GameButtons.S_Else;
+		GameButtons.Playing = false;
 	}
 	public void logic(HashMap<String, OzPoint> points) {
 		
@@ -83,6 +80,13 @@ public class GameButtons extends OzElement{
 		}
 		else{
 			Skill = GameButtons.S_Else;
+		}
+		
+		if(buttonPass.insides(points, P.AUTO_RATIO)){
+			Playing = false;
+		}
+		else{
+			Playing = true;
 		}
 		
 //		Gdx.app.log("btn", "Arrow: "+Arrow);
@@ -116,6 +120,13 @@ public class GameButtons extends OzElement{
 			P.draw(buttonAttack.x, buttonAttack.y, Res.game_btnAttack[1]);
 			P.draw(buttonJump.x, buttonJump.y, Res.game_btnJump[0]);
 		}
+		//暂停按键
+		if(Playing){
+			P.drawRaw(buttonPass.x, buttonPass.y, Res.game_btnPass[0]);
+		}
+		else{
+			P.drawRaw(buttonPass.x, buttonPass.y, Res.game_btnPass[1]);
+		}
 	}
 
 	
@@ -148,6 +159,10 @@ public class GameButtons extends OzElement{
 	public void prepare() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public static boolean isPlaying() {
+		return Playing;
 	}
 
 

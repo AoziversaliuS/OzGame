@@ -71,11 +71,19 @@ public class P {
 		picture.getSprite().setScale(scaleXY);
 		drawAtPosition(point.x*P.autoRatioX, point.y*P.autoRatioY, picture);
 	}
+	//直接画，不转换坐标的比例
+	public static void drawRaw(OzPoint p,OzPicture picture){
+		drawRaw(p.x, p.y, picture);
+	}
+	public static void drawRaw(float x,float y,OzPicture picture){
+		picture.setDefault();
+		drawAtPosition(x, y, picture);
+	}
+	//背景比例
 	public static void drawBg(float x,float y,OzPicture picture){
 		//此方法只能用来画背景图！
 		drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
 	}
-	
 	//自动比例
 	public static void draw(OzPoint point,OzPicture picture){
 		draw(point.x, point.y, picture);

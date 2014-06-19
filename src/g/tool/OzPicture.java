@@ -91,7 +91,6 @@ public class OzPicture {
 	public void setDefault(){
 		//根据比例来设置图片大小
 		if(isBackGround){
-			//背景图片特殊设定
 			this.sprite.setSize( this.basisWidth * P.getBgRatioX() , this.basisHeight * P.getBgRatioY() );
 		}
 		else if( ratioType==P.AUTO_RATIO ){
@@ -102,7 +101,6 @@ public class OzPicture {
 		}
 		this.sprite.setScale(1f);
 		this.sprite.setColor(Color.WHITE);
-		
 	}
 	
 	
@@ -120,6 +118,36 @@ public class OzPicture {
 	}
 	public float getWidth() {
 		return basisWidth;
+	}
+	public float getRealHeight(){
+		float realHeight = 0;
+		
+		if( ratioType == P.AUTO_RATIO ){
+			realHeight = basisHeight * P.getRatioY();
+		}
+		else if( ratioType == P.FORCE_RATIO ){
+			realHeight = basisHeight * P.getForceRatioY();
+		}
+		else if( ratioType == P.BG_RATIO ){
+			realHeight = basisHeight * P.getBgRatioY();
+		}
+		
+		return realHeight;
+	}
+	public float getRealWidth(){
+		float realWidth = 0;
+		
+		if( ratioType == P.AUTO_RATIO ){
+			realWidth = basisWidth * P.getRatioX();
+		}
+		else if( ratioType == P.FORCE_RATIO ){
+			realWidth = basisWidth * P.getForceRatioX();
+		}
+		else if( ratioType == P.BG_RATIO ){
+			realWidth = basisWidth * P.getBgRatioX();
+		}
+		
+		return realWidth;
 	}
 	
 	
