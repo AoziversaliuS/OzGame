@@ -24,10 +24,10 @@ public class PauseButtons extends OzElement{
 
 	public PauseButtons() {
 		super("PauseButtons", Rank.SELF_CUSTOM, ET.PauseButtons,null, null);
-		btnResume = new OzRect(600, 0, Res.pause_btnResume[0].getWidth(), Res.pause_btnResume[0].getHeight());
-		btnToSelect = new OzRect(480,0,Res.pause_btnToSelect[0].getWidth(),Res.pause_btnToSelect[0].getHeight());
-		btnToMain = new OzRect(360, 0, Res.pause_btnToMain[0].getWidth(), Res.pause_btnToMain[0].getHeight());
-		btnExit = new OzRect(240, 0, Res.pause_btnExit[0].getWidth(), Res.pause_btnExit[0].getHeight());
+		btnResume = new OzRect(0,600, Res.pause_btnResume[0].getWidth(), Res.pause_btnResume[0].getHeight());
+		btnToSelect = new OzRect(0,480,Res.pause_btnToSelect[0].getWidth(),Res.pause_btnToSelect[0].getHeight());
+		btnToMain = new OzRect(0,360, Res.pause_btnToMain[0].getWidth(), Res.pause_btnToMain[0].getHeight());
+		btnExit = new OzRect(0,240, Res.pause_btnExit[0].getWidth(), Res.pause_btnExit[0].getHeight());
 		
 		this.reset();
 	}

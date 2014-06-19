@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import g.button.GameButtons;
+import g.button.PauseButtons;
 import g.button.SelectButtons;
 import g.button.StartButtons;
 import g.refer.BasicBody;
@@ -31,6 +32,8 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	private SelectButtons selectBtns;
 	//StartStatus
 	private StartButtons startBtns;
+	//PauseStatus
+	private PauseButtons pauseBtns;
 	//GameStatus
 	private GameButtons gameBtns;
 	private static   ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
@@ -70,6 +73,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		startInit();//开始菜单初始化
 		this.gameInit();//游戏界面初始化
 		this.selectInit();//选择菜单初始化
+		this.pauseInit();//暂停菜单初始化
 		
 //		Res.prepare(Res.resourceA);
 //		while( !Res.update() ){
@@ -173,19 +177,20 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			gameDraw();
 			if( lightNum>=maxLight/2 ){
 				sT = SWITCH_LOADING;
+				Res.prepare(Res.PAUSE_SOURCE);
 			}
 		}
 		else if( sT==SWITCH_LOADING ){
 				gameDraw();
-//				sT = SWITCH_LOADED;
+				if(Res.update()){
+					sT = SWITCH_LOADED;
+				}
 		}
-//		else if( sT==SWITCH_LOADED ){
-////			lightNum = lightNum - dNum;
-//
-//			if( lightNum<=minLight ){
-//				sT = SWITCH_FINISH;
-//			}
-//		}
+		else if( sT==SWITCH_LOADED ){
+			lightNum = 0;
+			pauseDraw();
+			sT = SWITCH_FINISH;
+		}
 	}
 	private void startToSelect(){
 		if( sT==SWITCH_PREPARE ){
@@ -266,9 +271,9 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			
 		case Loading:  {        break;}
 		
-		case Pause:    {        break;}
+		case Pause:    {    pauseDraw();    break;}
 		
-		case Select:   {     selectDraw();   break;}
+		case Select:   {    selectDraw();   break;}
 		
 		case Start:    {    startDraw();   break;}
 		
@@ -290,7 +295,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 					
 		case Loading:  {        break;}
 				
-		case Pause:    {        break;}
+		case Pause:    {    pauseBtns.logic(points);    break;}
 				
 		case Select:   {    selectBtns.logic(points);   break;}
 				
@@ -305,7 +310,6 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	public void startInit(){
 		startBtns = new StartButtons();
 	}
-	
 	public void startEngine(){
 		
 	}
@@ -328,7 +332,17 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 		selectBtns.draw();
 	}
 	
-	
+	public void pauseInit(){
+		pauseBtns = new PauseButtons();
+	}
+	public void pauseEngine(){
+		
+	}
+	public void pauseDraw(){
+		gameDraw();
+		P.setlight(maxLight/2);//暂停按钮绘画前设置亮度
+		pauseBtns.draw();
+	}
 	
 	
 	
