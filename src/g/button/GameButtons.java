@@ -36,7 +36,7 @@ public class GameButtons extends OzElement{
 	public static  boolean Playing ;//游戏处于暂停状态时Playing为false
 	
 	public GameButtons() {
-		super("GameButton",Rank.SELF_CUSTOM, ET.GameButtons,null,null);
+		super("GameButtons",Rank.SELF_CUSTOM, ET.GameButtons,null,null);
 		buttonLeft  = new OzRect(25, 10, Res.game_btnLeft[0].getWidth(),Res.game_btnLeft[0].getHeight());
 		buttonRight = new OzRect(275, 10,Res.game_btnRight[0].getWidth(), Res.game_btnRight[0].getHeight());
 		buttonJump = new OzRect(900, 10, Res.game_btnJump[0].getWidth(), Res.game_btnJump[0].getHeight());

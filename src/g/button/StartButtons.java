@@ -18,24 +18,23 @@ public class StartButtons extends OzElement{
 
 	private OzRect startGameButton;
 	
-	public static final int START_GAME = 1,ELSE = 3; 
-	private boolean submit = false;//按下且松开按钮时为true
+	private static final int START_GAME = 1,ELSE = 3; 
+	private boolean submit;//按下且松开按钮时为true
 	
-	private  int selected = StartButtons.ELSE;
+	private  int selected;
 	
 	public StartButtons( ) {
-		super("StartButton", Rank.SELF_CUSTOM , ET.StartButtons, null, null );
+		super("StartButtons", Rank.SELF_CUSTOM , ET.StartButtons, null, null );
 		
 		startGameButton = new OzRect(450, 300, Res.startBtnA.getWidth(), Res.startBtnA.getHeight());
 		
-//		System.out.println("startGameButton 宽:"+Res.startBtnA.getOriginWidth()+"   高:"+Res.startBtnA.getOriginHeight() );
-//		System.out.println("startGameButton 使用比例为:"+Res.startBtnA.getRatioType());
+		this.reset();
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		selected = StartButtons.ELSE;
+		submit = false;
 	}
 
 	@Override
@@ -51,17 +50,14 @@ public class StartButtons extends OzElement{
 		
 		
 		if( l!=null ){
-			
 			if( startGameButton.inside(l,P.FORCE_RATIO) ){
 				selected = StartButtons.START_GAME;
 			}
 			else{
 				selected = StartButtons.ELSE;
 			}
-			
 		}
 		else{
-			System.out.println("进入");
 			if( selected!=StartButtons.ELSE ){
 				submit = true;
 			}

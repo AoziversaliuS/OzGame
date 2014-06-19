@@ -15,4 +15,7 @@ public enum ET {
 	
 	//Select
 	,SelectButtons
+	
+	//Pause
+	,PauseButtons
 }
