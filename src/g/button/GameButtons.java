@@ -46,6 +46,7 @@ public class GameButtons extends OzElement{
 		
 		GameButtons.Arrow = GameButtons.A_Else;
 		GameButtons.Skill = GameButtons.S_Else;
+		Playing = true;
 	}
 
 	@Override
