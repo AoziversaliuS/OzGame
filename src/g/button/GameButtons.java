@@ -6,12 +6,14 @@ import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.tool.P;
 import g.tool.Res;
+import g.tool.Res.*;
 import g.type.ET;
 import g.type.Rank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -23,7 +25,7 @@ public class GameButtons extends OzElement{
 	private OzRect buttonRight;
 	private OzRect buttonJump;
 	private OzRect buttonAttack;
-	
+	private OzRect buttonPass;
 	/**枚举值↓*/
 	//orientation  枚举值不能相同！
 	public static final int A_Left=1, A_Right=2,A_Else=3;
@@ -33,14 +35,19 @@ public class GameButtons extends OzElement{
 	Texture e;
 	public  static int   Arrow;   //方向键,触碰信息
 	public  static int   Skill;   //技能键,触碰信息
+	public static  boolean Playing ;//游戏处于暂停状态时Playing为false
 	
 	public GameButtons() {
 		super("GameButton",Rank.SELF_CUSTOM, ET.GameButtons,null,null);
+		buttonLeft  = new OzRect(25, 10, Res.game_btnLeft[0].getWidth(),Res.game_btnLeft[0].getHeight());
+		buttonRight = new OzRect(275, 10,Res.game_btnRight[0].getWidth(), Res.game_btnRight[0].getHeight());
+		buttonJump = new OzRect(900, 10, Res.game_btnJump[0].getWidth(), Res.game_btnJump[0].getHeight());
+		buttonAttack = new OzRect(1120, 10, Res.game_btnAttack[0].getWidth(), Res.game_btnAttack[0].getHeight());
 		
-		this.buttonLeft  = new OzRect(25, 10, Res.game_btnLeft[0].getWidth(),Res.game_btnLeft[0].getHeight());
-		this.buttonRight = new OzRect(275, 10,Res.game_btnRight[0].getWidth(), Res.game_btnRight[0].getHeight());
-		this.buttonJump = new OzRect(900, 10, Res.game_btnJump[0].getWidth(), Res.game_btnJump[0].getHeight());
-		this.buttonAttack = new OzRect(1120, 10, Res.game_btnAttack[0].getWidth(), Res.game_btnAttack[0].getHeight());
+		float passX = P.getScreenW()-Res.game_btnPass[0].getWidth();//相对坐标，屏幕大小不同，位置也会调整
+		float passY = P.getScreenH()-Res.game_btnPass[0].getHeight();
+		buttonPass = new OzRect(passX, passY, Res.game_btnPass[0].getWidth(), Res.game_btnPass[0].getHeight());
+		
 		GameButtons.Arrow = GameButtons.A_Else;
 		GameButtons.Skill = GameButtons.S_Else;
 	}
