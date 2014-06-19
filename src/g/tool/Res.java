@@ -18,6 +18,7 @@ public class Res {
 
 	
 	public static final int GAME_A=1,GAME_B=2,GAME_C=3;
+	public static final int PAUSE_SOURCE = 101;
 	static int sourceId = GAME_A;
 	
 	
@@ -113,8 +114,23 @@ public class Res {
 		switch (sourceId) {
 				
 				case GAME_A: { gA(); break; }
-					
+		}
+		switch (sourceId){
 		
+				case PAUSE_SOURCE: { pauseSource();  break;}
+		}
+	}
+	private static void pauseSource(){
+		if( loadStatus==LOADING ){
+			//加载暂停菜单的图片资源
+			manager.load("Image/pause/pause.atlas", TextureAtlas.class);
+		}
+		else if( loadStatus==LOAD_FINISH ){
+			setAtlas("Image/pause/pause.atlas");
+			loadPicGroup(pause_btnResume, "btnResume", P.FORCE_RATIO);
+			loadPicGroup(pause_btnToSelect, "btnToSelect", P.FORCE_RATIO);
+			loadPicGroup(pause_btnToMain, "btnToMain", P.FORCE_RATIO);
+			loadPicGroup(pause_btnExit, "btnExit", P.FORCE_RATIO);
 		}
 	}
 	
