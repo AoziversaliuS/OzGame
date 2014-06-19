@@ -29,12 +29,14 @@ public class Res {
 	public static OzPicture selectBg;
 	public static OzPicture selectBtn[] = new OzPicture[2];
 	
-	//gameSource
+	/**gameSource*/
+	//button
 	public static OzPicture[] game_btnLeft = new OzPicture[2];
 	public static OzPicture[] game_btnRight = new OzPicture[2];
 	public static OzPicture[] game_btnJump = new OzPicture[2];
 	public static OzPicture[] game_btnAttack = new OzPicture[2];
-	
+	public static OzPicture[] game_btnPass = new OzPicture[2];
+	//basic
 	public static OzPicture[] player = new OzPicture[1];
 	public static OzPicture backGround;
 	//build↓ 
@@ -45,22 +47,28 @@ public class Res {
 	public static OzPicture[] tree = new OzPicture[2];
 
 	
-	
 
-
-	private static void useResource(){
-		switch (resourceNum) {
-				
-				case resourceA: { gA(); break; }
-					
-		
-		}
+	public static void init(){
+		manager = new AssetManager();
+		NecessaryResLoad();
+		initPic();
+	}
+	private static void NecessaryResLoad(){
+		loadAtlas("Image/start/start.atlas");
+			startBg = new OzPicture(1280, 720, lS("startBg"), P.FORCE_RATIO);
+			startBtnA = new OzPicture(334, 135, lS("startBtnA"), P.FORCE_RATIO);
+			startBtnB = new OzPicture(334, 135, lS("startBtnB"), P.FORCE_RATIO);
+		loadAtlas("Image/select/select.atlas");
+			selectBg = new OzPicture(1280, 720, lS("bG"), P.FORCE_RATIO);
+			selectBtn[0] = new OzPicture(150, 150, lS("btn",0), P.FORCE_RATIO);
+			selectBtn[1] = new OzPicture(150, 150, lS("btn",1), P.FORCE_RATIO);
 	}
 	private static void initPic() {
 		setPicGroupData(208, 125, game_btnLeft);
 		setPicGroupData(208, 125, game_btnRight);
 		setPicGroupData(150, 150, game_btnJump);
 		setPicGroupData(150, 150, game_btnAttack);
+		setPicGroupData(100, 100, game_btnPass);
 		setPicGroupData(45, 45, player);
 		//build↓
 		setPicGroupData(50, 50, land);
@@ -72,6 +80,31 @@ public class Res {
 		//view↓
 		setPicGroupData(195, 254, tree);
 	}
+	
+	public static void prepare(int rNum){
+		//此方法只能进入一次！,用来预加载资源
+		loadStatus = LOADING;
+		//resourceNum表示需要加载哪一份资源
+		resourceNum = rNum;
+		useResource();
+	}
+	public static boolean update(){
+		boolean isFinish = manager.update();
+		if(isFinish){
+			loadStatus=LOAD_FINISH;
+			useResource();
+		}
+		return isFinish;
+	}
+	private static void useResource(){
+		switch (resourceNum) {
+				
+				case resourceA: { gA(); break; }
+					
+		
+		}
+	}
+	
 	private static void gA(){
 		//将资源放到预加载队列中
 		if( loadStatus==LOADING ){
@@ -84,31 +117,30 @@ public class Res {
 		}
 		//资源加载完成后建立资源的引用
 		else if( loadStatus==LOAD_FINISH ){
-		
 			
-			
-		setAtlas("Image/button/button.atlas");
+			setAtlas("Image/button/button.atlas");
 			loadPicGroup(game_btnLeft, "btnLeft");
 			loadPicGroup(true, false, game_btnRight, "btnLeft");
 			loadPicGroup(game_btnJump, "btnJump");
 			loadPicGroup( game_btnAttack, "btnAttack");
+			loadPicGroup(game_btnPass, "btnPass");
 			
-		setAtlas("Image/player/player.atlas");
+			setAtlas("Image/player/player.atlas");
 			player[0].setSprite(mS("player",0));
-		setAtlas("Image/backGround/backGround.atlas");
+			
+			setAtlas("Image/backGround/backGround.atlas");
 			backGround.setSprite(false, false, mS("backGround"), P.BG_RATIO);
 			
-		setAtlas("Image/build/build.atlas");
+			setAtlas("Image/build/build.atlas");
 			loadPicGroup(land, "land");
 			thorn.setSprite(mS("thorn"));
 			moveLand[0].setSprite( mS("moveLand",0));
 			moveLand[1].setSprite(mS("moveLand",1));
 			moveLand[2].setSprite(true,false,mS("moveLand",0));
 		
-		setAtlas("Image/view/view.atlas");
+			setAtlas("Image/view/view.atlas");
 			loadPicGroup( tree, "tree");
 		}
-
 	}
 	
 	
@@ -119,10 +151,11 @@ public class Res {
 		}
 	}
 	private static void loadPicGroup(OzPicture[] picGroup,String resName){
-		for(int i=0;i<picGroup.length;i++){
-//			picGroup[i] = new OzPicture(width, height, mS(resName,i));
-			picGroup[i].setSprite(mS(resName,i));
-		}
+//		for(int i=0;i<picGroup.length;i++){
+////			picGroup[i] = new OzPicture(width, height, mS(resName,i));
+//			picGroup[i].setSprite(mS(resName,i));
+//		}
+		loadPicGroup(false, false, picGroup, resName);
 	}
 	private static void loadPicGroup(boolean planeFlip, boolean verticalFlip,OzPicture[] picGroup,String resName){
 		for(int i=0;i<picGroup.length;i++){
@@ -161,36 +194,8 @@ public class Res {
 	}
 	
 	
-	public static void init(){
-		manager = new AssetManager();
-		NecessaryResLoad();
-		initPic();
-	}
-	private static void NecessaryResLoad(){
-		loadAtlas("Image/start/start.atlas");
-			startBg = new OzPicture(1280, 720, lS("startBg"), P.FORCE_RATIO);
-			startBtnA = new OzPicture(334, 135, lS("startBtnA"), P.FORCE_RATIO);
-			startBtnB = new OzPicture(334, 135, lS("startBtnB"), P.FORCE_RATIO);
-		loadAtlas("Image/select/select.atlas");
-			selectBg = new OzPicture(1280, 720, lS("bG"), P.FORCE_RATIO);
-			selectBtn[0] = new OzPicture(150, 150, lS("btn",0), P.FORCE_RATIO);
-			selectBtn[1] = new OzPicture(150, 150, lS("btn",1), P.FORCE_RATIO);
-	}
+
 	
 	
-	public static void prepare(int rNum){
-		//此方法只能进入一次！,用来预加载资源
-		loadStatus = LOADING;
-		//resourceNum表示需要加载哪一份资源
-		resourceNum = rNum;
-		useResource();
-	}
-	public static boolean update(){
-		boolean isFinish = manager.update();
-		if(isFinish){
-			loadStatus=LOAD_FINISH;
-			useResource();
-		}
-		return isFinish;
-	}
+
 }
