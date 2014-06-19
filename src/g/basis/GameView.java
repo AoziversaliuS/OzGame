@@ -193,9 +193,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 			}
 		}
 		else if( sT==SWITCH_LOADING ){
-			boolean s = Res.update();
-			System.out.println(s);
-			if(s){
+			if(Res.update()){
 				//加载完图片之后载入地图
 				GameChapter.chapterLoad(gateAtlas, rankNum,SelectButtons.getChapterId()); 
 				sT = SWITCH_LOADED;
