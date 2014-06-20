@@ -14,6 +14,7 @@ import g.tool.OzInt;
 import g.tool.OzPoint;
 import g.tool.P;
 import g.tool.Res;
+import g.type.Status;
 
 public class GameView implements ViewInterface,BtnMethods{
 
@@ -167,6 +168,13 @@ public class GameView implements ViewInterface,BtnMethods{
 
 	public ArrayList<OzInt> getRankNum() {
 		return rankNum;
+	}
+
+
+	@Override
+	public void toView(Status status, ViewInterface... viewInterfaces) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

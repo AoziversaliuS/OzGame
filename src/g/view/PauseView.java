@@ -8,6 +8,7 @@ import g.refer.BtnMethods;
 import g.refer.ViewInterface;
 import g.tool.OzPoint;
 import g.tool.P;
+import g.type.Status;
 
 public class PauseView implements ViewInterface,BtnMethods{
 
@@ -74,6 +75,12 @@ public class PauseView implements ViewInterface,BtnMethods{
 				MainView.switchType = MainView.SWITCH_FINISH;
 			}
 		}
+	}
+
+	@Override
+	public void toView(Status status, ViewInterface... viewInterfaces) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

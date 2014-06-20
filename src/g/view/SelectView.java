@@ -8,6 +8,7 @@ import g.refer.ViewInterface;
 import g.tool.OzPoint;
 import g.tool.P;
 import g.tool.Res;
+import g.type.Status;
 
 public class SelectView implements ViewInterface,BtnMethods{
 
@@ -46,5 +47,11 @@ public class SelectView implements ViewInterface,BtnMethods{
 
 	@Override
 	public void btnExit() {
+	}
+
+	@Override
+	public void toView(Status status, ViewInterface... viewInterfaces) {
+		// TODO Auto-generated method stub
+		
 	}
 }
