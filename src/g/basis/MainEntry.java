@@ -2,7 +2,6 @@ package g.basis;
 
 import java.util.HashMap;
 
-import g.button.SelectButtons;
 import g.refer.ViewInterface;
 import g.tool.OzPoint;
 import g.tool.P;
@@ -38,13 +37,7 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	private static Status status;  //当前界面状态
     private static Status toStatus;
 	
-//    public static final int SWITCH_PREPARE=1,SWITCH_LOADING=2,SWITCH_LOADED=3,SWITCH_FINISH=4;
-//	
-//	public static int switchType = SWITCH_PREPARE;
-//	
-
-	
-	
+    
 	@Override
 	public void create() {	
 		
@@ -156,119 +149,7 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		
 		}
 		
-//		if( switchType==SWITCH_FINISH ){
-//			status = toStatus;
-//			//重置信息
-//			P.setDarkness(0);
-//			switchType=SWITCH_PREPARE;
-//		}
 	}
-//	private void pauseToGame(){
-//		if( switchType==SWITCH_PREPARE ){
-////			lightNum = maxLight/2;
-//			P.setDarkness(P.MAX_BLACK_NUM/2);
-////			gameDraw();
-//			gameView.draw();
-//			switchType = SWITCH_LOADING;
-//		}
-//		else if( switchType==SWITCH_LOADING ){
-////			gameDraw();
-//			gameView.draw();
-//			switchType = SWITCH_LOADED;
-//		}
-//		else if( switchType==SWITCH_LOADED ){
-////			lightNum = lightNum-dNum;
-//			P.decreaseDarkness();
-////			gameDraw();
-//			gameView.draw();
-//			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
-//				switchType = SWITCH_FINISH;
-//			}
-//		}
-//	}
-//	private void gameToPause(){
-//		if( switchType==SWITCH_PREPARE ){
-////			lightNum = lightNum + dNum;
-//			P.increaseDarkness();
-////			gameDraw();
-//			gameView.draw();
-//			if( P.getBlackNum()>=P.MAX_BLACK_NUM/2 ){
-//				switchType = SWITCH_LOADING;
-//				Res.prepare(Res.PAUSE_SOURCE);
-//			}
-//		}
-//		else if( switchType==SWITCH_LOADING ){
-////				gameDraw();
-//				gameView.draw();
-//				if(Res.update()){
-//					switchType = SWITCH_LOADED;
-//				}
-//		}
-//		else if( switchType==SWITCH_LOADED ){
-////			lightNum = 0;
-//			P.setDarkness(0);
-////			pauseDraw();
-//			pauseView.draw(gameView);
-//			switchType = SWITCH_FINISH;
-//		}
-//	}
-//	private void startToSelect(){
-//		if( switchType==SWITCH_PREPARE ){
-////			lightNum = lightNum + dNum;
-//			P.increaseDarkness();
-////			startDraw();
-//			startView.draw();
-//			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
-//				switchType = SWITCH_LOADING;
-//			}
-//		}
-//		else if( switchType==SWITCH_LOADING ){
-//				switchType = SWITCH_LOADED;
-//		}
-//		else if( switchType==SWITCH_LOADED ){
-////			lightNum = lightNum - dNum;
-//			P.decreaseDarkness();
-////			selectDraw();
-//			selectView.draw();
-//			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
-//				switchType = SWITCH_FINISH;
-//			}
-//		}
-//	}
-//	private void selectToGame(){
-//		if( switchType==SWITCH_PREPARE ){
-////			lightNum = lightNum + dNum;
-//			P.increaseDarkness();
-////			selectDraw();
-//			selectView.draw();
-//			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
-//				switchType = SWITCH_LOADING;
-//				Res.prepare(Res.GAME_A);
-//			}
-//		}
-//		else if( switchType==SWITCH_LOADING ){
-////			selectDraw();
-//			selectView.draw();
-//			if(Res.update()){
-//				//加载完图片之后载入地图
-//				GameChapter.chapterLoad(
-//						gameView.getGateAtlas(),
-//						gameView.getRankNum(),
-//						selectView.getChapterId()
-//						); 
-//				switchType = SWITCH_LOADED;
-//			}
-//		}
-//		else if( switchType==SWITCH_LOADED ){
-////			lightNum = lightNum - dNum;
-//			P.decreaseDarkness();
-////			gameDraw();
-//			gameView.draw();
-//			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
-//				switchType = SWITCH_FINISH;
-//			}
-//		}
-//	}
 	
 	public void engine(){
 		
@@ -359,12 +240,6 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		status = toStatus;
 	}
 	
-//	public static boolean switchFinished(){
-//		if( status==toStatus ){
-//			return true;
-//		}
-//		return false;
-//	}
 	/**
 	 * 如果  status!=toStatus 则返回true
 	 * */
