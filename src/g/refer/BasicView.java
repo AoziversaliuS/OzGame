@@ -1,5 +1,7 @@
 package g.refer;
 
+import g.basis.MainEntry;
+import g.tool.P;
 import g.type.Status;
 
 public abstract class BasicView implements ViewInterface{
@@ -9,12 +11,17 @@ public abstract class BasicView implements ViewInterface{
     /**每个继承BasicView的view都有个switchType属性*/
 	public int switchType = SWITCH_PREPARE;
 	
+	/**
+	 * 从此视图切换到另外一个视图
+	 * */
 	public void toView(Status status,ViewInterface ...viewInterfaces){
 		
 		thisToView(status, viewInterfaces);
 		
 		if( switchType==SWITCH_FINISH ){
 			switchType = SWITCH_PREPARE;
+			MainEntry.finishSwitch();
+			P.setDarkness(0);
 		}
 	}
 	

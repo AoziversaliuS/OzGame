@@ -151,7 +151,6 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		if( switchType==SWITCH_FINISH ){
 			status = toStatus;
 			//重置信息
-//			lightNum = 0;
 			P.setDarkness(0);
 			switchType=SWITCH_PREPARE;
 		}
@@ -345,11 +344,27 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	public static Status getToStatus() {
 		return toStatus;
 	}
-	public static boolean switchFinished(){
+	/**
+	 * 在界面切换完成后调用此方法使 status = toStatus;
+	 * */
+	public static void finishSwitch(){
+		status = toStatus;
+	}
+	
+//	public static boolean switchFinished(){
+//		if( status==toStatus ){
+//			return true;
+//		}
+//		return false;
+//	}
+	/**
+	 * 如果  status!=toStatus 则返回true
+	 * */
+	public static boolean isSwitching(){
 		if( status==toStatus ){
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	public static void setToStatus(Status toStatus) {
