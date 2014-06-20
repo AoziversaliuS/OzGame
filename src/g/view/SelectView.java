@@ -2,13 +2,16 @@ package g.view;
 
 import java.util.HashMap;
 
+import g.button.SelectButtons;
 import g.refer.BtnMethods;
 import g.refer.ViewInterface;
 import g.tool.OzPoint;
+import g.tool.P;
+import g.tool.Res;
 
 public class SelectView implements ViewInterface,BtnMethods{
 
-	
+	private SelectButtons selectBtns;
 	
 	public SelectView() {
 		super();
@@ -17,38 +20,31 @@ public class SelectView implements ViewInterface,BtnMethods{
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-		
+		selectBtns = new SelectButtons();
 	}
 
 	@Override
 	public void engine() {
-		// TODO Auto-generated method stub
-		
+		selectBtns.logic();
 	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-		
+		P.draw(0, 0, Res.selectBg, P.FORCE_RATIO);
+		selectBtns.draw();
 	}
 
 	
 	@Override
 	public void btnLogic(HashMap<String, OzPoint> points) {
-		// TODO Auto-generated method stub
-		
+		selectBtns.logic(points);
 	}
 
 	@Override
 	public void btnEnter() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void btnExit() {
-		// TODO Auto-generated method stub
-		
 	}
 }

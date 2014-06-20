@@ -16,6 +16,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.Status;
 import g.view.GameView;
+import g.view.SelectView;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -30,7 +31,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	
 	private  HashMap<String, OzPoint> points;
 	//SelectStatus
-	private SelectButtons selectBtns;
+	private SelectView selectView;
+
 	//StartStatus
 	private StartButtons startBtns;
 	//PauseStatus
@@ -70,9 +72,10 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		toStatus = Status.Start;
 		
 		startInit();//开始菜单初始化
-//		this.gameInit();//游戏界面初始化
+        //游戏界面初始化
 		gameView = new GameView();
-		this.selectInit();//选择菜单初始化
+		//选择菜单初始化
+		selectView = new SelectView();
 		this.pauseInit();//暂停菜单初始化
 		
 //		Res.prepare(Res.resourceA);
@@ -231,7 +234,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		}
 		else if( sT==SWITCH_LOADED ){
 			lightNum = lightNum - dNum;
-			selectDraw();
+//			selectDraw();
+			selectView.draw();
 			if( lightNum<=minLight ){
 				sT = SWITCH_FINISH;
 			}
@@ -240,14 +244,16 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	private void selectToGame(){
 		if( sT==SWITCH_PREPARE ){
 			lightNum = lightNum + dNum;
-			selectDraw();
+//			selectDraw();
+			selectView.draw();
 			if( lightNum>=maxLight ){
 				sT = SWITCH_LOADING;
 				Res.prepare(Res.GAME_A);
 			}
 		}
 		else if( sT==SWITCH_LOADING ){
-			selectDraw();
+//			selectDraw();
+			selectView.draw();
 			if(Res.update()){
 				//加载完图片之后载入地图
 				GameChapter.chapterLoad(
@@ -280,7 +286,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		
 		case Pause:    {        break;}
 		
-		case Select:   {    selectEngine();   break;}
+		case Select:   {    selectView.engine();   break;}
 		
 		case Start:    {    startEngine();     break;}
 		
@@ -304,7 +310,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		
 		case Pause:    {    pauseDraw();    break;}
 		
-		case Select:   {    selectDraw();   break;}
+		case Select:   {    selectView.draw();   break;}
 		
 		case Start:    {    startDraw();   break;}
 		
@@ -328,7 +334,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 				
 		case Pause:    {    pauseBtns.logic(points);    break;}
 				
-		case Select:   {    selectBtns.logic(points);   break;}
+		case Select:   {    selectView.btnLogic(points);   break;}
 				
 		case Start:    {     startBtns.logic(points);   break;}
 				
@@ -351,17 +357,6 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	}
 	
 	
-	public void selectInit(){
-		selectBtns = new SelectButtons();
-	}
-	public void selectEngine(){
-		selectBtns.logic();
-	}
-	public void selectDraw(){
-//		P.drawForce(0, 0, Res.selectBg);
-		P.draw(0, 0, Res.selectBg, P.FORCE_RATIO);
-		selectBtns.draw();
-	}
 	
 	public void pauseInit(){
 		pauseBtns = new PauseButtons();
@@ -375,17 +370,6 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		P.setlight(maxLight/2);//暂停按钮绘画前设置亮度
 		pauseBtns.draw();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
