@@ -17,6 +17,7 @@ import g.tool.Res;
 import g.type.Status;
 import g.view.GameView;
 import g.view.SelectView;
+import g.view.StartView;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -30,11 +31,11 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	private long times = 50;//debug用，debug为true时使游戏运行缓慢，能看清每一帧
 	
 	private  HashMap<String, OzPoint> points;
+	
 	//SelectStatus
 	private SelectView selectView;
-
 	//StartStatus
-	private StartButtons startBtns;
+	private StartView startView;
 	//PauseStatus
 	private PauseButtons pauseBtns;
 	//GameStatus
@@ -71,7 +72,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		status = Status.Start;  //设置当前界面状态
 		toStatus = Status.Start;
 		
-		startInit();//开始菜单初始化
+		//开始菜单初始化
+		startView = new StartView();
         //游戏界面初始化
 		gameView = new GameView();
 		//选择菜单初始化
@@ -224,7 +226,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	private void startToSelect(){
 		if( sT==SWITCH_PREPARE ){
 			lightNum = lightNum + dNum;
-			startDraw();
+//			startDraw();
+			startView.draw();
 			if( lightNum>=maxLight ){
 				sT = SWITCH_LOADING;
 			}
@@ -288,7 +291,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		
 		case Select:   {    selectView.engine();   break;}
 		
-		case Start:    {    startEngine();     break;}
+		case Start:    {    startView.engine();;     break;}
 		
 		case Init:     {        break;}
 		
@@ -312,7 +315,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		
 		case Select:   {    selectView.draw();   break;}
 		
-		case Start:    {    startDraw();   break;}
+		case Start:    {    startView.draw();   break;}
 		
 		case Init:     {        break;}
 		
@@ -336,7 +339,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 				
 		case Select:   {    selectView.btnLogic(points);   break;}
 				
-		case Start:    {     startBtns.logic(points);   break;}
+		case Start:    {     startView.btnLogic(points);   break;}
 				
 		case Init:     {        break;}
 		
@@ -344,17 +347,6 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	}
 	
 	
-	public void startInit(){
-		startBtns = new StartButtons();
-	}
-	public void startEngine(){
-		
-	}
-	public void startDraw(){
-//		P.drawForce(0, 0, Res.startBg);
-		P.draw(0, 0, Res.startBg, P.FORCE_RATIO);
-		startBtns.draw();
-	}
 	
 	
 	
