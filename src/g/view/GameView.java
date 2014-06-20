@@ -117,7 +117,9 @@ public class GameView implements ViewInterface,BtnMethods{
 		gameBtns.draw();
 	
 	}
-	
+	/**
+	 * 从游戏界面切换到暂停菜单
+	 * */
 	public void toPauseView(ViewInterface ...viewInterfaces){
 		PauseView pauseView = (PauseView) viewInterfaces[0];
 		if( MainView.switchType==MainView.SWITCH_PREPARE ){

@@ -2,6 +2,7 @@ package g.view;
 
 import java.util.HashMap;
 
+import g.basis.MainView;
 import g.button.PauseButtons;
 import g.refer.BtnMethods;
 import g.refer.ViewInterface;
@@ -48,6 +49,31 @@ public class PauseView implements ViewInterface,BtnMethods{
 
 	@Override
 	public void btnExit() {
+	}
+	
+	public void toGameView(ViewInterface ...viewInterfaces){
+		GameView gameView = (GameView) viewInterfaces[0];
+		if( MainView.switchType==MainView.SWITCH_PREPARE ){
+//			lightNum = maxLight/2;
+			P.setDarkness(P.MAX_BLACK_NUM/2);
+//			gameDraw();
+			gameView.draw();
+			MainView.switchType = MainView.SWITCH_LOADING;
+		}
+		else if( MainView.switchType==MainView.SWITCH_LOADING ){
+//			gameDraw();
+			gameView.draw();
+			MainView.switchType = MainView.SWITCH_LOADED;
+		}
+		else if( MainView.switchType==MainView.SWITCH_LOADED ){
+//			lightNum = lightNum-dNum;
+			P.decreaseDarkness();
+//			gameDraw();
+			gameView.draw();
+			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
+				MainView.switchType = MainView.SWITCH_FINISH;
+			}
+		}
 	}
 
 }

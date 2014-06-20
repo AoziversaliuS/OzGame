@@ -156,7 +156,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 			gameView.toPauseView(pauseView);
 		}
 		if( toStatus==Status.Game && status==Status.Pause ){
-			pauseToGame();
+//			pauseToGame();
+			pauseView.toGameView(gameView);
 		}
 		
 		if( switchType==SWITCH_FINISH ){
@@ -167,29 +168,29 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 			switchType=SWITCH_PREPARE;
 		}
 	}
-	private void pauseToGame(){
-		if( switchType==SWITCH_PREPARE ){
-//			lightNum = maxLight/2;
-			P.setDarkness(P.MAX_BLACK_NUM/2);
-//			gameDraw();
-			gameView.draw();
-			switchType = SWITCH_LOADING;
-		}
-		else if( switchType==SWITCH_LOADING ){
-//			gameDraw();
-			gameView.draw();
-			switchType = SWITCH_LOADED;
-		}
-		else if( switchType==SWITCH_LOADED ){
-//			lightNum = lightNum-dNum;
-			P.decreaseDarkness();
-//			gameDraw();
-			gameView.draw();
-			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
-				switchType = SWITCH_FINISH;
-			}
-		}
-	}
+//	private void pauseToGame(){
+//		if( switchType==SWITCH_PREPARE ){
+////			lightNum = maxLight/2;
+//			P.setDarkness(P.MAX_BLACK_NUM/2);
+////			gameDraw();
+//			gameView.draw();
+//			switchType = SWITCH_LOADING;
+//		}
+//		else if( switchType==SWITCH_LOADING ){
+////			gameDraw();
+//			gameView.draw();
+//			switchType = SWITCH_LOADED;
+//		}
+//		else if( switchType==SWITCH_LOADED ){
+////			lightNum = lightNum-dNum;
+//			P.decreaseDarkness();
+////			gameDraw();
+//			gameView.draw();
+//			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
+//				switchType = SWITCH_FINISH;
+//			}
+//		}
+//	}
 //	private void gameToPause(){
 //		if( switchType==SWITCH_PREPARE ){
 ////			lightNum = lightNum + dNum;
