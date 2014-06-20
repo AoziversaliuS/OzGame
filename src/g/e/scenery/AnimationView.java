@@ -1,4 +1,4 @@
-package g.e.view;
+package g.e.scenery;
 
 import g.refer.BasicBody;
 import g.refer.Player;

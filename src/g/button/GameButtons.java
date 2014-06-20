@@ -46,16 +46,14 @@ public class GameButtons extends OzElement{
 		float passY = P.BASIC_SCREEN_HEIGHT-Res.game_btnPass[0].getHeight();
 		buttonPause = new OzRect(passX, passY, Res.game_btnPass[0].getWidth(), Res.game_btnPass[0].getHeight());
 		
-		GameButtons.Arrow = GameButtons.A_Else;
-		GameButtons.Skill = GameButtons.S_Else;
-		Playing = true;
+		this.reset();
 	}
 
 	@Override
 	public void reset() {
 		GameButtons.Arrow = GameButtons.A_Else;   //清除掉上一帧的按键信息
 		GameButtons.Skill = GameButtons.S_Else;
-		GameButtons.Playing = false;
+		GameButtons.Playing = true;
 	}
 	public void logic(HashMap<String, OzPoint> points) {
 		
