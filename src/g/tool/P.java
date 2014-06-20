@@ -49,12 +49,21 @@ public class P {
 		black.setColor(0, 0, 0, blackNum);
 		black.draw(batch);
 	}
+	/**
+	 *  调整P.useDarkness()所用到的屏幕暗度值大小
+	 * */
 	public static void increaseDarkness(){
 		blackNum = blackNum + D_BLACK_NUM;
 	}
+	/**
+	 * 调整P.useDarkness()所用到的屏幕暗度值大小
+	 * */
 	public static void decreaseDarkness(){
 		blackNum = blackNum - D_BLACK_NUM;
 	}
+	/**
+	 * 设置P.useDarkness()所用到的屏幕暗度值大小
+	 * */
 	public static void setDarkness(float blackNum) {
 		P.blackNum = blackNum;
 	}
@@ -75,16 +84,27 @@ public class P {
 	
 	//绘图方法↓
 	//根据图片的比例来画
+	/**
+	 * 根据图片本身的比例来画
+	 * */
 	public static void draw(OzPoint p,OzPicture picture){
 		draw(p.x, p.y, picture);
 	}
+	/**
+	 * 根据图片本身的比例来画
+	 * */
 	public static void draw(float x,float y,OzPicture picture){
 		draw(x, y, picture,picture.getRatioType());
 	}
-	//画图时自行设置比例
+	/**
+	 * 画图时自行设置比例
+	 * */
 	public static void draw(OzPoint p,OzPicture picture,int ratioType){
 		draw(p.x, p.y, picture, ratioType);
 	}
+	/**
+	 * 画图时自行设置比例
+	 * */
 	public static void draw(float x,float y,OzPicture picture,int ratioType){
 		if( ratioType == NO_RATIO ){
 			//直接画
