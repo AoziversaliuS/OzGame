@@ -2,6 +2,8 @@ package g.refer;
 
 
 
+
+
 public interface Origin {
 	
 		//重置所有元素信息
