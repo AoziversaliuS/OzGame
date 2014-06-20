@@ -16,6 +16,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.Status;
 import g.view.GameView;
+import g.view.PauseView;
 import g.view.SelectView;
 import g.view.StartView;
 
@@ -37,13 +38,12 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	//StartStatus
 	private StartView startView;
 	//PauseStatus
-	private PauseButtons pauseBtns;
+	private PauseView pauseView;
 	//GameStatus
 	private GameView gameView;
 	
 	private static Status status;  //当前界面状态
     private static Status toStatus;
-//	private float lightNum = 0f;
 	
 	private final int SWITCH_PREPARE=1,SWITCH_LOADING=2,SWITCH_LOADED=3,SWITCH_FINISH=4;
 	private int sT = SWITCH_PREPARE;
@@ -51,20 +51,13 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 
 	
 	
-//	private final float dNum = 0.05f;
-//	private final float maxLight = 0.98f;
-//	private final float minLight = 0.01f;
-	
 	@Override
 	public void create() {	
 		
 		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //画图工具类初始化
 		Res.init();//资源管理器初始化。
 		
-		
 		points = new HashMap<String, OzPoint>(); //触摸点
-		
-
 		
 		Gdx.input.setCatchBackKey(true); //不让系统接收到Back键
 		Gdx.input.setInputProcessor(this); //设置触屏监听
@@ -78,12 +71,9 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		gameView = new GameView();
 		//选择菜单初始化
 		selectView = new SelectView();
-		this.pauseInit();//暂停菜单初始化
+		//暂停菜单初始化
+		pauseView = new PauseView();
 		
-//		Res.prepare(Res.resourceA);
-//		while( !Res.update() ){
-//		}
-//		System.out.println("更新状态"+Res.update());
 	}
 	@Override
 	public synchronized boolean keyDown(int keycode) {
@@ -225,7 +215,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		else if( sT==SWITCH_LOADED ){
 //			lightNum = 0;
 			P.setDarkness(0);
-			pauseDraw();
+//			pauseDraw();
+			pauseView.draw(gameView);
 			sT = SWITCH_FINISH;
 		}
 	}
@@ -321,7 +312,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 			
 		case Loading:  {        break;}
 		
-		case Pause:    {    pauseDraw();    break;}
+		case Pause:    {    pauseView.draw(gameView);    break;}
 		
 		case Select:   {    selectView.draw();   break;}
 		
@@ -345,7 +336,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 					
 		case Loading:  {        break;}
 				
-		case Pause:    {    pauseBtns.logic(points);    break;}
+		case Pause:    {    pauseView.btnLogic(points);    break;}
 				
 		case Select:   {    selectView.btnLogic(points);   break;}
 				
@@ -359,20 +350,6 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	
 	
 	
-	
-	public void pauseInit(){
-		pauseBtns = new PauseButtons();
-	}
-	public void pauseEngine(){
-		
-	}
-	public void pauseDraw(){
-//		gameDraw();
-		gameView.draw();
-//		P.setlight(maxLight/2);//暂停按钮绘画前设置亮度
-		P.useDarkness(P.MAX_BLACK_NUM/2);
-		pauseBtns.draw();
-	}
 	
 	
 	

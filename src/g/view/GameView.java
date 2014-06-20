@@ -102,7 +102,7 @@ public class GameView implements ViewInterface,BtnMethods{
 	}
 
 	@Override
-	public void draw() {
+	public void draw(ViewInterface ...viewInterfaces) {
 		for(int i=0;i<rankNum.size();i++){
 			for(int i2=0;i2<gateAtlas.size();i2++){
 				if(rankNum.get(i).value == gateAtlas.get(i2).rankNum){

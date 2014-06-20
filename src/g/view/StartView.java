@@ -30,7 +30,7 @@ public class StartView implements ViewInterface,BtnMethods{
 	}
 
 	@Override
-	public void draw() {
+	public void draw(ViewInterface... viewInterfaces) {
 		P.draw(0, 0, Res.startBg, P.FORCE_RATIO);
 		startBtns.draw();
 	}
@@ -47,5 +47,6 @@ public class StartView implements ViewInterface,BtnMethods{
 	@Override
 	public void btnExit() {
 	}
+
 
 }

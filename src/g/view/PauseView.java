@@ -2,42 +2,44 @@ package g.view;
 
 import java.util.HashMap;
 
-import g.button.SelectButtons;
+import g.button.PauseButtons;
 import g.refer.BtnMethods;
 import g.refer.ViewInterface;
 import g.tool.OzPoint;
 import g.tool.P;
-import g.tool.Res;
 
-public class SelectView implements ViewInterface,BtnMethods{
+public class PauseView implements ViewInterface,BtnMethods{
 
-	private SelectButtons selectBtns;
-	
-	public SelectView() {
+	private PauseButtons pauseBtns;
+
+	public PauseView() {
 		super();
 		this.init();
 	}
 
 	@Override
 	public void init() {
-		selectBtns = new SelectButtons();
+		pauseBtns = new PauseButtons();
 	}
 
 	@Override
 	public void engine() {
-		selectBtns.logic();
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void draw(ViewInterface ...viewInterfaces) {
-		P.draw(0, 0, Res.selectBg, P.FORCE_RATIO);
-		selectBtns.draw();
+		//¡ýgameView.draw();
+		viewInterfaces[0].draw();
+		
+		P.useDarkness(P.MAX_BLACK_NUM/2);
+		pauseBtns.draw();
 	}
-
 	
 	@Override
 	public void btnLogic(HashMap<String, OzPoint> points) {
-		selectBtns.logic(points);
+		pauseBtns.logic(points);
 	}
 
 	@Override
@@ -47,4 +49,5 @@ public class SelectView implements ViewInterface,BtnMethods{
 	@Override
 	public void btnExit() {
 	}
+
 }

@@ -6,6 +6,10 @@ public interface ViewInterface {
 	
 	public void engine();
 	
-	public void draw();
+	/**
+	 * 如果要把另外一个视图作为背景画出，则应将该视图作为参数传入
+	 * 
+	 * */
+	public void draw(ViewInterface ...viewInterfaces);
 	
 }
