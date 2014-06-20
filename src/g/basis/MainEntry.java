@@ -339,8 +339,14 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	
 	
 	
+	public static Status getStatus() {
+		return status;
+	}
+	public static Status getToStatus() {
+		return toStatus;
+	}
 	public static boolean switchFinished(){
-		if( status==toStatus && status==Status.Game ){
+		if( status==toStatus ){
 			return true;
 		}
 		return false;

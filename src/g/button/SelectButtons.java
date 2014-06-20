@@ -189,7 +189,9 @@ public class SelectButtons extends OzElement{
 			}
 		}
 	}
-	//此方法只有在屏幕上有触碰点的时候才调用，最后一个触碰点离开时也会进入，此时points.size()==0;
+	/**
+	 * 此方法只有在屏幕上有触碰点的时候才调用，最后一个触碰点离开时也会进入，此时points.size()==0;
+	 * */
 	public void logic(HashMap<String, OzPoint> points){
 		
 		//触摸点的算法
@@ -230,11 +232,11 @@ public class SelectButtons extends OzElement{
 			MainEntry.setToStatus(Status.Game);
 			submit = false;
 		}
-		else{
-			if( MainEntry.switchFinished() ){//界面跳转到游戏界面时返回true
-				chapterId = -1;            //重设变量
-			}
-		}
+//		else{
+//			if( MainEntry.switchFinished() ){//界面跳转到游戏界面时返回true
+//				chapterId = -1;            //重设变量
+//			}
+//		}
 		
 		
 	}
