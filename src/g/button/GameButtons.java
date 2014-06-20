@@ -1,6 +1,6 @@
 package g.button;
 
-import g.basis.GameView;
+import g.basis.MainView;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -85,7 +85,7 @@ public class GameButtons extends OzElement{
 		//
 		if(buttonPause.insides(points, P.FORCE_RATIO)){
 			Playing = false;
-			GameView.setToStatus(Status.Pause);
+			MainView.setToStatus(Status.Pause);
 		}
 		else{
 			Playing = true;

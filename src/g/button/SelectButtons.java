@@ -3,7 +3,7 @@ package g.button;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import g.basis.GameView;
+import g.basis.MainView;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -227,11 +227,11 @@ public class SelectButtons extends OzElement{
 			submit = false;
 		}
 		else if( submit && moveMold==MOVE_QUIET ){ 
-			GameView.setToStatus(Status.Game);
+			MainView.setToStatus(Status.Game);
 			submit = false;
 		}
 		else{
-			if( GameView.switchFinished() ){//界面跳转到游戏界面时返回true
+			if( MainView.switchFinished() ){//界面跳转到游戏界面时返回true
 				chapterId = -1;            //重设变量
 			}
 		}

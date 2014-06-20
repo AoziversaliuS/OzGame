@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 
-import g.basis.GameView;
+import g.basis.MainView;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -76,7 +76,7 @@ public class PauseButtons extends OzElement{
 	}
 	private void active(){
 		if( selected==RESUME ){
-			GameView.setToStatus(Status.Game);
+			MainView.setToStatus(Status.Game);
 		}
 		else if( selected==EXIT ){
 			Gdx.app.exit();

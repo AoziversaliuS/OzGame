@@ -20,7 +20,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessorQueue;
 
-public class GameView extends InputProcessorQueue implements ApplicationListener {
+public class MainView extends InputProcessorQueue implements ApplicationListener {
 	
 	private boolean showFPS = false;
 	
@@ -468,7 +468,7 @@ public class GameView extends InputProcessorQueue implements ApplicationListener
 	}
 	
 	public static void setToStatus(Status toStatus) {
-		GameView.toStatus = toStatus;
+		MainView.toStatus = toStatus;
 	}
 
 }
