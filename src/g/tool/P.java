@@ -31,12 +31,12 @@ public class P {
 	}
 	
 	//设置屏幕亮度
-	public static void setlight(float light){
-		black.setColor(0, 0, 0, light);
-		black.draw(batch);
-	}
+//	public static void setlight(float light){
+//		black.setColor(0, 0, 0, light);
+//		black.draw(batch);
+//	}
 	/**
-	 * 使用参数值来设定屏幕暗度，0.01f<=blackNum<=0.98f
+	 * 使用参数值来设定屏幕暗度，0.00f<=blackNum<=1f
 	 * */
 	public static void useDarkness(float blackNum){
 		black.setColor(0, 0, 0, blackNum);
@@ -50,13 +50,13 @@ public class P {
 		black.draw(batch);
 	}
 	/**
-	 *  调整P.useDarkness()所用到的屏幕暗度值大小
+	 *  增加P.useDarkness()所用到的屏幕暗度值大小
 	 * */
 	public static void increaseDarkness(){
 		blackNum = blackNum + D_BLACK_NUM;
 	}
 	/**
-	 * 调整P.useDarkness()所用到的屏幕暗度值大小
+	 * 减少P.useDarkness()所用到的屏幕暗度值大小
 	 * */
 	public static void decreaseDarkness(){
 		blackNum = blackNum - D_BLACK_NUM;
@@ -67,10 +67,14 @@ public class P {
 	public static void setDarkness(float blackNum) {
 		P.blackNum = blackNum;
 	}
-	
-	
-	
+	/**
+	 * 获取屏幕暗度值
+	 * */
+	public static float getBlackNum() {
+		return blackNum;
+	}
 
+	
 	private static void LogShow(OzPicture a,String s){
 		Gdx.app.log("ratio","  "+s+"图片宽: "+a.getSprite().getWidth()+" "+s+"图片高: "+a.getSprite().getHeight());
 	}

@@ -43,7 +43,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	
 	private static Status status;  //当前界面状态
     private static Status toStatus;
-	private float lightNum = 0f;
+//	private float lightNum = 0f;
 	
 	private final int SWITCH_PREPARE=1,SWITCH_LOADING=2,SWITCH_LOADED=3,SWITCH_FINISH=4;
 	private int sT = SWITCH_PREPARE;
@@ -51,9 +51,9 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 
 	
 	
-	private final float dNum = 0.05f;
-	private final float maxLight = 0.98f;
-	private final float minLight = 0.01f;
+//	private final float dNum = 0.05f;
+//	private final float maxLight = 0.98f;
+//	private final float minLight = 0.01f;
 	
 	@Override
 	public void create() {	
@@ -144,7 +144,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 			statusSwitch();
 		}
 		
-		P.setlight(lightNum);
+//		P.setlight(lightNum);
+		P.useDarkness();
 		P.end();
 		
 		if(debug){
@@ -175,13 +176,15 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		if( sT==SWITCH_FINISH ){
 			status = toStatus;
 			//重置信息
-			lightNum = 0;
+//			lightNum = 0;
+			P.setDarkness(0);
 			sT=SWITCH_PREPARE;
 		}
 	}
 	private void pauseToGame(){
 		if( sT==SWITCH_PREPARE ){
-			lightNum = maxLight/2;
+//			lightNum = maxLight/2;
+			P.setDarkness(P.MAX_BLACK_NUM/2);
 //			gameDraw();
 			gameView.draw();
 			sT = SWITCH_LOADING;
@@ -192,20 +195,22 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 			sT = SWITCH_LOADED;
 		}
 		else if( sT==SWITCH_LOADED ){
-			lightNum = lightNum-dNum;
+//			lightNum = lightNum-dNum;
+			P.decreaseDarkness();
 //			gameDraw();
 			gameView.draw();
-			if(lightNum<=minLight){
+			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
 				sT = SWITCH_FINISH;
 			}
 		}
 	}
 	private void gameToPause(){
 		if( sT==SWITCH_PREPARE ){
-			lightNum = lightNum + dNum;
+//			lightNum = lightNum + dNum;
+			P.increaseDarkness();
 //			gameDraw();
 			gameView.draw();
-			if( lightNum>=maxLight/2 ){
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM/2 ){
 				sT = SWITCH_LOADING;
 				Res.prepare(Res.PAUSE_SOURCE);
 			}
@@ -218,17 +223,19 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 				}
 		}
 		else if( sT==SWITCH_LOADED ){
-			lightNum = 0;
+//			lightNum = 0;
+			P.setDarkness(0);
 			pauseDraw();
 			sT = SWITCH_FINISH;
 		}
 	}
 	private void startToSelect(){
 		if( sT==SWITCH_PREPARE ){
-			lightNum = lightNum + dNum;
+//			lightNum = lightNum + dNum;
+			P.increaseDarkness();
 //			startDraw();
 			startView.draw();
-			if( lightNum>=maxLight ){
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
 				sT = SWITCH_LOADING;
 			}
 		}
@@ -236,20 +243,22 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 				sT = SWITCH_LOADED;
 		}
 		else if( sT==SWITCH_LOADED ){
-			lightNum = lightNum - dNum;
+//			lightNum = lightNum - dNum;
+			P.decreaseDarkness();
 //			selectDraw();
 			selectView.draw();
-			if( lightNum<=minLight ){
+			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				sT = SWITCH_FINISH;
 			}
 		}
 	}
 	private void selectToGame(){
 		if( sT==SWITCH_PREPARE ){
-			lightNum = lightNum + dNum;
+//			lightNum = lightNum + dNum;
+			P.increaseDarkness();
 //			selectDraw();
 			selectView.draw();
-			if( lightNum>=maxLight ){
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
 				sT = SWITCH_LOADING;
 				Res.prepare(Res.GAME_A);
 			}
@@ -268,10 +277,11 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 			}
 		}
 		else if( sT==SWITCH_LOADED ){
-			lightNum = lightNum - dNum;
+//			lightNum = lightNum - dNum;
+			P.decreaseDarkness();
 //			gameDraw();
 			gameView.draw();
-			if( lightNum<=minLight ){
+			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				sT = SWITCH_FINISH;
 			}
 		}
@@ -359,7 +369,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	public void pauseDraw(){
 //		gameDraw();
 		gameView.draw();
-		P.setlight(maxLight/2);//暂停按钮绘画前设置亮度
+//		P.setlight(maxLight/2);//暂停按钮绘画前设置亮度
+		P.useDarkness(P.MAX_BLACK_NUM/2);
 		pauseBtns.draw();
 	}
 	
