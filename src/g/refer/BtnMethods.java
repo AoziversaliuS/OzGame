@@ -6,10 +6,10 @@ import java.util.HashMap;
 
 public interface BtnMethods {
 	
-	public void logic(HashMap<String, OzPoint> points);
+	public void btnLogic(HashMap<String, OzPoint> points);
 	
-	public void enter();
+	public void btnEnter();
 	
-	public void exit();
+	public void btnExit();
 
 }

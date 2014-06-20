@@ -15,6 +15,7 @@ import g.tool.OzPoint;
 import g.tool.P;
 import g.tool.Res;
 import g.type.Status;
+import g.view.GameView;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -25,7 +26,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	private boolean showFPS = false;
 	
 	private boolean debug = false;
-	private long times = 50;
+	private long times = 50;//debug用，debug为true时使游戏运行缓慢，能看清每一帧
 	
 	private  HashMap<String, OzPoint> points;
 	//SelectStatus
@@ -35,9 +36,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	//PauseStatus
 	private PauseButtons pauseBtns;
 	//GameStatus
-	private GameButtons gameBtns;
-	private static   ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
-	private  ArrayList<OzInt> rankNum;   //按图层等级来进行显示图片
+	private GameView gameView;
 	
 	private static Status status;  //当前界面状态
     private static Status toStatus;
@@ -46,7 +45,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	private final int SWITCH_PREPARE=1,SWITCH_LOADING=2,SWITCH_LOADED=3,SWITCH_FINISH=4;
 	private int sT = SWITCH_PREPARE;
 	
-	public static Player player;
+
 	
 	
 	private final float dNum = 0.05f;
@@ -71,7 +70,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		toStatus = Status.Start;
 		
 		startInit();//开始菜单初始化
-		this.gameInit();//游戏界面初始化
+//		this.gameInit();//游戏界面初始化
+		gameView = new GameView();
 		this.selectInit();//选择菜单初始化
 		this.pauseInit();//暂停菜单初始化
 		
@@ -177,16 +177,19 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	private void pauseToGame(){
 		if( sT==SWITCH_PREPARE ){
 			lightNum = maxLight/2;
-			gameDraw();
+//			gameDraw();
+			gameView.draw();
 			sT = SWITCH_LOADING;
 		}
 		else if( sT==SWITCH_LOADING ){
-			gameDraw();
+//			gameDraw();
+			gameView.draw();
 			sT = SWITCH_LOADED;
 		}
 		else if( sT==SWITCH_LOADED ){
 			lightNum = lightNum-dNum;
-			gameDraw();
+//			gameDraw();
+			gameView.draw();
 			if(lightNum<=minLight){
 				sT = SWITCH_FINISH;
 			}
@@ -195,14 +198,16 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	private void gameToPause(){
 		if( sT==SWITCH_PREPARE ){
 			lightNum = lightNum + dNum;
-			gameDraw();
+//			gameDraw();
+			gameView.draw();
 			if( lightNum>=maxLight/2 ){
 				sT = SWITCH_LOADING;
 				Res.prepare(Res.PAUSE_SOURCE);
 			}
 		}
 		else if( sT==SWITCH_LOADING ){
-				gameDraw();
+//				gameDraw();
+				gameView.draw();
 				if(Res.update()){
 					sT = SWITCH_LOADED;
 				}
@@ -245,13 +250,18 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 			selectDraw();
 			if(Res.update()){
 				//加载完图片之后载入地图
-				GameChapter.chapterLoad(gateAtlas, rankNum,SelectButtons.getChapterId()); 
+				GameChapter.chapterLoad(
+						gameView.getGateAtlas(),
+						gameView.getRankNum(),
+						SelectButtons.getChapterId()
+						); 
 				sT = SWITCH_LOADED;
 			}
 		}
 		else if( sT==SWITCH_LOADED ){
 			lightNum = lightNum - dNum;
-			gameDraw();
+//			gameDraw();
+			gameView.draw();
 			if( lightNum<=minLight ){
 				sT = SWITCH_FINISH;
 			}
@@ -264,7 +274,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		
 		case Credits:  {       break;}
 		
-		case Game:     {    gameEngine();    break;}
+		case Game:     {   gameView.engine();    break;}
 			
 		case Loading:  {        break;}
 		
@@ -288,7 +298,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		
 		case Credits:  {        break;}
 		
-		case Game:     {    gameDraw();    break;}
+		case Game:     {    gameView.draw();    break;}
 			
 		case Loading:  {        break;}
 		
@@ -312,7 +322,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 				
 		case Credits:  {        break;}
 				
-		case Game:     {    gameBtns.logic(points);     break;}
+		case Game:     {    gameView.btnLogic(points);     break;}
 					
 		case Loading:  {        break;}
 				
@@ -360,7 +370,8 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		
 	}
 	public void pauseDraw(){
-		gameDraw();
+//		gameDraw();
+		gameView.draw();
 		P.setlight(maxLight/2);//暂停按钮绘画前设置亮度
 		pauseBtns.draw();
 	}
@@ -369,87 +380,6 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	
 	
 	
-	public void gameInit(){
-		gameBtns     = new GameButtons();
-		gateAtlas   = new ArrayList<OzElement>();
-		rankNum     = new ArrayList<OzInt>();
-		player =  new Player();
-	}
-	public void gameEngine(){
-		
-		player.resetOnBegin();
-		
-		//↓复活回滚
-		if(Player.getCondition()==Player.DEAD_END){
-			boolean finish = false;
-			for(OzElement g:gateAtlas){
-
-				if( finish==false ){
-					finish = g.rollBack();
-				}
-				else{
-					g.rollBack();
-				}
-			}
-			//重设坐标之后开始复活
-			if(finish){
-				Player.setCondition(Player.REVIVE_START);
-			}
-		}
-		//↑复活回滚
-		
-		//碰撞检测A↓ [用于更新玩家碰撞状态]
-		for(int i=0;i<gateAtlas.size();i++){
-			gateAtlas.get(i).impact(player);
-		}
-		player.set_VerticalT_and_PlaneT(gateAtlas); //设置玩家的垂直状态和水平状态值
-		//碰撞检测A↑
-		
-		
-		//玩家状态改变↓
-		player.updateAction();
-		//玩家状态改变↑
-		
-		//在进入engine前对参数进行一些更新,目前仅用于MoveLand方向发生改变时更新参数
-		for(int i=0;i<gateAtlas.size();i++){
-			gateAtlas.get(i).prepare();
-		}
-		
-		//元素移动等逻辑↓
-		for(int i=0;i<gateAtlas.size();i++){
-			gateAtlas.get(i).engine();
-		}
-		player.engine();
-		//元素移动等逻辑↑
-		
-		//碰撞检测B↓ [用于PushBack]
-		for(int i=0;i<gateAtlas.size();i++){
-			gateAtlas.get(i).impact(player);
-		}
-		//位置微调
-		for(OzElement g:gateAtlas){
-			if(g instanceof BasicBody){
-				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
-				g.l.x = g.l.x + player.getPush_X();
-				g.l.y = g.l.y - player.getPush_Y();
-			}
-		}
-		//碰撞检测B↑
-		
-		/**此时还未绘图******/
-	}
-	public void gameDraw(){
-		for(int i=0;i<rankNum.size();i++){
-			for(int i2=0;i2<gateAtlas.size();i2++){
-				if(rankNum.get(i).value == gateAtlas.get(i2).rankNum){
-					gateAtlas.get(i2).draw();
-				}
-			}
-		}
-		player.draw();
-		gameBtns.draw();
-	
-	}
 	
 	
 	
