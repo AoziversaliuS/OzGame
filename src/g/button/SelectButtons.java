@@ -3,7 +3,7 @@ package g.button;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import g.basis.MainView;
+import g.basis.MainEntry;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -43,7 +43,7 @@ public class SelectButtons extends OzElement{
 	private float dX = 0;//触摸之后x轴要移动的距离
 	
 	
-	private static int chapterId = -1;
+	private  int chapterId = -1;
 	private boolean submit = false;
 	private boolean selected = false;
 	
@@ -227,11 +227,11 @@ public class SelectButtons extends OzElement{
 			submit = false;
 		}
 		else if( submit && moveMold==MOVE_QUIET ){ 
-			MainView.setToStatus(Status.Game);
+			MainEntry.setToStatus(Status.Game);
 			submit = false;
 		}
 		else{
-			if( MainView.switchFinished() ){//界面跳转到游戏界面时返回true
+			if( MainEntry.switchFinished() ){//界面跳转到游戏界面时返回true
 				chapterId = -1;            //重设变量
 			}
 		}
@@ -375,7 +375,7 @@ public class SelectButtons extends OzElement{
 		return rightBtn;
 	}
 
-	public static int getChapterId() {
+	public  int getChapterId() {
 		return chapterId;
 	}
 

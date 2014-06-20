@@ -1,10 +1,7 @@
 package g.basis;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import g.button.GameButtons;
-import g.button.PauseButtons;
 import g.button.SelectButtons;
 import g.tool.OzPoint;
 import g.tool.P;
@@ -19,7 +16,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessorQueue;
 
-public class MainView extends InputProcessorQueue implements ApplicationListener {
+public class MainEntry extends InputProcessorQueue implements ApplicationListener {
 	
 	private boolean showFPS = false;
 	
@@ -77,28 +74,22 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	}
 	@Override
 	public synchronized boolean touchDown(int screenX, int screenY,int pointer, int button) {
-		
 		points.put(""+pointer, new OzPoint(screenX, screenY, true));
 		btnLogic();
-//		Gdx.app.log("Interact", "touchDown  有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
 	@Override
 	public synchronized boolean touchUp(int screenX, int screenY, int pointer,
 			int button) {
-		
 		points.remove(""+pointer);
 		btnLogic();
-//		Gdx.app.log("Interact", "touchUp 有"+points.size()+"个点! "+"   "+pointer);
 		return false;
 	}
 	@Override
 	public synchronized boolean touchDragged(int screenX, int screenY,
 			int pointer) {
-		
 		points.get(""+pointer).set_XY_fromScreen(screenX, screenY);
 		btnLogic();
-//		Gdx.app.log("Interact", "touchDragged 有"+points.size()+"个点! "+"   "+pointer+" L: "+screenX+" "+screenY);
 		return false;
 	}
 	@Override
@@ -129,8 +120,6 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 		else{
 			statusSwitch();
 		}
-		
-//		P.setlight(lightNum);
 		P.useDarkness();
 		P.end();
 		
@@ -138,7 +127,6 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 			try {
 				Thread.sleep(times);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -259,7 +247,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 				GameChapter.chapterLoad(
 						gameView.getGateAtlas(),
 						gameView.getRankNum(),
-						SelectButtons.getChapterId()
+						selectView.getChapterId()
 						); 
 				switchType = SWITCH_LOADED;
 			}
@@ -359,7 +347,7 @@ public class MainView extends InputProcessorQueue implements ApplicationListener
 	}
 	
 	public static void setToStatus(Status toStatus) {
-		MainView.toStatus = toStatus;
+		MainEntry.toStatus = toStatus;
 	}
 
 }

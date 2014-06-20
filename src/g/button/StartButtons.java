@@ -3,7 +3,7 @@ package g.button;
 import java.awt.Point;
 import java.util.HashMap;
 
-import g.basis.MainView;
+import g.basis.MainEntry;
 import g.refer.OzElement;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -72,7 +72,7 @@ public class StartButtons extends OzElement{
 	//按键触发事件
 	private void active(){
 		if( selected==StartButtons.START_GAME ){
-			MainView.setToStatus(Status.Select);
+			MainEntry.setToStatus(Status.Select);
 		}
 		
 		

@@ -34,6 +34,12 @@ public class SelectView implements ViewInterface,BtnMethods{
 		P.draw(0, 0, Res.selectBg, P.FORCE_RATIO);
 		selectBtns.draw();
 	}
+	/**
+	 * 获取当前选中的关卡Id
+	 * */
+	public int getChapterId(){
+		return selectBtns.getChapterId();
+	}
 
 	
 	@Override
@@ -50,7 +56,7 @@ public class SelectView implements ViewInterface,BtnMethods{
 	}
 
 	@Override
-	public void toView(Status status, ViewInterface... viewInterfaces) {
+	public void thisToView(Status status, ViewInterface... viewInterfaces) {
 		// TODO Auto-generated method stub
 		
 	}

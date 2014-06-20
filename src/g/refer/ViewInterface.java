@@ -16,5 +16,5 @@ public interface ViewInterface {
 	/**
 	 * 从此视图切换到另外一个视图
 	 * */
-	public void toView(Status status,ViewInterface ...viewInterfaces);
+	public void thisToView(Status status,ViewInterface ...viewInterfaces);
 }

@@ -2,7 +2,7 @@ package g.view;
 
 import java.util.HashMap;
 
-import g.basis.MainView;
+import g.basis.MainEntry;
 import g.button.PauseButtons;
 import g.refer.BtnMethods;
 import g.refer.ViewInterface;
@@ -54,31 +54,31 @@ public class PauseView implements ViewInterface,BtnMethods{
 	
 	public void toGameView(ViewInterface ...viewInterfaces){
 		GameView gameView = (GameView) viewInterfaces[0];
-		if( MainView.switchType==MainView.SWITCH_PREPARE ){
+		if( MainEntry.switchType==MainEntry.SWITCH_PREPARE ){
 //			lightNum = maxLight/2;
 			P.setDarkness(P.MAX_BLACK_NUM/2);
 //			gameDraw();
 			gameView.draw();
-			MainView.switchType = MainView.SWITCH_LOADING;
+			MainEntry.switchType = MainEntry.SWITCH_LOADING;
 		}
-		else if( MainView.switchType==MainView.SWITCH_LOADING ){
+		else if( MainEntry.switchType==MainEntry.SWITCH_LOADING ){
 //			gameDraw();
 			gameView.draw();
-			MainView.switchType = MainView.SWITCH_LOADED;
+			MainEntry.switchType = MainEntry.SWITCH_LOADED;
 		}
-		else if( MainView.switchType==MainView.SWITCH_LOADED ){
+		else if( MainEntry.switchType==MainEntry.SWITCH_LOADED ){
 //			lightNum = lightNum-dNum;
 			P.decreaseDarkness();
 //			gameDraw();
 			gameView.draw();
 			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
-				MainView.switchType = MainView.SWITCH_FINISH;
+				MainEntry.switchType = MainEntry.SWITCH_FINISH;
 			}
 		}
 	}
 
 	@Override
-	public void toView(Status status, ViewInterface... viewInterfaces) {
+	public void thisToView(Status status, ViewInterface... viewInterfaces) {
 		// TODO Auto-generated method stub
 		
 	}
