@@ -50,7 +50,7 @@ public class StartView implements ViewInterface,BtnMethods{
 	}
 
 	@Override
-	public void toView(Status status, ViewInterface... viewInterfaces) {
+	public void thisToView(Status status, ViewInterface... viewInterfaces) {
 		// TODO Auto-generated method stub
 		
 	}
