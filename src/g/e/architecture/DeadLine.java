@@ -12,15 +12,9 @@ public class DeadLine extends BasicBody{
 		
 	public DeadLine(float y) {
 		super("DeadLine", Rank.SELF_CUSTOM, ET.DeadLine, new OzPoint(0, y),new OzRect(0, 0, 0,0));
-		//asddas
-				int a;
 	}
-	
-	
-	
 	@Override
 	public void logic() {
-		
 	}
 	@Override
 	public void draw() {
@@ -35,24 +29,13 @@ public class DeadLine extends BasicBody{
 				//第1次碰撞检测后设置玩家状态死亡开始,然后玩家进行死亡中,第2次碰撞检测再设置玩家状态为死亡开始,自此进入无线循环。
 				Player.setCondition(Player.DEAD_START);
 			}
-		
 		}
 	}
 
-
-
 	@Override
 	public void prepare() {
-		// TODO Auto-generated method stub
-		
 	}
-
-
-
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
 	}
-
 }
