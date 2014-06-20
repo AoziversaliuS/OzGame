@@ -11,24 +11,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class P {
-	public static float getForceRatioX() {
-		return forceRatioX;
-	}
-
-
-
-	public static float getForceRatioY() {
-		return forceRatioY;
-	}
-
 	
 
-	
-	
-	
-	
-	
 	public static Sprite black;
+	public static float blackNum = 0f;
+	public static final float D_BLACK_NUM = 0.05f;
+	public static final float  MAX_BLACK_NUM = 0.98f,MIN_BLACK_NUM = 0.01f;
 	
 	public static void init(float screenWidth,float screenHeight){
 		
@@ -42,9 +30,38 @@ public class P {
 		
 	}
 	
+	//设置屏幕亮度
+	public static void setlight(float light){
+		black.setColor(0, 0, 0, light);
+		black.draw(batch);
+	}
+	/**
+	 * 使用参数值来设定屏幕暗度，0.01f<=blackNum<=0.98f
+	 * */
+	public static void useDarkness(float blackNum){
+		black.setColor(0, 0, 0, blackNum);
+		black.draw(batch);
+	}
+	/**
+	 * 通过P.setDarkness(float blackNum)设置的值来调整屏幕暗度
+	 * */
+	public static void useDarkness(){
+		black.setColor(0, 0, 0, blackNum);
+		black.draw(batch);
+	}
+	public static void increaseDarkness(){
+		blackNum = blackNum + D_BLACK_NUM;
+	}
+	public static void decreaseDarkness(){
+		blackNum = blackNum - D_BLACK_NUM;
+	}
+	public static void setDarkness(float blackNum) {
+		P.blackNum = blackNum;
+	}
 	
 	
 	
+
 	private static void LogShow(OzPicture a,String s){
 		Gdx.app.log("ratio","  "+s+"图片宽: "+a.getSprite().getWidth()+" "+s+"图片高: "+a.getSprite().getHeight());
 	}
@@ -98,36 +115,6 @@ public class P {
 		picture.getSprite().setScale(scaleXY);
 		drawAtPosition(point.x*P.autoRatioX, point.y*P.autoRatioY, picture);
 	}
-//	//直接画，不转换坐标的比例
-//	public static void drawRaw(OzPoint p,OzPicture picture){
-//		drawRaw(p.x, p.y, picture);
-//	}
-//	public static void drawRaw(float x,float y,OzPicture picture){
-//		picture.setDefault();
-//		drawAtPosition(x, y, picture);
-//	}
-
-//	//背景比例
-//	public static void drawBg(float x,float y,OzPicture picture){
-//		//此方法只能用来画背景图！
-//		drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
-//	}
-//	//自动比例
-//	public static void draw(OzPoint point,OzPicture picture){
-//		draw(point.x, point.y, picture);
-//	}
-//	public static void draw(float x,float y,OzPicture picture){
-//		picture.setDefault();
-//		drawAtPosition(x*P.autoRatioX,   y*P.autoRatioY, picture);
-//	}
-//	//强制比例
-//	public static void drawForce(OzPoint point,OzPicture picture){
-//		drawForce(point.x, point.y, picture);
-//	}
-//	public static void drawForce(float x,float y,OzPicture picture){
-//		picture.setDefault();
-//		drawAtPosition(x*P.forceRatioX,  y*P.forceRatioY, picture);
-//	}
 	
 	private static void drawAtPosition(float positionX,float positionY,OzPicture picture){
 		picture.getSprite().setPosition(positionX,positionY);//已经调整好比例之后的XY值
@@ -150,11 +137,7 @@ public class P {
 
 	//绘图方法↑
 	
-	//设置屏幕亮度
-	public static void setlight(float light){
-		black.setColor(0, 0, 0, light);
-		black.draw(batch);
-	}
+
 	
 	public static void end(){
 		batch.end();
@@ -251,9 +234,15 @@ public class P {
 	public static float getBgRatioY() {
 		return bgRatioY;
 	}
-	public static SpriteBatch getBatch() {
-		return batch;
-	}
 
+	public static float getForceRatioX() {
+		return forceRatioX;
+	}
+	public static float getForceRatioY() {
+		return forceRatioY;
+	}
+//	private static SpriteBatch getBatch() {
+//		return batch;
+//	}
 	
 }
