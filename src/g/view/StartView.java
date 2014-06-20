@@ -3,6 +3,7 @@ package g.view;
 import java.util.HashMap;
 
 import g.button.StartButtons;
+import g.refer.BasicView;
 import g.refer.BtnMethods;
 import g.refer.ViewInterface;
 import g.tool.OzPoint;
@@ -10,7 +11,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.Status;
 
-public class StartView implements ViewInterface,BtnMethods{
+public class StartView extends BasicView implements BtnMethods{
 
 	private StartButtons startBtns;
 
@@ -50,9 +51,33 @@ public class StartView implements ViewInterface,BtnMethods{
 	}
 
 	@Override
-	public void thisToView(Status status, ViewInterface... viewInterfaces) {
-		// TODO Auto-generated method stub
+	public void thisToView(Status toStatus, ViewInterface... viewInterfaces) {
+		switch (toStatus) {
 		
+		case Select: { toSelectView(viewInterfaces); break; }
+			
+
+		}
+	}
+	private void toSelectView( ViewInterface... viewInterfaces ){
+		SelectView selectView = (SelectView) viewInterfaces[2];
+		if( switchType==SWITCH_PREPARE ){
+			P.increaseDarkness();
+			this.draw();
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
+				switchType = SWITCH_LOADING;
+			}
+		}
+		else if( switchType==SWITCH_LOADING ){
+				switchType = SWITCH_LOADED;
+		}
+		else if( switchType==SWITCH_LOADED ){
+			P.decreaseDarkness();
+			selectView.draw();
+			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
+				switchType = SWITCH_FINISH;
+			}
+		}
 	}
 
 

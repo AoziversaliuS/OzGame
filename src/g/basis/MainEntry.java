@@ -3,6 +3,7 @@ package g.basis;
 import java.util.HashMap;
 
 import g.button.SelectButtons;
+import g.refer.ViewInterface;
 import g.tool.OzPoint;
 import g.tool.P;
 import g.tool.Res;
@@ -37,10 +38,10 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	private static Status status;  //当前界面状态
     private static Status toStatus;
 	
-    public static final int SWITCH_PREPARE=1,SWITCH_LOADING=2,SWITCH_LOADED=3,SWITCH_FINISH=4;
-	
-	public static int switchType = SWITCH_PREPARE;
-	
+//    public static final int SWITCH_PREPARE=1,SWITCH_LOADING=2,SWITCH_LOADED=3,SWITCH_FINISH=4;
+//	
+//	public static int switchType = SWITCH_PREPARE;
+//	
 
 	
 	
@@ -134,26 +135,33 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	
 	public void statusSwitch(){
 
-		if( toStatus==Status.Select && status==Status.Start ){
-			this.startToSelect();
-		}
-		else if( toStatus==Status.Game && status==Status.Select ){
-			this.selectToGame();
-		}
-		if( toStatus==Status.Pause && status==Status.Game ){
-			gameView.toPauseView(pauseView);
-		}
-		if( toStatus==Status.Game && status==Status.Pause ){
-//			pauseToGame();
-			pauseView.toGameView(gameView);
+		
+		ViewInterface[] views = { gameView,pauseView,selectView,startView };
+		
+		switch (status) {
+		
+		case Credits:{              break; }
+		
+		case Game:   {   gameView.toView(toStatus,views);        break; }
+		
+		case Init:   {              break; }
+		
+		case Loading:{              break; }
+		
+		case Pause:  {   pauseView.toView(toStatus,views);           break; }
+		
+		case Select: {   selectView.toView(toStatus,views);          break; }
+		
+		case Start:  {   startView.toView(toStatus,views);       break; }
+		
 		}
 		
-		if( switchType==SWITCH_FINISH ){
-			status = toStatus;
-			//重置信息
-			P.setDarkness(0);
-			switchType=SWITCH_PREPARE;
-		}
+//		if( switchType==SWITCH_FINISH ){
+//			status = toStatus;
+//			//重置信息
+//			P.setDarkness(0);
+//			switchType=SWITCH_PREPARE;
+//		}
 	}
 //	private void pauseToGame(){
 //		if( switchType==SWITCH_PREPARE ){
@@ -204,63 +212,63 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 //			switchType = SWITCH_FINISH;
 //		}
 //	}
-	private void startToSelect(){
-		if( switchType==SWITCH_PREPARE ){
-//			lightNum = lightNum + dNum;
-			P.increaseDarkness();
-//			startDraw();
-			startView.draw();
-			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
-				switchType = SWITCH_LOADING;
-			}
-		}
-		else if( switchType==SWITCH_LOADING ){
-				switchType = SWITCH_LOADED;
-		}
-		else if( switchType==SWITCH_LOADED ){
-//			lightNum = lightNum - dNum;
-			P.decreaseDarkness();
-//			selectDraw();
-			selectView.draw();
-			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
-				switchType = SWITCH_FINISH;
-			}
-		}
-	}
-	private void selectToGame(){
-		if( switchType==SWITCH_PREPARE ){
-//			lightNum = lightNum + dNum;
-			P.increaseDarkness();
-//			selectDraw();
-			selectView.draw();
-			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
-				switchType = SWITCH_LOADING;
-				Res.prepare(Res.GAME_A);
-			}
-		}
-		else if( switchType==SWITCH_LOADING ){
-//			selectDraw();
-			selectView.draw();
-			if(Res.update()){
-				//加载完图片之后载入地图
-				GameChapter.chapterLoad(
-						gameView.getGateAtlas(),
-						gameView.getRankNum(),
-						selectView.getChapterId()
-						); 
-				switchType = SWITCH_LOADED;
-			}
-		}
-		else if( switchType==SWITCH_LOADED ){
-//			lightNum = lightNum - dNum;
-			P.decreaseDarkness();
-//			gameDraw();
-			gameView.draw();
-			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
-				switchType = SWITCH_FINISH;
-			}
-		}
-	}
+//	private void startToSelect(){
+//		if( switchType==SWITCH_PREPARE ){
+////			lightNum = lightNum + dNum;
+//			P.increaseDarkness();
+////			startDraw();
+//			startView.draw();
+//			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
+//				switchType = SWITCH_LOADING;
+//			}
+//		}
+//		else if( switchType==SWITCH_LOADING ){
+//				switchType = SWITCH_LOADED;
+//		}
+//		else if( switchType==SWITCH_LOADED ){
+////			lightNum = lightNum - dNum;
+//			P.decreaseDarkness();
+////			selectDraw();
+//			selectView.draw();
+//			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
+//				switchType = SWITCH_FINISH;
+//			}
+//		}
+//	}
+//	private void selectToGame(){
+//		if( switchType==SWITCH_PREPARE ){
+////			lightNum = lightNum + dNum;
+//			P.increaseDarkness();
+////			selectDraw();
+//			selectView.draw();
+//			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
+//				switchType = SWITCH_LOADING;
+//				Res.prepare(Res.GAME_A);
+//			}
+//		}
+//		else if( switchType==SWITCH_LOADING ){
+////			selectDraw();
+//			selectView.draw();
+//			if(Res.update()){
+//				//加载完图片之后载入地图
+//				GameChapter.chapterLoad(
+//						gameView.getGateAtlas(),
+//						gameView.getRankNum(),
+//						selectView.getChapterId()
+//						); 
+//				switchType = SWITCH_LOADED;
+//			}
+//		}
+//		else if( switchType==SWITCH_LOADED ){
+////			lightNum = lightNum - dNum;
+//			P.decreaseDarkness();
+////			gameDraw();
+//			gameView.draw();
+//			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
+//				switchType = SWITCH_FINISH;
+//			}
+//		}
+//	}
 	
 	public void engine(){
 		

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import g.basis.MainEntry;
 import g.button.GameButtons;
 import g.refer.BasicBody;
+import g.refer.BasicView;
 import g.refer.BtnMethods;
 import g.refer.OzElement;
 import g.refer.Player;
@@ -16,7 +17,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.Status;
 
-public class GameView implements ViewInterface,BtnMethods{
+public class GameView extends BasicView implements BtnMethods{
 
 	private  GameButtons gameBtns;
 	private  ArrayList<OzElement>  gateAtlas; //每一个关卡的地图集序列
@@ -118,36 +119,7 @@ public class GameView implements ViewInterface,BtnMethods{
 		gameBtns.draw();
 	
 	}
-	/**
-	 * 从游戏界面切换到暂停菜单
-	 * */
-	public void toPauseView(ViewInterface ...viewInterfaces){
-		PauseView pauseView = (PauseView) viewInterfaces[0];
-		if( MainEntry.switchType==MainEntry.SWITCH_PREPARE ){
-//			lightNum = lightNum + dNum;
-			P.increaseDarkness();
-//			gameDraw();
-			this.draw();
-			if( P.getBlackNum()>=P.MAX_BLACK_NUM/2 ){
-				MainEntry.switchType = MainEntry.SWITCH_LOADING;
-				Res.prepare(Res.PAUSE_SOURCE);
-			}
-		}
-		else if( MainEntry.switchType==MainEntry.SWITCH_LOADING ){
-//				gameDraw();
-				this.draw();
-				if(Res.update()){
-					MainEntry.switchType = MainEntry.SWITCH_LOADED;
-				}
-		}
-		else if( MainEntry.switchType==MainEntry.SWITCH_LOADED ){
-//			lightNum = 0;
-			P.setDarkness(0);
-//			pauseDraw();
-			pauseView.draw(this);
-			MainEntry.switchType = MainEntry.SWITCH_FINISH;
-		}
-	}
+
 
 
 	@Override
@@ -172,9 +144,39 @@ public class GameView implements ViewInterface,BtnMethods{
 
 
 	@Override
-	public void thisToView(Status status, ViewInterface... viewInterfaces) {
-		// TODO Auto-generated method stub
-		
+	public void thisToView(Status toStatus, ViewInterface... views) {
+		switch (toStatus) {
+			
+			case Pause:{ toPauseView(views); break;}
+			
+
+		}
+	}
+	
+	/**
+	 * 从游戏界面切换到暂停菜单
+	 * */
+	private void toPauseView(ViewInterface ...views){
+		PauseView pauseView = (PauseView) views[1];
+		if( switchType==SWITCH_PREPARE ){
+			P.increaseDarkness();
+			this.draw();
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM/2 ){
+				switchType = SWITCH_LOADING;
+				Res.prepare(Res.PAUSE_SOURCE);
+			}
+		}
+		else if( switchType==SWITCH_LOADING ){
+				this.draw();
+				if(Res.update()){
+					switchType = SWITCH_LOADED;
+				}
+		}
+		else if( switchType==SWITCH_LOADED ){
+			P.setDarkness(0);
+			pauseView.draw(this);
+			switchType = SWITCH_FINISH;
+		}
 	}
 
 	

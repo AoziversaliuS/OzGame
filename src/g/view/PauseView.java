@@ -4,13 +4,14 @@ import java.util.HashMap;
 
 import g.basis.MainEntry;
 import g.button.PauseButtons;
+import g.refer.BasicView;
 import g.refer.BtnMethods;
 import g.refer.ViewInterface;
 import g.tool.OzPoint;
 import g.tool.P;
 import g.type.Status;
 
-public class PauseView implements ViewInterface,BtnMethods{
+public class PauseView extends BasicView implements BtnMethods{
 
 	private PauseButtons pauseBtns;
 
@@ -52,35 +53,36 @@ public class PauseView implements ViewInterface,BtnMethods{
 	public void btnExit() {
 	}
 	
-	public void toGameView(ViewInterface ...viewInterfaces){
-		GameView gameView = (GameView) viewInterfaces[0];
-		if( MainEntry.switchType==MainEntry.SWITCH_PREPARE ){
-//			lightNum = maxLight/2;
-			P.setDarkness(P.MAX_BLACK_NUM/2);
-//			gameDraw();
-			gameView.draw();
-			MainEntry.switchType = MainEntry.SWITCH_LOADING;
-		}
-		else if( MainEntry.switchType==MainEntry.SWITCH_LOADING ){
-//			gameDraw();
-			gameView.draw();
-			MainEntry.switchType = MainEntry.SWITCH_LOADED;
-		}
-		else if( MainEntry.switchType==MainEntry.SWITCH_LOADED ){
-//			lightNum = lightNum-dNum;
-			P.decreaseDarkness();
-//			gameDraw();
-			gameView.draw();
-			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
-				MainEntry.switchType = MainEntry.SWITCH_FINISH;
-			}
-		}
-	}
+
 
 	@Override
-	public void thisToView(Status status, ViewInterface... viewInterfaces) {
-		// TODO Auto-generated method stub
+	public void thisToView(Status toStatus, ViewInterface... viewInterfaces) {
+		switch (toStatus) {
 		
+			case Game:{ toGameView(viewInterfaces); break;}
+			
+
+		}
+	}
+	
+	private void toGameView(ViewInterface ...viewInterfaces){
+		GameView gameView = (GameView) viewInterfaces[0];
+		if( switchType==SWITCH_PREPARE ){
+			P.setDarkness(P.MAX_BLACK_NUM/2);
+			gameView.draw();
+			switchType = SWITCH_LOADING;
+		}
+		else if( switchType==SWITCH_LOADING ){
+			gameView.draw();
+			switchType = SWITCH_LOADED;
+		}
+		else if( switchType==SWITCH_LOADED ){
+			P.decreaseDarkness();
+			gameView.draw();
+			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
+				switchType = SWITCH_FINISH;
+			}
+		}
 	}
 
 }

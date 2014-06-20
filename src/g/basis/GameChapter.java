@@ -68,7 +68,7 @@ public class GameChapter {
 	
 	
 	//地图载入
-	static void chapterLoad(ArrayList<OzElement> gateAtlas,ArrayList<OzInt> rankNum,int gateNum){
+	public static void chapterLoad(ArrayList<OzElement> gateAtlas,ArrayList<OzInt> rankNum,int gateNum){
 		initialise(gateAtlas,rankNum); //一定要写在第一行，用来清空地图信息
 		switch (gateNum){
 		

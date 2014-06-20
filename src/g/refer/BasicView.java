@@ -14,9 +14,9 @@ public abstract class BasicView implements ViewInterface{
 	/**
 	 * 从此视图切换到另外一个视图
 	 * */
-	public void toView(Status status,ViewInterface ...viewInterfaces){
+	public void toView(Status status,ViewInterface ...views){
 		
-		thisToView(status, viewInterfaces);
+		thisToView(status, views);
 		
 		if( switchType==SWITCH_FINISH ){
 			switchType = SWITCH_PREPARE;

@@ -15,6 +15,7 @@ public interface ViewInterface {
 	
 	/**
 	 * 从此视图切换到另外一个视图
+	 * views = { gameView,pauseView,selectView,startView };
 	 * */
-	public void thisToView(Status status,ViewInterface ...viewInterfaces);
+	public void thisToView(Status toStatus,ViewInterface ...views);
 }
