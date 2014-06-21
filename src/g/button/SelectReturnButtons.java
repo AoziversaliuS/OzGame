@@ -52,6 +52,12 @@ public class SelectReturnButtons extends OzElement implements BtnMethods{
 
 	@Override
 	public void draw() {
+		if(!seleted){
+			P.draw(toMainBtn.x, toMainBtn.y, Res.selectToMainBtn[0]);
+		}
+		else{
+			P.draw(toMainBtn.x, toMainBtn.y, Res.selectToMainBtn[1]);
+		}
 	}
 
 	@Override
