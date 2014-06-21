@@ -18,8 +18,8 @@ public class SelectView extends BasicView implements BtnMethods{
 	private SelectButtons selectBtns;
 	private SelectReturnButtons toMainBtn;
 	
-	private static final float FIRST_PAGE_POINT_X = 0;
-	private static final float PAGE_POINT_Y = 0;
+	private static final float FIRST_PAGE_POINT_X = 370;
+	private static final float PAGE_POINT_Y = 70;
 	private static final float SPACE = 100;//pagePoint之间的间隔
 	
 	public SelectView() {
