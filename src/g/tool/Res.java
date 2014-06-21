@@ -29,6 +29,7 @@ public class Res {
 	/**selectSource**/
 	public static OzPicture selectBg;
 	public static OzPicture selectBtn[] = new OzPicture[2];
+	public static OzPicture selectToMainBtn[] = new OzPicture[2];
 	/**pauseSource**/
 	public static OzPicture pause_btnResume[] = new OzPicture[2];
 	public static OzPicture pause_btnToSelect[] = new OzPicture[2];
@@ -68,6 +69,8 @@ public class Res {
 			selectBg = new OzPicture(1280, 720, lS("bG"), P.FORCE_RATIO);
 			selectBtn[0] = new OzPicture(150, 150, lS("btn",0), P.FORCE_RATIO);
 			selectBtn[1] = new OzPicture(150, 150, lS("btn",1), P.FORCE_RATIO);
+			selectToMainBtn[0] = new OzPicture(150, 150, lS("selectToMain",0), P.FORCE_RATIO);
+			selectToMainBtn[1] = new OzPicture(150, 150, lS("selectToMain",1), P.FORCE_RATIO);
 	}
 	//图片对象初始化
 	private static void initPic() {
