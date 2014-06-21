@@ -43,7 +43,12 @@ public class Player extends OzElement{
 	private static  int plane_HitType = HIT_ELSE;    //水平碰撞类型
 	private static int vertical_HitType = HIT_ELSE; //垂直碰撞类型
 	
-
+	public static final int DIR_LEFT=0,DIR_RIGHT=1;
+	/**
+	 * 玩家上一次的水平方向
+	 * */
+	private int lastDir = DIR_RIGHT;
+	
 	private  float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
 	public static float moveSpeed(){
@@ -120,6 +125,7 @@ public class Player extends OzElement{
 		moveSpeed = MAX_MOVE;
 		gravitySpeed = MAX_GRAVITY;
 		jumpSpeed = MAX_JUMP;
+		lastDir = DIR_RIGHT;
 	}
 	
 	@Override
@@ -143,17 +149,27 @@ public class Player extends OzElement{
 	@Override
 	public void draw() {
 		if( condition==ALIVE ){
-			P.draw(l, Res.player[0] ,P.AUTO_RATIO);
+			if(GameButtons.getArrow()==GameButtons.A_Left){
+				lastDir = DIR_LEFT;
+				P.draw(l, Res.player[0] ,P.AUTO_RATIO);
+			}
+			else if(GameButtons.getArrow()==GameButtons.A_Right){
+				lastDir = DIR_RIGHT;
+				P.draw(l, Res.player[1] ,P.AUTO_RATIO);
+			}
+			else{
+				P.draw(l, Res.player[lastDir] ,P.AUTO_RATIO);
+			}
 		}
 		else if( condition==DEADING ){
-			P.drawScale(scaleSize, l,  Res.player[0]);
+			P.drawScale(scaleSize, l,  Res.player[lastDir]);
 			scaleSize = scaleSize + 0.1f;
 			if( scaleSize>3 ){
 				condition = DEAD_END;
 			}
 		}
 		else if( condition==REVIVEING ){
-			P.drawScale(scaleSize, l,  Res.player[0]);
+			P.drawScale(scaleSize, l,  Res.player[lastDir]);
 			scaleSize = scaleSize - 0.1f;
 			if( scaleSize<=1 ){
 				condition = REVIVE_END;
