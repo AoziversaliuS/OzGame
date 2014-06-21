@@ -39,8 +39,13 @@ public class SelectReturnButtons extends OzElement implements BtnMethods{
 	@Override
 	public void btnLogic(HashMap<String, OzPoint> points) {
 		l = points.get("0");
-		if(l!=null && toMainBtn.inside(l, P.FORCE_RATIO)){
-			seleted = true;
+		if( l!=null ){
+			if( toMainBtn.inside(l, P.FORCE_RATIO) ){
+				seleted = true;
+			}
+			else{
+				seleted = false;
+			}
 		}
 		else{
 			if(seleted){
