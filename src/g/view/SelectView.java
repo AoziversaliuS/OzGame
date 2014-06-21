@@ -110,6 +110,7 @@ public class SelectView extends BasicView implements BtnMethods{
 						gameView.getRankNum(),
 						this.getChapterId()
 						); 
+				gameView.reset();
 				switchType = SWITCH_LOADED;
 			}
 		}

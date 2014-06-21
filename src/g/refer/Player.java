@@ -40,11 +40,11 @@ public class Player extends OzElement{
 	public static final int HIT_BASIC = 7        /**碰到静止的物体*/, 
 			                HIT_Moving = 8       /**碰到移动的物体*/, 
 			                HIT_ELSE = 9;        /**其余情况(没碰到物体时的情况)*/
-	private static int plane_HitType = HIT_ELSE;    //水平碰撞类型
+	private static  int plane_HitType = HIT_ELSE;    //水平碰撞类型
 	private static int vertical_HitType = HIT_ELSE; //垂直碰撞类型
 	//不必要？
 
-	private float scaleSize = 1f; //死亡和复活时的图片缩放参数
+	private  float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
 	public static float moveSpeed(){
 		return moveSpeed;
@@ -87,8 +87,8 @@ public class Player extends OzElement{
 	private static Vertical  verticalT =  Vertical.Else;
 	private  float push_X = 0;  //碰撞后将玩家位置推回到穿墙前
 	private  float push_Y = 0;  //碰撞后将玩家位置推回到穿墙前
-	private  float dY = 2;      //不出现穿墙状况的最低值 
-	private  float dX = 2;      //不出现穿墙状况的最低值 
+	private  static final float dY = 2;      //不出现穿墙状况的最低值 
+	private  static final float dX = 2;      //不出现穿墙状况的最低值 
 	
 	private static boolean jump = false;
 	
@@ -101,12 +101,25 @@ public class Player extends OzElement{
 				new OzRect(0, 0,Res.player[0].getWidth(),Res.player[0].getHeight())
 		);
 		Gdx.app.log("show", "玩家坐标: "+(P.getRatioX()*l.x)+" , "+(P.getRatioY()*l.y));
-		jump = false;
-		condition = Player.ALIVE;
+		this.reset();
 	}
 
 	@Override
 	public void reset() {
+		jump = false;
+		condition = Player.ALIVE;
+		push_X = 0;
+		push_Y = 0;
+		verticalT =  Vertical.Else;
+		planeT    =  Plane.Else;
+		scaleSize = 1f;
+		plane_HitType = HIT_ELSE;  
+		vertical_HitType = HIT_ELSE;
+		JumpTimeCount = 0;
+		gravityFinish = false;
+		moveSpeed = MAX_MOVE;
+		gravitySpeed = MAX_GRAVITY;
+		jumpSpeed = MAX_JUMP;
 	}
 	
 	@Override
