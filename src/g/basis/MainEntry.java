@@ -20,7 +20,7 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	
 	private boolean showFPS = false;
 	
-	private boolean debug = true;
+	private boolean debug = false;
 	private long times = 50;//debug用，debug为true时使游戏运行缓慢，能看清每一帧
 	
 	private  HashMap<String, OzPoint> points;

@@ -31,7 +31,7 @@ public class SelectButtons extends OzElement{
 	private float dragRange = 0;//一只手指拖动的距离，当距离超过最小拖动距离时屏幕将被拖动
 	private static int currentPageId = 0; //表示当前处于哪一页，最小页数为第0页
 	
-	public static final int MAX_PAGE_NUM = 2;//最大页数,从0开始
+	public static final int MAX_PAGE_NUM = 4;//最大页数,从0开始
 	public static final int MAX_BTN_NUM_ON_PAGE = 12;
 	public static final int MOVE_QUIET=1/**静止*/,MOVE_DRAG=2/**拖动*/,MOVE_ADJUST=3/**调整*/;
 	private static final int DIR_LEFT=4,DIR_RIGHT=5;
@@ -125,9 +125,12 @@ public class SelectButtons extends OzElement{
 	private void adjust(){
 		if( moveMold==MOVE_ADJUST ){
 			int dir = getDir();
+//			System.out.println(" currentPageId = "+currentPageId);
+//			System.out.println(" dir = "+dir);
 			if( dir==DIR_LEFT ){
 				OzRect leftBtn = getLeftSignBtn();//既然已经判定了方向为left，那么leftBtn不可能为null!
 				OzRect rightBtn = getRightSignBtn();
+//				System.out.println("rightBtn = "+rightBtn);
 				float moveRange = Math.abs( leftBtn.x-LIMIT_CENTER );
 				
 				if( moveRange<=LIMIT_RANGE || rightBtn==null ){
@@ -186,6 +189,7 @@ public class SelectButtons extends OzElement{
 			}
 			if( moveMold==MOVE_QUIET ){
 				currentPageId = getPageId();//重设当前页的Id
+				System.out.println(" getPageId() = "+getPageId());
 				dX = 0;
 			}
 		}
@@ -341,9 +345,9 @@ public class SelectButtons extends OzElement{
 			else{
 				if( Math.abs(signBtn.x-LIMIT_CENTER)<range ){
 					pId = i;
+					range = Math.abs(signBtn.x-LIMIT_CENTER);
 				}
 			}
-			
 		}
 		return pId;
 	}
