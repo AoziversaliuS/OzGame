@@ -18,7 +18,7 @@ import com.badlogic.gdx.InputProcessorQueue;
 
 public class MainEntry extends InputProcessorQueue implements ApplicationListener {
 	
-	private boolean showFPS = false;
+	private boolean showFPS = true;
 	
 	private boolean debug = false;
 	private long times = 50;//debug用，debug为true时使游戏运行缓慢，能看清每一帧
@@ -37,6 +37,10 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	private static Status status;  //当前界面状态
     private static Status toStatus;
 	
+    
+    private static final int KEY_LEFT=21;
+    private static final int KEY_RIGHT=22;
+    private static final int KEY_SPACE=62;
     
 	@Override
 	public void create() {	
@@ -64,12 +68,33 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	}
 	@Override
 	public synchronized boolean keyUp(int keycode) {
-		System.out.println("keyUp = "+keycode);
-		return super.keyUp(keycode);
+		//←按钮 141 568 →按钮 318 516 跳跃 733 529
+//		System.out.println("keyUp = "+keycode);
+		switch (keycode) {
+		
+		case KEY_LEFT:  points.remove("0"); break;
+		
+		case KEY_RIGHT: points.remove("0"); break;
+		
+		case KEY_SPACE: points.remove("1"); break;
+			
+		}
+		btnLogic();
+		return false;
 	}
 	@Override
 	public synchronized boolean keyDown(int keycode) {
-		System.out.println("keyDown = "+keycode);
+		
+		switch (keycode) {
+		
+		case KEY_LEFT: points.put("0", new OzPoint(141, 568, true)); break;
+		
+		case KEY_RIGHT: points.put("0", new OzPoint(318, 516, true)); break;
+		
+		case KEY_SPACE: points.put("1", new OzPoint(733, 529, true)); break;
+			
+		}
+		btnLogic();
 		return false;
 	}
 	@Override
