@@ -73,5 +73,11 @@ public class StartView extends BasicView implements BtnMethods{
 		}
 	}
 
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

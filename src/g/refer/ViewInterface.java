@@ -19,4 +19,5 @@ public interface ViewInterface {
 	 * */
 	public void thisToView(Status toStatus,ViewInterface ...views);
 	
+	public void reset();
 }

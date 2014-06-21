@@ -105,4 +105,10 @@ public class PauseView extends BasicView implements BtnMethods{
 		}
 	}
 
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
