@@ -45,7 +45,7 @@ public class Res {
 	public static OzPicture[] game_btnAttack = new OzPicture[2];
 	public static OzPicture[] game_btnPass = new OzPicture[2];
 	//basic
-	public static OzPicture[] player = new OzPicture[1];
+	public static OzPicture[] player = new OzPicture[2];
 	public static OzPicture backGround;
 	//build¡ý 
 	public static OzPicture[] land = new OzPicture[9];
@@ -171,7 +171,8 @@ public class Res {
 			loadPicGroup(game_btnPass, "btnPass",P.FORCE_RATIO);
 			
 			setAtlas("Image/player/player.atlas");
-			player[0].setSprite(mS("player",0),P.AUTO_RATIO);
+			player[0].setSprite(mS("player"),P.AUTO_RATIO);
+			player[1].setSprite(true, false, mS("player"), P.AUTO_RATIO);
 			
 			setAtlas("Image/backGround/backGround.atlas");
 			backGround.setSprite(false, false, mS("backGround"), P.BG_RATIO);

@@ -45,7 +45,7 @@ public class GameChapter {
 		gateAtlas.add(new View("Tree", 500, 145, Res.tree[0]));
 		
 		gateAtlas.add(new DeadLine(-300) );
-		System.out.println("gateAtlasSize="+gateAtlas.size());
+//		System.out.println("gateAtlasSize="+gateAtlas.size());
 	}
 	
 	
@@ -53,7 +53,10 @@ public class GameChapter {
 	
 	//第二关地图
 	private static void A_01(ArrayList<OzElement> gateAtlas) {
-		// TODO Auto-generated method stub
+		gateAtlas.add(new BackGround("BG-1"));
+		gateAtlas.add(new Land("l1", 300, -100, 10, 5));
+		gateAtlas.add(new View("Tree", 400, 145, Res.tree[1]));
+		gateAtlas.add(new DeadLine(-300) );
 	}
 	
 	
