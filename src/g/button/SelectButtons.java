@@ -18,15 +18,15 @@ public class SelectButtons extends OzElement{
 
 	private ArrayList<OzRect> btns;
 	
-	private static final float FIRST_LINE = 400;
-	private static final float SECOND_LINE = 200;
-	private static final int   LINE_BTN_NUM = 6;
-	private static final float SPACE = 40;
+	private static final float FIRST_LINE = 400;//第一行按钮的y坐标
+	private static final float SECOND_LINE = 200;//第二行按钮的y坐标
+	private static final int   LINE_BTN_NUM = 6;//一行有多少个按钮
+	private static final float SPACE = 40;//按钮之间的间距
 	private static final float LIMIT_CENTER = 90;//屏幕左上角第一个按钮的x坐标,同时也作为判断的基准中线
-	private static final float LIMIT_RANGE = 200; //限制的大小
-	private static final float ADJUST_SPEED = 30;
+	private static final float LIMIT_RANGE = 100; //触发移动到下一页或上一页事件的距离大小
+	private static final float ADJUST_SPEED = 40;//移动的速度
 	
-	private final float MIN_DRAG_RANGE = 50;//最小移动距离，只有超过了这个距离才能移动
+	private final float MIN_DRAG_RANGE = 30;//最小移动距离，只有超过了这个距离才能移动
 	
 	private float dragRange = 0;//一只手指拖动的距离，当距离超过最小拖动距离时屏幕将被拖动
 	private static int currentPageId = 0; //表示当前处于哪一页，最小页数为第0页

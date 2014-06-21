@@ -72,7 +72,8 @@ public class PauseView extends BasicView implements BtnMethods{
 		else if( switchType==SWITCH_LOADING ){
 			//Ð¶ÔØ×ÊÔ´
 			Res.unload(Res.PAUSE_SOURCE);
-			Res.unload(Res.GAME_A);
+			
+//			Res.unload(Res.GAME_A);
 			
 			switchType = SWITCH_LOADED;
 		}
