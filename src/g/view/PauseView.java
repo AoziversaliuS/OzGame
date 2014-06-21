@@ -9,6 +9,7 @@ import g.refer.BtnMethods;
 import g.refer.ViewInterface;
 import g.tool.OzPoint;
 import g.tool.P;
+import g.tool.Res;
 import g.type.Status;
 
 public class PauseView extends BasicView implements BtnMethods{
@@ -49,17 +50,42 @@ public class PauseView extends BasicView implements BtnMethods{
 
 
 	@Override
-	public void thisToView(Status toStatus, ViewInterface... viewInterfaces) {
+	public void thisToView(Status toStatus, ViewInterface... views) {
 		switch (toStatus) {
 		
-			case Game:{ toGameView(viewInterfaces); break;}
+			case Game:{ toGameView(views); break;}
 			
+			case Select:{ toSelectView(views); break;}
 
 		}
 	}
-	
-	private void toGameView(ViewInterface ...viewInterfaces){
-		GameView gameView = (GameView) viewInterfaces[0];
+	private void toSelectView(ViewInterface ...views){
+		GameView gameView = (GameView) views[0];
+		SelectView selectView = (SelectView) views[2];
+		if( switchType==SWITCH_PREPARE ){
+			P.increaseDarkness();
+			this.draw(gameView);
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
+				switchType = SWITCH_LOADING;
+			}
+		}
+		else if( switchType==SWITCH_LOADING ){
+			//Ð¶ÔØ×ÊÔ´
+			Res.unload(Res.PAUSE_SOURCE);
+			Res.unload(Res.GAME_A);
+			
+			switchType = SWITCH_LOADED;
+		}
+		else if( switchType==SWITCH_LOADED ){
+			P.decreaseDarkness();
+			selectView.draw();
+			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
+				switchType = SWITCH_FINISH;
+			}
+		}
+	}
+	private void toGameView(ViewInterface ...views){
+		GameView gameView = (GameView) views[0];
 		if( switchType==SWITCH_PREPARE ){
 			P.setDarkness(P.MAX_BLACK_NUM/2);
 			gameView.draw();
