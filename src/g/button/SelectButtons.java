@@ -31,9 +31,9 @@ public class SelectButtons extends OzElement{
 	private float dragRange = 0;//一只手指拖动的距离，当距离超过最小拖动距离时屏幕将被拖动
 	private static int currentPageId = 0; //表示当前处于哪一页，最小页数为第0页
 	
-	private static final int MAX_PAGE_NUM = 2;//最大页数
-	private static final int MAX_BTN_NUM_ON_PAGE = 12;
-	private static final int MOVE_QUIET=1/**静止*/,MOVE_DRAG=2/**拖动*/,MOVE_ADJUST=3/**调整*/;
+	public static final int MAX_PAGE_NUM = 2;//最大页数,从0开始
+	public static final int MAX_BTN_NUM_ON_PAGE = 12;
+	public static final int MOVE_QUIET=1/**静止*/,MOVE_DRAG=2/**拖动*/,MOVE_ADJUST=3/**调整*/;
 	private static final int DIR_LEFT=4,DIR_RIGHT=5;
 	private int moveMold = MOVE_QUIET;
 	
@@ -404,4 +404,8 @@ public class SelectButtons extends OzElement{
 		return false;
 	}
 
+	public int getMoveMold() {
+		return moveMold;
+	}
+	
 }

@@ -17,6 +17,11 @@ public class SelectView extends BasicView implements BtnMethods{
 
 	private SelectButtons selectBtns;
 	private SelectReturnButtons toMainBtn;
+	
+	private static final float FIRST_PAGE_POINT_X = 0;
+	private static final float PAGE_POINT_Y = 0;
+	private static final float SPACE = 100;//pagePoint之间的间隔
+	
 	public SelectView() {
 		super();
 		this.init();
@@ -38,6 +43,14 @@ public class SelectView extends BasicView implements BtnMethods{
 		P.draw(0, 0, Res.selectBg, P.FORCE_RATIO);
 		selectBtns.draw();
 		toMainBtn.draw();
+		for(int i=0;i<=SelectButtons.MAX_PAGE_NUM;i++){
+			if( i!=selectBtns.getPageId() ){
+				P.draw(FIRST_PAGE_POINT_X+i*SPACE, PAGE_POINT_Y, Res.selectPagePoint[0]);
+			}
+			else{
+				P.draw(FIRST_PAGE_POINT_X+i*SPACE, PAGE_POINT_Y, Res.selectPagePoint[1]);
+			}
+		}
 	}
 	/**
 	 * 获取当前选中的关卡Id
