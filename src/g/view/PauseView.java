@@ -56,7 +56,35 @@ public class PauseView extends BasicView implements BtnMethods{
 			case Game:{ toGameView(views); break;}
 			
 			case Select:{ toSelectView(views); break;}
+			
+			case Start:{ toStartView(views); break;}
 
+		}
+	}
+	private void toStartView(ViewInterface ...views){
+		GameView gameView = (GameView) views[0];
+		StartView startView = (StartView) views[3];
+		if( switchType==SWITCH_PREPARE ){
+			P.increaseDarkness();
+			this.draw(gameView);
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
+				switchType = SWITCH_LOADING;
+			}
+		}
+		else if( switchType==SWITCH_LOADING ){
+			//Ð¶ÔØ×ÊÔ´
+			Res.unload(Res.PAUSE_SOURCE);
+			
+//			Res.unload(Res.GAME_A);
+			
+			switchType = SWITCH_LOADED;
+		}
+		else if( switchType==SWITCH_LOADED ){
+			P.decreaseDarkness();
+			startView.draw();
+			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
+				switchType = SWITCH_FINISH;
+			}
 		}
 	}
 	private void toSelectView(ViewInterface ...views){

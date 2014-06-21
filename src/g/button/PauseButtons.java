@@ -82,7 +82,7 @@ public class PauseButtons extends OzElement{
 			MainEntry.setToStatus(Status.Select);
 		}
 		else if( selected==TO_MAIN ){
-			
+			MainEntry.setToStatus(Status.Start);
 		}
 		else if( selected==EXIT ){
 			Gdx.app.exit();
