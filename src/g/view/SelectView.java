@@ -48,6 +48,10 @@ public class SelectView extends BasicView implements BtnMethods{
 	public void btnLogic(HashMap<String, OzPoint> points) {
 		selectBtns.logic(points);
 	}
+	
+	public void toNextChapter(){
+		selectBtns.toNextChapter();
+	}
 
 
 	@Override

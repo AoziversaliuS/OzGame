@@ -104,6 +104,7 @@ public class SelectButtons extends OzElement{
 				btnBuff = btns.get(i);
 			}
 		}
+		chapterId = -1;
 	}
 
 	@Override
@@ -325,7 +326,10 @@ public class SelectButtons extends OzElement{
 		}
 		return -1;
 	}
-	private int getPageId(){
+	/**
+	 * 此方法是通过判断 哪一页的 signBtn 离 LIMIT_CENTER最近，则当前页就是那一页
+	 * */
+	public int getPageId(){
 		int pId = -1;
 		float range = -1;
 		for(int i=0;i<=MAX_PAGE_NUM;i++){
@@ -379,6 +383,12 @@ public class SelectButtons extends OzElement{
 
 	public  int getChapterId() {
 		return chapterId;
+	}
+	/**
+	 * 在游戏中进入到下一关卡时调用此方法使 chapterId++ ;
+	 * */
+	public void toNextChapter(){
+		chapterId = chapterId + 1;
 	}
 
 	@Override
