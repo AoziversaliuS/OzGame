@@ -42,13 +42,6 @@ public class StartView extends BasicView implements BtnMethods{
 		startBtns.logic(points);
 	}
 
-	@Override
-	public void btnEnter() {
-	}
-
-	@Override
-	public void btnExit() {
-	}
 
 	@Override
 	public void thisToView(Status toStatus, ViewInterface... viewInterfaces) {

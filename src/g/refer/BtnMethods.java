@@ -8,8 +8,5 @@ public interface BtnMethods {
 	
 	public void btnLogic(HashMap<String, OzPoint> points);
 	
-	public void btnEnter();
-	
-	public void btnExit();
 
 }

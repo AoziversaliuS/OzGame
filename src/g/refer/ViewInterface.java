@@ -18,4 +18,5 @@ public interface ViewInterface {
 	 * views = { gameView,pauseView,selectView,startView };
 	 * */
 	public void thisToView(Status toStatus,ViewInterface ...views);
+	
 }

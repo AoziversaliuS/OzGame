@@ -127,12 +127,6 @@ public class GameView extends BasicView implements BtnMethods{
 		gameBtns.logic(points);
 	}
 	
-	@Override
-	public void btnEnter() {
-	}
-	@Override
-	public void btnExit() {
-	}
 
 	public ArrayList<OzElement> getGateAtlas() {
 		return gateAtlas;

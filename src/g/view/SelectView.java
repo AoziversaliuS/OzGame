@@ -49,13 +49,6 @@ public class SelectView extends BasicView implements BtnMethods{
 		selectBtns.logic(points);
 	}
 
-	@Override
-	public void btnEnter() {
-	}
-
-	@Override
-	public void btnExit() {
-	}
 
 	@Override
 	public void thisToView(Status toStatus, ViewInterface... viewInterfaces) {

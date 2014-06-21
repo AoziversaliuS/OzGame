@@ -45,13 +45,6 @@ public class PauseView extends BasicView implements BtnMethods{
 		pauseBtns.logic(points);
 	}
 
-	@Override
-	public void btnEnter() {
-	}
-
-	@Override
-	public void btnExit() {
-	}
 	
 
 
