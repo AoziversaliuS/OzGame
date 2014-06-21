@@ -80,7 +80,7 @@ public class SelectView extends BasicView implements BtnMethods{
 		else if( switchType==SWITCH_LOADING ){
 			//ÊÍ·Å×ÊÔ´
 //			Res.unload(Res.GAME_A);
-			selectBtns.reset();
+			this.reset();
 			switchType = SWITCH_LOADED;
 		}
 		else if( switchType==SWITCH_LOADED ){
@@ -124,7 +124,6 @@ public class SelectView extends BasicView implements BtnMethods{
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		selectBtns.reset();
 	}
 }
