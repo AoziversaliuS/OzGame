@@ -25,13 +25,13 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	
 	private  HashMap<String, OzPoint> points;
 	
-	//SelectStatus
+	//关卡界面
 	private SelectView selectView;
-	//StartStatus
+	//开始界面
 	private StartView startView;
-	//PauseStatus
+	//暂停界面
 	private PauseView pauseView;
-	//GameStatus
+	//游戏界面
 	private GameView gameView;
 	
 	private static Status status;  //当前界面状态
@@ -63,7 +63,13 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		
 	}
 	@Override
+	public synchronized boolean keyUp(int keycode) {
+		System.out.println("keyUp = "+keycode);
+		return super.keyUp(keycode);
+	}
+	@Override
 	public synchronized boolean keyDown(int keycode) {
+		System.out.println("keyDown = "+keycode);
 		return false;
 	}
 	@Override
@@ -152,7 +158,6 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	}
 	
 	public void engine(){
-		
 		switch (status) {
 		
 		case Credits:  {       break;}
@@ -170,13 +175,8 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		case Init:     {        break;}
 		
 		}
-		
-		
 	}
-	
 	public void showGraphic(){
-		
-		
 		switch (status) {
 		
 		case Credits:  {        break;}
@@ -194,13 +194,9 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		case Init:     {        break;}
 		
 		}
-		
-		
-		
 	}
 	
 	public void btnLogic(){
-		
 		switch (status) {
 				
 		case Credits:  {        break;}
@@ -219,12 +215,6 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		
 		}
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	public static Status getStatus() {
