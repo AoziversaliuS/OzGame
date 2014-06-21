@@ -79,31 +79,8 @@ public class SelectButtons extends OzElement{
 
 	@Override
 	public void reset() {
-		for(int page=0;page<=MAX_PAGE_NUM;page++){
-			//每一页的起始坐标
-			OzRect btnBuff;
-			float firstX = page*P.BASIC_SCREEN_WIDTH+LIMIT_CENTER;
-			//第一行
-			OzRect btn = getSignBtn(page);
-			int btnId = getBtnId(btn);
-			btn.x = firstX;
-			btnBuff = btn;
-			for(int i=btnId+1;i<btnId+LINE_BTN_NUM;i++){
-				float leftX = btnBuff.getRight() + SPACE;
-				btns.get(i).x = leftX;
-				btnBuff = btns.get(i);
-			}
-			//第二行
-		    btn = btns.get(btnId+LINE_BTN_NUM);
-		    btnId = getBtnId(btn);
-		    btn.x = firstX;
-			btnBuff = btn;
-			for(int i=btnId+1;i<btnId+LINE_BTN_NUM;i++){
-				float leftX = btnBuff.getRight() + SPACE;
-				btns.get(i).x = leftX;
-				btnBuff = btns.get(i);
-			}
-		}
+		toFirstPage();
+		//使chapter = -1 是否不必要？
 		chapterId = -1;
 	}
 
@@ -363,6 +340,19 @@ public class SelectButtons extends OzElement{
 		pId = btnId/MAX_BTN_NUM_ON_PAGE;
 		return pId;
 	}
+	/**
+	 * 参数是某一个章节的id,获取该章节所在的页面id
+	 * */
+	private int getPageId(int cId){
+		int pageId = 0;
+		for(;pageId<=MAX_PAGE_NUM;pageId++){
+			int signBtnId = getBtnId(getSignBtn(pageId));
+			if( signBtnId>cId ){
+				pageId = pageId - 1;
+			}
+		}
+		return pageId;
+	}
 	private OzRect getLeftSignBtn(){
 		OzRect leftBtn = null;
 		
@@ -384,6 +374,53 @@ public class SelectButtons extends OzElement{
 		}
 		return rightBtn;
 	}
+	
+	/**
+	 * 去到当前章节所在的页面
+	 * */
+	public void toCurrentChapterPage(){
+		toPageByCid(chapterId);
+	}
+	private void toPageByCid(int cId){
+		toFirstPage();
+		toPage(getPageId(cId));
+	}
+	public void toPage(int pId){
+		toFirstPage();
+		for(OzRect btn:btns){
+			btn.x = btn.x - pId*P.BASIC_SCREEN_WIDTH;
+		}
+	}
+	/**
+	 * 去到第一页
+	 * */
+	private void toFirstPage(){
+		for(int page=0;page<=MAX_PAGE_NUM;page++){
+			//每一页的起始坐标
+			OzRect btnBuff;
+			float firstX = page*P.BASIC_SCREEN_WIDTH+LIMIT_CENTER;
+			//第一行
+			OzRect btn = getSignBtn(page);
+			int btnId = getBtnId(btn);
+			btn.x = firstX;
+			btnBuff = btn;
+			for(int i=btnId+1;i<btnId+LINE_BTN_NUM;i++){
+				float leftX = btnBuff.getRight() + SPACE;
+				btns.get(i).x = leftX;
+				btnBuff = btns.get(i);
+			}
+			//第二行
+		    btn = btns.get(btnId+LINE_BTN_NUM);
+		    btnId = getBtnId(btn);
+		    btn.x = firstX;
+			btnBuff = btn;
+			for(int i=btnId+1;i<btnId+LINE_BTN_NUM;i++){
+				float leftX = btnBuff.getRight() + SPACE;
+				btns.get(i).x = leftX;
+				btnBuff = btns.get(i);
+			}
+		}
+	}
 
 	public  int getChapterId() {
 		return chapterId;
@@ -393,6 +430,7 @@ public class SelectButtons extends OzElement{
 	 * */
 	public void toNextChapter(){
 		chapterId = chapterId + 1;
+		toCurrentChapterPage();
 	}
 
 	@Override

@@ -136,6 +136,9 @@ public class SelectView extends BasicView implements BtnMethods{
 		}
 	}
 
+	private void toPage(int pId){
+		selectBtns.toPage(pId);
+	}
 	@Override
 	public void reset() {
 		selectBtns.reset();
