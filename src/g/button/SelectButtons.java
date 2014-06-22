@@ -441,9 +441,8 @@ public class SelectButtons extends OzElement{
 	/**
 	 * 在游戏中进入到下一关卡时调用此方法使 chapterId++ ;
 	 * */
-	public void toNextChapter(){
+	public void increaseChapterId(){
 		chapterId = chapterId + 1;
-		toCurrentChapterPage();
 	}
 
 	@Override

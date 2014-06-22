@@ -162,14 +162,14 @@ public class Player extends OzElement{
 			}
 		}
 		else if( condition==DEADING ){
-			P.drawScale(scaleSize, l,  Res.player[lastDir]);
+			P.draw(scaleSize, l,  Res.player[lastDir]);
 			scaleSize = scaleSize + 0.1f;
 			if( scaleSize>3 ){
 				condition = DEAD_END;
 			}
 		}
 		else if( condition==REVIVEING ){
-			P.drawScale(scaleSize, l,  Res.player[lastDir]);
+			P.draw(scaleSize, l,  Res.player[lastDir]);
 			scaleSize = scaleSize - 0.1f;
 			if( scaleSize<=1 ){
 				condition = REVIVE_END;

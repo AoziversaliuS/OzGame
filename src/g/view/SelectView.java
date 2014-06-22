@@ -8,6 +8,7 @@ import g.button.SelectReturnButtons;
 import g.refer.BasicView;
 import g.refer.BtnMethods;
 import g.refer.ViewInterface;
+import g.tool.Data;
 import g.tool.OzPoint;
 import g.tool.P;
 import g.tool.Res;
@@ -66,9 +67,18 @@ public class SelectView extends BasicView implements BtnMethods{
 		toMainBtn.btnLogic(points);
 	}
 	
-	public void toNextChapter(){
-		selectBtns.toNextChapter();
+	/**
+	 * 让chapterId自增,并解锁下一关卡
+	 * */
+	public void unlockNextChapter(){
+		selectBtns.increaseChapterId();
+		//去到当前关卡所在的页面
+		selectBtns.toCurrentChapterPage();
+		//解锁下一关卡
+		Data.unLockChapter(selectBtns.getChapterId());
 	}
+	
+		
 
 
 	@Override

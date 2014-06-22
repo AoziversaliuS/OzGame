@@ -7,6 +7,6 @@ public enum Status {
 	Loading,//载入
 	Game,//游戏界面
 	Pause,//暂停界面
-	Interlude,//切换关卡的过场界面
+	Pass,//切换关卡的过场界面
 	Init//初始化状态
 }

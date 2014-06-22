@@ -130,15 +130,18 @@ public class P {
 			drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
 		}
 	}
-	public static void drawScale(float scaleXY,OzPoint point,OzPicture picture){
+	/**
+	 * 缩放图片
+	 * */
+	public static void draw(float scaleXY,OzPoint point,OzPicture picture){
+		draw(scaleXY, scaleXY, point, picture);
+	}
+	public static void draw(float scaleX,float scaleY,OzPoint point,OzPicture picture){
 		picture.setDefault();
-		//此方法适用于画除了背景图片之外的图片
-		//↓这里之后删
-		picture.getSprite().setColor(Color.RED);
-		//↑
-		picture.getSprite().setScale(scaleXY);
+		picture.getSprite().setScale(scaleX, scaleY);
 		drawAtPosition(point.x*P.autoRatioX, point.y*P.autoRatioY, picture);
 	}
+	
 	
 	private static void drawAtPosition(float positionX,float positionY,OzPicture picture){
 		picture.getSprite().setPosition(positionX,positionY);//已经调整好比例之后的XY值
@@ -154,7 +157,6 @@ public class P {
 		else{
 			picture.getSprite().draw(batch);
 		}
-//		picture.getSprite().draw(batch);
 	}
 	
 	
@@ -186,16 +188,6 @@ public class P {
 
 
 
-//	private static TextureAtlas atlas;
-	
-
-//	private static Sprite mS(String pictureName){
-//		
-//		return atlas.createSprite(pictureName);
-//	}
-//	private static Sprite mS(String pictureName,int index){
-//		return atlas.createSprite(pictureName,index);
-//	}
 	private static void ratioInit(){
 		
 		/**以1280*720分辨率作为基准屏幕*/
