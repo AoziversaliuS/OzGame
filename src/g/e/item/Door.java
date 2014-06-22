@@ -1,5 +1,6 @@
 package g.e.item;
 
+import g.basis.MainEntry;
 import g.refer.BasicBody;
 import g.refer.Player;
 import g.tool.OzPoint;
@@ -8,6 +9,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
+import g.type.Status;
 
 public class Door extends BasicBody{
 
@@ -48,6 +50,10 @@ public class Door extends BasicBody{
 				doorSize = 0;
 				activeType = ACTIVE_FINISH;
 			}
+		}
+		else if( activeType==ACTIVE_FINISH ){
+			this.reset();
+			MainEntry.setToStatus(Status.Pass);
 		}
 	}
 

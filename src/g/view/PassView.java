@@ -2,6 +2,7 @@ package g.view;
 
 import java.util.HashMap;
 
+import g.button.PassButtons;
 import g.refer.BasicView;
 import g.refer.BtnMethods;
 import g.refer.ViewInterface;
@@ -10,7 +11,7 @@ import g.type.Status;
 
 public class PassView  extends BasicView implements BtnMethods{
 
-	
+	private PassButtons passButtons;
 	
 	public PassView() {
 		super();
@@ -19,19 +20,17 @@ public class PassView  extends BasicView implements BtnMethods{
 
 	@Override
 	public void init() {
-		
+		passButtons = new PassButtons();
 	}
 
 	@Override
 	public void engine() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void draw(ViewInterface... viewInterfaces) {
-		// TODO Auto-generated method stub
-		
+		passButtons.draw();
 	}
 
 	@Override
@@ -48,8 +47,7 @@ public class PassView  extends BasicView implements BtnMethods{
 
 	@Override
 	public void btnLogic(HashMap<String, OzPoint> points) {
-		// TODO Auto-generated method stub
-		
+		passButtons.btnLogic(points);
 	}
 
 }

@@ -11,7 +11,7 @@ public interface ViewInterface {
 	/**
 	 * 如果要把另外一个视图作为背景画出，则应将该视图作为参数传入
 	 * */
-	public void draw(ViewInterface ...viewInterfaces);
+	public void draw(ViewInterface ...views);
 	
 	/**
 	 * 从此视图切换到另外一个视图

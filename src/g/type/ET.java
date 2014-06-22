@@ -18,4 +18,7 @@ public enum ET {
 	
 	//Pause
 	,PauseButtons
+	
+	//Pass
+	,PassButtons
 }
