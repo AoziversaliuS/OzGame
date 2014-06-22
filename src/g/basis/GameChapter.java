@@ -20,7 +20,7 @@ public class GameChapter {
 	
 	//第一关地图
 	static void A_00(ArrayList<OzElement> gateAtlas){
-		System.out.println("进入A_00000");
+		System.out.println("载入A_00地图");
 		gateAtlas.add(new BackGround("BG-1"));
 		
 		

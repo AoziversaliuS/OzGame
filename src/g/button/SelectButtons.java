@@ -102,12 +102,9 @@ public class SelectButtons extends OzElement{
 	private void adjust(){
 		if( moveMold==MOVE_ADJUST ){
 			int dir = getDir();
-//			System.out.println(" currentPageId = "+currentPageId);
-//			System.out.println(" dir = "+dir);
 			if( dir==DIR_LEFT ){
 				OzRect leftBtn = getLeftSignBtn();//既然已经判定了方向为left，那么leftBtn不可能为null!
 				OzRect rightBtn = getRightSignBtn();
-//				System.out.println("rightBtn = "+rightBtn);
 				float moveRange = Math.abs( leftBtn.x-LIMIT_CENTER );
 				
 				if( moveRange<=LIMIT_RANGE || rightBtn==null ){
@@ -166,7 +163,7 @@ public class SelectButtons extends OzElement{
 			}
 			if( moveMold==MOVE_QUIET ){
 				currentPageId = getPageId();//重设当前页的Id
-				System.out.println(" getPageId() = "+getPageId());
+//				System.out.println(" getPageId() = "+getPageId());
 				dX = 0;
 			}
 		}
