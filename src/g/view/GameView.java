@@ -143,7 +143,30 @@ public class GameView extends BasicView implements BtnMethods{
 			
 			case Pause:{ toPauseView(views); break;}
 			
-
+			case Pass:{ toPassView(views); break;}
+		}
+	}
+	
+	private void toPassView(ViewInterface ...views){
+		PassView passView = (PassView) views[4];
+		if( switchType==SWITCH_PREPARE ){
+			P.increaseDarkness();
+			this.draw();
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM/2 ){
+				switchType = SWITCH_LOADING;
+				Res.prepare(Res.PASS_SOURCE);
+			}
+		}
+		else if( switchType==SWITCH_LOADING ){
+				this.draw();
+				if(Res.update()){
+					switchType = SWITCH_LOADED;
+				}
+		}
+		else if( switchType==SWITCH_LOADED ){
+			P.setDarkness(0);
+			passView.draw(this);
+			switchType = SWITCH_FINISH;
 		}
 	}
 	

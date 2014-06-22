@@ -52,7 +52,6 @@ public class Door extends BasicBody{
 			}
 		}
 		else if( activeType==ACTIVE_FINISH ){
-			this.reset();
 			MainEntry.setToStatus(Status.Pass);
 		}
 	}

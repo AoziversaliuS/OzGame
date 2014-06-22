@@ -60,7 +60,7 @@ public class SelectButtons extends OzElement{
 		this.addButtons();
 		System.out.println("左边"+btns.get(0).x+"   右边"+(P.BASIC_SCREEN_WIDTH - btns.get(11).getRight()));
 		
-		lastUnlockChapterId = Data.getLastUnlockChapterId();
+		this.refreshUnlockId();
 		
 	}
 	
@@ -358,10 +358,14 @@ public class SelectButtons extends OzElement{
 	 * */
 	private int getPageId(int cId){
 		int pageId = 0;
+		//每页最后一个按钮的id,从第0页开始
+		int lastBtnId = MAX_BTN_NUM_ON_PAGE - 1; 
 		for(;pageId<=MAX_PAGE_NUM;pageId++){
-			int signBtnId = getBtnId(getSignBtn(pageId));
-			if( signBtnId>cId ){
-				pageId = pageId - 1;
+			if( lastBtnId<cId ){
+				lastBtnId = lastBtnId + MAX_BTN_NUM_ON_PAGE;
+			}
+			else{
+				break;
 			}
 		}
 		return pageId;
@@ -395,7 +399,6 @@ public class SelectButtons extends OzElement{
 		toPageByCid(chapterId);
 	}
 	private void toPageByCid(int cId){
-		toFirstPage();
 		toPage(getPageId(cId));
 	}
 	public void toPage(int pId){
@@ -433,6 +436,12 @@ public class SelectButtons extends OzElement{
 				btnBuff = btns.get(i);
 			}
 		}
+	}
+	/**
+	 * 刷新lastUnlockChapterId
+	 * */
+	public void refreshUnlockId(){
+		lastUnlockChapterId = Data.getLastUnlockChapterId();
 	}
 
 	public  int getChapterId() {

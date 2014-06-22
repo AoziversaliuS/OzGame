@@ -170,7 +170,7 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	public void statusSwitch(){
 
 		
-		ViewInterface[] views = { gameView,pauseView,selectView,startView };
+		ViewInterface[] views = { gameView,pauseView,selectView,startView,passView};
 		
 		switch (status) {
 		

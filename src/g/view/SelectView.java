@@ -16,7 +16,7 @@ import g.type.Status;
 
 public class SelectView extends BasicView implements BtnMethods{
 
-	private SelectButtons selectBtns;
+	private static SelectButtons  selectBtns;
 	private SelectReturnButtons toMainBtn;
 	
 	private static final float FIRST_PAGE_POINT_X = 370;
@@ -56,7 +56,7 @@ public class SelectView extends BasicView implements BtnMethods{
 	/**
 	 * 获取当前选中的关卡Id
 	 * */
-	public int getChapterId(){
+	public static int getChapterId(){
 		return selectBtns.getChapterId();
 	}
 
@@ -70,12 +70,15 @@ public class SelectView extends BasicView implements BtnMethods{
 	/**
 	 * 让chapterId自增,并解锁下一关卡
 	 * */
-	public void unlockNextChapter(){
+	public static void unlockNextChapter(){
+		
 		selectBtns.increaseChapterId();
-		//去到当前关卡所在的页面
+		System.out.println("ChapterId = "+SelectView.getChapterId());
+//		//去到当前关卡所在的页面
 		selectBtns.toCurrentChapterPage();
-		//解锁下一关卡
+//		//解锁下一关卡
 		Data.unLockChapter(selectBtns.getChapterId());
+		selectBtns.refreshUnlockId();
 	}
 	
 		

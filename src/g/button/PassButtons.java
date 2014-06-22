@@ -2,6 +2,7 @@ package g.button;
 
 import java.util.HashMap;
 
+import g.basis.MainEntry;
 import g.refer.BtnMethods;
 import g.refer.OzElement;
 import g.refer.Player;
@@ -11,6 +12,9 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
+import g.type.Status;
+import g.view.GameView;
+import g.view.SelectView;
 
 public class PassButtons extends OzElement implements BtnMethods{
 
@@ -54,15 +58,17 @@ public class PassButtons extends OzElement implements BtnMethods{
 		else{
 			if( selected!=ELSE ){
 				active();
+				selected = ELSE;
 			}
 		}
 	}
 	private void active(){
 		if( selected==RESTART ){
-			
+			MainEntry.setToStatus(Status.Game);
 		}
 		else if( selected==NEXT ){
-			
+			SelectView.unlockNextChapter();
+			MainEntry.setToStatus(Status.Game);
 		}
 	}
 
