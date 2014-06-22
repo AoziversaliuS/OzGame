@@ -53,7 +53,8 @@ public class Door extends BasicBody{
 
 	@Override
 	public void draw() {
-		P.draw(doorSize, l, Res.door);
+//		P.draw(doorSize, l, Res.door);
+		P.draw(1f, doorSize,l, Res.door);
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class Res {
 
 	
 	public static final int GAME_A=201,GAME_B=202,GAME_C=203;
-	public static final int PAUSE_SOURCE = 101;
+	public static final int PAUSE_SOURCE = 101,PASS_SOURCE=102;
 	static int sourceId = GAME_A;
 	
 	
@@ -37,7 +37,9 @@ public class Res {
 	public static OzPicture pause_btnToSelect[] = new OzPicture[2];
 	public static OzPicture pause_btnToMain[] = new OzPicture[2];
 	public static OzPicture pause_btnExit[] = new OzPicture[2];
-	
+	/**passSource**/
+	public static OzPicture pass_btnNext[] = new OzPicture[2];
+	public static OzPicture pass_btnRestart[] = new OzPicture[2];
 	/**gameSource*/
 	//button
 	public static OzPicture[] game_btnLeft = new OzPicture[2];
@@ -85,6 +87,9 @@ public class Res {
 		setPicGroupData(283, 105,  pause_btnToSelect,  P.FORCE_RATIO);
 		setPicGroupData(283, 105,  pause_btnToMain,  P.FORCE_RATIO);
 		setPicGroupData(283, 105,  pause_btnExit,  P.FORCE_RATIO);
+		//过关菜单对象初始化
+		setPicGroupData(300, 105, pass_btnNext, P.FORCE_RATIO);
+		setPicGroupData(300, 105, pass_btnRestart, P.FORCE_RATIO);
 		
 		//游戏图片对象初始化
 		setPicGroupData(208, 125, game_btnLeft,P.AUTO_RATIO);
@@ -128,6 +133,8 @@ public class Res {
 		switch (sourceId){
 		
 				case PAUSE_SOURCE: { pauseSource();  break;}
+				
+				case PASS_SOURCE: { passSource(); break;}
 		}
 	}
 	private static void pauseSource(){
@@ -145,7 +152,19 @@ public class Res {
 			loadPicGroup(pause_btnToMain, "btnToMain", P.FORCE_RATIO);
 			loadPicGroup(pause_btnExit, "btnExit", P.FORCE_RATIO);
 		}
-		
+	}
+	private static void passSource(){
+		if( loadStatus==LOADING ){
+			manager.load("Image/pass/pass.atlas", TextureAtlas.class);
+		}
+		else if( loadStatus==UN_LOAD ){//卸载资源
+			manager.unload("Image/pass/pass.atlas");
+		}
+		else if( loadStatus==LOAD_FINISH ){
+			setAtlas("Image/pass/pass.atlas");
+			loadPicGroup(pass_btnRestart, "restartBtn", P.FORCE_RATIO);
+			loadPicGroup(pass_btnNext, "nextBtn", P.FORCE_RATIO);
+		}
 	}
 	
 	private static void gA(){
