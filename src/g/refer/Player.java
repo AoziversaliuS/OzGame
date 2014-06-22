@@ -137,7 +137,7 @@ public class Player extends OzElement{
 		}
 		else if( condition==DEADING ){
 			scaleSize = scaleSize + 0.1f;
-			System.out.println("scaleSize = "+scaleSize);
+//			System.out.println("scaleSize = "+scaleSize);
 			if( scaleSize>3 ){
 				condition = DEAD_END;
 			}

@@ -68,17 +68,18 @@ public class SelectView extends BasicView implements BtnMethods{
 	}
 	
 	/**
-	 * 让chapterId自增,并解锁下一关卡
+	 * 当前chapterId不变,并解锁 chapterId+1 的关卡
 	 * */
 	public static void unlockNextChapter(){
 		
-		selectBtns.increaseChapterId();
-		System.out.println("ChapterId = "+SelectView.getChapterId());
 //		//去到当前关卡所在的页面
 		selectBtns.toCurrentChapterPage();
 //		//解锁下一关卡
-		Data.unLockChapter(selectBtns.getChapterId());
+		Data.unLockChapter(selectBtns.getChapterId()+1);
 		selectBtns.refreshUnlockId();
+	}
+	public static void increaseChapterId(){
+		selectBtns.increaseChapterId();
 	}
 	
 		

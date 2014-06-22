@@ -64,9 +64,11 @@ public class PassButtons extends OzElement implements BtnMethods{
 	}
 	private void active(){
 		if( selected==RESTART ){
+			SelectView.unlockNextChapter();
 			MainEntry.setToStatus(Status.Game);
 		}
 		else if( selected==NEXT ){
+			SelectView.increaseChapterId();
 			SelectView.unlockNextChapter();
 			MainEntry.setToStatus(Status.Game);
 		}
