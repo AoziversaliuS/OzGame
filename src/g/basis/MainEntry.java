@@ -20,7 +20,7 @@ import com.badlogic.gdx.files.FileHandle;
 
 public class MainEntry extends InputProcessorQueue implements ApplicationListener {
 	
-	private boolean showFPS = false;
+	private boolean showFPS = true;
 	
 	private boolean debug = false;
 	private long times = 50;//debug用，debug为true时使游戏运行缓慢，能看清每一帧
