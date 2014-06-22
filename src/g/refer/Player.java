@@ -32,14 +32,15 @@ public class Player extends OzElement{
 	
 	private  static OzPoint L = new OzPoint();     //对外传输玩家坐标
 	
-	public static final int ALIVE = 0 /**活着*/,
-			                DEAD_START=1 , DEADING=2,  DEAD_END=3,    /**死亡开始和结束*/
-			                REVIVE_START=4,REVIVEING=5 , REVIVE_END=6 /**复活开始和结束*/;
+	public static final int ALIVE = 100 /**活着*/,
+			                DEAD_START=101 , DEADING=102,  DEAD_END=103,    /**死亡开始和结束*/
+			                REVIVE_START=104,REVIVEING=105 , REVIVE_END=106 /**复活开始和结束*/
+			                ,STOPPING=107;
 	private  static  int condition = Player.ALIVE;//玩家当前所处的状态
 	
-	public static final int HIT_BASIC = 7        /**碰到静止的物体*/, 
-			                HIT_Moving = 8       /**碰到移动的物体*/, 
-			                HIT_ELSE = 9;        /**其余情况(没碰到物体时的情况)*/
+	public static final int HIT_BASIC = 70        /**碰到静止的物体*/, 
+			                HIT_Moving = 71       /**碰到移动的物体*/, 
+			                HIT_ELSE = 72;        /**其余情况(没碰到物体时的情况)*/
 	private static  int plane_HitType = HIT_ELSE;    //水平碰撞类型
 	private static int vertical_HitType = HIT_ELSE; //垂直碰撞类型
 	
@@ -49,7 +50,7 @@ public class Player extends OzElement{
 	 * */
 	private int lastDir = DIR_RIGHT;
 	
-	private  float scaleSize = 1f; //死亡和复活时的图片缩放参数
+	private static float scaleSize = 1f; //死亡和复活时的图片缩放参数
 	
 	public static float moveSpeed(){
 		return moveSpeed;
@@ -136,6 +137,7 @@ public class Player extends OzElement{
 		}
 		else if( condition==DEADING ){
 			scaleSize = scaleSize + 0.1f;
+			System.out.println("scaleSize = "+scaleSize);
 			if( scaleSize>3 ){
 				condition = DEAD_END;
 			}
@@ -151,6 +153,7 @@ public class Player extends OzElement{
 			}
 		}
 		else if( condition==REVIVE_END ){
+//			this.reset();//复活之后重设状态
 			condition = ALIVE;
 		}
 	}
@@ -176,10 +179,12 @@ public class Player extends OzElement{
 		}
 		else if( condition==DEADING ){
 			P.draw(scaleSize, l,  Res.player[lastDir]);
-			
 		}
 		else if( condition==REVIVEING ){
 			P.draw(scaleSize, l,  Res.player[lastDir]);
+		}
+		else if( condition==STOPPING ){
+			P.draw(scaleSize, l,Res.player[lastDir]);
 		}
 		
 
@@ -327,7 +332,11 @@ public class Player extends OzElement{
 		
 	}
 	
-
+	public static void setScaleSize(float scaleSize) {
+		Player.scaleSize = scaleSize;
+	}
+	
+	
 	
 
 }

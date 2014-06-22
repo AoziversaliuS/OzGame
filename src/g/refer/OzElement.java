@@ -49,7 +49,9 @@ public abstract class OzElement implements Origin{
 	//垂直移动运算 玩家【跳跃，下坠】时的相对运动
 	public void verticalLogic(){
 	}
-	
+	/**
+	 * 只有当 Player.getCondition()==Player.ALIVE 时才能进行相对移动
+	 * */
 	public void engine(){
 		//只有活着时才能进行相对移动
 		if(Player.getCondition()==Player.ALIVE){

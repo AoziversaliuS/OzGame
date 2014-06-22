@@ -131,15 +131,39 @@ public class P {
 		}
 	}
 	/**
-	 * 缩放图片
+	 * 缩放图片,使用picture自带的比例来画
 	 * */
 	public static void draw(float scaleXY,OzPoint point,OzPicture picture){
-		draw(scaleXY, scaleXY, point, picture);
+		draw(scaleXY, scaleXY, point, picture,picture.getRatioType());
 	}
+	/**
+	 * 缩放图片,使用picture自带的比例来画
+	 * */
 	public static void draw(float scaleX,float scaleY,OzPoint point,OzPicture picture){
+		draw(scaleX, scaleY, point, picture, picture.getRatioType());
+	}
+	/**
+	 * 缩放图片，使用自定义的比例来画
+	 * */
+	public static void draw(float scaleX,float scaleY,OzPoint point,OzPicture picture,int ratioType){
 		picture.setDefault();
 		picture.getSprite().setScale(scaleX, scaleY);
-		drawAtPosition(point.x*P.autoRatioX, point.y*P.autoRatioY, picture);
+		if( ratioType == NO_RATIO ){
+			//直接画
+			drawAtPosition(point.x, point.y, picture);
+		}
+		else if( ratioType==AUTO_RATIO ){
+			//自动比例
+			drawAtPosition(point.x*P.autoRatioX,   point.y*P.autoRatioY, picture);
+		}
+		else if( ratioType==FORCE_RATIO ){
+			//强制比例
+			drawAtPosition(point.x*P.forceRatioX,  point.y*P.forceRatioY, picture);
+		}
+		else if( ratioType==BG_RATIO ){
+			//背景比例
+			drawAtPosition(point.x*P.bgRatioX,  point.y*P.bgRatioY, picture);
+		}
 	}
 	
 	
