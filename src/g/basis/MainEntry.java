@@ -3,6 +3,7 @@ package g.basis;
 import java.util.HashMap;
 
 import g.refer.ViewInterface;
+import g.tool.Data;
 import g.tool.OzPoint;
 import g.tool.P;
 import g.tool.Res;
@@ -15,10 +16,11 @@ import g.view.StartView;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessorQueue;
+import com.badlogic.gdx.files.FileHandle;
 
 public class MainEntry extends InputProcessorQueue implements ApplicationListener {
 	
-	private boolean showFPS = true;
+	private boolean showFPS = false;
 	
 	private boolean debug = false;
 	private long times = 50;//debug用，debug为true时使游戏运行缓慢，能看清每一帧
@@ -65,6 +67,8 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		//暂停菜单初始化
 		pauseView = new PauseView();
 		
+		//存档文件的初始化
+		Data.init();
 	}
 	@Override
 	public synchronized boolean keyUp(int keycode) {
