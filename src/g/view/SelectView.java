@@ -118,6 +118,7 @@ public class SelectView extends BasicView implements BtnMethods{
 			this.draw();
 			if(Res.update()){
 				//加载完图片之后载入地图
+				System.out.println(" C chapterId = "+this.getChapterId());
 				GameChapter.chapterLoad(
 						gameView.getGateAtlas(),
 						gameView.getRankNum(),

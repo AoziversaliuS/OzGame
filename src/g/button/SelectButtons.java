@@ -3,6 +3,8 @@ package g.button;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 import g.basis.MainEntry;
 import g.refer.OzElement;
 import g.refer.Player;
@@ -87,6 +89,7 @@ public class SelectButtons extends OzElement{
 	public void reset() {
 		toFirstPage();
 		//使chapter = -1 是否不必要？
+		System.out.println("SelectButtons.reset()");
 		chapterId = -1;
 	}
 
@@ -194,6 +197,7 @@ public class SelectButtons extends OzElement{
 					// btnId<=lastUnlockChapterId 判断是否是已解锁的章节
 					if(btn.inside(l, P.FORCE_RATIO) && btnId<=lastUnlockChapterId ){
 						chapterId = i;
+						System.out.println(" A chapterId = "+chapterId);
 						selected = true;
 						break;
 					}
@@ -212,11 +216,14 @@ public class SelectButtons extends OzElement{
 			submit = true;
 		}
 		else if( moveMold==MOVE_DRAG ){ //拖动时提交无效
-			chapterId = -1;            
+//			chapterId = -1;
+			//拖动时也会有一定概率提交？
+		
 			submit = false;
 		}
 		else if( submit && moveMold==MOVE_QUIET ){ 
 			MainEntry.setToStatus(Status.Game);
+			System.out.println(" B chapterId = "+chapterId);
 			submit = false;
 		}
 //		else{
