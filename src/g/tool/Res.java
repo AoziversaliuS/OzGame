@@ -52,6 +52,7 @@ public class Res {
 	public static OzPicture[] land = new OzPicture[9];
 	public static OzPicture thorn;
 	public static OzPicture[] moveLand = new OzPicture[3];
+	public static OzPicture door;
 	//view¡ý
 	public static OzPicture[] tree = new OzPicture[2];
 
@@ -99,6 +100,7 @@ public class Res {
 		moveLand[1]  = new OzPicture(50, 50,P.AUTO_RATIO);
 		moveLand[2]  = new OzPicture(50, 50,P.AUTO_RATIO);
 		backGround   = new OzPicture(1280, 720, P.BG_RATIO);
+		door         = new OzPicture(67, 79, P.AUTO_RATIO);
 		//view¡ý
 		setPicGroupData(195, 254, tree,P.AUTO_RATIO);
 	}
@@ -185,6 +187,7 @@ public class Res {
 			moveLand[0].setSprite( mS("moveLand",0),P.AUTO_RATIO);
 			moveLand[1].setSprite(mS("moveLand",1),P.AUTO_RATIO);
 			moveLand[2].setSprite(true,false,mS("moveLand",0),P.AUTO_RATIO);
+			door.setSprite(mS("door"), P.AUTO_RATIO);
 		
 			setAtlas("Image/view/view.atlas");
 			loadPicGroup( tree, "tree",P.AUTO_RATIO);

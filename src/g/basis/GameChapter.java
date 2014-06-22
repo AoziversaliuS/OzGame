@@ -1,11 +1,11 @@
 package g.basis;
 
-import g.e.architecture.DeadLine;
 import g.e.architecture.Land;
 import g.e.architecture.MoveLand;
 import g.e.architecture.ReferPoint;
 import g.e.architecture.Thorn;
-import g.e.scenery.AnimationView;
+import g.e.item.DeadLine;
+import g.e.item.Door;
 import g.e.scenery.View;
 import g.refer.BackGround;
 import g.refer.OzElement;
@@ -45,6 +45,8 @@ public class GameChapter {
 		gateAtlas.add(new View("Tree", 500, 145, Res.tree[0]));
 		
 		gateAtlas.add(new DeadLine(-300) );
+		
+		gateAtlas.add(new Door("door", 200, 150));
 //		System.out.println("gateAtlasSize="+gateAtlas.size());
 	}
 	

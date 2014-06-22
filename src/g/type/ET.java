@@ -8,7 +8,7 @@ public enum ET {
 	BackGround,Player,
 	
 	ReferPoint,//≤Œ’’µ„
-	Land,Thorn,MoveLand,DeadLine,View
+	Land,Thorn,MoveLand,DeadLine,View,Door
 	
 	//Start
 	,StartButtons
