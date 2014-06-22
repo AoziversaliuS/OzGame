@@ -47,6 +47,9 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	@Override
 	public void create() {	
 		
+		//存档文件的初始化
+		Data.init();
+		
 		P.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //画图工具类初始化
 		Res.init();//资源管理器初始化。
 		
@@ -67,8 +70,7 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		//暂停菜单初始化
 		pauseView = new PauseView();
 		
-		//存档文件的初始化
-		Data.init();
+
 	}
 	@Override
 	public synchronized boolean keyUp(int keycode) {

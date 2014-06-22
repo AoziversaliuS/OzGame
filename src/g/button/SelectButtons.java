@@ -6,6 +6,7 @@ import java.util.HashMap;
 import g.basis.MainEntry;
 import g.refer.OzElement;
 import g.refer.Player;
+import g.tool.Data;
 import g.tool.OzPoint;
 import g.tool.OzRect;
 import g.tool.P;
@@ -28,13 +29,15 @@ public class SelectButtons extends OzElement{
 	
 	private final float MIN_DRAG_RANGE = 30;//最小移动距离，只有超过了这个距离才能移动
 	
-	private float dragRange = 0;//一只手指拖动的距离，当距离超过最小拖动距离时屏幕将被拖动
-	private static int currentPageId = 0; //表示当前处于哪一页，最小页数为第0页
-	
+
 	public static final int MAX_PAGE_NUM = 4;//最大页数,从0开始
 	public static final int MAX_BTN_NUM_ON_PAGE = 12;
 	public static final int MOVE_QUIET=1/**静止*/,MOVE_DRAG=2/**拖动*/,MOVE_ADJUST=3/**调整*/;
 	private static final int DIR_LEFT=4,DIR_RIGHT=5;
+
+	
+	private float dragRange = 0;//一只手指拖动的距离，当距离超过最小拖动距离时屏幕将被拖动
+	private static int currentPageId = 0; //表示当前处于哪一页，最小页数为第0页
 	private int moveMold = MOVE_QUIET;
 	
 	private int lastId = -1;//上一次的触摸点的Id
@@ -46,13 +49,16 @@ public class SelectButtons extends OzElement{
 	private  int chapterId = -1;
 	private boolean submit = false;
 	private boolean selected = false;
-	
+	private int lastUnlockChapterId = 0;
+
 	public SelectButtons(){
 		super("SelectButtons", Rank.SELF_CUSTOM, ET.SelectButtons, null, null);
 		currentPageId = 0;//当前处于第0页
 		btns = new ArrayList<OzRect>();
 		this.addButtons();
 		System.out.println("左边"+btns.get(0).x+"   右边"+(P.BASIC_SCREEN_WIDTH - btns.get(11).getRight()));
+		
+		lastUnlockChapterId = Data.getLastUnlockChapterId();
 		
 	}
 	
@@ -184,7 +190,9 @@ public class SelectButtons extends OzElement{
 				//非移动状态判断是否按下了按钮
 				for(int i=0;i<btns.size();i++){
 					OzRect btn = btns.get(i);
-					if(btn.inside(l, P.FORCE_RATIO)){
+					int btnId = getBtnId(btn);
+					// btnId<=lastUnlockChapterId 判断是否是已解锁的章节
+					if(btn.inside(l, P.FORCE_RATIO) && btnId<=lastUnlockChapterId ){
 						chapterId = i;
 						selected = true;
 						break;
@@ -264,8 +272,11 @@ public class SelectButtons extends OzElement{
 			if( i==chapterId && selected==true ){
 				P.draw(btn.x, btn.y, Res.selectBtn[1], P.FORCE_RATIO);
 			}
-			else{
+			else if( i<=lastUnlockChapterId ){
 				P.draw(btn.x, btn.y, Res.selectBtn[0], P.FORCE_RATIO);
+			}
+			else{
+				P.draw(btn.x, btn.y, Res.selectBtn[2], P.FORCE_RATIO);
 			}
 		}
 		
