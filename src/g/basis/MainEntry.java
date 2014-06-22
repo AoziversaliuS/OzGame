@@ -9,6 +9,7 @@ import g.tool.P;
 import g.tool.Res;
 import g.type.Status;
 import g.view.GameView;
+import g.view.PassView;
 import g.view.PauseView;
 import g.view.SelectView;
 import g.view.StartView;
@@ -35,6 +36,8 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	private PauseView pauseView;
 	//游戏界面
 	private GameView gameView;
+	//关卡切换界面
+	private PassView passView;
 	
 	private static Status status;  //当前界面状态
     private static Status toStatus;
@@ -69,7 +72,8 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		selectView = new SelectView();
 		//暂停菜单初始化
 		pauseView = new PauseView();
-		
+		//关卡切换界面初始化
+		passView = new PassView();
 
 	}
 	@Override
@@ -184,6 +188,7 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		
 		case Start:  {   startView.toView(toStatus,views);       break; }
 		
+		case Pass:   {    passView.toView(toStatus,views);          break;}
 		}
 		
 	}
@@ -205,6 +210,8 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		
 		case Init:     {        break;}
 		
+		case Pass:   {    passView.engine();          break;}
+		
 		}
 	}
 	public void showGraphic(){
@@ -223,6 +230,8 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		case Start:    {    startView.draw();   break;}
 		
 		case Init:     {        break;}
+		
+		case Pass:   {      passView.draw(gameView);         break;}
 		
 		}
 	}
@@ -243,6 +252,8 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		case Start:    {     startView.btnLogic(points);   break;}
 				
 		case Init:     {        break;}
+		
+		case Pass:   {       passView.btnLogic(points);        break;}
 		
 		}
 	}
