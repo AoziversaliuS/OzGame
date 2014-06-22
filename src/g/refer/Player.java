@@ -134,8 +134,21 @@ public class Player extends OzElement{
 			condition = DEADING;
 			System.out.println("正在死亡: "+condition);
 		}
+		else if( condition==DEADING ){
+			scaleSize = scaleSize + 0.1f;
+			if( scaleSize>3 ){
+				condition = DEAD_END;
+			}
+		}
 		else if( condition==REVIVE_START ){
+			//condition从 DEAD_END 切换到 REVIVE_START 是gameView里做的
 			condition = REVIVEING;
+		}
+		else if( condition==REVIVEING ){
+			scaleSize = scaleSize - 0.1f;
+			if( scaleSize<=1 ){
+				condition = REVIVE_END;
+			}
 		}
 		else if( condition==REVIVE_END ){
 			condition = ALIVE;
@@ -163,17 +176,10 @@ public class Player extends OzElement{
 		}
 		else if( condition==DEADING ){
 			P.draw(scaleSize, l,  Res.player[lastDir]);
-			scaleSize = scaleSize + 0.1f;
-			if( scaleSize>3 ){
-				condition = DEAD_END;
-			}
+			
 		}
 		else if( condition==REVIVEING ){
 			P.draw(scaleSize, l,  Res.player[lastDir]);
-			scaleSize = scaleSize - 0.1f;
-			if( scaleSize<=1 ){
-				condition = REVIVE_END;
-			}
 		}
 		
 
