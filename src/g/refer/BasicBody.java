@@ -39,7 +39,6 @@ public abstract class BasicBody extends OzElement {
 	//在这里进行水平移动运算  【玩家向左移动，向右移动】            时相对运动
 	@Override
 	public void planeLogic() {
-//		System.out.println("Player.getPlane_HitType()="+Player.getPlane_HitType());
 		
 		if( Player.getPlane_HitType()==Player.HIT_BASIC || Player.getPlane_HitType()==Player.HIT_ELSE ){
 			//玩家向左移动
