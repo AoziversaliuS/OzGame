@@ -160,13 +160,17 @@ public class GameView extends BasicView implements BtnMethods{
 		else if( switchType==SWITCH_LOADING ){
 				this.draw(views);
 				if(Res.update()){
+					passView.reset();
 					switchType = SWITCH_LOADED;
 				}
 		}
 		else if( switchType==SWITCH_LOADED ){
 			P.setDarkness(0);
 			passView.draw(views);
-			switchType = SWITCH_FINISH;
+			if( passView.enter() ){
+				switchType = SWITCH_FINISH;
+			}
+			
 		}
 	}
 	
@@ -192,7 +196,9 @@ public class GameView extends BasicView implements BtnMethods{
 		else if( switchType==SWITCH_LOADED ){
 			P.setDarkness(0);
 			pauseView.draw(views);
-			switchType = SWITCH_FINISH;
+			if( pauseView.enter() ){
+				switchType = SWITCH_FINISH;
+			}
 		}
 	}
 
@@ -201,6 +207,20 @@ public class GameView extends BasicView implements BtnMethods{
 	public void reset() {
 		player.reset();
 		gameBtns.reset();
+	}
+
+
+	@Override
+	public boolean enter() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean exit() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

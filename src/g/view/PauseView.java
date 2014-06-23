@@ -16,6 +16,8 @@ public class PauseView extends BasicView implements BtnMethods{
 
 	private PauseButtons pauseBtns;
 
+
+	
 	public PauseView() {
 		super();
 		this.init();
@@ -39,6 +41,32 @@ public class PauseView extends BasicView implements BtnMethods{
 		
 		P.useDarkness(P.MAX_BLACK_NUM/2);
 		pauseBtns.draw();
+	}
+	
+	@Override
+	public boolean enter() {
+		if( pauseBtns.getBtnRestart().x<0 ){
+			
+			pauseBtns.getBtnRestart().x =pauseBtns.getBtnRestart().x + BTN_SPEED;
+			pauseBtns.getBtnResume().x  =pauseBtns.getBtnResume().x + BTN_SPEED;
+			pauseBtns.getBtnToMain().x  =pauseBtns.getBtnToMain().x + BTN_SPEED;
+			pauseBtns.getBtnToSelect().x = pauseBtns.getBtnToSelect().x + BTN_SPEED;
+			
+			return false;
+		}
+		else{
+			pauseBtns.getBtnRestart().x =0;
+			pauseBtns.getBtnResume().x  =0;
+			pauseBtns.getBtnToMain().x  =0;
+			pauseBtns.getBtnToSelect().x =0;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean exit() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	@Override
@@ -73,7 +101,7 @@ public class PauseView extends BasicView implements BtnMethods{
 		else if( switchType==SWITCH_LOADING ){
 			//卸载资源
 			Res.unload(Res.PAUSE_SOURCE);
-			
+			this.reset();
 //			Res.unload(Res.GAME_A);
 			
 			switchType = SWITCH_LOADED;
@@ -98,7 +126,7 @@ public class PauseView extends BasicView implements BtnMethods{
 		else if( switchType==SWITCH_LOADING ){
 			//卸载资源
 			Res.unload(Res.PAUSE_SOURCE);
-			
+			this.reset();
 //			Res.unload(Res.GAME_A);
 			switchType = SWITCH_LOADED;
 		}
@@ -119,6 +147,7 @@ public class PauseView extends BasicView implements BtnMethods{
 		}
 		else if( switchType==SWITCH_LOADING ){
 			gameView.draw(views);
+			this.reset();
 			switchType = SWITCH_LOADED;
 		}
 		else if( switchType==SWITCH_LOADED ){
@@ -132,8 +161,9 @@ public class PauseView extends BasicView implements BtnMethods{
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		pauseBtns.reset();
 	}
+
+
 
 }

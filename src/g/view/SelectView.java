@@ -159,4 +159,16 @@ public class SelectView extends BasicView implements BtnMethods{
 	public void reset() {
 		selectBtns.reset();
 	}
+
+	@Override
+	public boolean enter() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean exit() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

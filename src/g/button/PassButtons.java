@@ -27,15 +27,16 @@ public class PassButtons extends OzElement implements BtnMethods{
 	public PassButtons() {
 		super("PassButtons", Rank.SELF_CUSTOM, ET.PassButtons, null, null);
 	
-		float basicX = P.BASIC_SCREEN_WIDTH - Res.pass_btnNext[0].getWidth();
-		btnRestart = new OzRect(basicX, 400, Res.pass_btnRestart[0].getWidth(),  Res.pass_btnRestart[0].getHeight());
-		btnNext = new OzRect(basicX,200, Res.pass_btnNext[0].getWidth(), Res.pass_btnNext[0].getHeight());
+		btnRestart = new OzRect(P.BASIC_SCREEN_WIDTH, 400, Res.pass_btnRestart[0].getWidth(),  Res.pass_btnRestart[0].getHeight());
+		btnNext    = new OzRect(P.BASIC_SCREEN_WIDTH,200, Res.pass_btnNext[0].getWidth(), Res.pass_btnNext[0].getHeight());
 		this.reset();
 	}
 
 	@Override
 	public void reset() {
 		selected = ELSE;
+		btnRestart.x = P.BASIC_SCREEN_WIDTH;
+		btnNext.x = P.BASIC_SCREEN_WIDTH;
 	}
 
 	@Override
@@ -102,8 +103,15 @@ public class PassButtons extends OzElement implements BtnMethods{
 
 	@Override
 	public boolean rollBack() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public OzRect getBtnNext() {
+		return btnNext;
+	}
+
+	public OzRect getBtnRestart() {
+		return btnRestart;
 	}
 
 

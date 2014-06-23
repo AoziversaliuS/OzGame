@@ -27,10 +27,10 @@ public class PauseButtons extends OzElement{
 
 	public PauseButtons() {
 		super("PauseButtons", Rank.SELF_CUSTOM, ET.PauseButtons,null, null);
-		btnResume = new OzRect(0,550, Res.pause_btnResume[0].getWidth(), Res.pause_btnResume[0].getHeight());
-		btnRestart = new OzRect(0, 400, Res.pass_btnRestart[0].getWidth(), Res.pass_btnRestart[0].getHeight());
-		btnToSelect = new OzRect(0,250,Res.pause_btnToSelect[0].getWidth(),Res.pause_btnToSelect[0].getHeight());
-		btnToMain = new OzRect(0,100, Res.pause_btnToMain[0].getWidth(), Res.pause_btnToMain[0].getHeight());
+		btnResume = new OzRect(-(Res.pause_btnResume[0].getWidth()),550, Res.pause_btnResume[0].getWidth(), Res.pause_btnResume[0].getHeight());
+		btnRestart = new OzRect(-(Res.pass_btnRestart[0].getWidth()), 400, Res.pass_btnRestart[0].getWidth(), Res.pass_btnRestart[0].getHeight());
+		btnToSelect = new OzRect(-(Res.pause_btnToSelect[0].getWidth()),250,Res.pause_btnToSelect[0].getWidth(),Res.pause_btnToSelect[0].getHeight());
+		btnToMain = new OzRect(-(Res.pause_btnToMain[0].getWidth()),100, Res.pause_btnToMain[0].getWidth(), Res.pause_btnToMain[0].getHeight());
 		
 		this.reset();
 	}
@@ -38,6 +38,10 @@ public class PauseButtons extends OzElement{
 	@Override
 	public void reset() {
 		selected = ELSE;
+		btnResume.x = -(btnResume.width); 
+		btnRestart.x = -(btnRestart.width); 
+		btnToSelect.x = -(btnToSelect.width); 
+		btnToMain.x = -(btnToMain.width); 
 	}
 
 	@Override
@@ -134,5 +138,23 @@ public class PauseButtons extends OzElement{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public OzRect getBtnResume() {
+		return btnResume;
+	}
+
+	public OzRect getBtnRestart() {
+		return btnRestart;
+	}
+
+	public OzRect getBtnToSelect() {
+		return btnToSelect;
+	}
+
+	public OzRect getBtnToMain() {
+		return btnToMain;
+	}
+	
+	
 
 }

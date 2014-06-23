@@ -8,6 +8,7 @@ public abstract class BasicView implements ViewInterface{
 	
     public static final int SWITCH_PREPARE=1,SWITCH_LOADING=2,SWITCH_LOADED=3,SWITCH_FINISH=4;
 	
+    public static final float BTN_SPEED = 35f;
     /**每个继承BasicView的view都有个switchType属性*/
 	public int switchType = SWITCH_PREPARE;
 	

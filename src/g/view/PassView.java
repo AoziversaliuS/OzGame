@@ -39,6 +39,27 @@ public class PassView  extends BasicView implements BtnMethods{
 	}
 
 	@Override
+	public boolean enter() {
+		 float enterX = P.BASIC_SCREEN_WIDTH - passButtons.getBtnNext().width;
+		if( passButtons.getBtnNext().x > enterX){
+			passButtons.getBtnNext().x = passButtons.getBtnNext().x - BTN_SPEED;
+			passButtons.getBtnRestart().x = passButtons.getBtnRestart().x - BTN_SPEED;
+			return false;
+		}
+		else{
+			passButtons.getBtnNext().x = enterX;
+			passButtons.getBtnRestart().x = enterX;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean exit() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
 	public void thisToView(Status toStatus, ViewInterface... views) {
 		switch (toStatus) {
 		
@@ -68,6 +89,7 @@ public class PassView  extends BasicView implements BtnMethods{
 						SelectView.getChapterId()
 						); 
 				gameView.reset();
+				this.reset();
 				switchType = SWITCH_LOADED;
 			}
 		}
@@ -82,13 +104,13 @@ public class PassView  extends BasicView implements BtnMethods{
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		passButtons.reset();
 	}
 
 	@Override
 	public void btnLogic(HashMap<String, OzPoint> points) {
 		passButtons.btnLogic(points);
 	}
+
 
 }
