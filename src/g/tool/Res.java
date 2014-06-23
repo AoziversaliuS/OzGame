@@ -144,7 +144,7 @@ public class Res {
 			manager.load("Image/pause/pause.atlas", TextureAtlas.class);
 		}
 		else if( loadStatus==UN_LOAD ){//卸载资源
-			manager.unload("Image/pause/pause.atlas");
+			unload("Image/pause/pause.atlas");
 		}
 		else if( loadStatus==LOAD_FINISH ){
 			setAtlas("Image/pause/pause.atlas");
@@ -159,7 +159,7 @@ public class Res {
 			manager.load("Image/pass/pass.atlas", TextureAtlas.class);
 		}
 		else if( loadStatus==UN_LOAD ){//卸载资源
-			manager.unload("Image/pass/pass.atlas");
+			unload("Image/pass/pass.atlas");
 		}
 		else if( loadStatus==LOAD_FINISH ){
 			setAtlas("Image/pass/pass.atlas");
@@ -178,11 +178,11 @@ public class Res {
 			manager.load("Image/view/view.atlas", TextureAtlas.class);
 		}
 		else if( loadStatus==UN_LOAD ){
-			manager.unload("Image/button/button.atlas");
-			manager.unload("Image/player/player.atlas");
-			manager.unload("Image/build/build.atlas");
-			manager.unload("Image/backGround/backGround.atlas");
-			manager.unload("Image/view/view.atlas");
+			unload("Image/button/button.atlas");
+			unload("Image/player/player.atlas");
+			unload("Image/build/build.atlas");
+			unload("Image/backGround/backGround.atlas");
+			unload("Image/view/view.atlas");
 		}
 		else if( loadStatus==LOAD_FINISH ){
 			//资源加载完成后建立资源的引用
@@ -272,6 +272,15 @@ public class Res {
 		Res.sourceId = sourceId;
 		loadStatus = UN_LOAD;
 		useSource();
+	}
+	/**
+	 * 底层用到的方法，判断资源是否被加载，若是则卸载，否则不做任何操作
+	 * @param source 资源的路径 xxx/xx.atlas
+	 * */
+	private static void unload(String fileName){
+		if( manager.isLoaded(fileName) ){
+			manager.unload(fileName);
+		}
 	}
 	
 	
