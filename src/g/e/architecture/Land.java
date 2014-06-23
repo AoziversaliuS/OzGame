@@ -20,12 +20,12 @@ public class Land extends BasicBody {
 	
 	//实体与图片大小不同时要自定义实体偏移值
 	public Land(String Tag, OzPoint l,OzRect entityOffset) {
-		super(Tag, Rank.BUILD, ET.Land, l, entityOffset);
+		super(Tag, Rank.BUILD_3, ET.Land, l, entityOffset);
 	}
 	//实体与图片大小相同使用默认偏移值
 	public Land(String Tag,float x,float y,int widthNum,int heightNum) {
 		
-		super(Tag, Rank.BUILD, ET.Land, new OzPoint(x, y),
+		super(Tag, Rank.BUILD_3, ET.Land, new OzPoint(x, y),
 				new OzRect(0, 0, Res.land[0].getWidth()*widthNum,Res.land[0].getHeight()*heightNum));
 		this.width = (int) (widthNum*Res.land[0].getWidth());
 		this.height = (int) (heightNum*Res.land[0].getHeight());

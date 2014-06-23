@@ -11,7 +11,7 @@ import g.type.Rank;
 public class ReferPoint extends BasicBody{
 
 	public ReferPoint() {
-		super("ReferPoint", Rank.BUILD, ET.ReferPoint, new OzPoint(0,0), new OzRect());
+		super("ReferPoint", Rank.BUILD_3, ET.ReferPoint, new OzPoint(0,0), new OzRect());
 	}
 
 	@Override

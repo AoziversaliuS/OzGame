@@ -74,6 +74,16 @@ public class GameChapter {
 		gateAtlas.add(new Door("door", 1250, 50));
 		gateAtlas.add(new DeadLine(-300) );
 	}
+	private static void A_04(ArrayList<OzElement> gateAtlas) {
+		gateAtlas.add(new BackGround("BG-1"));
+		gateAtlas.add(new Land("l1", 500, -100, 5, 5));
+		gateAtlas.add(new MoveLand("mv", 800, 100, 4,800,1000, 2, Move.plane));
+		gateAtlas.add(new Land("l1", 800, -100, 11, 3));
+		gateAtlas.add(new Thorn("ArrayThorn", 800, 45, 5, Thorn.STYLE_PLANE));
+		gateAtlas.add(new View("Tree", 1100, 45, Res.tree[1]));
+		gateAtlas.add(new Door("door", 1250, 50));
+		gateAtlas.add(new DeadLine(-300) );
+	}
 	
 	
 	
@@ -95,6 +105,15 @@ public class GameChapter {
 		case 1:{     A_01(gateAtlas); break;}
 		case 2:{     A_02(gateAtlas); break;}
 		case 3:{     A_03(gateAtlas); break;}
+		case 4:{     A_04(gateAtlas); break;}
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		}
 		makingRankArray(gateAtlas, rankNum);//一定要写在最后一行，用来设置关卡信息
