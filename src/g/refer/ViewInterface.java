@@ -9,7 +9,8 @@ public interface ViewInterface {
 	public void engine();
 	
 	/**
-	 * 如果要把另外一个视图作为背景画出，则应将该视图作为参数传入
+	 * 如果要把另外一个视图作为背景画出，则应将该视图作为参数传入  
+	 * views[0,1,2,3,4] = { gameView,pauseView,selectView,startView,passView };
 	 * */
 	public void draw(ViewInterface ...views);
 	

@@ -68,7 +68,8 @@ public class SelectView extends BasicView implements BtnMethods{
 	}
 	
 	/**
-	 * 并解锁 chapterId+1 的关卡,并根据参数来判断是否需要使chapterId自增
+	 * 解锁 chapterId+1 的关卡,并根据参数来判断是否需要使chapterId自增
+	 * (真正解锁的调用是在door对象里)
 	 * */
 	public static void unlockNextChapter(boolean increaseChapterId){
 		
@@ -99,7 +100,7 @@ public class SelectView extends BasicView implements BtnMethods{
 		StartView startView = (StartView) views[3];
 		if( switchType==SWITCH_PREPARE ){
 			P.increaseDarkness();
-			this.draw();
+			this.draw(views);
 			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
 				switchType = SWITCH_LOADING;
 			}
@@ -112,7 +113,7 @@ public class SelectView extends BasicView implements BtnMethods{
 		}
 		else if( switchType==SWITCH_LOADED ){
 			P.decreaseDarkness();
-			startView.draw();
+			startView.draw(views);
 			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				switchType = SWITCH_FINISH;
 			}
@@ -122,21 +123,21 @@ public class SelectView extends BasicView implements BtnMethods{
 			GameView gameView = (GameView) views[0];
 		if( switchType==SWITCH_PREPARE ){
 			P.increaseDarkness();
-			this.draw();
+			this.draw(views);
 			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
 				switchType = SWITCH_LOADING;
 				Res.prepare(Res.GAME_A);
 			}
 		}
 		else if( switchType==SWITCH_LOADING ){
-			this.draw();
+			this.draw(views);
 			if(Res.update()){
 				//加载完图片之后载入地图
-				System.out.println(" C chapterId = "+this.getChapterId());
+				System.out.println(" C chapterId = "+SelectView.getChapterId());
 				GameChapter.chapterLoad(
 						gameView.getGateAtlas(),
 						gameView.getRankNum(),
-						this.getChapterId()
+						SelectView.getChapterId()
 						); 
 				gameView.reset();
 				switchType = SWITCH_LOADED;
@@ -144,7 +145,7 @@ public class SelectView extends BasicView implements BtnMethods{
 		}
 		else if( switchType==SWITCH_LOADED ){
 			P.decreaseDarkness();
-			gameView.draw();
+			gameView.draw(views);
 			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				switchType = SWITCH_FINISH;
 			}

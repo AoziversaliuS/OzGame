@@ -52,11 +52,11 @@ public class StartView extends BasicView implements BtnMethods{
 
 		}
 	}
-	private void toSelectView( ViewInterface... viewInterfaces ){
-		SelectView selectView = (SelectView) viewInterfaces[2];
+	private void toSelectView( ViewInterface... views ){
+		SelectView selectView = (SelectView) views[2];
 		if( switchType==SWITCH_PREPARE ){
 			P.increaseDarkness();
-			this.draw();
+			this.draw(views);
 			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
 				switchType = SWITCH_LOADING;
 			}
@@ -66,7 +66,7 @@ public class StartView extends BasicView implements BtnMethods{
 		}
 		else if( switchType==SWITCH_LOADED ){
 			P.decreaseDarkness();
-			selectView.draw();
+			selectView.draw(views);
 			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				switchType = SWITCH_FINISH;
 			}

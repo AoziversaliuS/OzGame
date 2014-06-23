@@ -51,14 +51,14 @@ public class PassView  extends BasicView implements BtnMethods{
 		GameView gameView = (GameView) views[0];
 		if( switchType==SWITCH_PREPARE ){
 			P.increaseDarkness();
-			this.draw(gameView);
+			this.draw(views);
 			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
 				switchType = SWITCH_LOADING;
 				Res.prepare(Res.GAME_A);
 			}
 		}
 		else if( switchType==SWITCH_LOADING ){
-			this.draw(gameView);
+			this.draw(views);
 			if(Res.update()){
 				//加载完图片之后载入地图
 				System.out.println(" C chapterId = "+SelectView.getChapterId());
@@ -73,7 +73,7 @@ public class PassView  extends BasicView implements BtnMethods{
 		}
 		else if( switchType==SWITCH_LOADED ){
 			P.decreaseDarkness();
-			gameView.draw();
+			gameView.draw(views);
 			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				switchType = SWITCH_FINISH;
 			}

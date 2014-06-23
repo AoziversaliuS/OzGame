@@ -10,6 +10,7 @@ import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
 import g.type.Status;
+import g.view.SelectView;
 
 public class Door extends BasicBody{
 
@@ -52,6 +53,8 @@ public class Door extends BasicBody{
 			}
 		}
 		else if( activeType==ACTIVE_FINISH ){
+			//解锁下一关卡
+			SelectView.unlockNextChapter(false);
 			MainEntry.setToStatus(Status.Pass);
 		}
 	}

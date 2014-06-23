@@ -33,9 +33,9 @@ public class PauseView extends BasicView implements BtnMethods{
 	}
 
 	@Override
-	public void draw(ViewInterface ...viewInterfaces) {
+	public void draw(ViewInterface ...views) {
 		//¡ýgameView.draw();
-		viewInterfaces[0].draw();
+		views[0].draw();
 		
 		P.useDarkness(P.MAX_BLACK_NUM/2);
 		pauseBtns.draw();
@@ -62,11 +62,10 @@ public class PauseView extends BasicView implements BtnMethods{
 		}
 	}
 	private void toStartView(ViewInterface ...views){
-		GameView gameView = (GameView) views[0];
 		StartView startView = (StartView) views[3];
 		if( switchType==SWITCH_PREPARE ){
 			P.increaseDarkness();
-			this.draw(gameView);
+			this.draw(views);
 			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
 				switchType = SWITCH_LOADING;
 			}
@@ -81,18 +80,17 @@ public class PauseView extends BasicView implements BtnMethods{
 		}
 		else if( switchType==SWITCH_LOADED ){
 			P.decreaseDarkness();
-			startView.draw();
+			startView.draw(views);
 			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				switchType = SWITCH_FINISH;
 			}
 		}
 	}
 	private void toSelectView(ViewInterface ...views){
-		GameView gameView = (GameView) views[0];
 		SelectView selectView = (SelectView) views[2];
 		if( switchType==SWITCH_PREPARE ){
 			P.increaseDarkness();
-			this.draw(gameView);
+			this.draw(views);
 			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
 				switchType = SWITCH_LOADING;
 			}
@@ -106,7 +104,7 @@ public class PauseView extends BasicView implements BtnMethods{
 		}
 		else if( switchType==SWITCH_LOADED ){
 			P.decreaseDarkness();
-			selectView.draw();
+			selectView.draw(views);
 			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				switchType = SWITCH_FINISH;
 			}
@@ -116,16 +114,16 @@ public class PauseView extends BasicView implements BtnMethods{
 		GameView gameView = (GameView) views[0];
 		if( switchType==SWITCH_PREPARE ){
 			P.setDarkness(P.MAX_BLACK_NUM/2);
-			gameView.draw();
+			gameView.draw(views);
 			switchType = SWITCH_LOADING;
 		}
 		else if( switchType==SWITCH_LOADING ){
-			gameView.draw();
+			gameView.draw(views);
 			switchType = SWITCH_LOADED;
 		}
 		else if( switchType==SWITCH_LOADED ){
 			P.decreaseDarkness();
-			gameView.draw();
+			gameView.draw(views);
 			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
 				switchType = SWITCH_FINISH;
 			}
