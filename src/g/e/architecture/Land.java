@@ -26,16 +26,16 @@ public class Land extends BasicBody {
 	public Land(String Tag,float x,float y,int widthNum,int heightNum) {
 		
 		super(Tag, Rank.BUILD_3, ET.Land, new OzPoint(x, y),
-				new OzRect(0, 0, Res.land[0].getWidth()*widthNum,Res.land[0].getHeight()*heightNum));
-		this.width = (int) (widthNum*Res.land[0].getWidth());
-		this.height = (int) (heightNum*Res.land[0].getHeight());
+				new OzRect(0, 0, Res.build_land[0].getWidth()*widthNum,Res.build_land[0].getHeight()*heightNum));
+		this.width = (int) (widthNum*Res.build_land[0].getWidth());
+		this.height = (int) (heightNum*Res.build_land[0].getHeight());
 		
 	}
 	
 	@Override
 	public void draw() {
-		int dW = (int) Res.land[0].getWidth();
-		int dH = (int) Res.land[0].getHeight();
+		int dW = (int) Res.build_land[0].getWidth();
+		int dH = (int) Res.build_land[0].getHeight();
 		
 		int xNum = 0;
 		int yNum = 0;
@@ -53,35 +53,35 @@ public class Land extends BasicBody {
 				for(; xNum<width; xNum=xNum+dW ){
 					if( yNum==0 ){
 						if( xNum==0 ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[0],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[0],P.AUTO_RATIO);
 						}
 						else if( xNum==(width-dW) ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[2],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[2],P.AUTO_RATIO);
 						}
 						else{
-							P.draw(l.x+xNum, l.y+yNum, Res.land[1],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[1],P.AUTO_RATIO);
 						}
 					}
 					else if( yNum==(height-dH) ){
 						if( xNum==0 ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[6],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[6],P.AUTO_RATIO);
 						}
 						else if( xNum==(width-dW) ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[8],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[8],P.AUTO_RATIO);
 						}
 						else{
-							P.draw(l.x+xNum, l.y+yNum, Res.land[7],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[7],P.AUTO_RATIO);
 						}
 					}
 					else{
 						if( xNum==0 ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[3],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[3],P.AUTO_RATIO);
 						}
 						else if( xNum==(width-dW) ){
-							P.draw(l.x+xNum, l.y+yNum, Res.land[5],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[5],P.AUTO_RATIO);
 						}
 						else{
-							P.draw(l.x+xNum, l.y+yNum, Res.land[4],P.AUTO_RATIO);
+							P.draw(l.x+xNum, l.y+yNum, Res.build_land[4],P.AUTO_RATIO);
 						}
 					}
 				}

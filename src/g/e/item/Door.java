@@ -24,7 +24,7 @@ public class Door extends BasicBody{
 	private static final float dSize = 0.1f;
 	
 	public Door(String Tag,float x,float y) {
-		super(Tag, Rank.ITEM, ET.Door, new OzPoint(x, y), new OzRect(23, 0, 20, Res.door.getHeight()-30));
+		super(Tag, Rank.ITEM, ET.Door, new OzPoint(x, y), new OzRect(23, 0, 20, Res.item_door.getHeight()-30));
 		this.reset();
 	}
 
@@ -62,7 +62,7 @@ public class Door extends BasicBody{
 	@Override
 	public void draw() {
 //		P.draw(doorSize, l, Res.door);
-		P.draw(1f, doorSize,l, Res.door);
+		P.draw(1f, doorSize,l, Res.item_door);
 	}
 
 	@Override

@@ -51,12 +51,13 @@ public class Res {
 	public static OzPicture[] player = new OzPicture[2];
 	public static OzPicture backGround;
 	//build¡ý 
-	public static OzPicture[] land = new OzPicture[9];
-	public static OzPicture thorn;
-	public static OzPicture[] moveLand = new OzPicture[3];
-	public static OzPicture door;
+	public static OzPicture[] build_land = new OzPicture[9];
+	public static OzPicture build_thorn;
+	public static OzPicture[] build_moveLand = new OzPicture[3];
+	//item¡ý 
+	public static OzPicture item_door;
 	//view¡ý
-	public static OzPicture[] tree = new OzPicture[2];
+	public static OzPicture[] view_tree = new OzPicture[2];
 
 	
 
@@ -99,15 +100,15 @@ public class Res {
 		setPicGroupData(100, 100, game_btnPass,P.AUTO_RATIO);
 		setPicGroupData(45, 45, player,P.AUTO_RATIO);
 		//build¡ý
-		setPicGroupData(50, 50, land,P.AUTO_RATIO);
-		thorn        = new OzPicture(50, 50,P.AUTO_RATIO);
-		moveLand[0]  = new OzPicture(50, 50,P.AUTO_RATIO);
-		moveLand[1]  = new OzPicture(50, 50,P.AUTO_RATIO);
-		moveLand[2]  = new OzPicture(50, 50,P.AUTO_RATIO);
+		setPicGroupData(50, 50, build_land,P.AUTO_RATIO);
+		build_thorn        = new OzPicture(50, 50,P.AUTO_RATIO);
+		build_moveLand[0]  = new OzPicture(50, 50,P.AUTO_RATIO);
+		build_moveLand[1]  = new OzPicture(50, 50,P.AUTO_RATIO);
+		build_moveLand[2]  = new OzPicture(50, 50,P.AUTO_RATIO);
 		backGround   = new OzPicture(1280, 720, P.BG_RATIO);
-		door         = new OzPicture(67, 79, P.AUTO_RATIO);
+		item_door         = new OzPicture(67, 79, P.AUTO_RATIO);
 		//view¡ý
-		setPicGroupData(195, 254, tree,P.AUTO_RATIO);
+		setPicGroupData(195, 254, view_tree,P.AUTO_RATIO);
 	}
 	
 	public static void prepare(int sourceId){
@@ -201,15 +202,15 @@ public class Res {
 			backGround.setSprite(false, false, mS("backGround"), P.BG_RATIO);
 			
 			setAtlas("Image/build/build.atlas");
-			loadPicGroup(land, "land",P.AUTO_RATIO);
-			thorn.setSprite(mS("thorn"),P.AUTO_RATIO);
-			moveLand[0].setSprite( mS("moveLand",0),P.AUTO_RATIO);
-			moveLand[1].setSprite(mS("moveLand",1),P.AUTO_RATIO);
-			moveLand[2].setSprite(true,false,mS("moveLand",0),P.AUTO_RATIO);
-			door.setSprite(mS("door"), P.AUTO_RATIO);
+			loadPicGroup(build_land, "land",P.AUTO_RATIO);
+			build_thorn.setSprite(mS("thorn"),P.AUTO_RATIO);
+			build_moveLand[0].setSprite( mS("moveLand",0),P.AUTO_RATIO);
+			build_moveLand[1].setSprite(mS("moveLand",1),P.AUTO_RATIO);
+			build_moveLand[2].setSprite(true,false,mS("moveLand",0),P.AUTO_RATIO);
+			item_door.setSprite(mS("door"), P.AUTO_RATIO);
 		
 			setAtlas("Image/view/view.atlas");
-			loadPicGroup( tree, "tree",P.AUTO_RATIO);
+			loadPicGroup( view_tree, "tree",P.AUTO_RATIO);
 		}
 	}
 	

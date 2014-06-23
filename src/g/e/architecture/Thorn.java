@@ -41,8 +41,8 @@ public class Thorn extends BasicBody {
 				new OzRect(
 						0, 
 						0,
-						getWidth(Res.thorn, length, style),
-						getHeight(Res.thorn, length, style)
+						getWidth(Res.build_thorn, length, style),
+						getHeight(Res.build_thorn, length, style)
 						)
 			);
 		this.length = length;
@@ -62,7 +62,7 @@ public class Thorn extends BasicBody {
 	public void draw() {
 //		P.draw(l, Res.thorn);
 		for(int i=0;i<length;i++){
-			P.draw(l.x+Res.thorn.getWidth()*i,l.y, Res.thorn);
+			P.draw(l.x+Res.build_thorn.getWidth()*i,l.y, Res.build_thorn);
 		}
 	}
 
