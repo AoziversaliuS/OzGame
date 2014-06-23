@@ -137,6 +137,7 @@ public class GameView extends BasicView implements BtnMethods{
 	}
 
 
+	@SuppressWarnings("incomplete-switch")
 	@Override
 	public void thisToView(Status toStatus, ViewInterface... views) {
 		switch (toStatus) {
