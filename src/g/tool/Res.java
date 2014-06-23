@@ -75,8 +75,8 @@ public class Res {
 			selectBtn[0] = new OzPicture(150, 150, lS("btn",0), P.FORCE_RATIO);
 			selectBtn[1] = new OzPicture(150, 150, lS("btn",1), P.FORCE_RATIO);
 			selectBtn[2] = new OzPicture(150, 150, lS("btn",2), P.FORCE_RATIO);
-			selectToMainBtn[0] = new OzPicture(200, 117, lS("selectToMain",0), P.FORCE_RATIO);
-			selectToMainBtn[1] = new OzPicture(200, 117, lS("selectToMain",1), P.FORCE_RATIO);
+			selectToMainBtn[0] = new OzPicture(105, 117, lS("selectToMain",0), P.FORCE_RATIO);
+			selectToMainBtn[1] = new OzPicture(105, 117, lS("selectToMain",1), P.FORCE_RATIO);
 			selectPagePoint[0] =  new OzPicture(50, 50, lS("pagePoint",0), P.FORCE_RATIO);
 			selectPagePoint[1] =  new OzPicture(50, 50, lS("pagePoint",1), P.FORCE_RATIO);
 	}
