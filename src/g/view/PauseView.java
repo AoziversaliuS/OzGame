@@ -2,6 +2,7 @@ package g.view;
 
 import java.util.HashMap;
 
+import g.basis.GameChapter;
 import g.basis.MainEntry;
 import g.button.PauseButtons;
 import g.refer.BasicView;
@@ -81,7 +82,15 @@ public class PauseView extends BasicView implements BtnMethods{
 	public void thisToView(Status toStatus, ViewInterface... views) {
 		switch (toStatus) {
 		
-			case Game:{ toGameView(views); break;}
+			case Game:{ 
+				if( pauseBtns.isRestart() ){
+					toGameView_Restart(views);
+				}
+				else{
+					toGameView_Resume(views);
+				}
+				break;
+			}
 			
 			case Select:{ toSelectView(views); break;}
 			
@@ -138,7 +147,7 @@ public class PauseView extends BasicView implements BtnMethods{
 			}
 		}
 	}
-	private void toGameView(ViewInterface ...views){
+	private void toGameView_Resume(ViewInterface ...views){
 		GameView gameView = (GameView) views[0];
 		if( switchType==SWITCH_PREPARE ){
 			P.setDarkness(P.MAX_BLACK_NUM/2);
@@ -154,6 +163,39 @@ public class PauseView extends BasicView implements BtnMethods{
 			P.decreaseDarkness();
 			gameView.draw(views);
 			if(P.getBlackNum()<=P.MIN_BLACK_NUM){
+				switchType = SWITCH_FINISH;
+			}
+		}
+	}
+	private void toGameView_Restart(ViewInterface ...views){
+		GameView gameView = (GameView) views[0];
+		if( switchType==SWITCH_PREPARE ){
+			P.increaseDarkness();
+			this.draw(views);
+			if( P.getBlackNum()>=P.MAX_BLACK_NUM ){
+				switchType = SWITCH_LOADING;
+				Res.prepare(Res.GAME_A);
+			}
+		}
+		else if( switchType==SWITCH_LOADING ){
+			this.draw(views);
+			if(Res.update()){
+				//加载完图片之后载入地图
+				System.out.println(" C chapterId = "+SelectView.getChapterId());
+				GameChapter.chapterLoad(
+						gameView.getGateAtlas(),
+						gameView.getRankNum(),
+						SelectView.getChapterId()
+						); 
+				gameView.reset();
+				this.reset();
+				switchType = SWITCH_LOADED;
+			}
+		}
+		else if( switchType==SWITCH_LOADED ){
+			P.decreaseDarkness();
+			gameView.draw(views);
+			if( P.getBlackNum()<=P.MIN_BLACK_NUM ){
 				switchType = SWITCH_FINISH;
 			}
 		}

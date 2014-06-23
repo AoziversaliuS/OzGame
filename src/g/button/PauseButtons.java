@@ -14,6 +14,7 @@ import g.tool.Res;
 import g.type.ET;
 import g.type.Rank;
 import g.type.Status;
+import g.view.SelectView;
 
 public class PauseButtons extends OzElement{
 
@@ -23,6 +24,7 @@ public class PauseButtons extends OzElement{
 	private OzRect btnToMain;
 	
 	private int selected;
+	private boolean isRestart = false;//用作判断是resume还是restart
 	private static final int RESUME=1,RESTART=2,TO_SELECT=3,TO_MAIN=4,ELSE=5;
 
 	public PauseButtons() {
@@ -42,6 +44,7 @@ public class PauseButtons extends OzElement{
 		btnRestart.x = -(btnRestart.width); 
 		btnToSelect.x = -(btnToSelect.width); 
 		btnToMain.x = -(btnToMain.width); 
+		isRestart = false;//用作判断是resume还是restart
 	}
 
 	@Override
@@ -55,6 +58,7 @@ public class PauseButtons extends OzElement{
 			}
 			else if( btnRestart.inside(l, P.FORCE_RATIO) ){
 				selected = RESTART;
+				isRestart = true;
 			}
 			else if( btnToSelect.inside(l, P.FORCE_RATIO) ){
 				selected = TO_SELECT;
@@ -72,7 +76,7 @@ public class PauseButtons extends OzElement{
 					MainEntry.setToStatus(Status.Game);
 				}
 				else if( selected==RESTART ){
-					
+					MainEntry.setToStatus(Status.Game);
 				}
 				else if( selected==TO_SELECT ){
 					MainEntry.setToStatus(Status.Select);
@@ -155,6 +159,8 @@ public class PauseButtons extends OzElement{
 		return btnToMain;
 	}
 	
-	
+	public boolean isRestart(){
+			return isRestart;
+	}
 
 }

@@ -190,6 +190,7 @@ public class GameView extends BasicView implements BtnMethods{
 		else if( switchType==SWITCH_LOADING ){
 				this.draw(views);
 				if(Res.update()){
+					pauseView.reset();
 					switchType = SWITCH_LOADED;
 				}
 		}
