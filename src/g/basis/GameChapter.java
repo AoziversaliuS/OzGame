@@ -49,15 +49,29 @@ public class GameChapter {
 		gateAtlas.add(new Door("door", 200, 150));
 //		System.out.println("gateAtlasSize="+gateAtlas.size());
 	}
-	
-	
-	
-	
 	//第二关地图
 	private static void A_01(ArrayList<OzElement> gateAtlas) {
 		gateAtlas.add(new BackGround("BG-1"));
 		gateAtlas.add(new Land("l1", 300, -100, 10, 5));
 		gateAtlas.add(new View("Tree", 400, 145, Res.tree[1]));
+		gateAtlas.add(new DeadLine(-300) );
+		gateAtlas.add(new Door("door", 350, 150));
+	}
+	private static void A_02(ArrayList<OzElement> gateAtlas) {
+		gateAtlas.add(new BackGround("BG-1"));
+		gateAtlas.add(new Land("l1", 300, -100, 10, 5));
+		gateAtlas.add(new Land("l1", 100, -100, 2, 5));
+		gateAtlas.add(new Thorn("T-1",310, 145));
+		gateAtlas.add(new Door("door", 120, 150));
+		gateAtlas.add(new DeadLine(-300) );
+	}
+	private static void A_03(ArrayList<OzElement> gateAtlas) {
+		gateAtlas.add(new BackGround("BG-1"));
+		gateAtlas.add(new Land("l1", 500, -100, 5, 5));
+		gateAtlas.add(new MoveLand("mv", 800, 100, 4,800,1000, 2, Move.plane));
+		gateAtlas.add(new Land("l1", 1100, -100, 5, 3));
+		gateAtlas.add(new View("Tree", 1100, 45, Res.tree[1]));
+		gateAtlas.add(new Door("door", 1250, 50));
 		gateAtlas.add(new DeadLine(-300) );
 	}
 	
@@ -77,16 +91,11 @@ public class GameChapter {
 		initialise(gateAtlas,rankNum); //一定要写在第一行，用来清空地图信息
 		switch (gateNum){
 		
-		case 0:
-			                    A_00(gateAtlas);
-			break;
-		case 1:
-								A_01(gateAtlas);
-			break;
-			
-			
-		default:
-			break;
+		case 0:{     A_00(gateAtlas); break;}
+		case 1:{     A_01(gateAtlas); break;}
+		case 2:{     A_02(gateAtlas); break;}
+		case 3:{     A_03(gateAtlas); break;}
+		
 		}
 		makingRankArray(gateAtlas, rankNum);//一定要写在最后一行，用来设置关卡信息
 	}

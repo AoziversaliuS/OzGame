@@ -27,6 +27,9 @@ public class MoveLand extends BasicBody{
 	
 	public Move mT;
 	//实体与图片大小相同使用默认偏移值
+	/**
+	 * A是左边界，B是右边界。
+	 * */
 	public MoveLand(String Tag,float x,float y,float widthNum,float A,float B,float speed,Move mT) {
 		super(Tag, Rank.BUILD, ET.MoveLand, new OzPoint(x, y),new OzRect(0, 0, widthNum*Res.moveLand[0].getWidth(),Res.moveLand[0].getHeight()));
 		this.speed = speed;
