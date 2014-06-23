@@ -34,9 +34,9 @@ public class Res {
 	public static OzPicture selectPagePoint[] = new OzPicture[2];
 	/**pauseSource**/
 	public static OzPicture pause_btnResume[] = new OzPicture[2];
+	public static OzPicture pause_btnRestart[] = new OzPicture[2];
 	public static OzPicture pause_btnToSelect[] = new OzPicture[2];
 	public static OzPicture pause_btnToMain[] = new OzPicture[2];
-	public static OzPicture pause_btnExit[] = new OzPicture[2];
 	/**passSource**/
 	public static OzPicture pass_btnNext[] = new OzPicture[2];
 	public static OzPicture pass_btnRestart[] = new OzPicture[2];
@@ -83,10 +83,10 @@ public class Res {
 	//图片对象初始化
 	private static void initPic() {
 		//暂停菜单对象初始化
-		setPicGroupData(283, 105, pause_btnResume, P.FORCE_RATIO);
-		setPicGroupData(283, 105,  pause_btnToSelect,  P.FORCE_RATIO);
-		setPicGroupData(283, 105,  pause_btnToMain,  P.FORCE_RATIO);
-		setPicGroupData(283, 105,  pause_btnExit,  P.FORCE_RATIO);
+		setPicGroupData(300, 105, pause_btnResume, P.FORCE_RATIO);
+		setPicGroupData(300, 105, pause_btnRestart, P.FORCE_RATIO);
+		setPicGroupData(300, 105,  pause_btnToSelect,  P.FORCE_RATIO);
+		setPicGroupData(300, 105,  pause_btnToMain,  P.FORCE_RATIO);
 		//过关菜单对象初始化
 		setPicGroupData(300, 105, pass_btnNext, P.FORCE_RATIO);
 		setPicGroupData(300, 105, pass_btnRestart, P.FORCE_RATIO);
@@ -150,7 +150,7 @@ public class Res {
 			loadPicGroup(pause_btnResume, "btnResume", P.FORCE_RATIO);
 			loadPicGroup(pause_btnToSelect, "btnToSelect", P.FORCE_RATIO);
 			loadPicGroup(pause_btnToMain, "btnToMain", P.FORCE_RATIO);
-			loadPicGroup(pause_btnExit, "btnExit", P.FORCE_RATIO);
+			loadPicGroup(pause_btnRestart, "btnRestart", P.FORCE_RATIO);
 		}
 	}
 	private static void passSource(){
