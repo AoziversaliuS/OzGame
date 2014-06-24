@@ -212,6 +212,12 @@ public class GameView extends BasicView implements BtnMethods{
 		player.reset();
 		gameBtns.reset();
 	}
+	
+	
+
+	public GameButtons getGameBtns() {
+		return gameBtns;
+	}
 
 
 	@Override

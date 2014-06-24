@@ -156,6 +156,7 @@ public class PauseView extends BasicView implements BtnMethods{
 		}
 		else if( switchType==SWITCH_LOADING ){
 			gameView.draw(views);
+			gameView.getGameBtns().reset();
 			this.reset();
 			switchType = SWITCH_LOADED;
 		}

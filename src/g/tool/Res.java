@@ -110,7 +110,7 @@ public class Res {
 		item_door         = new OzPicture(67, 79, P.AUTO_RATIO);
 		//view¡ý
 		setPicGroupData(195, 254, view_tree,P.AUTO_RATIO);
-		view_sky = new OzPicture(1280, 200, P.FORCE_RATIO);
+		view_sky = new OzPicture(1280, 150, P.FORCE_RATIO);
 	}
 	
 	public static void prepare(int sourceId){
