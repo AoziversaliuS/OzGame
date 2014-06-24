@@ -61,14 +61,13 @@ public class Door extends BasicBody{
 
 	@Override
 	public void draw() {
-//		P.draw(doorSize, l, Res.door);
 		P.draw(1f, doorSize,l, Res.item_door);
 	}
 
 	@Override
 	public void impact(Player player) {
 		if( hit(player) ){
-			if( activeType==ACTIVE_NOT ){
+			if( activeType==ACTIVE_NOT && Player.isAlive() ){
 				//让小球处于无法操控状态
 				Player.setCondition(Player.STOPPING);
 				activeType = ACTIVE_PLAYER;

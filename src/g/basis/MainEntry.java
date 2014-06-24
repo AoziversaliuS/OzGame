@@ -26,6 +26,9 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 	private boolean debug = false;
 	private long times = 50;//debug用，debug为true时使游戏运行缓慢，能看清每一帧
 	
+	/**
+	 * 触碰点的map集合
+	 * */
 	private  HashMap<String, OzPoint> points;
 	
 	//关卡界面
@@ -82,7 +85,7 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 //		System.out.println("keyUp = "+keycode);
 		switch (keycode) {
 		
-		case KEY_LEFT:  points.remove("0"); break;
+		case  KEY_LEFT: points.remove("0"); break;
 		
 		case KEY_RIGHT: points.remove("0"); break;
 		
@@ -97,7 +100,7 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		
 		switch (keycode) {
 		
-		case KEY_LEFT: points.put("0", new OzPoint(141, 568, true)); break;
+		case  KEY_LEFT: points.put("0", new OzPoint(141, 568, true)); break;
 		
 		case KEY_RIGHT: points.put("0", new OzPoint(318, 516, true)); break;
 		

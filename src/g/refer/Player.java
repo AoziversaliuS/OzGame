@@ -78,9 +78,20 @@ public class Player extends OzElement{
 	public static void setVertical_HitType(int vertical_HitType) {
 		Player.vertical_HitType = vertical_HitType;
 	}
-
+	/**
+	 * 获得玩家所处的状态
+	 * */
 	public static int getCondition() {
 		return condition;
+	}
+	/**
+	 * condition==ALIVE 时返回true
+	 * */
+	public static boolean isAlive(){
+		if( condition==ALIVE ){
+			return true;
+		}
+		return false;
 	}
 
 	public static void setCondition(int condition) {

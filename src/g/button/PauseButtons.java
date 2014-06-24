@@ -55,6 +55,7 @@ public class PauseButtons extends OzElement{
 		if(l!=null){
 			if( btnResume.inside(l, P.FORCE_RATIO) ){
 				selected = RESUME;
+				isRestart = false;
 			}
 			else if( btnRestart.inside(l, P.FORCE_RATIO) ){
 				selected = RESTART;
@@ -62,12 +63,15 @@ public class PauseButtons extends OzElement{
 			}
 			else if( btnToSelect.inside(l, P.FORCE_RATIO) ){
 				selected = TO_SELECT;
+				isRestart = false;
 			}
 			else if( btnToMain.inside(l, P.FORCE_RATIO) ){
 				selected = TO_MAIN;
+				isRestart = false;
 			}
 			else{
 				selected = ELSE;
+				isRestart = false;
 			}
 		}
 		else{
@@ -76,6 +80,7 @@ public class PauseButtons extends OzElement{
 					MainEntry.setToStatus(Status.Game);
 				}
 				else if( selected==RESTART ){
+					System.out.println("isRestart = "+isRestart);
 					MainEntry.setToStatus(Status.Game);
 				}
 				else if( selected==TO_SELECT ){
