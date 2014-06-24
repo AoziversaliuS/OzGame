@@ -58,6 +58,7 @@ public class Res {
 	public static OzPicture item_door;
 	//view¡ý
 	public static OzPicture[] view_tree = new OzPicture[2];
+	public static OzPicture view_sky;
 
 	
 
@@ -109,6 +110,7 @@ public class Res {
 		item_door         = new OzPicture(67, 79, P.AUTO_RATIO);
 		//view¡ý
 		setPicGroupData(195, 254, view_tree,P.AUTO_RATIO);
+		view_sky = new OzPicture(1280, 200, P.FORCE_RATIO);
 	}
 	
 	public static void prepare(int sourceId){
@@ -211,6 +213,7 @@ public class Res {
 		
 			setAtlas("Image/view/view.atlas");
 			loadPicGroup( view_tree, "tree",P.AUTO_RATIO);
+			view_sky.setSprite(mS("sky"), P.FORCE_RATIO);
 		}
 	}
 	

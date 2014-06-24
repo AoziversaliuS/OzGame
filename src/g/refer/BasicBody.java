@@ -15,14 +15,37 @@ public abstract class BasicBody extends OzElement {
 	/**
 	 * 该物体最初所在的位置，用于重生时，地图位置还原
 	 * */
-    public OzPoint startPoint; 
-    public static final float rollBackRate = 25f;
-    public static final float deviation = 0.1f; //误差
-    public float range = 5;
-    public boolean  selected = false;
+    public OzPoint _startPoint; 
+    /**
+     * 复活回滚时的速度
+     * */
+    public static final float _rollBackRate = 25f;
+    /**
+     * rollBack时的误差范围限制
+     * */
+    public static final float _deviation = 0.1f; //误差
+    /**
+     * rollBack时每一瞬间应该移动的斜线的距离
+     * */
+    public float _range = 5;
+    /**
+     * 是否已经设定了rollback要用到的range
+     * */
+    public boolean  _rangeSelected = false;
+    /**
+     * 是否使用rollBack
+     * */
+    public boolean _pushBackAvailable = true;
     
-    
-    public static MoveLand MoveLand_hitting;
+    /**
+     * 若返回false,此子类不需使用pushBack功能
+     * */
+    public boolean isPushBackAvailable() {
+		return _pushBackAvailable;
+	}
+
+    /**玩家碰到的moveLand*/
+	public static MoveLand MoveLand_hitting;
     
     public float a;
     public float b;
@@ -31,7 +54,7 @@ public abstract class BasicBody extends OzElement {
     
 	public BasicBody(String Tag, int Rank, ET type, OzPoint l,OzRect entityOffset) {
 		super(Tag, Rank, type, l, entityOffset);
-		startPoint = new OzPoint(l.x, l.y);
+		_startPoint = new OzPoint(l.x, l.y);
 	}
 
 	
@@ -152,25 +175,23 @@ public abstract class BasicBody extends OzElement {
 		float sinY;
 		float cosX;
 		
-		a = startPoint.x - l.x;
-		b = startPoint.y - l.y;
+		a = _startPoint.x - l.x;
+		b = _startPoint.y - l.y;
 		c = (float) Math.sqrt( a*a+b*b );
 		
 		setRange();//只在复活移动最开头设置一次range。
-//		range = 5;
-//		System.out.println("c="+c+"  range="+range + " selectedRange="+selected);
-		if( Math.abs(c-range)<deviation || c<range ){
-			l.x = startPoint.x;
-			l.y = startPoint.y;
-			selected = false; //复活移动完成后，selectedRange设为false;
+		if( Math.abs(c-_range)<_deviation || c<_range ){
+			l.x = _startPoint.x;
+			l.y = _startPoint.y;
+			_rangeSelected = false; //复活移动完成后，selectedRange设为false;
 //			System.out.println("-------------------------");
 			return true;
 		}
 		else{
 			cosX = a/c;
 			sinY = b/c;
-			float dx = range*cosX;
-			float dy = range*sinY;
+			float dx = _range*cosX;
+			float dy = _range*sinY;
 			l.x = l.x+dx;
 			l.y = l.y+dy;
 		}
@@ -178,13 +199,14 @@ public abstract class BasicBody extends OzElement {
 	}
 	
 	public void setRange(){
-		if(selected==false){
-			range = c/rollBackRate;
-			if( range<10f ){
-				range = 10f;
+		if(_rangeSelected==false){
+			_range = c/_rollBackRate;
+			if( _range<10f ){
+				_range = 10f;
 			}
-			selected = true;  //复活移动完成后，selectedRange要重新设为false;
+			_rangeSelected = true;  //复活移动完成后，selectedRange要重新设为false;
 		}
 	}
-
+	
+	
 }

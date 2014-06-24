@@ -2,14 +2,16 @@ package g.basis;
 
 import g.e.architecture.Land;
 import g.e.architecture.MoveLand;
-import g.e.architecture.ReferPoint;
 import g.e.architecture.Thorn;
 import g.e.item.DeadLine;
 import g.e.item.Door;
+import g.e.item.ReferPoint;
+import g.e.scenery.StaticView;
 import g.e.scenery.View;
 import g.refer.BackGround;
 import g.refer.OzElement;
 import g.tool.OzInt;
+import g.tool.P;
 import g.tool.Res;
 import g.type.Move;
 
@@ -23,9 +25,8 @@ public class GameChapter {
 		System.out.println("载入A_00地图");
 		gateAtlas.add(new BackGround("BG-1"));
 		
-		
 		//以下皆为继承BasicBody的对象，只有BasicBody的子类才能达到伪静止状态
-//		gateAtlas.add(new Land("L-1",500,300));
+		gateAtlas.add(new StaticView("StaticView",0,P.BASIC_SCREEN_HEIGHT-Res.view_sky.getHeight(), Res.view_sky));
 //		new MoveLand(Tag, x, y, widthNum, heightNum, A, B, speed, mT)
 //		gateAtlas.add(new MoveLand("ML-1", 400, 200,3, 400, 600, 3, Move.plane));
 //		gateAtlas.add(new MoveLand("ML-1", 400, 300,4, 400, 600, 2, Move.plane));
@@ -51,6 +52,7 @@ public class GameChapter {
 	}
 	//第二关地图
 	private static void A_01(ArrayList<OzElement> gateAtlas) {
+		gateAtlas.add(new StaticView("StaticView",0,P.BASIC_SCREEN_HEIGHT-Res.view_sky.getHeight(), Res.view_sky));
 		gateAtlas.add(new BackGround("BG-1"));
 		gateAtlas.add(new Land("l1", 300, -100, 10, 5));
 		gateAtlas.add(new View("Tree", 400, 145, Res.view_tree[1]));
@@ -58,6 +60,7 @@ public class GameChapter {
 		gateAtlas.add(new Door("door", 350, 150));
 	}
 	private static void A_02(ArrayList<OzElement> gateAtlas) {
+		gateAtlas.add(new StaticView("StaticView",0,P.BASIC_SCREEN_HEIGHT-Res.view_sky.getHeight(), Res.view_sky));
 		gateAtlas.add(new BackGround("BG-1"));
 		gateAtlas.add(new Land("l1", 300, -100, 10, 5));
 		gateAtlas.add(new Land("l1", 100, -100, 2, 5));
@@ -66,6 +69,7 @@ public class GameChapter {
 		gateAtlas.add(new DeadLine(-300) );
 	}
 	private static void A_03(ArrayList<OzElement> gateAtlas) {
+		gateAtlas.add(new StaticView("StaticView",0,P.BASIC_SCREEN_HEIGHT-Res.view_sky.getHeight(), Res.view_sky));
 		gateAtlas.add(new BackGround("BG-1"));
 		gateAtlas.add(new Land("l1", 500, -100, 5, 5));
 		gateAtlas.add(new MoveLand("mv", 800, 100, 4,800,1000, 2, Move.plane));
@@ -75,6 +79,7 @@ public class GameChapter {
 		gateAtlas.add(new DeadLine(-300) );
 	}
 	private static void A_04(ArrayList<OzElement> gateAtlas) {
+		gateAtlas.add(new StaticView("StaticView",0,P.BASIC_SCREEN_HEIGHT-Res.view_sky.getHeight(), Res.view_sky));
 		gateAtlas.add(new BackGround("BG-1"));
 		gateAtlas.add(new Land("l1", 500, -100, 5, 5));
 		gateAtlas.add(new MoveLand("mv", 800, 100, 4,800,1000, 2, Move.plane));

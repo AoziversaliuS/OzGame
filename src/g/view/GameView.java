@@ -96,9 +96,11 @@ public class GameView extends BasicView implements BtnMethods{
 		//位置微调
 		for(OzElement g:gateAtlas){
 			if(g instanceof BasicBody){
-				//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
-				g.l.x = g.l.x + player.getPush_X();
-				g.l.y = g.l.y - player.getPush_Y();
+				if( ((BasicBody) g).isPushBackAvailable() ){
+					//让玩家回到穿墙前的一瞬，相对来说玩家穿墙实际上是墙穿玩家，正确的做法是把墙从玩家身边拉开。
+					g.l.x = g.l.x + player.getPush_X();
+					g.l.y = g.l.y - player.getPush_Y();
+				}
 			}
 		}
 		//碰撞检测B↑

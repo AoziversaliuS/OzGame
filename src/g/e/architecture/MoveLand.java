@@ -227,25 +227,25 @@ public class MoveLand extends BasicBody{
 
 		setMoveDistanceAndC();
 		
-		if( Math.abs(c-range)<deviation || c<range ){
+		if( Math.abs(c-_range)<_deviation || c<_range ){
 			if(mT == Move.plane){
-				l.x = startPoint.x + moveDistance;
-				l.y = startPoint.y;
+				l.x = _startPoint.x + moveDistance;
+				l.y = _startPoint.y;
 			}
 			else if(mT == Move.vertical){
-				l.x = startPoint.x;
-				l.y = startPoint.y + moveDistance;
+				l.x = _startPoint.x;
+				l.y = _startPoint.y + moveDistance;
 			}
 
 			System.out.println("复活完成");
-			selected = false; //复活移动完成后，selected设为false;
+			_rangeSelected = false; //复活移动完成后，selected设为false;
 			return true;
 		}
 		else{
 			cosX = a/c;
 			sinY = b/c;
-			float dx = range*cosX;
-			float dy = range*sinY;
+			float dx = _range*cosX;
+			float dy = _range*sinY;
 			l.x = l.x+dx;
 			l.y = l.y+dy;
 		}
@@ -253,7 +253,7 @@ public class MoveLand extends BasicBody{
 	}
 	
 	public void setMoveDistanceAndC(){
-		if( selected==false ){
+		if( _rangeSelected==false ){
 			if(mT == Move.plane){
 				moveDistance =l.x - (refer.x + limitA); 
 			}
@@ -263,12 +263,12 @@ public class MoveLand extends BasicBody{
 		}
 		
 		if(mT == Move.plane){
-			a = startPoint.x+moveDistance - l.x;
-			b = startPoint.y - l.y;
+			a = _startPoint.x+moveDistance - l.x;
+			b = _startPoint.y - l.y;
 		}
 		else if(mT == Move.vertical){
-			a = startPoint.x - l.x;
-			b = startPoint.y + moveDistance  - l.y;
+			a = _startPoint.x - l.x;
+			b = _startPoint.y + moveDistance  - l.y;
 		}
 		
 	    c = (float) Math.sqrt( a*a+b*b );

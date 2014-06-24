@@ -1,4 +1,4 @@
-package g.e.architecture;
+package g.e.item;
 
 import g.refer.BasicBody;
 import g.refer.Player;
