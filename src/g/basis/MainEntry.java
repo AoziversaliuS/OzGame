@@ -238,8 +238,13 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		
 		}
 	}
-	
+	/**
+	 * 只有当 toStatus==status 时按钮逻辑才会生效
+	 * */
 	public void btnLogic(){
+		
+		if( toStatus==status ){
+			
 		switch (status) {
 				
 		case Credits:  {        break;}
@@ -257,6 +262,8 @@ public class MainEntry extends InputProcessorQueue implements ApplicationListene
 		case Init:     {        break;}
 		
 		case Pass:   {       passView.btnLogic(points);        break;}
+		
+		}
 		
 		}
 	}

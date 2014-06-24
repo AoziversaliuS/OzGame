@@ -91,6 +91,9 @@ public class SelectButtons extends OzElement{
 		//使chapter = -1 是否不必要？
 		System.out.println("SelectButtons.reset()");
 		chapterId = -1;
+		selected = false;
+		submit = false;
+		lastUnlockChapterId = Data.getLastUnlockChapterId();
 	}
 
 	@Override
