@@ -102,7 +102,7 @@ public class Res {
 		setPicGroupData(45, 45, player,P.AUTO_RATIO);
 		//build¡ý
 		setPicGroupData(50, 50, build_land,P.AUTO_RATIO);
-		build_thorn        = new OzPicture(50, 50,P.AUTO_RATIO);
+		build_thorn        = new OzPicture(30, 30,P.AUTO_RATIO);
 		build_moveLand[0]  = new OzPicture(50, 50,P.AUTO_RATIO);
 		build_moveLand[1]  = new OzPicture(50, 50,P.AUTO_RATIO);
 		build_moveLand[2]  = new OzPicture(50, 50,P.AUTO_RATIO);
