@@ -52,8 +52,20 @@ public abstract class BasicBody extends OzElement {
     public float c;//回滚时用到的3个重要变量 勾股定理
     
     
+	public BasicBody() {
+		super();
+	}
 	public BasicBody(String Tag, int Rank, ET type, OzPoint l,OzRect entityOffset) {
-		super(Tag, Rank, type, l, entityOffset);
+		init(Tag, Rank, type, l, entityOffset);
+	}
+	/**初始化*/
+	public void init(String Tag, int Rank, ET type, OzPoint l,OzRect entityOffset){
+		entity = new OzRect();
+		this.Tag = Tag;
+		this.rankNum = Rank;
+		this.type = type;
+		this.l = l;
+		this.entityOffset = entityOffset;
 		_startPoint = new OzPoint(l.x, l.y);
 	}
 

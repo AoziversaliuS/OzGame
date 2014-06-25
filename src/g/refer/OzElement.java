@@ -37,12 +37,18 @@ public abstract class OzElement implements Origin{
 		this.entityOffset = entityOffset;
 	}
 	
+	
 	//该元素的逻辑运算
 	//该元素的图形显示函数
 	//该元素的碰撞检测函数
 	
 	
 	
+	public OzElement() {
+		super();
+	}
+
+
 	//在这里进行水平移动运算  【玩家向左移动，向右移动】            时相对运动
 	public void planeLogic(){
 	}

@@ -38,10 +38,7 @@ public class GameChapter {
 //		gateAtlas.add(new Land("L-1",500,-50,          6,4));
 //		gateAtlas.add(new Land("L-1",700,-200,         6,4));
 //		gateAtlas.add(new Land("L-1",1050,-200,        9,9));
-		gateAtlas.add(new Thorn("T-1",-200, 150));
-		gateAtlas.add(new Thorn("T-1",-150, 150));
-		gateAtlas.add(new Thorn("T-1",-100, 150));
-		gateAtlas.add(new Thorn("T-1",-50, 150));
+		gateAtlas.add(new Thorn("T-1",-180,145,6,Thorn.STYLE_PLANE_UP));
 		
 		gateAtlas.add(new View("Tree", 500, 145, Res.view_tree[0]));
 		
@@ -64,7 +61,7 @@ public class GameChapter {
 		gateAtlas.add(new BackGround("BG-1"));
 		gateAtlas.add(new Land("l1", 300, -100, 10, 5));
 		gateAtlas.add(new Land("l1", 100, -100, 2, 5));
-		gateAtlas.add(new Thorn("T-1",310, 145));
+		gateAtlas.add(new Thorn("T-1",310, 145,Thorn.STYLE_PLANE_UP));
 		gateAtlas.add(new Door("door", 120, 150));
 		gateAtlas.add(new DeadLine(-300) );
 	}
@@ -84,7 +81,7 @@ public class GameChapter {
 		gateAtlas.add(new Land("l1", 500, -100, 5, 5));
 		gateAtlas.add(new MoveLand("mv", 800, 100, 4,800,1000, 2, Move.plane));
 		gateAtlas.add(new Land("l1", 800, -100, 11, 3));
-		gateAtlas.add(new Thorn("ArrayThorn", 800, 45, 5, Thorn.STYLE_PLANE));
+		gateAtlas.add(new Thorn("ArrayThorn", 800, 45, 5, Thorn.STYLE_PLANE_UP));
 		gateAtlas.add(new View("Tree", 1100, 45, Res.view_tree[1]));
 		gateAtlas.add(new Door("door", 1250, 50));
 		gateAtlas.add(new DeadLine(-300) );
