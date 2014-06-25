@@ -89,13 +89,13 @@ public class MoveLand extends BasicBody{
 		int dNum = 0;
 		for(;dNum<width;dNum=dNum+dW){
 			if( dNum==0 ){
-				P.draw(l.x+dNum, l.y, Res.build_moveLand[0],P.AUTO_RATIO);
+				P.draw(l.x+dNum, l.y, Res.build_moveLand[0]);
 			}
 			else if( dNum==width-dW ){
-				P.draw(l.x+dNum, l.y, Res.build_moveLand[2],P.AUTO_RATIO);
+				P.draw(l.x+dNum, l.y, Res.build_moveLand[2]);
 			}
 			else{
-				P.draw(l.x+dNum, l.y, Res.build_moveLand[1],P.AUTO_RATIO);
+				P.draw(l.x+dNum, l.y, Res.build_moveLand[1]);
 			}
 		}
 	}
