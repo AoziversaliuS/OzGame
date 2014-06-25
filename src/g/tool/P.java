@@ -87,82 +87,144 @@ public class P {
 	
 	
 	//绘图方法↓
-	//根据图片的比例来画
-	/**
-	 * 根据图片本身的比例来画
-	 * */
-	public static void draw(OzPoint p,OzPicture picture){
-		draw(p.x, p.y, picture);
+	/**根据图片本身的比例来画*/
+	public static void draw(OzPoint point,OzPicture picture){
+//		draw(p.x, p.y, picture);
+		draw(
+				point.x, 
+				point.y, 
+				picture, picture.getRatioType(), false, 0, false, 0, 0);
 	}
-	/**
-	 * 根据图片本身的比例来画
-	 * */
+	/**根据图片本身的比例来画 */
 	public static void draw(float x,float y,OzPicture picture){
-		draw(x, y, picture,picture.getRatioType());
+//		draw(x, y, picture,picture.getRatioType());
+		draw(
+				x, 
+				y, 
+				picture, picture.getRatioType(), false, 0, false, 0, 0);
 	}
-	/**
-	 * 画图时自行设置比例
-	 * */
-	public static void draw(OzPoint p,OzPicture picture,int ratioType){
-		draw(p.x, p.y, picture, ratioType);
+	/** 画图时自行设置比例*/
+	public static void draw(OzPoint point,OzPicture picture,int ratioType){
+		draw(
+				point.x, 
+				point.y, 
+				picture,ratioType, false, 0, false, 0, 0);
 	}
-	/**
-	 * 画图时自行设置比例
-	 * */
+	/** 画图时自行设置比例*/
 	public static void draw(float x,float y,OzPicture picture,int ratioType){
-		if( ratioType == NO_RATIO ){
-			//直接画
-			picture.setDefault();
-			drawAtPosition(x, y, picture);
-		}
-		else if( ratioType==AUTO_RATIO ){
-			//自动比例
-			picture.setDefault();
-			drawAtPosition(x*P.autoRatioX,   y*P.autoRatioY, picture);
-		}
-		else if( ratioType==FORCE_RATIO ){
-			//强制比例
-			picture.setDefault();
-			drawAtPosition(x*P.forceRatioX,  y*P.forceRatioY, picture);
-		}
-		else if( ratioType==BG_RATIO ){
-			//背景比例
-			drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
-		}
+		draw(
+				x, 
+				y, 
+				picture,ratioType, false, 0, false, 0, 0);
 	}
-	/**
-	 * 缩放图片,使用picture自带的比例来画
-	 * */
+//	public static void draw(float x,float y,OzPicture picture,int ratioType){
+//		if( ratioType == NO_RATIO ){
+//			//直接画
+//			drawAtPosition(x, y, picture);
+//		}
+//		else if( ratioType==AUTO_RATIO ){
+//			//自动比例
+//			drawAtPosition(x*P.autoRatioX,   y*P.autoRatioY, picture);
+//		}
+//		else if( ratioType==FORCE_RATIO ){
+//			//强制比例
+//			drawAtPosition(x*P.forceRatioX,  y*P.forceRatioY, picture);
+//		}
+//		else if( ratioType==BG_RATIO ){
+//			//背景比例
+//			drawAtPosition(x*P.bgRatioX,  y*P.bgRatioY, picture);
+//		}
+//	}
+	/** 缩放图片,使用picture自带的比例来画*/
 	public static void draw(float scaleXY,OzPoint point,OzPicture picture){
-		draw(scaleXY, scaleXY, point, picture,picture.getRatioType());
+//		draw(scaleXY, scaleXY, point, picture,picture.getRatioType());
+		draw(
+				point.x, 
+				point.y, 
+				picture, picture.getRatioType(), false, 0, true, scaleXY, scaleXY);
 	}
-	/**
-	 * 缩放图片,使用picture自带的比例来画
-	 * */
+	/**缩放图片,使用picture自带的比例来画 */
 	public static void draw(float scaleX,float scaleY,OzPoint point,OzPicture picture){
-		draw(scaleX, scaleY, point, picture, picture.getRatioType());
+//		draw(scaleX, scaleY, point, picture, picture.getRatioType());
+		draw(
+				point.x, 
+				point.y, 
+				picture, picture.getRatioType(), false, 0, true, scaleX, scaleY);
 	}
-	/**
-	 * 缩放图片，使用自定义的比例来画
-	 * */
+	/**缩放图片，使用自定义的比例来画*/
 	public static void draw(float scaleX,float scaleY,OzPoint point,OzPicture picture,int ratioType){
+		draw(point.x, point.y, picture, ratioType, false, 0, true, scaleX, scaleY);
+	}
+	/** 旋转图片,使用picture自带的比例来画 */
+	public static void draw(float degrees,float pX,float pY,OzPicture picture){
+		draw(pX, pY, picture, picture.getRatioType(), true, degrees, false, 0, 0);
+	}
+	/** 旋转图片，使用自定义的比例来画*/
+	public static void draw(float degrees,float pX,float pY,OzPicture picture,int ratioType){
+		draw(pX, pY, picture,ratioType, true, degrees, false, 0, 0);
+	}
+	/** 旋转并缩放图片,使用picture自带的比例来画 */
+	public static void draw(float scaleX,float scaleY,float degrees,float pX,float pY,OzPicture picture){
+		draw(pX, pY, picture, picture.getRatioType(), true, degrees, true,scaleX,scaleY);
+	}
+	/** 旋转并缩放图片,使用picture自带的比例来画 */
+	public static void draw(float scaleXY,float degrees,float pX,float pY,OzPicture picture){
+		draw(pX, pY, picture, picture.getRatioType(), true, degrees, true,scaleXY,scaleXY);
+	}
+	/** 旋转并缩放图片,使用自定义的比例来画 */
+	public static void draw(float scaleX,float scaleY,float degrees,float pX,float pY,OzPicture picture,int ratioType){
+		draw(pX, pY, picture,ratioType, true, degrees, true,scaleX,scaleY);
+	}
+	/** 旋转并缩放图片,使用自定义的比例来画 */
+	public static void draw(float scaleXY,float degrees,float pX,float pY,OzPicture picture,int ratioType){
+		draw(pX, pY, picture,ratioType, true, degrees, true,scaleXY,scaleXY);
+	}
+//	/**
+//	 * 缩放图片，使用自定义的比例来画
+//	 * */
+//	public static void draw(float scaleX,float scaleY,OzPoint point,OzPicture picture,int ratioType){
+//		picture.getSprite().setScale(scaleX, scaleY);
+//		if( ratioType == NO_RATIO ){
+//			//直接画
+//			drawAtPosition(point.x, point.y, picture);
+//		}
+//		else if( ratioType==AUTO_RATIO ){
+//			//自动比例
+//			drawAtPosition(point.x*P.autoRatioX,point.y*P.autoRatioY, picture);
+//		}
+//		else if( ratioType==FORCE_RATIO ){
+//			//强制比例
+//			drawAtPosition(point.x*P.forceRatioX,  point.y*P.forceRatioY, picture);
+//		}
+//		else if( ratioType==BG_RATIO ){
+//			//背景比例
+//			drawAtPosition(point.x*P.bgRatioX,  point.y*P.bgRatioY, picture);
+//		}
+//	}
+	
+	private static void draw(float pX,float pY,OzPicture picture,int ratioType,boolean rotation,float degrees,boolean scale,float scaleX,float scaleY){
+	
 		picture.setDefault();
-		picture.getSprite().setScale(scaleX, scaleY);
+		
+		if(scale) picture.getSprite().setScale(scaleX, scaleY);
+		
+		if(rotation) picture.getSprite().setRotation(degrees);
+	
 		if( ratioType == NO_RATIO ){
 			//直接画
-			drawAtPosition(point.x, point.y, picture);
+			drawAtPosition(pX,pY, picture);
 		}
 		else if( ratioType==AUTO_RATIO ){
 			//自动比例
-			drawAtPosition(point.x*P.autoRatioX,   point.y*P.autoRatioY, picture);
+			drawAtPosition(pX*P.autoRatioX,pY*P.autoRatioY, picture);
 		}
 		else if( ratioType==FORCE_RATIO ){
 			//强制比例
-			drawAtPosition(point.x*P.forceRatioX,  point.y*P.forceRatioY, picture);
+			drawAtPosition(pX*P.forceRatioX,pY*P.forceRatioY, picture);
 		}
 		else if( ratioType==BG_RATIO ){
 			//背景比例
-			drawAtPosition(point.x*P.bgRatioX,  point.y*P.bgRatioY, picture);
+			drawAtPosition(pX*P.bgRatioX,pY*P.bgRatioY, picture);
 		}
 	}
 	
