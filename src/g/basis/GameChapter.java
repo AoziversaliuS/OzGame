@@ -86,7 +86,23 @@ public class GameChapter {
 		gateAtlas.add(new Door("door", 1250, 50));
 		gateAtlas.add(new DeadLine(-300) );
 	}
-	
+	private static void A_05(ArrayList<OzElement> gateAtlas) {
+		gateAtlas.add(new StaticView("StaticView",0,P.BASIC_SCREEN_HEIGHT-Res.view_sky.getHeight(), Res.view_sky));
+		gateAtlas.add(new BackGround("BG-1"));
+		gateAtlas.add(new Land("l1",320, 0, 7, 3));
+		gateAtlas.add(new Land("l2",220,150,4, 2));
+		gateAtlas.add(new Land("l3",220,450,10, 2));
+		gateAtlas.add(new Land("l3",0,-200,3, 3));
+		gateAtlas.add(new Thorn("Thorn", 300,425,13,Thorn.STYLE_PLANE_DOWN));
+		gateAtlas.add(new MoveLand("mv", 800, 100, 4,800,1000, 2, Move.plane));
+//		gateAtlas.add(new Land("l1", 800, -100, 11, 3));
+		gateAtlas.add(new Thorn("Thorn", 230,245,Thorn.STYLE_PLANE_UP));
+		gateAtlas.add(new Thorn("Thorn", 415,195,Thorn.STYLE_VERTICAL_RIGHT));
+		gateAtlas.add(new Thorn("Thorn", 230,125,Thorn.STYLE_PLANE_DOWN));
+//		gateAtlas.add(new View("Tree", 1100, 45, Res.view_tree[1]));
+//		gateAtlas.add(new Door("door", 1250, 50));
+		gateAtlas.add(new DeadLine(-300) );
+	}
 	
 	
 	
@@ -108,8 +124,7 @@ public class GameChapter {
 		case 2:{     A_02(gateAtlas); break;}
 		case 3:{     A_03(gateAtlas); break;}
 		case 4:{     A_04(gateAtlas); break;}
-		
-		
+		case 5:{     A_05(gateAtlas); break;}
 		
 		
 		

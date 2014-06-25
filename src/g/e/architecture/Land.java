@@ -46,6 +46,7 @@ public class Land extends BasicBody {
 		//判断此大方块整体有无在屏幕之外，此处采用基准屏幕 1280 * 720p 来判定
 		if( right<0 || l.x>P.BASIC_SCREEN_WIDTH || top<0 || l.y>P.BASIC_SCREEN_HEIGHT ){
 			//不画处于屏幕之外的大方块
+			System.out.println("超出了屏幕。。。");
 		}
 		else{
 			for(;  yNum<height; yNum=yNum+dH ){

@@ -155,27 +155,27 @@ public class P {
 	public static void draw(float scaleX,float scaleY,OzPoint point,OzPicture picture,int ratioType){
 		draw(point.x, point.y, picture, ratioType, false, 0, true, scaleX, scaleY);
 	}
-	/** 旋转图片,使用picture自带的比例来画 */
+	/** 逆时针旋转图片,使用picture自带的比例来画 */
 	public static void draw(float degrees,float pX,float pY,OzPicture picture){
 		draw(pX, pY, picture, picture.getRatioType(), true, degrees, false, 0, 0);
 	}
-	/** 旋转图片，使用自定义的比例来画*/
+	/** 逆时针旋转图片，使用自定义的比例来画*/
 	public static void draw(float degrees,float pX,float pY,OzPicture picture,int ratioType){
 		draw(pX, pY, picture,ratioType, true, degrees, false, 0, 0);
 	}
-	/** 旋转并缩放图片,使用picture自带的比例来画 */
+	/** 逆时针旋转并缩放图片,使用picture自带的比例来画 */
 	public static void draw(float scaleX,float scaleY,float degrees,float pX,float pY,OzPicture picture){
 		draw(pX, pY, picture, picture.getRatioType(), true, degrees, true,scaleX,scaleY);
 	}
-	/** 旋转并缩放图片,使用picture自带的比例来画 */
+	/** 逆时针旋转并缩放图片,使用picture自带的比例来画 */
 	public static void draw(float scaleXY,float degrees,float pX,float pY,OzPicture picture){
 		draw(pX, pY, picture, picture.getRatioType(), true, degrees, true,scaleXY,scaleXY);
 	}
-	/** 旋转并缩放图片,使用自定义的比例来画 */
+	/** 逆时针旋转并缩放图片,使用自定义的比例来画 */
 	public static void draw(float scaleX,float scaleY,float degrees,float pX,float pY,OzPicture picture,int ratioType){
 		draw(pX, pY, picture,ratioType, true, degrees, true,scaleX,scaleY);
 	}
-	/** 旋转并缩放图片,使用自定义的比例来画 */
+	/** 逆时针旋转并缩放图片,使用自定义的比例来画 */
 	public static void draw(float scaleXY,float degrees,float pX,float pY,OzPicture picture,int ratioType){
 		draw(pX, pY, picture,ratioType, true, degrees, true,scaleXY,scaleXY);
 	}

@@ -19,7 +19,7 @@ public class Thorn extends BasicBody {
 							STYLE_VERTICAL_RIGHT=103;
 	
 	/**刺的类型*/
-	private int style = STYLE_PLANE_UP;
+	private int style;
 	
 	/**图片的旋转角度   STYLE_PLANE_UP的角度为0度*/
 	private float degrees;
@@ -118,11 +118,11 @@ public class Thorn extends BasicBody {
 	private void setDegrees(int style) {
 		switch (style) {
 		
-		case       STYLE_PLANE_UP: this.degrees =   0; break;
-		case STYLE_VERTICAL_RIGHT: this.degrees =  90; break;
-		case     STYLE_PLANE_DOWN: this.degrees = 180; break;
-		case  STYLE_VERTICAL_LEFT: this.degrees = 270; break;
-		
+		case       STYLE_PLANE_UP: this.degrees =   0f; break;
+		case  STYLE_VERTICAL_LEFT: this.degrees =  90f; break;
+		case     STYLE_PLANE_DOWN: this.degrees = 180f; break;
+		case STYLE_VERTICAL_RIGHT: this.degrees = 270f; break;
+
 		}
 	}
 	
