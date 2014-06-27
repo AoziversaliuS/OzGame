@@ -30,11 +30,6 @@ public class P {
 		
 	}
 	
-	//设置屏幕亮度
-//	public static void setlight(float light){
-//		black.setColor(0, 0, 0, light);
-//		black.draw(batch);
-//	}
 	/**
 	 * 使用参数值来设定屏幕暗度，0.00f<=blackNum<=1f
 	 * */
@@ -179,28 +174,6 @@ public class P {
 	public static void draw(float scaleXY,float degrees,float pX,float pY,OzPicture picture,int ratioType){
 		draw(pX, pY, picture,ratioType, true, degrees, true,scaleXY,scaleXY);
 	}
-//	/**
-//	 * 缩放图片，使用自定义的比例来画
-//	 * */
-//	public static void draw(float scaleX,float scaleY,OzPoint point,OzPicture picture,int ratioType){
-//		picture.getSprite().setScale(scaleX, scaleY);
-//		if( ratioType == NO_RATIO ){
-//			//直接画
-//			drawAtPosition(point.x, point.y, picture);
-//		}
-//		else if( ratioType==AUTO_RATIO ){
-//			//自动比例
-//			drawAtPosition(point.x*P.autoRatioX,point.y*P.autoRatioY, picture);
-//		}
-//		else if( ratioType==FORCE_RATIO ){
-//			//强制比例
-//			drawAtPosition(point.x*P.forceRatioX,  point.y*P.forceRatioY, picture);
-//		}
-//		else if( ratioType==BG_RATIO ){
-//			//背景比例
-//			drawAtPosition(point.x*P.bgRatioX,  point.y*P.bgRatioY, picture);
-//		}
-//	}
 	
 	private static void draw(float pX,float pY,OzPicture picture,int ratioType,boolean rotation,float degrees,boolean scale,float scaleX,float scaleY){
 	
@@ -259,8 +232,9 @@ public class P {
 	public static final int AUTO_RATIO = 1,BG_RATIO = 2, FORCE_RATIO = 3,NO_RATIO=4;
 	public static final float BASIC_SCREEN_WIDTH = 1280f;
 	public static final float BASIC_SCREEN_HEIGHT = 720f;
-	
+	/**运行程序的手机的屏幕大小*/
 	private static float screenW;
+	/**运行程序的手机的屏幕大小*/
 	private static float screenH;
 	private static float autoRatioX;
 	private static float autoRatioY;
@@ -312,9 +286,6 @@ public class P {
 		texture.dispose();
 		p.dispose();
 	}
-//	private static void setAtlas(String path){
-//		atlas = new TextureAtlas(Gdx.files.internal(path));
-//	}
 	public static void dispose(){
 		batch.dispose();
 	}
@@ -343,8 +314,31 @@ public class P {
 	public static float getForceRatioY() {
 		return forceRatioY;
 	}
-//	private static SpriteBatch getBatch() {
-//		return batch;
-//	}
+	/**
+	 * 获取实际显示在屏幕上的点的真实坐标或真实距离
+	 * @param value 要转换的值
+	 * @param ratioType 使用的比例类型
+	 * @param isX true时为X轴上的点，false时为Y轴上的点
+	 * */
+	public static float getRealValue(float value,int ratioType,boolean isX){
+		float realValue = 0;
+		
+		if( ratioType==P.NO_RATIO ){
+				realValue = value;
+		}
+		else if( ratioType==P.AUTO_RATIO ){
+			if(isX) realValue = value*P.autoRatioX;
+			else    realValue = value*P.autoRatioY;
+		}
+		else if( ratioType==P.FORCE_RATIO ){
+			if(isX) realValue = value*P.forceRatioX;
+			else    realValue = value*P.forceRatioY;
+		}
+		else if( ratioType==P.BG_RATIO ){
+			if(isX) realValue = value*P.bgRatioX;
+			else    realValue = value*P.bgRatioY;
+		}
+		return realValue;
+	}
 	
 }
