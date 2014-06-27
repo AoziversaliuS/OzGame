@@ -167,6 +167,8 @@ public class Player extends OzElement{
 //			this.reset();//复活之后重设状态
 			condition = ALIVE;
 		}
+		
+		
 	}
 	
 

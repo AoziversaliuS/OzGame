@@ -104,7 +104,7 @@ public class GameView extends BasicView implements BtnMethods{
 			}
 		}
 		//Åö×²¼ì²âB¡ü
-		
+//		player.engine();
 		/**´ËÊ±»¹Î´»æÍ¼******/
 	}
 
